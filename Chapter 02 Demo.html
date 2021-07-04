@@ -5,7 +5,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width">
   <title>Chapter 2 Demo</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+
 
   <!-- Fonts -->
   <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
@@ -122,7 +122,9 @@
   
 <script src="js/auxiliary.js"></script>
 <div id="myPlot" style="width:100%;max-width:700px">
-  <script>
+</div>
+  
+<script>
 function draw()   {
 var A = parseFloat(document.getElementById("A").value);  
 var B = parseFloat(document.getElementById("B").value);
@@ -130,18 +132,17 @@ var Y0 = parseFloat(document.getElementById("Y0").value);
 const xArray = math.range(0, 5, 0.05).toArray();
 const yArray = xArray.map(function (x) {
         return math.evaluate('(Y0 - B/A)*exp(-A*x)+B/A', {x: x, A:A, B:B, Y0:Y0})
-           })
-//var y = (Y0 - B/A)*NumJs.exp(-A*xArray)+B/A;
-//var yArray = y.tolist();
+           });
+
 // Define Data
-var data = [{
+const data = [{
   x:xArray,
   y:yArray,
   mode:"lines"
 }];
 
 // Define Layout
-var layout = {
+const layout = {
   xaxis: {range: [0, 5], title: "time t"},
   yaxis: {title: "Y"},  
   title: "The solution curve Y(t) (with A="+ A + ", B=" + B + ", Y0=" + Y0 + ")"
@@ -152,16 +153,21 @@ Plotly.newPlot("myPlot", data, layout);
 }
 
 document.getElementById('A').onsubmit = function (event) {
+   event.preventDefault()
     draw()
   }
 document.getElementById('B').onsubmit = function (event) {
+  event.preventDefault()
     draw()
   }
 document.getElementById('Y0').onsubmit = function (event) {
+  event.preventDefault()
     draw()
   } 
 
-    </script></div>
+  draw()
+
+  </script>
 
 
 
