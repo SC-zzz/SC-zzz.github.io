@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width">
   <title>Chapter 2 Demo</title>
 
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
   <!-- Fonts -->
   <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
 
@@ -85,14 +85,13 @@
 
 <article>
 
-  <header>
     <h1>Chapter 2 Demo</h1>  
 
 <div>
 <h3>Visualizing a certain first-order autonomous ODE.</h3>
 </div>
 
-<p>Here we visualize the solutions to the autonomous ODE</p>
+<p>Here we visualize the solution $Y(t)$ to the autonomous ODE</p>
 <p>
     \begin{align}
     Y' +AY = B,
@@ -125,7 +124,7 @@
 </div>
   
 <script>
-function draw()   {
+function plot_my_function()  {
 var A = parseFloat(document.getElementById("A").value);  
 var B = parseFloat(document.getElementById("B").value);
 var Y0 = parseFloat(document.getElementById("Y0").value); 
@@ -151,21 +150,21 @@ const layout = {
 // Display using Plotly
 Plotly.newPlot("myPlot", data, layout);
 }
+plot_my_function();
 
-document.getElementById('A').onsubmit = function (event) {
-   event.preventDefault()
-    draw()
+document.getElementById('A').onchange = function (event) {
+  event.preventDefault();
+    plot_my_function();
   }
-document.getElementById('B').onsubmit = function (event) {
-  event.preventDefault()
-    draw()
+document.getElementById('B').onchange = function (event) {
+  event.preventDefault();
+    plot_my_function();
   }
-document.getElementById('Y0').onsubmit = function (event) {
-  event.preventDefault()
-    draw()
+document.getElementById('Y0').onchange = function (event) {
+  event.preventDefault();
+    plot_my_function();
   } 
 
-  draw()
 
   </script>
 
