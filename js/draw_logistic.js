@@ -24,7 +24,8 @@ var grid = {
 	aspect: 8/7, 
 	paddingleft: 20,	
 	paddingright: 20,
-	wd: Math.max(500, Math.min(canvasdiv.offsetWidth, 7/8.5 * window.innerHeight))	  // get width according to window size
+	wd: Math.max(500, Math.min(canvasdiv.offsetWidth, 7/8.5 * window.innerHeight))	  
+	    // get width according to window size
 }
 	
     
@@ -50,20 +51,20 @@ function x_px(x_coord){
 // draw underlying grids
 function drawGrid() {
     for (let i =0; i<6; i++) {           
-            ctx.beginPath();
-	        ctx.moveTo(x_px(i), y_px(-1));
-	        ctx.lineTo(x_px(i), y_px(6));
-	        ctx.strokeStyle = grid.gridcolor;
-	        ctx.lineWidth = grid.gridwidth;
-	        ctx.stroke();
+		ctx.beginPath();
+		ctx.moveTo(x_px(i), y_px(-1));
+		ctx.lineTo(x_px(i), y_px(6));
+		ctx.strokeStyle = grid.gridcolor;
+		ctx.lineWidth = grid.gridwidth;
+		ctx.stroke();
     }
     for (let j =0; j<6; j++) {          
-            ctx.beginPath();
-	        ctx.moveTo(x_px(-1), y_px(j));
-	        ctx.lineTo(x_px(6), y_px(j));
-	        ctx.strokeStyle = grid.gridcolor;
-	        ctx.lineWidth = grid.gridwidth;
-	        ctx.stroke();
+		ctx.beginPath();
+		ctx.moveTo(x_px(-1), y_px(j));
+		ctx.lineTo(x_px(6), y_px(j));
+		ctx.strokeStyle = grid.gridcolor;
+		ctx.lineWidth = grid.gridwidth;
+		ctx.stroke();
     }    
 } 
 
@@ -106,70 +107,44 @@ function drawAxis() {
 }
 
 
-// draw arrows on canvas
-function canvas_arrow(fromx, fromy, tox, toy) {
-  var headlen = 5; // length of head in pixels
-  var dx = tox - fromx;
-  var dy = toy -  fromy;
-  var angle = Math.atan2(dy, dx);
-  ctx.beginPath();
-  ctx.moveTo(fromx, fromy);
-  ctx.lineTo(tox, toy);
-  ctx.strokeStyle = grid.vectorcolor;
-  ctx.lineWidth = grid.vectorwidth;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(tox, toy);  
-  ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
-  ctx.strokeStyle = grid.vectorcolor;
-  ctx.lineWidth = grid.vectorwidth;
-  ctx.stroke();
-  
-  ctx.beginPath();  
-  ctx.moveTo(tox, toy);
-  ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
-  ctx.strokeStyle = grid.vectorcolor;
-  ctx.lineWidth = grid.vectorwidth;
-  ctx.stroke();
-}
-
 
 // draw direction field or slope field. 1= unit direction field, 2 = slope field
 function draw_direction_field(option, r, K, Y0){
-    var xDF = math.range(-1, 6, 0.4).toArray();
-    var yDF = math.range(-1, 6, 0.4).toArray();
-    var scaling = 0.3;
-    var dyDF = yDF.map(function (y) {
-         return math.evaluate('r*y*(1-y/K)', {y:y, r:r, K:K, Y0:Y0})
-           });
-    var lengths = dyDF.map(function (y) {
-         return math.evaluate('sqrt(1+y^2)', {y:y})
-           }); 
-    var vxs_normalized = dyDF.map(function (y) {
-         return scaling*math.evaluate('1/sqrt(1+y^2)', {y:y})
-           });  
-    var vys_normalized = dyDF.map(function (y) {
-         return scaling*math.evaluate('y/sqrt(1+y^2)', {y:y})});       
-    if (option == 1) {
-        for (let i =0; i < xDF.length; i++) {
-            for (let j =0; j < yDF.length; j++) {
-                //canvas_arrow(x_px(xDF[i]), y_px(yDF[j]), x_px(vxs_normalized[i]), y_px(vys_normalized[j]));
-                canvas_arrow(x_px(xDF[i]), y_px(yDF[j]), x_px(xDF[i]+vxs_normalized[j]), y_px(yDF[j]+vys_normalized[j]));
-            }
-        }
-    }
-    if (option == 2) {
-        for (let i =0; i < xDF.length; i++) {
-            for (let j =0; j < yDF.length; j++) {
-                    ctx.beginPath();
-	                ctx.moveTo(x_px(xDF[i]), y_px(yDF[j]));
-	                ctx.lineTo(x_px(xDF[i]+vxs_normalized[j]), y_px(yDF[j]+vys_normalized[j]));
-	                ctx.strokeStyle = grid.vectorcolor;
-	                ctx.lineWidth = grid.vectorwidth;
-	                ctx.stroke();
-            }
-        }
-    }
+	var xDF = math.range(-1, 6, 0.4).toArray();
+	var yDF = math.range(-1, 6, 0.4).toArray();
+	var scaling = 0.3;
+	var dyDF = yDF.map(function (y) {
+		 return math.evaluate('r*y*(1-y/K)', {y:y, r:r, K:K, Y0:Y0})
+		   });
+	var lengths = dyDF.map(function (y) {
+		 return math.evaluate('sqrt(1+y^2)', {y:y})
+		   }); 
+	var vxs_normalized = dyDF.map(function (y) {
+		 return scaling*math.evaluate('1/sqrt(1+y^2)', {y:y})
+		   });  
+	var vys_normalized = dyDF.map(function (y) {
+		 return scaling*math.evaluate('y/sqrt(1+y^2)', {y:y})});       
+	if (option == 1) {
+		for (let i =0; i < xDF.length; i++) {
+			for (let j =0; j < yDF.length; j++) {
+				canvas_add_arrow(ctx, x_px(xDF[i]), y_px(yDF[j]), 
+				    x_px(xDF[i]+vxs_normalized[j]), y_px(yDF[j]+vys_normalized[j]), 
+				    grid.vectorcolor, grid.vectorwidth, 5);
+			}
+		}
+	}
+	if (option == 2) {
+		for (let i =0; i < xDF.length; i++) {
+			for (let j =0; j < yDF.length; j++) {
+					ctx.beginPath();
+					ctx.moveTo(x_px(xDF[i]), y_px(yDF[j]));
+					ctx.lineTo(x_px(xDF[i]+vxs_normalized[j]), y_px(yDF[j]+vys_normalized[j]));
+					ctx.strokeStyle = grid.vectorcolor;
+					ctx.lineWidth = grid.vectorwidth;
+					ctx.stroke();
+			}
+		}
+	}
 } 
 
 
