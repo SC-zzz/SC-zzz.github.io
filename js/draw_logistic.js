@@ -218,7 +218,7 @@ function new_function() {
     
     if (Y0 > K) {
     let t_break = Math.log(-(K-Y0)/Y0)/r;
-    let t_start = math.max(t_break+0.006, -1);
+    let t_start = math.max(t_break+0.001, -1);
     var xArray = math.range(t_start, 6, 0.01).toArray();
     var yArray = xArray.map(function (x) {
          return math.evaluate('(K * Y0)/(Y0 +(K-Y0)*exp(-r*x))', {x: x, r:r, K:K, Y0:Y0})
