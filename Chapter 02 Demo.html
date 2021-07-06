@@ -28,19 +28,6 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
   <style>
-#container {
-  width: 400px;
-  height: 400px;
-  position: relative;
-  background: white;
-}
-#animate {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  background: red;
-}
-
 .range-wrap {
   position: relative;
   margin: 0 auto 2.5rem 4rem;
@@ -77,8 +64,8 @@
 
 <nav>
 <a href="index_page.html">back to index page</a> | 
-<a href="index_page.html">previous page</a> | 
-<a href="index_page.html">next page</a>
+<a href="Chapter 01 Demo.html">previous page</a> | 
+<a href="Chapter 03 Demo.html">next page</a>
 </nav>
 
 
@@ -128,7 +115,7 @@ function plot_my_function()  {
 var A = parseFloat(document.getElementById("A").value);  
 var B = parseFloat(document.getElementById("B").value);
 var Y0 = parseFloat(document.getElementById("Y0").value); 
-const xArray = math.range(0, 5, 0.05).toArray();
+const xArray = math.range(-2, 4, 0.02).toArray();
 const yArray = xArray.map(function (x) {
         return math.evaluate('(Y0 - B/A)*exp(-A*x)+B/A', {x: x, A:A, B:B, Y0:Y0})
            });
@@ -142,8 +129,8 @@ const data = [{
 
 // Define Layout
 const layout = {
-  xaxis: {range: [0, 5], title: "time t"},
-  yaxis: {title: "Y"},  
+  xaxis: {range: [-2, 4], title: "time t"},
+  yaxis: {autorange: true, title: "Y"},  
   title: "The solution curve Y(t) (with A="+ A + ", B=" + B + ", Y0=" + Y0 + ")"
 };
 
@@ -152,15 +139,15 @@ Plotly.newPlot("myPlot", data, layout);
 }
 plot_my_function();
 
-document.getElementById('A').onchange = function (event) {
+document.getElementById('A').oninput = function (event) {
   event.preventDefault();
     plot_my_function();
   }
-document.getElementById('B').onchange = function (event) {
+document.getElementById('B').oninput = function (event) {
   event.preventDefault();
     plot_my_function();
   }
-document.getElementById('Y0').onchange = function (event) {
+document.getElementById('Y0').oninput = function (event) {
   event.preventDefault();
     plot_my_function();
   } 
