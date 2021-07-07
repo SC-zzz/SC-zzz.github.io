@@ -178,10 +178,11 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <div style="width: 95%*window.innerWidth;">
-<!--<div class="twoCol_4060" style="width: 90%*window.innerWidth;">-->
+<div class="twoCol_4060" style="width: 50%*window.innerWidth;">
  <!--<div name = "control bar" style="margin-left: 1em; margin-right: auto; border: solid black; padding-left: 1em;padding-top: 1em;padding-bottom: 1em;" >-->
   
-  <div class = "left">
+   <!--<div class = "left">-->
+   <div> 
    <div> 
   <fieldset>
       <legend class="controlLegend">Constants and Initial Condtions</legend>
@@ -200,12 +201,11 @@ Responsive layout - makes the two columns stack on top of each other instead of 
   <label for="Y0">$y_0$: </label>
   <input id = "Y0" type="range" class="range" min="0" max="5" step = 0.1 value = "1">
   <output class="bubble"></output>
-  <br>
  </div>
 </div>
 </fieldset>
  </div>
- <br>
+  <br>
  <div >
 <fieldset>
   <legend class="controlLegend">Display Options</legend>
@@ -225,10 +225,10 @@ Responsive layout - makes the two columns stack on top of each other instead of 
    <label for="colorize"> Colorize according to magnitude</label><br></div>  
 </fieldset>
  </div>
-</div>
+ </div>
 
-
-  <div  class = "right">
+  <div>
+  <!--<div  class = "right">-->
         <fieldset >
         <legend class="controlLegend">Graph</legend>
             <div id="canvasdiv" style="margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
@@ -237,7 +237,10 @@ Responsive layout - makes the two columns stack on top of each other instead of 
         </fieldset>
     </div>
 </div>  
-<br> <br>
+</div>
+
+
+<div> 
 <h4>Playing with slopes fields.</h4>
 <p>You can go to any of the sites below to generate your own slope fields. Have fun! </p>
 <div class="plainlist">
@@ -247,7 +250,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 <li><a href="https://www.integral-domain.org/lwilliams/Applets/calculus/slopef.php">Slope fields</a>.</li>
 </ul>
 </div>
-      
+  </div>  
 
 
 <script src="js/draw_logistic.js"> </script> 
