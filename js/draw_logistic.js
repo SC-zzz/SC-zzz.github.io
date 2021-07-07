@@ -26,7 +26,7 @@ var grid = {
 	aspect: 8/7, 
 	paddingleft: 20,	
 	paddingright: 20,
-	wd: Math.max(500, Math.min(canvasdiv.offsetWidth, 7/8.5 * window.innerHeight))	  
+	wd: Math.max(300, Math.min(canvasdiv.offsetWidth, 7/8.5 * window.innerHeight))	  
 	    // get width according to window size
 }
 	
