@@ -155,10 +155,11 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 <article>
 
     <h1>Chapter 3 Demo</h1>  
+<h3>Visualizing the dynamic perspectives of first-order ODE's.</h3>
 
-<div>
-<h3>Visualizing the logistic model.</h3>
-</div>
+
+
+<h4>The logistic model.</h4>
 
 <p>Here we visualize the solutions to the logistic model
 </p>
@@ -173,7 +174,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <img src="img/logistic-basic.png" alt="basic logistic model" width = "50%" height = "auto">
 
-<p> To fiddle with the visulization yourself, choose values for the constants $r$, $K$, and choose the intial condition  $y(0)=y_0$ at time  $t=0$:</p>
+<p> To play with the visulization yourself, choose values for the constants $r$, $K$, and choose the intial condition  $y(0)=y_0$ at time  $t=0$:</p>
 
 
 <div style="width: 95%*window.innerWidth;">
@@ -184,6 +185,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
    <div> 
   <fieldset>
       <legend class="controlLegend">Constants and Initial Condtions</legend>
+  <div>    
  <div class="range-wrap" style="width: 75%;">
   <label for="r">$r$: </label>
   <input id = "r" type="range" class="range" min="0.1" max="5" step = 0.1 value = "1">
@@ -200,20 +202,27 @@ Responsive layout - makes the two columns stack on top of each other instead of 
   <output class="bubble"></output>
   <br>
  </div>
+</div>
 </fieldset>
  </div>
  <br>
  <div >
 <fieldset>
   <legend class="controlLegend">Display Options</legend>
+  <div>   
  Stationary solutions: <br>
      <input type="radio" name="stationary" id="hideStationary" checked onclick="new_function()"> hide<br>
     <input type="radio" name="stationary"  id="showStationary" onclick="new_function()"> show (red = stable, green = unstable)<br>
   <br>
  Direction Field: <br>
     <input type="radio" name="showDF" id="hideDF" onclick="new_function()"> hide<br>
-    <input type="radio" name="showDF"  id="DF" checked onclick="new_function()"> unit direction field<br>
-     <input type="radio" name="showDF" id="slope" onclick="new_function()"> slope field<br> 
+    <input type="radio" name="showDF"  id="UDF" onclick="new_function()"> unit direction field<br>
+     <input type="radio" name="showDF" id="slope"  checked onclick="new_function()"> slope field<br> 
+    <br>
+      <label for="Y0">Density: </label><br>
+   <input id = "density" type="range" class="range" min="1.5" max="4.0" step = 0.25 value = "2.5" style="width: 50%;" oninput="new_function()"> <br><br>
+   <input type="checkbox" id="colorize"  oninput="new_function()">
+   <label for="colorize"> Colorize according to magnitude</label><br></div>  
 </fieldset>
  </div>
 </div>
@@ -228,7 +237,16 @@ Responsive layout - makes the two columns stack on top of each other instead of 
         </fieldset>
     </div>
 </div>  
-
+<br> <br>
+<h4>Playing with slopes fields.</h4>
+<p>You can go to any of the sites below to generate your own slope fields. Have fun! </p>
+<div class="plainlist">
+<ul>
+<li><a href="https://www.geogebra.org/m/UwwmYgBG">Slope Field Generator</a>.</li>
+<li><a href="https://homepages.bluffton.edu/~nesterd/apps/slopefields.html">Slope and direction fields</a>.</li>
+<li><a href="https://www.integral-domain.org/lwilliams/Applets/calculus/slopef.php">Slope fields</a>.</li>
+</ul>
+</div>
       
 
 

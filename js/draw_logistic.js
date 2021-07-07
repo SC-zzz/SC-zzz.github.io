@@ -19,7 +19,9 @@ var grid = {
 	plotwidth: "4",
 	stationarycolor: "cyan",
 	stationarywidth: "3",
-	vectorcolor: "#8080ff",
+	//vectorcolor: "#8080ff",
+	//vectorcolor: "RGB(70, 170, 185)",	
+	vectorcolor: "hsl(250,80%,70%)",
 	vectorwidth: "2",
 	aspect: 8/7, 
 	paddingleft: 20,	
@@ -108,11 +110,13 @@ function drawAxis() {
 
 
 
-// draw direction field or slope field. 1= unit direction field, 2 = slope field
-function draw_direction_field(option, r, K, Y0){
-	var xDF = math.range(-1, 6, 0.4).toArray();
-	var yDF = math.range(-1, 6, 0.4).toArray();
-	var scaling = 0.3;
+// draw direction field or slope field. 
+// 1= unit direction field, 
+// 2 = slope field
+function draw_direction_field(option, r, K, Y0, density, colorize){
+	var xDF = math.range(-1, 6, 1/density).toArray();
+	var yDF = math.range(-1, 6, 1/density).toArray();
+	var scaling = 0.8/density;
 	var dyDF = yDF.map(function (y) {
 		 return math.evaluate('r*y*(1-y/K)', {y:y, r:r, K:K, Y0:Y0})
 		   });
@@ -123,25 +127,50 @@ function draw_direction_field(option, r, K, Y0){
 		 return scaling*math.evaluate('1/sqrt(1+y^2)', {y:y})
 		   });  
 	var vys_normalized = dyDF.map(function (y) {
-		 return scaling*math.evaluate('y/sqrt(1+y^2)', {y:y})});       
+		 return scaling*math.evaluate('y/sqrt(1+y^2)', {y:y})}); 
+	//var colors = new Array(yDF.length);	
+	//for  (let j =0; j < yDF.length; j++) {
+	//if colorize {
+	   //let angle = Math.atan2(dyDF[j], 1);
+	    //color[j] = 'hsl(' + (240*math.abs(angle/(math.PI/2))) % 360 + ', 100%, 70%)';
+	//    colors[j] = grid.vectorcolor;
+	//} else { 
+	//    colors[j] = grid.vectorcolor;
+	//}	
+	//} 	       
 	if (option == 1) {
 		for (let i =0; i < xDF.length; i++) {
 			for (let j =0; j < yDF.length; j++) {
-				canvas_add_arrow(ctx, x_px(xDF[i]), y_px(yDF[j]), 
+			    if (colorize==true) {
+			        let angleInDeg = Math.atan2(dyDF[j], 1)* 180 / Math.PI;
+			        let color = "hsl(" + (250 + Math.abs(Math.ceil(angleInDeg))) + ", 100%, 70%)";
+			        canvas_add_arrow(ctx, x_px(xDF[i]), y_px(yDF[j]), 
+				        x_px(xDF[i]+vxs_normalized[j]), y_px(yDF[j]+vys_normalized[j]), 
+				        color, grid.vectorwidth, 5);
+			    }
+				else {canvas_add_arrow(ctx, x_px(xDF[i]), y_px(yDF[j]), 
 				    x_px(xDF[i]+vxs_normalized[j]), y_px(yDF[j]+vys_normalized[j]), 
 				    grid.vectorcolor, grid.vectorwidth, 5);
+				}    
 			}
 		}
 	}
 	if (option == 2) {
 		for (let i =0; i < xDF.length; i++) {
 			for (let j =0; j < yDF.length; j++) {
-					ctx.beginPath();
-					ctx.moveTo(x_px(xDF[i]), y_px(yDF[j]));
-					ctx.lineTo(x_px(xDF[i]+vxs_normalized[j]), y_px(yDF[j]+vys_normalized[j]));
-					ctx.strokeStyle = grid.vectorcolor;
-					ctx.lineWidth = grid.vectorwidth;
-					ctx.stroke();
+			    if (colorize==true) {
+			        let angleInDeg = Math.atan2(dyDF[j], 1)* 180 / Math.PI;
+			        var color = "hsl(" + (250 + Math.abs(Math.ceil(angleInDeg))) + ", 100%, 70%)";
+			    }    
+			    else {
+			        var color = grid.vectorcolor;
+			    }    
+				ctx.beginPath();
+				ctx.moveTo(x_px(xDF[i]), y_px(yDF[j]));
+				ctx.lineTo(x_px(xDF[i]+vxs_normalized[j]), y_px(yDF[j]+vys_normalized[j]));
+				ctx.strokeStyle = color;
+				ctx.lineWidth = grid.vectorwidth;
+				ctx.stroke();
 			}
 		}
 	}
@@ -158,6 +187,7 @@ function new_function() {
     var r = parseFloat(document.getElementById("r").value);  
     var K = parseFloat(document.getElementById("K").value);
     var Y0 = parseFloat(document.getElementById("Y0").value); 
+    var density = parseFloat(document.getElementById("density").value); 
     ctx.font = "20px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
@@ -165,12 +195,14 @@ function new_function() {
     let str = "(with r= " + r + ", K=" + K + ", y_0 =" + Y0 +")";
     ctx.fillText(str, x_px(3),y_px(6.5));
     
+    var colorize = document.getElementById("colorize").checked;
+    
     // draw direction field
-    if (document.getElementById("DF").checked) {
-        draw_direction_field(option=1, r, K, Y0);
+    if (document.getElementById("UDF").checked) {
+        draw_direction_field(option=1, r, K, Y0, density, colorize);
     }
     else if (document.getElementById("slope").checked) {
-        draw_direction_field(option=2, r, K, Y0);
+        draw_direction_field(option=2, r, K, Y0, density, colorize);
     }
     
     // draw stationary solutions
