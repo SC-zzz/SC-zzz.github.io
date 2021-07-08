@@ -191,9 +191,9 @@ function new_function() {
     ctx.font = "20px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
-    ctx.fillText("The logistic model", x_px(3),y_px(7));
+    ctx.fillText("The logistic model", x_px(2.5),y_px(7));
     let str = "(with r= " + r + ", K=" + K + ", y_0 =" + Y0 +")";
-    ctx.fillText(str, x_px(3),y_px(6.5));
+    ctx.fillText(str, x_px(2.5),y_px(6.5));
     
     var colorize = document.getElementById("colorize").checked;
     
