@@ -4,7 +4,7 @@
  <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width">
-  <title>Chapter 5 Demo</title>
+  <title>Chapter 6 Demo</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
   <!-- Fonts -->
@@ -43,7 +43,7 @@
 
 .range-wrap {
   position: relative;
-  margin: 0 auto 2.3rem 0rem;
+  margin: 0 8% 2.3rem 0rem;
 }
 .range {
   width: 100%;
@@ -72,7 +72,7 @@
 /* Create two unequal columns that floats next to each other */
 .column {
   float: left;
-  padding: 10px;
+  flex: 50%;
 }
 
 .left {
@@ -114,23 +114,21 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <nav>
 <a href="index_page.html">back to index page</a> | 
-<a href="Chapter 04 Demo.html">previous page</a> | 
-<a href="Chapter 06 Demo.html">next page</a>
+<a href="Chapter 05 Demo.html">previous page</a> | 
+<a href="Chapter 07 Demo.html">next page</a>
 </nav>
 
 
 
 <article>
 
-    <h1>Chapter 5 Demo</h1>  
+    <h1>Chapter 6 Demo</h1>  
 
 <div>
-<h3>Visualizing second-order linear ODE’s.</h3>
+<h3>Visualizing second-order linear ODE’s, continued.</h3>
 </div>
 
-<h4>Visualizing second-order linear ODE’s with constant coefficients.</h4>
-
-<p>Here we visualize the solutions to the second-order linear ODE
+<p>Here we continue to visualize the solutions to the second-order linear ODE
 </p>
 <p>
     \begin{align}
@@ -148,14 +146,14 @@ Responsive layout - makes the two columns stack on top of each other instead of 
    <div> 
   <fieldset>
       <legend class="controlLegend">Constants</legend>
- <div class="range-wrap" style="width: 75%;">
+ <div class="range-wrap column" style="width: 42%;">
   <label for="p">$p$: </label>
-  <input id = "p" type="range" class="range" min="-4" max="4" step = 0.1 value = "-1" oninput="new_function()">
+  <input id = "p" type="range" class="range" min="-3" max="3" step = 0.1 value = "-1" oninput="new_function()">
   <output class="bubble"></output>
  </div>
- <div class="range-wrap" style="width: 75%;">
+ <div class="range-wrap column" style="width: 42%;">
   <label for="q">$q$: </label>
-  <input id = "q" type="range" class="range" min="-4" max="4" step = 0.1 value = "1.5" oninput="new_function()">
+  <input id = "q" type="range" class="range" min="-3" max="3" step = 0.1 value = "1.5" oninput="new_function()">
   <output class="bubble"></output>
  </div>
 </fieldset>
@@ -164,12 +162,12 @@ Responsive layout - makes the two columns stack on top of each other instead of 
    <div> 
   <fieldset>
       <legend class="controlLegend">Initial Condtions</legend>
- <div class="range-wrap" style="width: 75%;">
+ <div class="range-wrap column" style="width: 42%;">
   <label for="Y0">$y(0)$: </label>
   <input id = "Y0" type="range" class="range" min="-3" max="3" step = 0.1 value = "1" oninput="new_function()">
   <output class="bubble"></output>
 </div>
- <div class="range-wrap" style="width: 75%;">
+ <div class="range-wrap column" style="width: 42%;">
   <label for="dY0">$y'(0)$: </label>
   <input id = "dY0" type="range" class="range" min="-3" max="3" step = 0.1 value = "1" oninput="new_function()">
   <output class="bubble"></output>
@@ -184,16 +182,13 @@ Responsive layout - makes the two columns stack on top of each other instead of 
  Independent solutions: <br>
     <input type="radio" name="showIndSol" id="hideIS" checked onclick="new_function()"> hide<br>
     <input type="radio" name="showIndSol"  id="showIS" onclick="new_function()"> show<br><br>
-   Scale: <br>
+<!--    Scale: <br>
     <input type="radio" name="scale" id="linear" checked onclick="new_function()"> linear scale<br>
-    <input type="radio" name="scale"  id="log" onclick="new_function()"> log scale (WARNING: This works only for positive parts)<br>  
+    <input type="radio" name="scale"  id="log" onclick="new_function()"> log scale (WARNING: only for positive parts)<br>   -->
 </fieldset>
  </div>
-</div>
-
-
-  <div>
-    <div>
+<br>
+ <div>
         <fieldset >
         <legend class="controlLegend">Output</legend>
         <p> As in Theorem 5.4.14, the asoociated characteristic polynomial is $\lambda^2 + p \lambda + q = \lambda^2$<span id ="p_term">+</span>$\lambda$<span id ="q_term">-1.5</span>. <span id ="type_of_roots"> </span></p>
@@ -202,118 +197,31 @@ Responsive layout - makes the two columns stack on top of each other instead of 
         <p id="case2">Two independent solutions are $y_1(t) = e^{\lambda_1 t}$  and $y_2(t) = te^{\lambda_1 t}$. </p>
         <p id="case3">Let $\lambda_1, \lambda_2 = r_0 \pm i s_0$. Then two independent solutions are $y_1(t) = e^{r_0t}\cos(s_0t)$  and $y_2(t) = e^{r_0t}\sin(s_0t)$. </p>
 
-
-
         </fieldset>
     </div>
+
+</div>
+
+
+  <div>
 
     <div>
         <fieldset >
         <legend class="controlLegend">Graph</legend>
             <div style="margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
             <div id="myPlot"></div>
+            <div id="myPlot3d"></div>
           </div>
         </fieldset>
     </div>
   </div>
 </div>  
 
-<script src="js/draw_second_order_ode.js"> </script> 
-
-<br>
-<h4>Visualizing complex numbers.</h4>
-
-<div class="twoCol_3366">
-  
-  <div>
- <div >
-<fieldset>
-  <legend class="controlLegend">Outputs</legend>
-  <div id="output">  
-    <p id="rtop"> $x = \operatorname{cos} \theta = $ <span id = "x_coord"></span>, &nbsp $y= \operatorname{sin} \theta = $ <span id = "y_coord"></span>.</p>
-    <p>$\theta = $ <span id = "theta_dec"></span> radians &nbsp $ = $ <span id = "theta_pi"></span>$\pi$ radians.</p>
-        <b>Euler's Formula</b>
-    <p id="euler"> $e^{i\theta} = \operatorname{cos} \theta + i \operatorname{sin} \theta = $ <span id = "x_coord2"></span> <span id = "plus">$+$</span><span id = "minus">$-$</span> <span id = "y_coord2"></span> $i$.</p>
-  </div> 
-</fieldset>
- </div>
+<!-- <div style="width:100%;max-width:700px">
 </div>
-
-
-  <div>
-    <div>
-        <fieldset >
-        <legend class="controlLegend">Graph</legend>
-            <div>
-               <div id = "box" class="jxgbox" style="width:600px; height:600px;">
-    </div>
-          </div>
-        </fieldset>
-    </div>
-  </div>
-</div>  
-
-
-
-<script type="text/javascript">
-  JXG.Options.text.useMathJax = true;
-  var brd = JXG.JSXGraph.initBoard('box', {axis:true, boundingbox: [-1.5, 1.5, 1.5, -1.5]});
-//var ax = brd.create('line',[[0,0],[1,0]],{visible:true});
-//var ay = brd.create('line',[[0,0],[0,1]],{visible:true});
-
-var p0 = brd.create('point',[0,0],{fixed:true,visible:false});
-var p1 = brd.create('point',[1,0],{name:'',visible:false,fixed:true});
-var c = brd.create('circle',[p0,p1],{strokeWidth:3,strokeColor:'gray'});
-var p2 = brd.create('glider',[0.4,1.0,c],{name:'\\[P = e^{i&theta;}\\]',withLabel:true});
-var p3 = brd.create('point',[function(){return p2.X();},0.0],{visible:false,name:'',withLabel:false});
-var p4 = brd.create('point',[0.0,function(){return p2.Y();}],{visible:false,name:'',withLabel:false});
-
-var theta = brd.create('angle', [p1,p0,p2], {type:'sector', orthoType:'square', orthoSensitivity:2, radius:0.3, name: "$&theta;$"});
-
-brd.create('line',[p0,p2],{straightFirst:false,straightLast:false,strokeColor:'rgb(30, 144, 255)'});   // Hypotenuse
-brd.create('line',[p2,p3],{straightFirst:false,straightLast:false,strokeColor:'rgb(255,30,144)'});     // sin
-brd.create('line',[p2,p4],{straightFirst:false,straightLast:false,strokeColor:'rgb(255,30,144)'});     // cos
-
-
-brd.create('text',[
-        function(){return (p2.X()+p4.X())*0.3;},
-        function(){return (p2.Y()+p4.Y())*0.5+0.05;},
-        'cos'],{});
-
-brd.create('text',[
-        function(){return (p2.X()+p3.X())*0.5;},
-        function(){return (p2.Y()+p3.Y())*0.5;},
-        'sin'],{});
-
-var updtxt = function() {
-document.getElementById("x_coord").innerHTML = math.format(p2.X(),{precision: 3});
-document.getElementById("x_coord2").innerHTML = math.format(p2.X(),{precision: 3});
-document.getElementById("y_coord").innerHTML = math.format(p2.Y(),{precision: 3});
-if (p2.Y()<0){
-    document.getElementById("plus").style.display= "none";
-    document.getElementById("minus").style.display= "inline";
-    document.getElementById("y_coord2").innerHTML = (-math.format(p2.Y(),{precision: 3}));
-  }
-  else {
-    document.getElementById("plus").style.display= "inline";
-    document.getElementById("minus").style.display= "none";
-    document.getElementById("y_coord2").innerHTML = math.format(p2.Y(),{precision: 3});
-  }
-var theta_dec = (Math.atan2(p2.Y(),p2.X()) + 2* Math.PI) % (2 * Math.PI);
-var theta_pi = theta_dec / Math.PI;
-document.getElementById("theta_dec").innerHTML = math.format(theta_dec,{precision: 3});
-document.getElementById("theta_pi").innerHTML = math.format(theta_pi,{precision: 3});
-}
-
-updtxt();
-
-  p2.on("drag",function(){ 
-    updtxt();
-  });
-
-
-</script>
-            
+ -->
+              
+<script src="js/draw_second_order_ode_Ch6.js"> </script> 
 
 <script src="js/draw_bubble.js"></script>
 </body>
