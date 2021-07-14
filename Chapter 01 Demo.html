@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 1 Demo</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 5% 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  flex: 50%;
+}
+
+.column3 {
+  float: left;
+  flex: 33%;
+}
+
+.left {
+ float: left;
+ width: 50%;
+
+}
+
+.right {
+  float: left;
+  width: 50%;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+<body>
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+previous page | 
+<a href="Chapter 02 Demo.html">next page</a>
+</nav>
+
+
+
+<article class="article">
+
+  <header class="article__header">
+    <h1>Chapter 1 Demo</h1>  
+
+<h3>Introducing ODE's.</h3>
+
+
+<p> Some ODE systems exhibit “chaos” (i.e., extreme sensitivity to initial conditions). One example is given by the following system of 3 ODE's, called the Chen attractor, with parameters $a,b,c$. You can read more about it <a href="https://en.wikipedia.org/wiki/Multiscroll_attractor">here</a>.</p>
+<p>
+    \begin{align}
+    \dot{x} &amp; = a(y-x) \\
+    \dot{y} &amp; = (c-a)x  - xz + cy\\
+    \dot{z} &amp; = xy -bz.
+    \end{align}
+  </p>
+
+<p> Here we will use $(a, b, c) = (40, 3, 28)$. Then the system of ODE's becomes</p>
+<p>
+    \begin{align}
+    \dot{x} &amp; = 40(y-x) \\
+    \dot{y} &amp; = -12x  - xz + 28y\\
+    \dot{z} &amp; = xy -3z.
+    \end{align}
+  </p>
+
+<p> Notice that this system is non-linear. The figure below shows the trajectory of a Chen attractor with initial value $(x_0,y_0,z_0)=(-0.1,0.5,-0.6)$ from time $t =0$ to time $t=20$. You can see that it looks like a double scroll.</p>
+
+
+<div id="3dChen" style="max-width: 900px"> </div>
+
+<script type="text/javascript">
+var a = 40, b = 3, c = 28;
+function f(t,v) {
+  return [a * (v[1] - v[0]), (c - a) * v[0] - v[0] * v[2] + c * v[1], v[0] * v[1] - b * v[2]];
+}
+function f2(v) {
+  return [a * (v[1] - v[0]), (c - a) * v[0] - v[0] * v[2] + c * v[1], v[0] * v[1] - b * v[2]];
+}
+
+var dt = 0.002;
+
+function attractor_3d(){
+
+
+let x = [], y = [], z = [];  
+
+  //x[0] = -0.1;
+  //y[0] = 0.5;
+  //z[0] = -0.6;
+  
+
+let sol = ode_RK4(0, 20, dt, f, [-0.1,0.5,-0.6]);
+let n = sol[0].length;
+  for (let i =0; i< n; i++){
+    x[i] = sol[1][i][0];
+    y[i] = sol[1][i][1];
+    z[i] = sol[1][i][2];
+  }
+
+
+Plotly.newPlot('3dChen', [{
+  x: x,
+  y: y,
+  z: z,
+  type: 'scatter3d',
+  mode: 'lines', 
+  line: {color: 'dodgerblue', width: 3},
+  name: 'initial value (-0.1,0.5,-0.6)'
+},{
+  x: [x[0]],
+  y: [y[0]],
+  z: [z[0]],
+  type: 'scatter3d',
+  mode: 'markers', 
+  marker: {color: 'red', size:5},
+  name: 't=0'
+},
+{
+  x: [x[n-1]],
+  y: [y[n-1]],
+  z: [z[n-1]],
+  type: 'scatter3d',
+  mode: 'markers', 
+  marker: {color: 'darkviolet', size:5},
+  name: 't=20'
+}
+], { title: "Chen attractor", scene: {
+  xaxis: {title: "x"},
+  yaxis: {title: "y"},
+  zaxis: {title: "z"}},
+  margin: {
+        l: 0,
+        r: 0,
+        b: 0
+        //t: 10
+        }, 
+});
+}
+attractor_3d();
+</script>
+
+<p> Now let's try it yourself. Choose an initial value near $(-0.1,0.5,-0.6)$. Then you will see (the $xy$-projection of) the trajactories of two Chen attractors, one with intial value $(x_0,y_0,z_0)=(-0.1,0.5,-0.6)$ and the other with the intial value of your choice. You will see that the two trajectories quickly become unrelated.</p>
+
+ <div class="row" style="max-width: 900px;">   
+
+ </div>
+
+
+
+
+
+
+
+<div class="twoCol_3366">
+  
+ <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Initial Conditions</legend>
+ <div class="row" style="padding-left:1em">   
+ <div class="range-wrap" style="width: 55%;">
+  <label for="x_0">$x_0$: </label>
+  <input id = "x_0" type="range" class="range" min="-0.15" max="-0.05" step = 0.01 value = "-0.1" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap" style="width: 55%;">
+  <label for="y_0">$y_0$: </label>
+  <input id = "y_0" type="range" class="range" min="0.45" max="0.55" step = 0.01 value = "0.5" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+   <div class="range-wrap" style="width: 55%;">
+  <label for="z_0">$z_0$: </label>
+  <input id = "z_0" type="range" class="range" min="-0.65" max="-0.55" step = 0.01 value = "-0.62" oninput="new_function()">
+  <output class="bubble"></output><br>
+  <div>
+
+ </div>
+ </div>
+
+</fieldset>
+ </div>
+
+    <div> 
+  <fieldset>
+      <legend class="controlLegend">Display Options</legend>
+      <div>
+   <div style="padding-top: 1em;">     
+  <button style="font-size: 18px;" onclick="myFunction()">Run the attractors!</button>
+  <br></div>
+
+  <div style="padding-top: 1em;">
+  <button style="font-size: 18px;" onclick="stopAnimation()">Pause</button> 
+  <button style="font-size: 18px;" onclick="continueAnimation()">Continue</button><br></div>
+   <div style="padding-top: 1em;">  Speed: 
+    <input type="radio" name="speed" id="normal" checked onclick="continueAnimation()"> normal &nbsp; 
+    <input type="radio" name="speed"  id="x2" onclick="continueAnimation()"> x2 &nbsp; &nbsp; 
+     <input type="radio" name="speed" id="x4"  onclick="continueAnimation()"> x4 &nbsp; <br> </div>
+   </div>
+</fieldset>
+ </div>
+</div> 
+
+
+
+
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Animation</legend>
+<div id="myDiv" style="width:100%;max-width:700px">
+</div>
+        </fieldset>
+    </div>
+  </div>
+ </div> 
+
+
+
+
+
+<script type="text/javascript">
+var myReq;
+//var dt = 0.005;
+var n = 1000;
+var x = [], y = [], z = [];  
+
+function attractors_2d_setup(x_0, y_0, z_0){
+x[0] = [];
+y[0] = [];
+z[0] = [];
+x[1] = [];
+y[1] = [];
+z[1] = [];
+
+  x[0][0] = -0.1;
+  y[0][0] = 0.5;
+  z[0][0] = -0.6;
+
+  x[1][0] = x_0;
+  y[1][0] = y_0;
+  z[1][0] = z_0;
+  
+for (var j = 0; j < 2; j++) {
+    let sol = ode_auto_RK4(n, dt, f2, [x[j][0],y[j][0],z[j][0]]);
+  for (let i =0; i< n; i++){
+    x[j][i] = sol[i][0];
+    y[j][i] = sol[i][1];
+    z[j][i] = sol[i][2];
+  }
+}
+
+
+Plotly.newPlot('myDiv', [{
+  x: x[0],
+  y: y[0],
+  mode: 'lines', name: 'initial value (-0.1,0.5,-0.6)',
+  line: {color: 'dodgerblue'}
+},
+{
+  x: x[1],
+  y: y[1],
+  mode: 'lines', name: 'initial value('+x_0+','+y_0+','+z_0+')',
+  line: {color: 'orange'}
+}
+], {legend: {"orientation": "h"}, title: "Chen attractors", 
+  xaxis: {range: [-24, 24]},
+  yaxis: {range: [-28, 28]}
+});
+}
+
+function compute (speed) {
+  for (var j = 0; j < 2; j++) {
+    let sol = ode_auto_RK4(n, dt, f2, [x[j][4*speed],y[j][4*speed],z[j][4*speed]]);
+   for (let i =0; i< n; i++){
+     x[j][i] = sol[i][0];
+     y[j][i] = sol[i][1];
+     z[j][i] = sol[i][2];
+   }
+  }
+}
+
+
+function update () {
+  compute(1);
+
+  Plotly.animate('myDiv', {
+    data: [{x: x[0], y: y[0]}, {x: x[1], y: y[1]}]
+  }, {
+    transition: {
+      duration: 0
+    },
+    frame: {
+      duration: 0,
+      redraw: false
+    }
+  });
+  myReq =requestAnimationFrame(update);
+}
+
+function update_x2 () {
+  compute(2);
+
+  Plotly.animate('myDiv', {
+    data: [{x: x[0], y: y[0]}, {x: x[1], y: y[1]}]
+  }, {
+    transition: {
+      duration: 0
+    },
+    frame: {
+      duration: 0,
+      redraw: false
+    }
+  });
+  myReq =requestAnimationFrame(update_x2);
+}
+
+function update_x4 () {
+  compute(4);
+
+  Plotly.animate('myDiv', {
+    data: [{x: x[0], y: y[0]}, {x: x[1], y: y[1]}]
+  }, {
+    transition: {
+      duration: 0
+    },
+    frame: {
+      duration: 0,
+      redraw: false
+    }
+  });
+  myReq =requestAnimationFrame(update_x4);
+}
+
+
+
+
+
+function stopAnimation (){
+  window.cancelAnimationFrame(myReq);
+}
+
+function continueAnimation (){
+  stopAnimation();
+  if (document.getElementById('normal').checked) {
+      myReq = window.requestAnimationFrame(update);
+  }
+  else if (document.getElementById('x2').checked) {
+      myReq = window.requestAnimationFrame(update_x2);
+  }  
+  else if (document.getElementById('x4').checked) {
+      myReq = window.requestAnimationFrame(update_x4);
+  } 
+}
+
+//attractors_2d();
+</script>
+
+
+<script type="text/javascript">
+function myFunction() {
+  var x_0 = parseFloat(document.getElementById("x_0").value);
+  var y_0 = parseFloat(document.getElementById("y_0").value);
+  var z_0 = parseFloat(document.getElementById("z_0").value);
+  stopAnimation();  
+  attractors_2d_setup(x_0, y_0, z_0);
+  if (document.getElementById('normal').checked) {
+      myReq = window.requestAnimationFrame(update);
+  }
+  else if (document.getElementById('x2').checked) {
+      myReq = window.requestAnimationFrame(update_x2);
+  }  
+  else if (document.getElementById('x4').checked) {
+      myReq = window.requestAnimationFrame(update_x4);
+  } 
+}
+
+</script>
+
+
+
+<script src="js/draw_bubble.js"></script>
+
+</body>
+
+</html>
