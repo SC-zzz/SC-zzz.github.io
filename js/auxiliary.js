@@ -156,3 +156,31 @@ function ode_RK4(t_0, t_1, h, f, y_0) {
 	}
 	return [ts, ys];
 }
+
+
+/**
+ * Solve a system of first-order autonomous ODE y' = f(y) numerically using the Runge Kutta 4th 
+ * order method.
+ * @param {Integer} N: The desired length.
+ * @param {Float} h: The stepsize.
+ * @param {function} f: The function.  
+ * @param {Float} or {Array} y_0: The initial value. Float for 1d case, Array for higher dim
+ * @returns {Array} ys: ys is an Array storing the function values
+ */
+function ode_auto_RK4(N, h, f, y_0) {
+	var ys = Array(N).fill(y_0);  //initialize the array for the results
+
+	for (let i = 0; i < N-1; i++) {
+	  const k1 = f(ys[i]);
+	  const s1 = math.add(ys[i], math.multiply(k1, h/2));
+	  const k2 = f(s1);
+	  const s2 = math.add(ys[i], math.multiply(k2, h/2));
+	  const k3 = f(s2);
+	  const s3 = math.add(ys[i], math.multiply(k2, h));	
+      const k4 = f(s3); // f(y_n + k3*h)	
+      const k_new =  math.multiply(math.add(math.add(math.add(math.multiply(k1, 1/2), k2), 
+          k3), math.multiply(k4, 1/2)), 1/3); // k1/6 + k2/3 + k3/3 + k4/6
+	  ys[i + 1] =  math.add(ys[i], math.multiply(k_new, h));
+	}
+	return ys;
+}
