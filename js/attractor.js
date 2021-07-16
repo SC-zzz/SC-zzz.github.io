@@ -1,8 +1,7 @@
 let inSyncThreshold = 2;
-
-let a = 10;
-let b = 28;
-let c = 8.0 / 3.0;
+    //let a = 10;
+    //let b = 28;
+    //let c = 8.0 / 3.0;
 
 class Attractor {
   constructor(initialX, initialY, initialZ, dt, maxPoints) {

@@ -222,13 +222,7 @@ Plotly.newPlot('3dChen', [{
 attractor_3d();
 </script>
 
-<p> Now let's try it yourself. Choose an initial value near $(-0.1,0.5,-0.6)$. Then you will see (the $xy$-projection of) the trajactories of two Chen attractors, one with intial value $(x_0,y_0,z_0)=(-0.1,0.5,-0.6)$ and the other with the intial value of your choice. You will see that the two trajectories quickly become unrelated.</p>
-
- <div class="row" style="max-width: 900px;">   
-
- </div>
-
-
+<p> Now let's try it yourself. Choose an initial value near $(-0.1,0.5,-0.6)$ and hit the “Run the attractors!” button. Then you will see (the $xy$-projection of) the trajactories of two Chen attractors, one with intial value $(x_0,y_0,z_0)=(-0.1,0.5,-0.6)$ and the other with the intial value of your choice. You will see that the two trajectories quickly become unrelated.</p>
 
 
 
@@ -324,7 +318,7 @@ z[1] = [];
   z[1][0] = z_0;
   
 for (var j = 0; j < 2; j++) {
-    let sol = ode_auto_RK4(n, dt, f2, [x[j][0],y[j][0],z[j][0]]);
+  let sol = ode_auto_RK4(n, dt, f2, [x[j][0],y[j][0],z[j][0]]);
   for (let i =0; i< n; i++){
     x[j][i] = sol[i][0];
     y[j][i] = sol[i][1];
