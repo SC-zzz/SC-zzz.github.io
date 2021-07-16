@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 8 Demo</title>
+
+
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  flex: 50%;
+}
+
+.left {
+ float: left;
+ width: 50%;
+
+}
+
+.right {
+  float: left;
+  width: 50%;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 07 Demo.html">previous page</a> | 
+<a href="Chapter 09 Demo.html">next page</a>
+</nav>
+
+
+
+<article>
+
+    <h1>Chapter 8 Demo</h1>  
+
+<h3>Visualizing phase portraits and eigenvalues.</h3>
+
+
+<h4>A chemical oscillator.</h4>
+
+<p> Here we consider the chemical oscillator in Example 8.1.1 modelled by the following system of equations:
+</p>
+<p>
+    \begin{align}
+    x_1' &= k_1-x_1\Big( 1+\dfrac{4x_2}{1+x_1^2}\Big), \\
+    x_2' &= k_2x_2\Big( 1-\dfrac{x_2}{1+x_1^2}\Big).
+    \end{align}
+  </p>
+<p>where $x_1(t)$ and $x_2(t)$ correspond to the concentration levels of certain molecules and the constants $k_1$ and
+$k_2$ depend on reaction rates and other information.</p>
+
+
+<p> In order to understand if the ODE model predicts (for certain $(k_1, k_2)$) the observed periodic behavior, we plot the phase portrait of the system. To play with the visulization yourself, change the parameters, and see how the graph changes. Choose your desired initial condition by dragging the blue point on the graph. </p>
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameters</legend>
+ <div class="row">   
+ <div class="range-wrap column" style="width: 42%;">
+  <label for="k1">$k_1$: </label>
+  <input id = "k1" type="range" class="range" min="5" max="12" step = 0.5 value = "10" oninput="new_chem_osc()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="k2">$k_2$: </label>
+  <input id = "k2" type="range" class="range" min="1" max="8" step = 0.5 value = "2" oninput="new_chem_osc()">
+  <output class="bubble"></output>
+ </div>
+ </div>
+</fieldset>
+ </div>
+ <br>
+  <div>
+<fieldset>
+  <legend class="controlLegend">Display Options</legend>
+      <label for="density_chem">Density: </label><br>
+   <input id = "density_chem" type="range" class="range" min="1.2" max="3" step = 0.15 value = "1.8" style="width: 50%;" oninput="new_chem_osc()"> <br><br>
+   <input type="checkbox" id="colorize_chem"  oninput="new_chem_osc()">
+   <label for="colorize_chem"> Colorize according to magnitude</label><br> 
+</fieldset>
+</div>
+</div>
+
+
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Phase Portrait</legend>
+        <div id = "chemicaldiv" >
+        <div id = "chemicalbox" class="jxgbox" style="width:600px; height:600px;">
+          </div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+
+              
+<script src="js/chemical_oscillator.js"> </script> 
+
+
+
+
+<h4>First-order linear systems with distinct real nonzero eigenvalues.</h4>
+<p>Here we visualize the solutions to the first-order linear system of the form
+</p>
+<p>
+    \begin{align}
+    \mathbf{x}'(t) = A\mathbf{x}(t)
+    \end{align}
+  </p>
+<p>for a $2\times 2$ matrix $A$, where $A$ has distinct real nonzero eigenvalues $\lambda_1$ and $\lambda_2$, with corresponding eigenvectors $\mathbf{v}_1$ and $\mathbf{v}_2$. </p>
+
+<p>Let $V = \begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 \end{bmatrix}$, and $D = \begin{bmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{bmatrix}$.
+Then $A = VDV^{-1}$.</p>
+
+<p> The solutions of this linear sysmtem are all of the form
+$$\mathbf{x}(t) = k_1e^{\lambda_1t}\mathbf{v}_1 + k_2e^{\lambda_2t}\mathbf{v}_2,$$
+for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
+
+<p>To play with the visulization yourself, pick values for $\lambda_1,\lambda_2$, and drag $\mathbf{v}_2$ to your desired position:</p>
+
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Eigenvalues</legend>
+ <div>   
+ <div class="range-wrap" style="width: 42%;">
+  <label for="lambda1">$\lambda_1$: </label>
+  <input id = "lambda1" type="range" class="range" min="-5" max="5" step = 0.5 value = "1" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap" style="width: 42%;">
+  <label for="lambda2">$\lambda_2$: </label>
+  <input id = "lambda2" type="range" class="range" min="-5" max="5" step = 0.5 value = "2" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+ </div>
+</fieldset>
+ </div>
+ <br>
+
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Eigenvectors</legend>
+ <div><p>$\mathbf{v}_1 = [1,0]^T$, corresponding to $\lambda_1$</p></div>
+  <div><p>$\mathbf{v}_2 = [$<span id="v2_x">0</span>, <span id="v2_y">1</span>$]^T$, corresponding to $\lambda_2$ </p></div>
+  <div id = "repeatedEigenvectors"> <p>ATTENTION: $\mathbf{v}_1$ and $\mathbf{v}_2$ must be linearly independent!</p></div>
+</fieldset>
+ </div>
+ <br>
+</div>
+
+
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Phase Portrait</legend>
+        <div id = "repeatedRootsGraph"> <p>ATTENTION: $\lambda_1$ and $\lambda_2$ must be distinct!</p></div>
+        <div id = "zeroEv"> <p>ATTENTION: Eigenvalues need to be nonzero!</p></div>
+        <div id = "canvasdiv">
+        <div id = "box" class="jxgbox" style="width:600px; height:600px;">
+          </div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+<br>
+
+
+              
+<script src="js/draw_first_order_system_Ch8.js"> </script> 
+
+<script src="js/draw_bubble.js"></script>
+</body>
+
+</html>
