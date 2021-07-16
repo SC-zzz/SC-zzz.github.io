@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 10 Demo</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 auto 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 09 Demo.html">previous page</a> | 
+<a href="Chapter 11 Demo.html">next page</a>
+</nav>
+
+
+
+<article>
+
+    <h1>Chapter 10 Demo</h1>  
+
+<div>
+<h3>Visualizing resonance.</h3>
+</div>
+
+<h4>Friction effects on resonance.</h4>
+<!-- <h4>Studying the impact of initial condition and frequency of forcing function on response function.</h4> -->
+
+<p> Here we consider the following second-order IVP as in Example 10.6.1 <!--  the first-order inhomogeneous linear ODE -->
+</p>
+<p>
+    \begin{align}
+    y'' + 2\zeta y' + y = \operatorname{cos}(\omega t),\ y(0) = y'(0) = 0,
+    \end{align}
+  </p>
+<p>where $\zeta \ge 0$ and $\omega \ge 0$.</p>
+<p> Using the method of integration factors, we find the solution to be</p>
+<p>
+    \begin{align}
+    y(t) & = Ce^{-5t} +  \dfrac{\omega e^{-5t} -\omega \operatorname{cos}(\omega t) + 5 \operatorname{sin}(\omega t)}{25 + \omega^2} \\
+    & = \Big(C + \dfrac{\omega}{25 + \omega^2}\Big) e^{-5t} + \dfrac{\operatorname{sin}(\omega t - \phi)}{\sqrt{25 + \omega^2}}, \hspace{1em} \text{where $\phi = \operatorname{arcsin}(\dfrac{\omega}{25 + \omega^2})$.}
+    \end{align}
+  </p>
+
+<p> To play with the visulization yourself, change the parameter $\zeta$ or the frequency of forcing $\omega$, and see how the graph changes. </p>
+
+<p> Questions to consider: </p>
+<div class="plainlist">
+<ul>
+<li>How does the undamped case ($\zeta =0$) behave? Does the graph look bounded at resonance $\omega = 1$?</li>
+<li>For the damped case, does the graph look bounded for aribitrary $\omega$?</li>
+<li>For $\omega = 1$, what happens to the plots as $\zeta$ increases to $1$? (critically damped). What happens beyond this?</li>
+</ul>
+</div>
+     
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 90%;">
+  <label for="zeta">$\zeta$: </label>
+  <input id = "zeta" type="range" class="range" min="0" max="2" step = 0.02 value = "0" oninput="new_function()">
+  <output class="bubble"></output><br>
+  <p><br>Undamped: $\zeta =0$;</p>
+<p>Underdamped: $0< \zeta < 1$;</p>
+<p>Critically damped: $ \zeta = 1$;</p>
+<p>Overdamped: $\zeta > 1$.</p>
+ </div>
+</fieldset>
+ </div>
+ <br>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Frequency of Forcing</legend>
+ <div class="range-wrap" style="width: 90%;">
+  <label for="omega">$\omega$: </label>
+  <input id = "omega" type="range" class="range" min="0" max="2" step = 0.02 value = "1" oninput="new_function()">
+  <output class="bubble"></output>
+</div>
+Period:
+$T = \dfrac{2\pi}{\omega} = $ <span id = 'period'> </span>
+</fieldset>
+ </div>
+</div>
+
+
+  <div>
+
+
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Graph</legend>
+            <div style="margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
+            <div id="myPlot"></div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+<script src="js/second_order_inhomo_Ch10.js"> </script> 
+
+
+
+
+
+
+
+
+
+<!-- 
+<br>
+<h4>Resonant solutions from the non-resonant case.</h4>
+
+<p> Here we consider the following second-order IVP 
+</p>
+<p>
+    \begin{align}
+    y'' = e^{b t},\ y(0) = y'(0) = 0.
+    \end{align}
+  </p>
+<p> This models a frictionless spring (due to the absence of a $y'$-term) with a periodic driving force $\operatorname{sin}(\omega t)$. </p>
+<p>
+    \begin{align}
+    y(t) & = Ce^{-5t} +  \dfrac{\omega e^{-5t} -\omega \operatorname{cos}(\omega t) + 5 \operatorname{sin}(\omega t)}{25 + \omega^2} \\
+    & = \Big(C + \dfrac{\omega}{25 + \omega^2}\Big) e^{-5t} + \dfrac{\operatorname{sin}(\omega t - \phi)}{\sqrt{25 + \omega^2}}, \hspace{1em} \text{where $\phi = \operatorname{arcsin}(\dfrac{\omega}{25 + \omega^2})$.}
+    \end{align}
+  </p>
+
+<p> To play with the visulization yourself, change the constants $a,b$ or the frequency of forcing $\omega$, and see how the graph changes. </p>
+
+<p> Now it is time to have some fun. "guess !0
+game"</p>
+
+<p> Questions to consider: </p>
+<div class="plainlist">
+<ul>
+<li>How does frictionless case ($zeta =0$) behave?</li>
+<li>How does the amplitude of response $y(t)$ depend on $\omega$?</li>
+<li>How does the phase shift of $y(t)$ change with the change of $\omega$?</li>
+</ul>
+</div>
+     
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Constants</legend>
+ <div class="range-wrap" style="width: 85%;">
+  <label for="w">$w$: </label>
+  <input id = "w" type="range" class="range" min="-3" max="3" step = 0.1 value = "0" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap" style="width: 85%;">
+  <label for="b">$b$: </label>
+  <input id = "b" type="range" class="range" min="-3" max="3" step = 0.1 value = "0" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+</fieldset>
+ </div>
+ <br>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Frequency of Forcing</legend>
+ <div class="range-wrap" style="width: 85%;">
+  <label for="omega_2">$\omega$: </label>
+  <input id = "omega_2" type="range" class="range" min="-10" max="10" step = 0.1 value = "1" oninput="new_function()">
+  <output class="bubble"></output>
+</div>
+Period:
+$T = \dfrac{2\pi}{\omega} = $ <span id = 'period_2'> </span>
+</fieldset>
+ </div>
+</div>
+
+
+  <div>
+
+
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Graph</legend>
+            <div style="margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
+            <div id="myPlot_2"></div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+ -->
+
+
+
+ 
+            
+
+<script src="js/draw_bubble.js"></script>
+</body>
+
+</html>

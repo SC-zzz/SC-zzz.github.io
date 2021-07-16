@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 11 Demo</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 10 Demo.html">previous page</a> | 
+<a href="Chapter 12 Demo.html">next page</a>
+</nav>
+
+
+
+<article>
+
+    <h1>Chapter 11 Demo</h1>  
+
+<div>
+<h3>Visualizing phase portraits for 2-dimensional ODE's.</h3>
+</div>
+
+<h4>The competitive Lotka-Volterra model.</h4>
+<!-- <h4>Studying the impact of initial condition and frequency of forcing function on response function.</h4> -->
+
+<p> Here we consider the non-linear competitive Lotka-Volterra equations in Example 11.4.2. It models two competing species (or competing business, etc.) with respective population sizes
+$x_1(t)$ and $x_2(t)$, using the following system of equations:
+</p>
+<p>
+    \begin{align}
+    x_1' &= r_1x_1\Big( 1-\dfrac{x_1+k_{12}x_2}{K_1}\Big), \\
+    x_2' &= r_2x_2\Big( 1-\dfrac{x_2+k_{21}x_1}{K_2}\Big)
+    \end{align}
+  </p>
+<p>where $x_i(t)$ is the population size for species $i$ at time $t$, $r_i>0$ is the “growth rate” that would govern exponential growth if
+there were no resource constraints, $K_i>0$ is the “carrying capacity” that constrains growth based on the
+finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on species $i$.</p>
+
+
+<p> To play with the visulization yourself, change the parameters, and see how the graph changes. Choose your desired initial condition by dragging the blue point on the graph. The stationary points are shown as red dots. Observe that solution curves starting in the first quadrant stay in the first quadrant.</p>
+
+     
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameters</legend>
+ <div class="range-wrap column" style="width: 42%;">
+  <label for="r_1">$r_1$: </label>
+  <input id = "r_1" type="range" class="range" min="0.5" max="5" step = 0.5 value = "5" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="r_2">$r_2$: </label>
+  <input id = "r_2" type="range" class="range" min="0.5" max="5" step = 0.5 value = "3" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="K_1">$K_1$: </label>
+  <input id = "K_1" type="range" class="range" min="0.5" max="5" step = 0.5 value = "4" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="K_2">$K_2$: </label>
+  <input id = "K_2" type="range" class="range" min="0.5" max="5" step = 0.5 value = "2" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="k_12">$k_{12}$: </label>
+  <input id = "k_12" type="range" class="range" min="0.5" max="5" step = 0.5 value = "5" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="k_21">$k_{21}$: </label>
+  <input id = "k_21" type="range" class="range" min="0.5" max="5" step = 0.5 value = "1" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+</fieldset>
+ </div>
+ <br>
+  <div>
+<fieldset>
+  <legend class="controlLegend">Display Options</legend>
+      <label for="density">Density: </label><br>
+   <input id = "density" type="range" class="range" min="1.2" max="3.8" step = 0.2 value = "1.8" style="width: 50%;" oninput="new_function()"> <br><br>
+   <input type="checkbox" id="colorize"  oninput="new_function()">
+   <label for="colorize"> Colorize according to magnitude</label><br> 
+</fieldset>
+</div>
+</div>
+
+
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Graph</legend>
+        <div id = "canvasdiv" >
+        <div id = "box" class="jxgbox" style="width:600px; height:600px;">
+          </div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+
+
+<script src="js/competitive_Lotka_Volterra_new.js"> </script> 
+
+
+
+
+
+
+
+
+
+
+<br>
+<h4>An ODE system with bounded trajectories.</h4>
+
+<p> Here we consider the following system of equations:
+</p>
+<p>
+      \begin{align}
+    x_1' &= -(x_1)^3 + ax_1 + bx_2, \\
+    x_2' &= -(x_2)^3 + cx_1 + dx_2.
+    \end{align}
+  </p>
+<p> To play with the visulization yourself, change the parameters, and see how the graph changes. Choose your desired initial condition by dragging the blue point on the graph. Observe that for any choice of parameters, the vector fields point inwards when $|x_1(t)|$ and $|x_2(t)|$ are large. From this you can deduce that no trajectories are going off to infinity. </p>
+
+     
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameters</legend>
+ <div class="range-wrap column" style="width: 42%;">
+  <label for="a">$a$: </label>
+  <input id = "a" type="range" class="range" min="-5" max="5" step = 0.5 value = "5" oninput="new_bounded_trajectory()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="b">$b$: </label>
+  <input id = "b" type="range" class="range" min="-5" max="5" step = 0.5 value = "-3" oninput="new_bounded_trajectory()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="c">$c$: </label>
+  <input id = "c" type="range" class="range" min="-5" max="5" step = 0.5 value = "1" oninput="new_bounded_trajectory()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="d">$d$: </label>
+  <input id = "d" type="range" class="range" min="-5" max="5" step = 0.5 value = "-5" oninput="new_bounded_trajectory()">
+  <output class="bubble"></output>
+ </div>
+</fieldset>
+ </div>
+ <br>
+ <div>
+<fieldset>
+  <legend class="controlLegend">Display Options</legend>
+      <label for="density_2">Density: </label><br>
+   <input id = "density_2" type="range" class="range" min="1" max="2.8" step = 0.2 value = "1.6" style="width: 50%;" oninput="new_bounded_trajectory()"> <br><br>
+   <input type="checkbox" id="colorize_2"  oninput="new_bounded_trajectory()">
+   <label for="colorize_2"> Colorize according to magnitude</label><br> 
+</fieldset>
+</div>
+</div> 
+
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Graph</legend>
+        <div id = "canvasdiv2" >
+        <div id = "box2" class="jxgbox" style="width:600px; height:600px;">
+          </div>
+          </div>
+        </fieldset>
+    </div>
+</div>  
+
+
+
+<script src="js/bounded_trajectory.js"> </script> 
+ 
+            
+
+<script src="js/draw_bubble.js"></script>
+</body>
+
+</html>

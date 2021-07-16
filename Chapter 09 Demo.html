@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 9 Demo</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 auto 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 08 Demo.html">previous page</a> | 
+<a href="Chapter 10 Demo.html">next page</a>
+</nav>
+
+
+
+<article>
+
+    <h1>Chapter 9 Demo</h1>  
+
+<div>
+<h3>Visualizing inhomogeneous linear ODE’s.</h3>
+</div>
+
+<h4>First-order equations.</h4>
+<!-- <h4>Studying the impact of initial condition and frequency of forcing function on response function.</h4> -->
+
+<p> Here we consider the following first-order IVP <!--  the first-order inhomogeneous linear ODE -->
+</p>
+<p>
+    \begin{align}
+    y' + 5y = \operatorname{sin}(\omega t),\ y(0) = C.
+    \end{align}
+  </p>
+<p> Using the method of integration factors, we find the solution to be</p>
+<p>
+    \begin{align}
+    y(t) & = Ce^{-5t} +  \dfrac{\omega e^{-5t} -\omega \operatorname{cos}(\omega t) + 5 \operatorname{sin}(\omega t)}{25 + \omega^2} \\
+    & = \Big(C + \dfrac{\omega}{25 + \omega^2}\Big) e^{-5t} + \dfrac{\operatorname{sin}(\omega t - \phi)}{\sqrt{25 + \omega^2}}, \hspace{1em} \text{where $\phi = \operatorname{arcsin}(\dfrac{\omega}{25 + \omega^2})$.}
+    \end{align}
+  </p>
+
+<p> To play with the visulization yourself, change the initial value $C$ or the frequency of forcing $\omega$, and see how the graph changes. </p>
+
+<p> Questions to consider: </p>
+<div class="plainlist">
+<ul>
+<li>How does the amplitude of response $y(t)$ depend on initial value $C$?</li>
+<li>How does the amplitude of response $y(t)$ depend on $\omega$?</li>
+<li>How does the phase shift of $y(t)$ change with the change of $\omega$?</li>
+</ul>
+</div>
+     
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Initial Condition</legend>
+ <div class="range-wrap" style="width: 90%;">
+  <label for="C">$C$: </label>
+  <input id = "C" type="range" class="range" min="-3" max="3" step = 0.1 value = "0" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+</fieldset>
+ </div>
+ <br>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Frequency of Forcing</legend>
+ <div class="range-wrap" style="width: 90%;">
+  <label for="omega">$\omega$: </label>
+  <input id = "omega" type="range" class="range" min="-10" max="10" step = 0.1 value = "1" oninput="new_function()">
+  <output class="bubble"></output>
+</div>
+Period:
+$T = \dfrac{2\pi}{\omega} = $ <span id = 'period'> </span>
+</fieldset>
+ </div>
+</div>
+
+
+  <div>
+
+
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Graph</legend>
+            <div style="margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
+            <div id="myPlot"></div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+<script src="js/first_order_inhomo_Ch9.js"> </script> 
+
+<br>
+<h4>Second-order equations.</h4>
+
+<p> Here we consider the following second-order IVP <!--  the first-order inhomogeneous linear ODE -->
+</p>
+<p>
+    \begin{align}
+    y'' + \omega_0^2 y = \operatorname{sin}(\omega t),\ y(0) = y'(0) = 0,
+    \end{align}
+  </p>
+  <p>where $\omega_0 > 0$. </p>
+<p> We can find the solution $y(t)$ using the method of variation of parameters, as described in Theorem 9.4.2. Let $u_1(t), u_2(t)$ be two linearly independent solutions of the corresponding homogeneous ODE $y'' + \omega_0^2 y = 0$. Here we take $u_1(t) = \operatorname{sin}({\omega_0} t)$ and $u_2(t) = \operatorname{cos}({\omega_0} t)$. </p>
+<ol>
+  <li>The associated Wronskian is $W(t) = u_1(t)u_2'(t) - u_1'(t)u_2(t) = - \operatorname{sin}^2({\omega_0} t) - \operatorname{cos}^2({\omega_0} t) = -1$.</li>
+  <li>The inhomogeneous ODE $y'' + \omega_0^2 y = \operatorname{sin}(\omega t)$ with initial conditions $y(0) = 0$ and
+$y'(0) = 0$ (which are our initial conditions) has exactly one solution, given by 
+    \begin{align}
+    y(t) &= -u_1(t) \int_0^t \dfrac{u_2(t)\operatorname{sin}(\omega t)}{W(t)}ds + u_2(t) \int_0^t \dfrac{u_1(t)\operatorname{sin}(\omega t)}{W(t)} ds \\
+    & = \operatorname{sin}({\omega_0} t) \int_0^t {\operatorname{cos}({\omega_0} t)\operatorname{sin}(\omega t)}ds - \operatorname{cos}({\omega_0} t) \int_0^t {\operatorname{sin}({\omega_0} t)\operatorname{sin}(\omega t)} ds \\
+    &= \begin{cases} \dfrac{\operatorname{sin}(\omega t) - (\omega \operatorname{sin}({\omega_0} t))/{\omega_0}}{\omega_0^2 - \omega^2} & \omega_0 \neq \pm \omega, \\
+       \dfrac{\operatorname{sin}(\omega t) - t\omega \operatorname{cos}(\omega t)}{2\omega^2}  & \omega_0 = \pm\omega. \end{cases}
+    \end{align}
+</li>
+</ol>
+
+<p> Now it is time to have some fun and play a “guessing $\omega_0$ game”. Press the button to generate a random $\omega_0$, then vary $\omega$ to see how the graph changes and enter your guess for $\omega_0$. </p>
+
+
+<script type="text/javascript">
+var omega0 = 0.1;
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
+function generate_freq(){
+  omega0 = getRandomInt(1,51)/10;
+  evaluate_guess();
+  document.getElementById("show_omega0").innerHTML = omega0;
+}
+
+function evaluate_guess(){
+  var guess = parseFloat(document.getElementById("guess").value);
+  document.getElementById("guess_omega0").innerHTML = guess;
+  new_guessing_graph();
+  if (math.abs(guess - omega0) > 0.5 && guess > 0){
+    document.getElementById("message").innerHTML = "Emm... try again.";
+  }
+  else if (math.abs(guess - omega0) > 0 && guess > 0) {
+    document.getElementById("message").innerHTML = "Pretty Close! Try again.";
+  }  
+  else if (guess - omega0 == 0) {
+    document.getElementById("message").innerHTML = "Yay! You get the correct value!";
+  }
+  else {
+    document.getElementById("message").innerHTML = "Please enter a valid positive number.";
+  }
+}
+</script> 
+
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Resonant Frequency</legend>
+Press the button to randomly generate a resonant frequency $w_0 \in [0.1,5]$ (up to 1 decimal place):
+  <div style="padding-top: 1em;">     
+  <button style="font-size: 18px;" onclick="generate_freq()">Generate!</button>
+  <br></div>
+</fieldset>
+ </div>
+ <br>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Frequency of Forcing</legend>
+ <div class="range-wrap" style="width: 90%;">
+  <label for="omega_2">$\omega$: </label>
+  <input id = "omega_2" type="range" class="range" min="-8" max="8" step = 0.1 value = "1" oninput="new_guessing_graph()">
+  <output class="bubble"></output>
+</div>
+Period:
+$T = \dfrac{2\pi}{\omega} = $ <span id = 'period_2'> </span>
+</fieldset>
+ </div>
+<br>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Your Guess: </legend>
+<label for="guess">Your guess for $\omega_0$:</label>
+  <input type="number" min = 0.1 step = 0.1 max = 5 value = 0.1 id="guess" name="guess" oninput="evaluate_guess()"><br>
+  <p>You guessed $\omega_0 = $ <span id = "guess_omega0"> </span>.</p>
+   <p style="display: none;"> Actual $\omega_0$: <span id = "show_omega0"> </span>  <br></p>
+ <label for="showGuess">Show your guess on the graph:</label>
+    <input type="radio" name="showGuess" id="hide" checked onclick="new_guessing_graph()"> hide 
+    <input type="radio" name="showGuess"  id="show" onclick="new_guessing_graph()"> show<br>
+  <p id = "message"></p>
+</fieldset>
+ </div>
+
+</div>
+
+
+  <div>
+
+
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Graph</legend>
+            <div style="margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
+            <div id="myPlot_2"></div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+
+
+<script src="js/guessing_game_Ch9.js"></script>
+
+
+ 
+            
+
+<script src="js/draw_bubble.js"></script>
+</body>
+
+</html>
