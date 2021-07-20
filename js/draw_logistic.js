@@ -198,10 +198,10 @@ function new_function() {
     var colorize = document.getElementById("colorize").checked;
     
     // draw direction field
-    if (document.getElementById("UDF").checked) {
-        draw_direction_field(option=1, r, K, Y0, density, colorize);
-    }
-    else if (document.getElementById("slope").checked) {
+//     if (document.getElementById("UDF").checked) {
+//         draw_direction_field(option=1, r, K, Y0, density, colorize);
+//     }
+    if (document.getElementById("slope").checked) {
         draw_direction_field(option=2, r, K, Y0, density, colorize);
     }
     
