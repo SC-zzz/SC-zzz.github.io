@@ -129,9 +129,9 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 <h3>Visualizing phase portraits and eigenvalues.</h3>
 
 
-<h4>A chemical oscillator.</h4>
+<h4>Visualizing a chemical oscillator.</h4>
 
-<p> Here we consider the chemical oscillator in Example 8.1.1 modelled by the following system of equations:
+<p> Here we consider the chemical oscillator introduced in this chapter modelled by the following system of equations:
 </p>
 <p>
     \begin{align}
@@ -170,7 +170,7 @@ $k_2$ depend on reaction rates and other information.</p>
   <legend class="controlLegend">Display Options</legend>
       <label for="density_chem">Density: </label><br>
    <input id = "density_chem" type="range" class="range" min="1.2" max="3" step = 0.15 value = "1.8" style="width: 50%;" oninput="new_chem_osc()"> <br><br>
-   <input type="checkbox" id="colorize_chem"  oninput="new_chem_osc()">
+   <input type="checkbox" checked id="colorize_chem"  oninput="new_chem_osc()">
    <label for="colorize_chem"> Colorize according to magnitude</label><br> 
 </fieldset>
 </div>
@@ -197,7 +197,7 @@ $k_2$ depend on reaction rates and other information.</p>
 
 
 
-<h4>First-order linear systems with distinct real nonzero eigenvalues.</h4>
+<h4>Visualizing first-order linear systems with distinct real nonzero eigenvalues.</h4>
 <p>Here we visualize the solutions to the first-order linear system of the form
 </p>
 <p>
@@ -225,13 +225,13 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
       <legend class="controlLegend">Eigenvalues</legend>
  <div>   
  <div class="range-wrap" style="width: 42%;">
-  <label for="lambda1">$\lambda_1$: </label>
-  <input id = "lambda1" type="range" class="range" min="-5" max="5" step = 0.5 value = "1" oninput="new_function()">
+  <label for="ev1">$\lambda_1$: </label>
+  <input id = "ev1" type="range" class="range" min="-5" max="5" step = 0.5 value = "1" oninput="new_phase_portrait()">
   <output class="bubble"></output>
  </div>
   <div class="range-wrap" style="width: 42%;">
-  <label for="lambda2">$\lambda_2$: </label>
-  <input id = "lambda2" type="range" class="range" min="-5" max="5" step = 0.5 value = "2" oninput="new_function()">
+  <label for="ev2">$\lambda_2$: </label>
+  <input id = "ev2" type="range" class="range" min="-5" max="5" step = 0.5 value = "2" oninput="new_phase_portrait()">
   <output class="bubble"></output>
  </div>
  </div>
@@ -255,10 +255,10 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
     <div>
         <fieldset >
         <legend class="controlLegend">Phase Portrait</legend>
-        <div id = "repeatedRootsGraph"> <p>ATTENTION: $\lambda_1$ and $\lambda_2$ must be distinct!</p></div>
-        <div id = "zeroEv"> <p>ATTENTION: Eigenvalues need to be nonzero!</p></div>
-        <div id = "canvasdiv">
-        <div id = "box" class="jxgbox" style="width:600px; height:600px;">
+        <div id = "repeatedRootsReal"> <p style="color:red">ATTENTION: $\lambda_1$ and $\lambda_2$ must be distinct!</p></div>
+        <div id = "zeroEv"> <p style="color:red">ATTENTION: Eigenvalues need to be nonzero!</p></div>
+        <div id = "realdiv">
+        <div id = "realbox" class="jxgbox" style="width:600px; height:600px;">
           </div>
           </div>
         </fieldset>
@@ -266,11 +266,107 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
   </div>
 </div>  
 
-<br>
-
 
               
 <script src="js/draw_first_order_system_Ch8.js"> </script> 
+
+
+<br>
+<h4>Visualizing first-order linear systems using eigenvector bases.</h4>
+
+
+<p> Here we visualize the solutions to the first-order linear system of the form
+</p>
+<p>
+    \begin{align}
+    \mathbf{x}'(t) = A\mathbf{x}(t)
+    \end{align}
+  </p>
+<p>  for a $2\times 2$ matrix $A = \begin{bmatrix}a & b \\ c & d \end{bmatrix}$ that has two distinct nonzero eigenvalues. </p>
+
+<p> To play with the visulization yourself, pick values for constants $a,b,c,d$, and choose your prefered display options:</p>
+
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Constants</legend>
+ <div class="row">   
+ <div class="range-wrap column" style="width: 42%;">
+  <label for="a">$a$: </label>
+  <input id = "a" type="range" class="range" min="-5" max="5" step = 0.5 value = "-1" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="b">$b$: </label>
+  <input id = "b" type="range" class="range" min="-5" max="5" step = 0.5 value = "2" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+ </div>
+ <div class="row">   
+ <div class="range-wrap column" style="width: 42%;">
+  <label for="c">$c$: </label>
+  <input id = "c" type="range" class="range" min="-5" max="5" step = 0.5 value = "0" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="d">$d$: </label>
+  <input id = "d" type="range" class="range" min="-5" max="5" step = 0.5 value = "3" oninput="new_function()">
+  <output class="bubble"></output>
+ </div>
+ </div>
+</fieldset>
+ </div>
+ <br>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Outputs</legend>
+        <p> The determinant of $A$ is $\operatorname{det}(A) = ad-bc = $ <span id ="det_term"> </span>. </p> 
+         <div id = "detIs0"> <p>ATTENTION: The determinant is zero. Please change $A$ to make it nonzero.</p></div>
+         <div id = "detNot0">
+         <p>  The asoociated characteristic polynomial is $\lambda^2 - \operatorname{tr}(A) \lambda + \operatorname{det}(A) = \lambda^2$<span id ="p_term">+</span>$\lambda$<span id ="q_term">-1.5</span>. <span id ="type_of_roots"> </span></p>
+         <div id = "repeatedRoots"> <p>ATTENTION: Please change $A$ to make them distinct.</p></div>
+         <div id = "distinctRoots">
+        <p>The eigenvalues of $A$ are $\lambda_1 =$  <span id ="lambda1"></span>, $\lambda_2 =$  <span id ="lambda2"></span>. </p> 
+        <p style="line-height: 1.3">Corresponding eigenvectors are $v_1 = $ <span id ="v1"></span> and $v_2 = $ <span id ="v2"></span>. </p> 
+        <p>The phase portrait is shown on the right.</p>
+      </div>
+        </div>
+</fieldset>
+ </div>
+</div>
+
+
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Phase Portrait</legend>
+        <div id = "repeatedRootsGraph"> <p>ATTENTION: To see the visualization, please change $A$ to make the eigenvalues distinct!</p></div>
+        <div id = "zeroDetGraph"> <p>ATTENTION: To see the visualization, please change $A$ to make the determinant nonzero!</p></div>
+        <div id = "canvasdiv" >
+        <div id = "box" class="jxgbox" style="width:600px; height:600px;">
+          </div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+            
+<script src="js/draw_first_order_system.js"> </script> 
+
+<br>
+<div> 
+<h4>Generating your own phase portraits.</h4>
+<p>You can go to the site below and click on the "System" tab to generate your own phase portraits. Have fun! </p>
+<div class="plainlist">
+<ul>
+<li><a href="https://homepages.bluffton.edu/~nesterd/apps/slopefields.html">Slope and direction fields</a>.</li>
+<!-- <li><a href="https://www.integral-domain.org/lwilliams/Applets/calculus/slopef.php">Slope fields</a>.</li> -->
+</ul>
+</div>
+  </div>  
 
 <script src="js/draw_bubble.js"></script>
 </body>

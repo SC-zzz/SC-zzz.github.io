@@ -30,7 +30,7 @@ function new_function() {
       if (length != 0) {
         let w = [scaling*g(v)[0]/length, scaling*g(v)[1]/length];
         if (colorize==true) {
-		  var color = "hsl(" + (360- (length % 360)) + ", 100%, 70%)";
+		  var color = "hsl(" + (360- (length % 360)) + ", 100%, 75%)";
 		}    
 		else {
 		  var color = 'gray';
@@ -44,20 +44,20 @@ function new_function() {
 
 
 
-  brd.create('point', [K_1, 0],{size: 4, visible:true,fixed:true, name:''});  
-  brd.create('point', [0, K_2],{size: 4, visible:true,fixed:true, name:''});  
-  brd.create('point', [0, 0],{size: 4, visible:true,fixed:true, name:''});  
+  brd.create('point', [K_1, 0],{size: 5, visible:true,fixed:true, name:''});  
+  brd.create('point', [0, K_2],{size: 5, visible:true,fixed:true, name:''});  
+  brd.create('point', [0, 0],{size: 5, visible:true,fixed:true, name:''});  
 
   let det = 1 - k_12 * k_21;
   if (det != 0) {
     var sp = [(K_1 - k_12* K_2)/det, (K_2 - k_21* K_1)/det];
-    brd.create('point', sp, {size: 4, visible:true,fixed:true, name:''});
+    brd.create('point', sp, {size: 5, visible:true,fixed:true, name:''});
   //x_curve = brd.create('curve', [x1Array, x2Array], {strokeColor:'blue', strokeWidth:'3px'});
   //var s1 = brd.create('point', [K_1, 0], {fixed:true, visible:true, color:red});
   //var s2 = brd.create('point', [0, K_2], {fixed:true, visible:true, color:red});
     }
   
-  var p = brd.create('point', [2,3], {size: 5, fixed:false, strokeColor:'dodgerblue', fillColor:'dodgerblue', name:'Drag me'});
+  var p = brd.create('point', [2,3], {size: 6, fixed:false, strokeColor:'dodgerblue', fillColor:'dodgerblue', name:'Drag me'});
  
   
   var sol = ode_RK4(t_start, t_fin, dt, f, [p.X(),p.Y()]);

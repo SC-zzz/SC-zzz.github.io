@@ -49,9 +49,9 @@ function new_function() {
   var layout = {
 	xaxis: {range: [t_start, t_fin], title: "t"},
 	yaxis: {autorange: true, title: "y"},  
-	title: "The solution curve y(t) (with zeta=" 
-			  + a/2 + ", omega=" + omega + ")",
-	};
+	title: "The solution curve y(t) (with &#950;=" 
+			  + a/2 + ", &#969;=" + omega + ")",
+	}; //&#950; = zeta, &#969; = omega
 
     // Display using Plotly
   Plotly.newPlot("myPlot", data, layout);

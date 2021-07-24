@@ -89,7 +89,7 @@ function new_guessing_graph() {
   let layout = {
 	xaxis: {range: [t_start, t_fin], title: "t"},
 	yaxis: {autorange: true, title: "y"},  
-	title: "The solution curve y(t) (with omega=" + omega + ")",
+	title: "The solution curve y(t) (with &#969;=" + omega + ")",
 	};
 
     // Display using Plotly

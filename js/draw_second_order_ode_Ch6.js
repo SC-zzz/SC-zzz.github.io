@@ -91,7 +91,8 @@ function new_function() {
     }
 
 
-
+    // data for 3d plot on the bottom
+    // the curve
     var parametric3d ={
 	x:tArray,
 	y:yArray,
@@ -102,6 +103,7 @@ function new_function() {
     line: {color: 'dodgerblue', width: 3}
 	};
 
+    // independent solns
 	var parametric3d_y1 ={
 		x:tArray,
 		y:y1Array,
@@ -148,6 +150,7 @@ function new_function() {
 			yaxis: 'y2',
 			mode:"lines",
 			name: 'y_1(t)',
+			showlegend: false,
 			line: {color: 'hsl(0, 100%, 80%)'}
 			};
 		var y2dy_plot = 	{
@@ -157,6 +160,7 @@ function new_function() {
 			yaxis: 'y2',
 			mode:"lines",
 			name: 'y_2(t)',
+			showlegend: false,
 			line: {color: 'hsl(270, 100%, 80%)'}
 			};
 		
@@ -188,6 +192,7 @@ function new_function() {
     yaxis: 'y2',
 	mode:"lines",
 	name: 'y(t)',
+    showlegend: false,
 	line: {color: 'dodgerblue', width: 3}
 	};
    

@@ -1,24 +1,22 @@
-var canvasdiv = document.getElementById('canvasdiv');
-
-
+JXG.Options.text.useMathJax = true;
+  
+function new_phase_portrait() { 
+var canvasdiv = document.getElementById('realdiv');
 // for eigenlines
 var r_lim = 8;
 var l_lim = -r_lim;
 const m = 8;
 
-JXG.Options.text.useMathJax = true;
-  
-function new_function() { 
   canvasdiv.style.display = 'initial'; 
   var lname=[];  
-  var lambda1 = parseFloat(document.getElementById("lambda1").value);  
-  var lambda2 = parseFloat(document.getElementById("lambda2").value);  
+  var lambda1 = parseFloat(document.getElementById("ev1").value);  
+  var lambda2 = parseFloat(document.getElementById("ev2").value);  
 
 
 
   if (lambda1 == lambda2){
     canvasdiv.style.display = 'none';
-    document.getElementById("repeatedRootsGraph").style.display = "initial";
+    document.getElementById("repeatedRootsReal").style.display = "initial";
     return;
   }
   
@@ -29,19 +27,19 @@ function new_function() {
   }
   
   
-  document.getElementById("repeatedRootsGraph").style.display = "none";
+  document.getElementById("repeatedRootsReal").style.display = "none";
   document.getElementById("zeroEv").style.display = "none";
   
-  var brd = JXG.JSXGraph.initBoard('box',
+  var brd = JXG.JSXGraph.initBoard('realbox',
 					    {axis: true,boundingbox: [-5, 5, 5, -5],keepaspectratio: true});	
   				    
   brd.create('text',[-4.5,4, 'Drag $v_2$ to your desired position:'],{fontsize: 16});				
   var p0 = brd.create('point',[0,0],{fixed:true,visible:false});
   var pneg1 = brd.create('point',[-1,0],{visible:false,fixed:true});
-  var p1 = brd.create('point',[1,0],{name:'\\[v_1\\]',fixed:true, size: 5});
+  var p1 = brd.create('point',[1,0],{name:'\\[v_1\\]',fixed:true, size: 6});
   var semicircle = brd.create('semicircle',[pneg1,p1],{strokeWidth:2,strokeColor:'gray', dash:2});
   var p2 = brd.create('glider',[0,1.0,semicircle],
-    {strokeColor: "dodgerblue", fillColor: "dodgerblue", name:'\\[v_2\\]',withLabel:true, size: 5});
+    {strokeColor: "dodgerblue", fillColor: "dodgerblue", name:'\\[v_2\\]',withLabel:true, size: 6});
   document.getElementById("v2_x").innerHTML = "0";
   document.getElementById("v2_y").innerHTML = "1"; 
   
@@ -148,7 +146,7 @@ function new_function() {
 
 }
 
-new_function();
+new_phase_portrait();
 
 
 

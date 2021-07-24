@@ -1,16 +1,12 @@
-var canvasdiv = document.getElementById('canvasdiv');
-
-
 // plotting range: -1<= x <=6, -1<= y <= 6
-
-
-
-// for eigenlines
-var r_lim =12;
-var l_lim = -r_lim;
-const m =8;
-
+JXG.Options.text.useMathJax = true;
 function new_function() { 
+  var canvasdiv = document.getElementById('canvasdiv');
+  // for eigenlines
+  var r_lim =12;
+  var l_lim = -r_lim;
+  const m =8;
+
     canvasdiv.style.display = 'initial'; 
     document.getElementById("repeatedRootsGraph").style.display = 'none'; 
     document.getElementById("zeroDetGraph").style.display = 'none';
@@ -129,9 +125,9 @@ function new_function() {
 
 				var brd = JXG.JSXGraph.initBoard('box',{axis: true,boundingbox: [-5, 5, 5, -5], keepaspectratio: true});
 				var p1 = brd.create('point', v[0],
-				         {withLabel: true, name: "v_1", size: 6, fixed: true});
+				         {withLabel: true, name: "$v_1$", size: 6, fixed: true});
 				var p2 = brd.create('point', v[1],
-				         {withLabel: true, name: "v_2", size: 6, fixed: true});
+				         {withLabel: true, name: "$v_2$", size: 6, fixed: true});
 			    //p1.label.content.setProperty({fontSize:60}); 
 			    //p2.label.content.setProperty({fontSize:60}); 
                 
@@ -139,14 +135,14 @@ function new_function() {
                 var lname = new Array(2);
                 for (let j=0; j<= 1; j ++) {
 				if (w[j] > 0) {
-				    lname[j] = "&lambda;_" + (j+1) + " = " + math.format(w[j],{precision: 4}) + " > 0";
+				    lname[j] = "$&lambda;_" + (j+1) + " = " + math.format(w[j],{precision: 4}) + " > 0$";
 				    for (let i = 0; i< r_lim; i ++){
                         brd.create('arrow', [[i*v[j][0],i*v[j][1]], [(i+1)*v[j][0],(i+1)*v[j][1]]], {color: "black", fixed: true});
                         brd.create('arrow', [[-i*v[j][0],-i*v[j][1]], [-(i+1)*v[j][0],-(i+1)*v[j][1]]], {color: "black", fixed: true});
                     }
 				}
 				else {
-				    lname[j] = "&lambda;_" + (j+1) + " = " + math.format(w[j],{precision: 4}) + " < 0";
+				    lname[j] = "$&lambda;_" + (j+1) + " = " + math.format(w[j],{precision: 4}) + " < 0$";
 				    for (let i = 1; i<= r_lim; i ++){
                         brd.create('arrow', [[i*v[j][0],i*v[j][1]], [(i-1)*v[j][0],(i-1)*v[j][1]]], {color: "black", fixed: true});
                         brd.create('arrow', [[-i*v[j][0],-i*v[j][1]], [-(i-1)*v[j][0],-(i-1)*v[j][1]]], {color: "black", fixed: true});
@@ -255,43 +251,44 @@ function new_function() {
 					// draw arrows
 					if (r0 > 0) {
 					    var t_start = -4*Math.PI/Math.abs(s0);   
-					    var t_fin = Math.max(Math.log(30)/Math.abs(r0),8*Math.PI/Math.abs(s0));					    
-					    for (let i = 0.5; i< 8; i =i+1) {
-
-							let t = i* Math.PI/(2*Math.abs(s0));
-							let dt = Math.min(0.3 * Math.PI/(2*Math.abs(s0)), Math.log(1+0.3/Math.exp(r0*t))/r0);
-							let x_0 = math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]));
-							let y_0 = math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]));
-							let x_1 = math.re(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][0]));
-							let y_1 = math.re(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][1]));					    
-							brd.create('arrow', [[x_0,y_0], [x_1,y_1]], {color: "black", fixed: true}); 
-							
-							let x2_0 = math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]));
-							let y2_0 = math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]));
-							let x2_1 = math.im(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][0]));
-							let y2_1 = math.im(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][1]));					    
-							brd.create('arrow', [[x2_0,y2_0], [x2_1,y2_1]], {color: "black", fixed: true});              
-                        }
+					    var t_fin = Math.max(Math.log(30)/Math.abs(r0),8*Math.PI/Math.abs(s0));	
+					    				    
+// 					    for (let i = 0.5; i< 8; i =i+1) {
+// 
+// 							let t = i* Math.PI/(2*Math.abs(s0));
+// 							let dt = Math.min(0.3 * Math.PI/(2*Math.abs(s0)), Math.log(1+0.3/Math.exp(r0*t))/r0);
+// 							let x_0 = math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]));
+// 							let y_0 = math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]));
+// 							let x_1 = math.re(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][0]));
+// 							let y_1 = math.re(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][1]));					    
+// 							brd.create('arrow', [[x_0,y_0], [x_1,y_1]], {color: "black", fixed: true}); 
+// 							
+// 							let x2_0 = math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]));
+// 							let y2_0 = math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]));
+// 							let x2_1 = math.im(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][0]));
+// 							let y2_1 = math.im(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][1]));					    
+// 							brd.create('arrow', [[x2_0,y2_0], [x2_1,y2_1]], {color: "black", fixed: true});              
+//                         }
 					}
 					else {
 					    var t_start = Math.min(-Math.log(30)/Math.abs(r0),-8*Math.PI/Math.abs(s0));   
 					    var t_fin = 4*Math.PI/Math.abs(s0);
-					    for (let i = -7.5; i <= 0; i =i+1) {
-
-							let t = i* Math.PI/(2*Math.abs(s0));
-							let dt = Math.min(0.3 * Math.PI/(2*Math.abs(s0)), -Math.log(1+0.3/Math.exp(r0*t))/r0);
-							let x_0 = math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]));
-							let y_0 = math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]));
-							let x_1 = math.re(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][0]));
-							let y_1 = math.re(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][1]));					    
-							brd.create('arrow', [[x_0,y_0], [x_1,y_1]], {color: "black", fixed: true}); 
-							
-							let x2_0 = math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]));
-							let y2_0 = math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]));
-							let x2_1 = math.im(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][0]));
-							let y2_1 = math.im(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][1]));					    
-							brd.create('arrow', [[x2_0,y2_0], [x2_1,y2_1]], {color: "black", fixed: true});              
-                        }					    
+// 					    for (let i = -7.5; i <= 0; i =i+1) {
+// 
+// 							let t = i* Math.PI/(2*Math.abs(s0));
+// 							let dt = Math.min(0.3 * Math.PI/(2*Math.abs(s0)), -Math.log(1+0.3/Math.exp(r0*t))/r0);
+// 							let x_0 = math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]));
+// 							let y_0 = math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]));
+// 							let x_1 = math.re(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][0]));
+// 							let y_1 = math.re(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][1]));					    
+// 							brd.create('arrow', [[x_0,y_0], [x_1,y_1]], {color: "black", fixed: true}); 
+// 							
+// 							let x2_0 = math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]));
+// 							let y2_0 = math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]));
+// 							let x2_1 = math.im(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][0]));
+// 							let y2_1 = math.im(math.multiply(math.exp(math.multiply(w[0],t+dt)), v[0][1]));					    
+// 							brd.create('arrow', [[x2_0,y2_0], [x2_1,y2_1]], {color: "black", fixed: true});              
+//                         }					    
 					}
 
 				    for (let k=0; k< m/2; k++){
@@ -306,6 +303,17 @@ function new_function() {
 						           +coeff[1]*math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1])) 
 						    },
 						t_start, t_fin], {strokeColor:'gray',strokeWidth:2});
+						// add arrows
+						brd.create('curve',[
+						function(t){
+						    return coeff[0]*math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]))
+						           +coeff[1]*math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0])) 
+						    },
+						function(t){						    
+						    return coeff[0]*math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]))
+						           +coeff[1]*math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1])) 
+						    },
+						t_start, 0.4*Math.PI/(2*Math.abs(s0))], {strokeColor:'gray',strokeWidth:2,lastArrow: true});
 // 						for (let i= -1; i<=1; i++) {
 // 							let t = i* Math.PI/(2*Math.abs(s0));
 // 							let dt = Math.min(0.2 * Math.PI/(2*Math.abs(s0)), -Math.log(1+0.1/Math.exp(r0*t))/r0);
@@ -316,6 +324,15 @@ function new_function() {
 // 							brd.create('arrow', [[x_0,y_0], [x_1,y_1]], {color: "gray", strokeWidth:2, fixed: true}); 
 // 						}
 				    }
+				    // add arrows
+					brd.create('curve',[
+						function(t){return math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]))},
+						function(t){return math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]))},
+						t_start, 0.4*Math.PI/(2*Math.abs(s0))],{strokeColor:'black',strokeWidth:2,lastArrow: true});	
+					brd.create('curve',[
+						function(t){return math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]))},
+						function(t){return math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]))},
+						t_start, 0.4*Math.PI/(2*Math.abs(s0))],{strokeColor:'black',strokeWidth:2,lastArrow: true});  
 					var c1 = brd.create('curve',[
 						function(t){return math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]))},
 						function(t){return math.re(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]))},
@@ -323,7 +340,8 @@ function new_function() {
 					var c2 = brd.create('curve',[
 						function(t){return math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][0]))},
 						function(t){return math.im(math.multiply(math.exp(math.multiply(w[0],t)), v[0][1]))},
-						t_start, t_fin],{strokeColor:'black',strokeWidth:3});    
+						t_start, t_fin],{strokeColor:'black',strokeWidth:3});   
+	 
                 }
 			}
 

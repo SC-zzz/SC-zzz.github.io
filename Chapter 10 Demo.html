@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width">
   <title>Chapter 10 Demo</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+
   <!-- Fonts -->
   <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
 
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  
  <!-- Including Math -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
 
@@ -131,16 +134,16 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 <h4>Friction effects on resonance.</h4>
 <!-- <h4>Studying the impact of initial condition and frequency of forcing function on response function.</h4> -->
 
-<p> Here we consider the following second-order IVP as in Example 10.6.1 <!--  the first-order inhomogeneous linear ODE -->
+<p> Here we consider the following second-order IVP<!--  the first-order inhomogeneous linear ODE -->
 </p>
 <p>
     \begin{align}
     y'' + 2\zeta y' + y = \operatorname{cos}(\omega t),\ y(0) = y'(0) = 0,
     \end{align}
   </p>
-<p>where $\zeta \ge 0$ and $\omega \ge 0$.</p>
+<p>where $\zeta \ge 0$ and $\omega \ge 0$. This is the driven damped harmonic oscillator discussed in this chapter, with a periodic driving force $f(t) = \operatorname{cos}(\omega t)$.</p>
 
-<p> To play with the visulization yourself, change the parameter $\zeta$ or the frequency of forcing $\omega$, and see how the graph changes. </p>
+<p> To play with the visulization yourself, change the damping ratio $\zeta$ or the frequency of forcing $\omega$, and see how the graph changes. </p>
 
 <p> Questions to consider: </p>
 <div class="plainlist">
@@ -157,7 +160,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
   <div>
    <div> 
   <fieldset>
-      <legend class="controlLegend">Parameter</legend>
+      <legend class="controlLegend">Damping Ratio</legend>
  <div class="range-wrap" style="width: 90%;">
   <label for="zeta">$\zeta$: </label>
   <input id = "zeta" type="range" class="range" min="0" max="2" step = 0.02 value = "0" oninput="new_function()">

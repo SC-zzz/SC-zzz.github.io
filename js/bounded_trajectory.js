@@ -25,7 +25,7 @@ function new_bounded_trajectory() {
       if (length != 0) {
         let w = [scaling*g(v)[0]/length, scaling*g(v)[1]/length];
         if (colorize==true) {
-		  var color = "hsl(" + (360- (length % 360)) + ", 100%, 70%)";
+		  var color = "hsl(" + (360- (length % 360)) + ", 100%, 75%)";
 		}    
 		else {
 		  var color = 'gray';
@@ -37,7 +37,7 @@ function new_bounded_trajectory() {
   }
   
   
-  var p = board.create('point', [4,3], {size: 5, strokeColor:'dodgerblue', fillColor:'dodgerblue', name:'Drag me'});
+  var p = board.create('point', [4,3], {size: 6, strokeColor:'dodgerblue', fillColor:'dodgerblue', name:'Drag me'});
  
 
   var sol = ode_auto_RK4(N, dt, g, [p.X(),p.Y()]);

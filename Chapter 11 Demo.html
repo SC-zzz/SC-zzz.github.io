@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width">
   <title>Chapter 11 Demo</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
   <!-- Fonts -->
   <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
 
@@ -20,6 +19,9 @@
   };
   </script>
   <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
 
   <!-- Including Plotly -->
   <script>
@@ -192,7 +194,7 @@ finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on 
   <legend class="controlLegend">Display Options</legend>
       <label for="density">Density: </label><br>
    <input id = "density" type="range" class="range" min="1.2" max="3.8" step = 0.2 value = "1.8" style="width: 50%;" oninput="new_function()"> <br><br>
-   <input type="checkbox" id="colorize"  oninput="new_function()">
+   <input type="checkbox" id="colorize"  checked oninput="new_function()">
    <label for="colorize"> Colorize according to magnitude</label><br> 
 </fieldset>
 </div>
@@ -274,7 +276,7 @@ finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on 
   <legend class="controlLegend">Display Options</legend>
       <label for="density_2">Density: </label><br>
    <input id = "density_2" type="range" class="range" min="1" max="2.8" step = 0.2 value = "1.6" style="width: 50%;" oninput="new_bounded_trajectory()"> <br><br>
-   <input type="checkbox" id="colorize_2"  oninput="new_bounded_trajectory()">
+   <input type="checkbox" id="colorize_2" checked oninput="new_bounded_trajectory()">
    <label for="colorize_2"> Colorize according to magnitude</label><br> 
 </fieldset>
 </div>
