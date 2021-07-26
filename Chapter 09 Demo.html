@@ -237,7 +237,8 @@ $y'(0) = 0$ (which are our initial conditions) has exactly one solution, given b
 
 
 <script type="text/javascript">
-var omega0 = 0.1;
+var omega0 = 0.2;
+document.getElementById("successimg").style.display = 'none'; 
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -246,12 +247,13 @@ function getRandomInt(min, max) {
 }
 
 function generate_freq(){
-  omega0 = getRandomInt(1,51)/10;
+  omega0 = getRandomInt(2,51)/10;
   evaluate_guess();
   document.getElementById("show_omega0").innerHTML = omega0;
 }
 
 function evaluate_guess(){
+  document.getElementById("successimg").style.display = 'none'; 
   var guess = parseFloat(document.getElementById("guess").value);
   document.getElementById("guess_omega0").innerHTML = guess;
   new_guessing_graph();
@@ -266,9 +268,10 @@ function evaluate_guess(){
   }  
   else if (guess - omega0 == 0) {
     document.getElementById("message").innerHTML = "Yay! You get the correct value!";
+    document.getElementById("successimg").style.display = 'initial'; 
   }
   else {
-    document.getElementById("message").innerHTML = "Please enter a valid positive number.";
+    document.getElementById("message").innerHTML = "Please enter a positive number.";
   }
 }
 </script> 
@@ -280,7 +283,7 @@ function evaluate_guess(){
    <div> 
   <fieldset>
       <legend class="controlLegend">Resonant Frequency</legend>
-Press the button to randomly generate a resonant frequency $w_0 \in [0.1,5]$ (up to 1 decimal place):
+Press the button to randomly generate a resonant frequency $w_0 \in [0.2,5]$ (up to 1 decimal place):
   <div style="padding-top: 1em;">     
   <button style="font-size: 18px;" onclick="generate_freq()">Generate!</button>
   <br></div>
@@ -300,17 +303,19 @@ $T = \dfrac{2\pi}{\omega} = $ <span id = 'period_2'> </span>
 </fieldset>
  </div>
 <br>
-   <div> 
+   <div style="position: relative"> 
   <fieldset>
       <legend class="controlLegend">Your Guess: </legend>
 <label for="guess">Your guess for $\omega_0$:</label>
-  <input type="number" min = 0.1 step = 0.1 max = 5 value = 0.1 id="guess" name="guess" oninput="evaluate_guess()"><br>
-  <p>You guessed $\omega_0 = $ <span id = "guess_omega0"> </span>.</p>
+  <input type="number" min = 0.2 step = 0.1 max = 5 value = 0.2 id="guess" name="guess" oninput="evaluate_guess()"><br>
+  <p style="display: none;">You guessed $\omega_0 = $ <span id = "guess_omega0"> </span>.</p>
    <p style="display: none;"> Actual $\omega_0$: <span id = "show_omega0"> </span>  <br></p>
  <label for="showGuess">Show your guess on the graph:</label>
     <input type="radio" name="showGuess" id="hide" checked onclick="new_guessing_graph()"> hide 
     <input type="radio" name="showGuess"  id="show" onclick="new_guessing_graph()"> show<br>
-  <p id = "message"></p>
+  <p id = "message" style = "color:red"></p>
+  <div id="successimg" style ="display: none;"><img src="img/success.gif" alt="success" width = "100%" height = "auto">
+<div>
 </fieldset>
  </div>
 
