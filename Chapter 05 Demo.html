@@ -6,9 +6,12 @@
   <meta name="viewport" content="width=device-width">
   <title>Chapter 5 Demo</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+
   <!-- Fonts -->
   <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
 
  <!-- Including Math -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
@@ -182,8 +185,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 <fieldset>
   <legend class="controlLegend">Display Options</legend>
  Independent solutions: <br>
-    <input type="radio" name="showIndSol" id="hideIS" checked onclick="new_function()"> hide<br>
-    <input type="radio" name="showIndSol"  id="showIS" onclick="new_function()"> show<br><br>
+    <input type="radio" name="showIndSol" id="hideIS" onclick="new_function()"> hide<br>
+    <input type="radio" name="showIndSol"  id="showIS" checked onclick="new_function()"> show<br><br>
    Scale: <br>
     <input type="radio" name="scale" id="linear" checked onclick="new_function()"> linear scale<br>
     <input type="radio" name="scale"  id="log" onclick="new_function()"> log scale (WARNING: This works only for positive parts)<br>  
@@ -195,13 +198,12 @@ Responsive layout - makes the two columns stack on top of each other instead of 
   <div>
     <div>
         <fieldset >
-        <legend class="controlLegend">Output</legend>
+        <legend class="controlLegend">Outputs</legend>
         <p> As in Theorem 5.4.14, the asoociated characteristic polynomial is $\lambda^2 + p \lambda + q = \lambda^2$<span id ="p_term">+</span>$\lambda$<span id ="q_term">-1.5</span>. <span id ="type_of_roots"> </span></p>
         <p>The roots are $\lambda_1 =$  <span id ="lambda1"></span>, $\lambda_2 =$  <span id ="lambda2"></span>. </p>  
         <p id="case1">Two independent solutions are $y_1(t) = e^{\lambda_1 t}$  and $y_2(t) = e^{\lambda_2 t}$. </p>   
         <p id="case2">Two independent solutions are $y_1(t) = e^{\lambda_1 t}$  and $y_2(t) = te^{\lambda_1 t}$. </p>
         <p id="case3">Let $\lambda_1, \lambda_2 = r_0 \pm i s_0$. Then two independent solutions are $y_1(t) = e^{r_0t}\cos(s_0t)$  and $y_2(t) = e^{r_0t}\sin(s_0t)$. </p>
-
 
 
         </fieldset>
@@ -220,11 +222,14 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <script src="js/draw_second_order_ode.js"> </script> 
 
+
+
 <br>
+
 <h4>Visualizing complex numbers.</h4>
-<p> To play with the visulization yourself, drag the point $P$ on the graph. </p>
+<p> To visualize Euler's formula, drag the point $P$ on the graph: </p>
+
 <div class="twoCol_3366">
-  
   <div>
  <div >
 <fieldset>
@@ -243,9 +248,9 @@ Responsive layout - makes the two columns stack on top of each other instead of 
   <div>
     <div>
         <fieldset >
-        <legend class="controlLegend">Graph</legend>
+        <legend class="controlLegend">Euler's Formula</legend>
             <div>
-               <div id = "box" class="jxgbox" style="width:600px; height:600px;">
+               <div id = "Eulerbox" class="jxgbox" style="width:600px; height:600px;">
     </div>
           </div>
         </fieldset>
@@ -253,77 +258,79 @@ Responsive layout - makes the two columns stack on top of each other instead of 
   </div>
 </div>  
 
+<br>
+<p> To visualize complex multiplication, drag the points $z_1,z_2$ on the graph: </p>
+
+<div class="twoCol_3366">
+  <div>
+ <div>
+<fieldset>
+  <legend class="controlLegend">Outputs</legend>
+  <div>  
+    <p id="z1_mult"> $z_1  = 1.5e^{i \theta_1} $$=1.5\operatorname{cos} \theta_1 + (1.5\operatorname{sin} \theta_1)i  = $ <span id = "x1_mult"></span>$ + ($<span id = "y1_mult"></span>$)i$.</p>
+
+    <p id="z2_mult"> $z_2 = 2e^{i \theta_2} $$=2\operatorname{cos} \theta_2 + (2\operatorname{sin} \theta_2)i  = $ <span id = "x2_mult"></span>$ + ($<span id = "y2_mult"></span>$)i$.</p>
+
+    <p id="z3_mult"> $z_3 = z_1z_2$$=3e^{i (\theta_1+\theta_2)}$$=3e^{i \theta_3}$$=3\operatorname{cos} \theta_3 + (3\operatorname{sin} \theta_3)i$$=$ <span id = "x3_mult"></span>$ + ($<span id = "y3_mult"></span>$)i$.</p>
+
+    <p id="theta1_mult"> $\theta_1 = $ <span id = "t1pi_mult"></span>$\pi$ radians.</p>
+    <p id="theta2_mult"> $\theta_2 = $ <span id = "t2pi_mult"></span>$\pi$ radians.</p>
+    <p id="theta3_mult"> $\theta_3$$=(\theta_1+\theta_2) \text{ mod } 2\pi = $ <span id = "t3pi_mult"></span>$\pi$ radians.</p>
+  </div> 
+</fieldset>
+ </div>
+</div>
 
 
-<script type="text/javascript">
-  JXG.Options.text.useMathJax = true;
-  var brd = JXG.JSXGraph.initBoard('box', {axis:true, boundingbox: [-1.5, 1.5, 1.5, -1.5]});
-//var ax = brd.create('line',[[0,0],[1,0]],{visible:true});
-//var ay = brd.create('line',[[0,0],[0,1]],{visible:true});
-brd.create('text',[-1.2,1, 'Drag $P$:'],{fontsize: 16});
-var p0 = brd.create('point',[0,0],{fixed:true,visible:false});
-var p1 = brd.create('point',[1,0],{name:'',visible:false,fixed:true});
-var c = brd.create('circle',[p0,p1],{strokeWidth:3,strokeColor:'gray'});
-var p2 = brd.create('glider',[0.4,1.0,c],{name:'\\[P = e^{i&theta;}\\]',withLabel:true, size: 5});
-var p3 = brd.create('point',[function(){return p2.X();},0.0],{visible:false,name:'',withLabel:false});
-var p4 = brd.create('point',[0.0,function(){return p2.Y();}],{visible:false,name:'',withLabel:false});
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Complex Multiplication</legend>
+            <div>
+               <div id = "multbox" class="jxgbox" style="width:600px; height:600px;">
+    </div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
 
-var theta = brd.create('angle', [p1,p0,p2], {type:'sector', orthoType:'square', orthoSensitivity:2, radius:0.3, name: "$&theta;$"});
+<br>
+<p> To visualize complex conjugation and inversion, drag the point $z$ on the graph: </p>
 
-brd.create('line',[p0,p2],{straightFirst:false,straightLast:false,strokeColor:'rgb(30, 144, 255)'});   // Hypotenuse
-brd.create('line',[p2,p3],{straightFirst:false,straightLast:false,strokeColor:'rgb(255,30,144)'});     // sin
-brd.create('line',[p2,p4],{straightFirst:false,straightLast:false,strokeColor:'rgb(255,144,30)'});     // cos
+<div class="twoCol_3366">
+  <div>
+ <div>
+<fieldset>
+  <legend class="controlLegend">Outputs</legend>
+  <div>  
+    <p id="z1_conj"> $z  = 2e^{i \theta} $$=2\operatorname{cos} \theta + (2\operatorname{sin} \theta)i  = $ <span id = "x1_conj"></span>$ + ($<span id = "y1_conj"></span>$)i$.</p>
 
+    <p id="z2_conj"> $\overline{z} = 2e^{-i \theta} $$=2\operatorname{cos} \theta - (2\operatorname{sin} \theta)i  = $ <span id = "x2_conj"></span>$ + ($<span id = "y2_conj"></span>$)i$.</p>
 
-brd.create('text',[
-        function(){return (p2.X()+p4.X())*0.3;},
-        function(){return (p2.Y()+p4.Y())*0.5+0.05;},
-        'cos'],{fontsize: 14});
+    <p id="z3_conj"> $1/z = \overline{z}/|z|^2$$=0.5e^{-i \theta}$$=0.5e^{-i \theta}$$=0.5\operatorname{cos} \theta - (0.5\operatorname{sin} \theta)i$$=$ <span id = "x3_conj"></span>$ + ($<span id = "y3_conj"></span>$)i$.</p>
 
-brd.create('text',[
-        function(){return (p2.X()+p3.X())*0.5;},
-        function(){return (p2.Y()+p3.Y())*0.5;},
-        'sin'],{fontsize: 14});
-
-brd.create('text',[
-        1.3,
-        -0.08,
-        'Re'],{fontsize: 14});
-
-brd.create('text',[
-        -0.1,
-        1.4,
-        'Im'],{fontsize: 14});
-
-var updtxt = function() {
-document.getElementById("x_coord").innerHTML = math.format(p2.X(),{precision: 3});
-document.getElementById("x_coord2").innerHTML = math.format(p2.X(),{precision: 3});
-document.getElementById("y_coord").innerHTML = math.format(p2.Y(),{precision: 3});
-if (p2.Y()<0){
-    document.getElementById("plus").style.display= "none";
-    document.getElementById("minus").style.display= "inline";
-    document.getElementById("y_coord2").innerHTML = (-math.format(p2.Y(),{precision: 3}));
-  }
-  else {
-    document.getElementById("plus").style.display= "inline";
-    document.getElementById("minus").style.display= "none";
-    document.getElementById("y_coord2").innerHTML = math.format(p2.Y(),{precision: 3});
-  }
-var theta_dec = (Math.atan2(p2.Y(),p2.X()) + 2* Math.PI) % (2 * Math.PI);
-var theta_pi = theta_dec / Math.PI;
-document.getElementById("theta_dec").innerHTML = math.format(theta_dec,{precision: 3});
-document.getElementById("theta_pi").innerHTML = math.format(theta_pi,{precision: 3});
-}
-
-updtxt();
-
-  p2.on("drag",function(){ 
-    updtxt();
-  });
+    <p> $\theta = $ <span id = "t1pi_conj"></span>$\pi$ radians.</p>
+  </div> 
+</fieldset>
+ </div>
+</div>
 
 
-</script>
-            
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Complex Conjugation and Inversion</legend>
+            <div>
+               <div id = "conjbox" class="jxgbox" style="width:600px; height:600px;">
+    </div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+<script src="js/complex_numbers.js"></script>           
 
 <script src="js/draw_bubble.js"></script>
 </body>

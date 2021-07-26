@@ -4,9 +4,9 @@
  <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width">
-  <title>Chapter 1 Demo</title>
+  <title>Chapter 12 Demo</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+
   <!-- Fonts -->
   <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
 
@@ -20,6 +20,10 @@
   };
   </script>
   <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
 
   <!-- Including Plotly -->
   <script>
@@ -43,7 +47,7 @@
 
 .range-wrap {
   position: relative;
-  margin: 0 5% 2.3rem 0rem;
+  margin: 0 8% 2.3rem 0rem;
 }
 .range {
   width: 100%;
@@ -109,13 +113,17 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <link rel="stylesheet" href="css/style.css">
 
-<body>
+</head>
+
+
+
+<body id = "body">
 
 
 <nav>
 <a href="index_page.html">back to index page</a> | 
-previous page | 
-<a href="Chapter 02 Demo.html">next page</a>
+<a href="Chapter 11 Demo.html">previous page</a> | 
+<a href="Chapter 13 Demo.html">next page</a>
 </nav>
 
 
@@ -123,110 +131,115 @@ previous page |
 <article class="article">
 
   <header class="article__header">
-    <h1>Chapter 1 Demo</h1>  
+    <h1>Chapter 12 Demo</h1>  
 
-<h3>Introducing ODE's.</h3>
+<h3>Visualizing Lorenz attractors.</h3>
 
 
-<p> As we will learn later in this course, some ODE systems exhibit “chaos” (i.e., extreme sensitivity to initial conditions). One example is given by the following system of equations, which describes the velocity of a point. This system is called the Chen attractor, with parameters $a,b,c$. You can read more about it <a href="https://en.wikipedia.org/wiki/Multiscroll_attractor">here</a>. </p>
+<p> The system of ODE's we care about is the following Lorenz system,  with constants $a > 1, b > 0, c > 0$:</p>
 <p>
     \begin{align}
     \dot{x} &amp; = a(y-x) \\
-    \dot{y} &amp; = (c-a)x  - xz + cy\\
-    \dot{z} &amp; = xy -bz.
+    \dot{y} &amp; = bx - y - xz \\
+    \dot{z} &amp; = xy -cz.
     \end{align}
   </p>
 
-<p> Here we will use $(a, b, c) = (40, 3, 28)$. Then the system of ODE's becomes</p>
+<p> Lorenz focused on $(a, b, c) = (10, 28, 8/3)$, for reasons within the theory of dynamical systems. We also focus on this case here. Then the system of ODE's becomes</p>
 <p>
     \begin{align}
-    \dot{x} &amp; = 40(y-x) \\
-    \dot{y} &amp; = -12x  - xz + 28y\\
-    \dot{z} &amp; = xy -3z.
+    \dot{x} &amp; = 10(y-x) \\
+    \dot{y} &amp; = 28x - y - xz \\
+    \dot{z} &amp; = xy -\dfrac{8}{3}z.
     \end{align}
   </p>
 
-<p> Notice that this system is non-linear. The figure below shows the trajectory of a Chen attractor with initial value $(x_0,y_0,z_0)=(-0.1,0.5,-0.6)$ from time $t =0$ to time $t=20$. You can see that it looks like a double scroll. You can also play with the figure yourself; move your mouse to the figure and you will see various viewing options on the top right corner of the figure. </p>
+<p> The figure below shows the trajectory of a Lorenz attractor with initial value $(x_0,y_0,z_0)=(1,1,1)$ from time $t =0$ to time $t=20$. You can also play with the figure yourself; move your mouse to the figure and you will see various viewing options on the top right corner of the figure. </p>
 
 
-<div id="3dChen" style="max-width: 900px"> </div>
+<div id="3dLorenz" style="max-width: 900px"> </div>
 
 <script type="text/javascript">
-var a = 40, b = 3, c = 28;
-function f(t,v) {
-  return [a * (v[1] - v[0]), (c - a) * v[0] - v[0] * v[2] + c * v[1], v[0] * v[1] - b * v[2]];
-}
-function f2(v) {
-  return [a * (v[1] - v[0]), (c - a) * v[0] - v[0] * v[2] + c * v[1], v[0] * v[1] - b * v[2]];
-}
+var a = 10, b = 28, c = 8/3;
+var h = 0.005;
 
-var dt = 0.004;
+function g(v) {
+  return [a * (v[1] - v[0]), b * v[0] - v[0] * v[2] - v[1], v[0] * v[1] - c * v[2]];
+}
 
 function attractor_3d(){
 
+let xArray = [], yArray = [], zArray = [];  
 
-let x = [], y = [], z = [];  
-
-  //x[0] = -0.1;
-  //y[0] = 0.5;
-  //z[0] = -0.6;
-  
-
-let sol = ode_RK4(0, 20, dt, f, [-0.1,0.5,-0.6]);
-let n = sol[0].length;
-  for (let i =0; i< n; i++){
-    x[i] = sol[1][i][0];
-    y[i] = sol[1][i][1];
-    z[i] = sol[1][i][2];
+let nTotal = 20/h + 1;
+let sol = ode_auto_RK4(nTotal, h, g, [1,1,1]);
+  for (let i =0; i< nTotal; i++){
+    xArray[i] = sol[i][0];
+    yArray[i] = sol[i][1];
+    zArray[i] = sol[i][2];
   }
 
 
-Plotly.newPlot('3dChen', [{
-  x: x,
-  y: y,
-  z: z,
+Plotly.newPlot('3dLorenz', [{
+  x: xArray,
+  y: yArray,
+  z: zArray,
   type: 'scatter3d',
   mode: 'lines', 
   line: {color: 'dodgerblue', width: 3},
-  name: 'initial value (-0.1,0.5,-0.6)'
+  name: 'initial value (1,1,1)'
 },{
-  x: [x[0]],
-  y: [y[0]],
-  z: [z[0]],
+  x: [xArray[0]],
+  y: [yArray[0]],
+  z: [zArray[0]],
   type: 'scatter3d',
   mode: 'markers', 
   marker: {color: 'red', size:5},
   name: 't=0'
 },
 {
-  x: [x[n-1]],
-  y: [y[n-1]],
-  z: [z[n-1]],
+  x: [xArray[nTotal-1]],
+  y: [yArray[nTotal-1]],
+  z: [zArray[nTotal-1]],
   type: 'scatter3d',
   mode: 'markers', 
   marker: {color: 'darkviolet', size:5},
   name: 't=20'
 }
-], { title: "Chen attractor", scene: {
+], { scene: {
   xaxis: {title: "x"},
   yaxis: {title: "y"},
   zaxis: {title: "z"}},
   margin: {
         l: 0,
         r: 0,
-        b: 0
-        //t: 10
+        b: 0,
+        t: 10
         }, 
 });
 }
 attractor_3d();
 </script>
 
-<p> Now let's try it yourself. Choose an initial value near $(-0.1,0.5,-0.6)$ and hit the “Run the attractors!” button. Then you will see (the $xy$-projection of) the trajactories of two Chen attractors, one with intial value $(x_0,y_0,z_0)=(-0.1,0.5,-0.6)$ and the other with the intial value of your choice. For clarity, only the trajectories in the previous two seconds are kept showing. You will see that initially the two trajectories are very close to each other  (so you probably will only be able to see one),, but they quickly become unrelated.</p>
+
+
+<p> Here is a colorful demonstration of 50 Lorenz attractors with nearby yet distinct initial positions. This animation is essentially taken from <a href="https://iacopogarizio.com/projects/visualizing-chaos/">here</a>. You can see that their trajectories are eventually totally unrelated. </p>
+
+
+<div id="canvasdiv" style="position: relative;margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
+  <!-- <canvas id="canvas" style=" background: white; width:600px; height: 450px"></canvas> -->
+  </div>
+
+<script src="js/attractor.js"></script> 
+
+
+<script src="js/my_rainbow_attractor.js"></script> 
 
 
 
 
+
+<p> Now let's try it yourself. Choose an initial value near (1,1,1) and hit the “Run the attractors!” button. Then you will see (the $xy$-projection of) the trajactories of two Lorenz attractors, one with intial value $(x_0,y_0,z_0)=(1,1,1)$ and the other with the intial value of your choice. For clarity, only the trajectories in the previous five seconds are kept showing. You will see that initially the two trajectories are very close to each other (so you probably will only be able to see one), but they quickly become unrelated.</p>
 
 <div class="twoCol_3366">
   
@@ -237,17 +250,17 @@ attractor_3d();
  <div class="row" style="padding-left:1em">   
  <div class="range-wrap" style="width: 55%;">
   <label for="x_0">$x_0$: </label>
-  <input id = "x_0" type="range" class="range" min="-0.15" max="-0.05" step = 0.01 value = "-0.1" oninput="new_function()">
+  <input id = "x_0" type="range" class="range" min="0.95" max="1.05" step = 0.01 value = "1" oninput="new_function()">
   <output class="bubble"></output>
  </div>
   <div class="range-wrap" style="width: 55%;">
   <label for="y_0">$y_0$: </label>
-  <input id = "y_0" type="range" class="range" min="0.45" max="0.55" step = 0.01 value = "0.5" oninput="new_function()">
+  <input id = "y_0" type="range" class="range" min="0.95" max="1.05" step = 0.01 value = "1" oninput="new_function()">
   <output class="bubble"></output>
  </div>
    <div class="range-wrap" style="width: 55%;">
   <label for="z_0">$z_0$: </label>
-  <input id = "z_0" type="range" class="range" min="-0.65" max="-0.55" step = 0.01 value = "-0.62" oninput="new_function()">
+  <input id = "z_0" type="range" class="range" min="0.95" max="1.05" step = 0.01 value = "1.03" oninput="new_function()">
   <output class="bubble"></output><br>
   <div>
 
@@ -292,17 +305,12 @@ attractor_3d();
  </div> 
 
 
-
-
-
 <script type="text/javascript">
 var myReq;
 var param = 1; // speeding
-//var dt = 0.004;
-var N = 500;
+var N = 1000;
 var n = 2;
 var x = [], y = [], z = [];  
-
 function attractors_2d_setup(x_0, y_0, z_0){
 n = 2;  
 x[0] = [];
@@ -312,16 +320,16 @@ x[1] = [];
 y[1] = [];
 z[1] = [];
 
-  x[0][0] = -0.1;
-  y[0][0] = 0.5;
-  z[0][0] = -0.6;
+  x[0][0] = 1;
+  y[0][0] = 1;
+  z[0][0] = 1;
 
   x[1][0] = x_0;
   y[1][0] = y_0;
   z[1][0] = z_0;
   
 for (var j = 0; j < 2; j++) {
-  let sol = ode_auto_RK4(n, dt, f2, [x[j][0],y[j][0],z[j][0]]);
+  let sol = ode_auto_RK4(n, h, g, [x[j][0],y[j][0],z[j][0]]);
   for (let i =0; i< n; i++){
     x[j][i] = sol[i][0];
     y[j][i] = sol[i][1];
@@ -329,24 +337,24 @@ for (var j = 0; j < 2; j++) {
   }
 }
 
-
 Plotly.newPlot('myDiv', [{
   x: x[0],
   y: y[0],
-  mode: 'lines', name: 'initial value (-0.1,0.5,-0.6)',
+  mode: 'lines', name: 'initial value (1,1,1)',
   line: {color: 'dodgerblue'}
 },
 {
   x: x[1],
   y: y[1],
-  mode: 'lines', name: 'initial value('+x_0+','+y_0+','+z_0+')',
+  mode: 'lines', name: 'initial value ('+x_0+','+y_0+','+z_0+')',
   line: {color: 'orange'}
 }
-], {legend: {"orientation": "h"}, title: "Chen attractors", 
-  xaxis: {range: [-24, 24]},
-  yaxis: {range: [-28, 28]}
+], {
+  xaxis: {range: [-25, 25], title: "x"},
+  yaxis: {range: [-30, 30], title: "y"}
 });
 }
+
 
 function compute (speed) {
   if (n < N) {
@@ -357,7 +365,7 @@ function compute (speed) {
     var start = param*speed;
   }
   for (var j = 0; j < 2; j++) {
-    let sol = ode_auto_RK4(n, dt, f2, [x[j][start],y[j][start],z[j][start]]);
+    let sol = ode_auto_RK4(n, h, g, [x[j][start],y[j][start],z[j][start]]);
    for (let i =0; i< n; i++){
      x[j][i] = sol[i][0];
      y[j][i] = sol[i][1];
@@ -383,6 +391,7 @@ function update () {
   });
   myReq =requestAnimationFrame(update);
 }
+
 
 function update_x2 () {
   compute(2);
@@ -417,7 +426,6 @@ function update_x4 () {
   });
   myReq =requestAnimationFrame(update_x4);
 }
-
 
 
 
@@ -462,8 +470,6 @@ function myFunction() {
 }
 
 </script>
-
-
 
 <script src="js/draw_bubble.js"></script>
 
