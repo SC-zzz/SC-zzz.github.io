@@ -40,7 +40,8 @@ function new_function() {
     var delta = ((p*cf)**2 - 4 * q*cf*cf)/(cf*cf);
     if (delta > 0) {   
         var lambda1 = (-p+math.sqrt(delta))/2; 
-        var lambda2 = (-p-math.sqrt(delta))/2;  
+        var lambda2 = (-p-math.sqrt(delta))/2; 
+        var A = [[1,1],[lambda1,lambda2]]; 
         document.getElementById("type_of_roots").innerHTML = 
           "It has two distinct real roots.";
         document.getElementById("lambda1").innerHTML =  lambda1;
@@ -52,9 +53,10 @@ function new_function() {
         var y2Array = tArray.map(function (x) {return math.exp(x*lambda2)});         
     }
     else if (delta == 0) {
-        var lambda1 = -p/2; 
+        var lambda1 = -p/2;
+        var A = [[1,0],[lambda1,1]];
         document.getElementById("type_of_roots").innerHTML = 
-            "It has two equal real roots.";
+            "It has two equal real roots.";     
         document.getElementById("lambda1").innerHTML =  -p/2;
         document.getElementById("lambda2").innerHTML =  -p/2; 
         document.getElementById("case1").style.display = 'none'; 
@@ -68,6 +70,7 @@ function new_function() {
         var lambda2 = math.subtract(-p/2, math.sqrt(delta/4)); 
         var r0 =  -p/2;
         var s0 = math.sqrt(-delta/4);
+        var A = [[1,0],[r0,s0]];
         document.getElementById("type_of_roots").innerHTML = 
           "It has two conjugate complex roots.";
         document.getElementById("lambda1").innerHTML =  lambda1;
@@ -79,6 +82,19 @@ function new_function() {
         var y2Array = tArray.map(function (x) {return math.exp(x*r0)*math.sin(s0*x)});
     }
 
+    var coeff = math.multiply(math.inv(A), [y0,dy0]);
+    document.getElementById("c1").innerHTML =  math.format(coeff[0],{precision: 3});
+    if (coeff[1] >= 0) {
+        document.getElementById("plusc2").style.display = 'initial'; 
+        document.getElementById("minusc2").style.display = 'none'; 
+        document.getElementById("c2").innerHTML =  math.format(coeff[1],{precision: 3});
+    }
+    else {
+        document.getElementById("plusc2").style.display = 'none'; 
+        document.getElementById("minusc2").style.display = 'initial'; 
+        document.getElementById("c2").innerHTML =  math.format(-coeff[1],{precision: 3});
+    }
+        
     if (document.getElementById("showIS").checked) {
         var y1data = {
 			x: tArray,

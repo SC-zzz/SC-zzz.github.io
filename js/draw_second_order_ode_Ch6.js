@@ -50,6 +50,19 @@ function new_function() {
         document.getElementById("case1").style.display = 'block'; 
         document.getElementById("case2").style.display = 'none';    
         document.getElementById("case3").style.display = 'none';  
+        var A = [[1,1],[lambda1,lambda2]];
+        var coeff = math.multiply(math.inv(A), [y0,dy0]);
+        document.getElementById("c1").innerHTML =  math.format(coeff[0],{precision: 3});
+        if (coeff[1] >= 0) {
+          document.getElementById("plusc2").style.display = 'initial'; 
+          document.getElementById("minusc2").style.display = 'none'; 
+          document.getElementById("c2").innerHTML =  math.format(coeff[1],{precision: 3});
+        }
+        else {
+          document.getElementById("plusc2").style.display = 'none'; 
+          document.getElementById("minusc2").style.display = 'initial'; 
+          document.getElementById("c2").innerHTML =  math.format(-coeff[1],{precision: 3});
+        }
         var y1Array = tArray.map(function (x) {return math.exp(x*lambda1)});
         var dy1Array = tArray.map(function (x) {return lambda1*math.exp(x*lambda1)});
         var y2Array = tArray.map(function (x) {return math.exp(x*lambda2)});   
@@ -63,7 +76,20 @@ function new_function() {
         document.getElementById("lambda2").innerHTML =  -p/2; 
         document.getElementById("case1").style.display = 'none'; 
         document.getElementById("case2").style.display = 'block';    
-        document.getElementById("case3").style.display = 'none';    
+        document.getElementById("case3").style.display = 'none';   
+        var A = [[1,0],[lambda1,1]];
+        var coeff = math.multiply(math.inv(A), [y0,dy0]);
+        document.getElementById("c1").innerHTML =  math.format(coeff[0],{precision: 3});
+        if (coeff[1] >= 0) {
+          document.getElementById("plusc2").style.display = 'initial'; 
+          document.getElementById("minusc2").style.display = 'none'; 
+          document.getElementById("c2").innerHTML =  math.format(coeff[1],{precision: 3});
+        }
+        else {
+          document.getElementById("plusc2").style.display = 'none'; 
+          document.getElementById("minusc2").style.display = 'initial'; 
+          document.getElementById("c2").innerHTML =  math.format(-coeff[1],{precision: 3});
+        } 
         var y1Array = tArray.map(function (x) {return math.exp(x*lambda1)});
         var dy1Array = tArray.map(function (x) {return lambda1*math.exp(x*lambda1)});
         var y2Array = tArray.map(function (x) {return x*math.exp(x*lambda1)});      
@@ -75,8 +101,23 @@ function new_function() {
         var lambda2 = math.subtract(-p/2, math.sqrt(delta/4)); 
         var r0 =  -p/2;
         var s0 = math.sqrt(-delta/4);
+
         document.getElementById("type_of_roots").innerHTML = 
           "It has two conjugate complex roots.";
+        var A = [[1,0],[r0,s0]];
+        var coeff = math.multiply(math.inv(A), [y0,dy0]);
+        document.getElementById("c1").innerHTML =  math.format(coeff[0],{precision: 3});
+        if (coeff[1] >= 0) {
+          document.getElementById("plusc2").style.display = 'initial'; 
+          document.getElementById("minusc2").style.display = 'none'; 
+          document.getElementById("c2").innerHTML =  math.format(coeff[1],{precision: 3});
+        }
+        else {
+          document.getElementById("plusc2").style.display = 'none'; 
+          document.getElementById("minusc2").style.display = 'initial'; 
+          document.getElementById("c2").innerHTML =  math.format(-coeff[1],{precision: 3});
+        }
+        
         document.getElementById("lambda1").innerHTML =  lambda1;
         document.getElementById("lambda2").innerHTML =  lambda2;
         document.getElementById("case1").style.display = 'none'; 
