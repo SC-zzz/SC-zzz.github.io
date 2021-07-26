@@ -264,7 +264,7 @@ function evaluate_guess(){
     document.getElementById("message").innerHTML = "Close! Try again.";
   }  
   else if (math.abs(guess - omega0) > 0 && guess > 0) {
-    document.getElementById("message").innerHTML = "Very close! Try again.";
+    document.getElementById("message").innerHTML = "Very close! Keep trying.";
   }  
   else if (guess - omega0 == 0) {
     document.getElementById("message").innerHTML = "Yay! You get the correct value!";

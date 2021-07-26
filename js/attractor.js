@@ -12,7 +12,7 @@ class Attractor {
   }
 
   primeSystem() {
-    for (let j = 0; j < 200; j++) {
+    for (let j = 0; j < 600; j++) {
       this.addNewLorenzPoint();
     }
     this.points.length = 1;

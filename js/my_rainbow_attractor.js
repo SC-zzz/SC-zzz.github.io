@@ -8,7 +8,7 @@ let perturbation_magnitude = 1 / 100000;
 let randomRangeX = [-15, 15];
 let randomRangeY = [-18, 18];
 let randomRangeZ = [14, 40];
-let dt = 0.015;
+let dt = 0.01;
 
 let button_reset, button_cont, button_pause;
 

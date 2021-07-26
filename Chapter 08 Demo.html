@@ -136,14 +136,14 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 <p>
     \begin{align}
     x_1' &= k_1-x_1\Big( 1+\dfrac{4x_2}{1+x_1^2}\Big), \\
-    x_2' &= k_2x_2\Big( 1-\dfrac{x_2}{1+x_1^2}\Big).
+    x_2' &= k_2x_2\Big( 1-\dfrac{x_2}{1+x_1^2}\Big),
     \end{align}
   </p>
-<p>where $x_1(t)$ and $x_2(t)$ correspond to the concentration levels of certain molecules and the constants $k_1$ and
-$k_2$ depend on reaction rates and other information.</p>
+<p>for constants $k_1, k_2 > 0$. Here $x_1(t)$ and $x_2(t)$ correspond to the concentration levels of certain molecules and the constants $k_1$ and $k_2$ depend on reaction rates and other information. Since the $x_j$’s are modeling concentrations of two molecules, we are mainly interested in $x_1, x_2 > 0$.</p>
 
+<p> For this pair of ODE’s, for certain values of $(k_1, k_2)$ (for example $k_1 = 10$ and $k_2 = 2$, which are the default parameters in the graph below), the solutions all seem to spiral around and around, converging towards a specific orbiting path. This “attracting oscillator” trajectory corresponds to the chemical system oscillating between several states. </p>
 
-<p> In order to understand if the ODE model predicts (for certain $(k_1, k_2)$) the observed periodic behavior, we plot the phase portrait of the system. To play with the visulization yourself, change the parameters, and see how the graph changes. Choose your desired initial condition by dragging the blue point on the graph. </p>
+<p> In order to understand if the ODE model predicts (for certain $(k_1, k_2)$) the observed periodic behavior, we plot the phase portrait of the system. To play with the visulization yourself, change the parameters, and see how the graph changes. Choose your desired initial condition by dragging the blue point on the graph. The red point is the unique stationary point. The range of $(k_1, k_2)$ where the system has an “attracting oscillator” trajectory is shown on the left.</p>
 <div class="twoCol_3366">
   
   <div>
@@ -153,7 +153,7 @@ $k_2$ depend on reaction rates and other information.</p>
  <div class="row">   
  <div class="range-wrap column" style="width: 42%;">
   <label for="k1">$k_1$: </label>
-  <input id = "k1" type="range" class="range" min="5" max="12" step = 0.5 value = "10" oninput="new_chem_osc()">
+  <input id = "k1" type="range" class="range" min="5" max="13" step = 0.5 value = "10" oninput="new_chem_osc()">
   <output class="bubble"></output>
  </div>
   <div class="range-wrap column" style="width: 42%;">
@@ -174,6 +174,17 @@ $k_2$ depend on reaction rates and other information.</p>
    <label for="colorize_chem"> Colorize according to magnitude</label><br> 
 </fieldset>
 </div>
+ <br>
+  <div style="position:relative">
+<fieldset>
+  <legend class="controlLegend">Outputs</legend>
+<p>Range of $(k_1, k_2)$ where the system has an “attracting oscillator” trajectory:</p>
+<div style="width:100%; padding-top:80%; position:relative">
+<div id = "krangebox" class="jxgbox" style="position:absolute;top: 0;width:100%;height:100%">
+</div>
+</fieldset>
+</div>
+
 </div>
 
 
@@ -207,10 +218,22 @@ $k_2$ depend on reaction rates and other information.</p>
   </p>
 <p>for a $2\times 2$ matrix $A$, where $A$ has distinct real nonzero eigenvalues $\lambda_1$ and $\lambda_2$, with corresponding eigenvectors $\mathbf{v}_1$ and $\mathbf{v}_2$. </p>
 
-<p>Let $V = \begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 \end{bmatrix}$, and $D = \begin{bmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{bmatrix}$.
-Then $A = VDV^{-1}$.</p>
+<p>We can calculate $A$ using its eigenvalues and eigenvectors. Putting the system of equations 
+    \begin{align}
+    \begin{cases}
+    A\mathbf{v}_1 = \lambda_1 \mathbf{v}_1 \\
+    A\mathbf{v}_2 = \lambda_2 \mathbf{v}_2 
+    \end{cases}
+    \end{align}
+into matrix form yields
+    \begin{align}
+    A \begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 \end{bmatrix} &=  \begin{bmatrix}\lambda_1 \mathbf{v}_1 & \lambda_2\mathbf{v}_2 \end{bmatrix} \\
+    &=  \begin{bmatrix}\mathbf{v}_1 & \mathbf{v}_2 \end{bmatrix}\begin{bmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{bmatrix}.\\
+    \end{align}
+  Let $V = \begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 \end{bmatrix}$, and $D = \begin{bmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{bmatrix}$.
+Then $AV = VD$, so $A = VDV^{-1}$.</p>
 
-<p> The solutions of this linear sysmtem are all of the form
+<p> The solutions of the linear sysmtem $\mathbf{x}'(t) = A\mathbf{x}(t)$ are all of the form
 $$\mathbf{x}(t) = k_1e^{\lambda_1t}\mathbf{v}_1 + k_2e^{\lambda_2t}\mathbf{v}_2,$$
 for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
 

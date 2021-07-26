@@ -44,9 +44,9 @@ function new_function() {
 
 
 
-  brd.create('point', [K_1, 0],{size: 5, visible:true,fixed:true, name:''});  
-  brd.create('point', [0, K_2],{size: 5, visible:true,fixed:true, name:''});  
-  brd.create('point', [0, 0],{size: 5, visible:true,fixed:true, name:''});  
+  brd.create('point', [K_1, 0],{size: 5, fixed:true, name:''});  
+  brd.create('point', [0, K_2],{size: 5, fixed:true, name:''});  
+  brd.create('point', [0, 0],{size: 5, fixed:true, name:''});  
 
   let det = 1 - k_12 * k_21;
   if (det != 0) {
