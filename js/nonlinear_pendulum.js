@@ -5,8 +5,7 @@ function new_pendulum() {
   let density = parseFloat(document.getElementById("density").value); 
   let scaling = 0.8/density;
   let colorize = document.getElementById("colorize").checked;
-  let color;
-  
+  let color;  
   let gamma = parseFloat(document.getElementById("gamma").value);
   let T = 6;
   let Tbackwards = 5;
@@ -28,7 +27,10 @@ function new_pendulum() {
 
 
   
-  
+  let xMin = -7;
+  let xMax = 7;
+  let yMin = -6;
+  let yMax = 6;  
   let h = 0.05;
   let N = math.ceil(T/h);
   let Nbackwards = math.ceil(Tbackwards/h);
@@ -39,7 +41,7 @@ function new_pendulum() {
   
   
   let brd = JXG.JSXGraph.initBoard('pendulumbox', {
-    boundingbox: [-7, 6, 7, -6], 
+    boundingbox: [xMin, yMax, xMax, yMin], 
     axis: true, grid: true, keepAspectRatio: true,
     defaultAxes: {
     x : {
@@ -61,8 +63,8 @@ function new_pendulum() {
   }});
   
   // arrows 
-  for (let i = -7; i<= 7; i= i+1/density){
-    for (let j = -6; j<=6; j= j+1/density){
+  for (let i = xMin; i<=xMax; i= i+1/density){
+    for (let j = yMin; j<=yMax; j= j+1/density){
       let v = [i,j];
       let length = math.norm(g(v));
       if (length != 0) {
@@ -243,4 +245,3 @@ function new_pendulum() {
 
 
 new_pendulum();
-//new_SIR();

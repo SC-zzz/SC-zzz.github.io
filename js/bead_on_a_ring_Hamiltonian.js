@@ -1,19 +1,24 @@
 JXG.Options.text.useMathJax = true;
-function new_bead() { 
-  
-  let omega = parseFloat(document.getElementById("omega").value);
-  let density = parseFloat(document.getElementById("density_2").value); 
-  let scaling = 0.8/density;
-  let colorize = document.getElementById("colorize_2").checked;
-  let color;
-  let N = 6000;
-  let dt = 0.002;
+
+var board;
+var levelset;
+
   let xMin = -7;
   let xMax = 7;
   let yMin = -6;
   let yMax = 6;
   
   
+function new_bead() { 
+  
+  let omega = parseFloat(document.getElementById("omega").value);
+  let density = parseFloat(document.getElementById("density_2").value); 
+  //let c = parseFloat(document.getElementById("E").value);
+  let scaling = 0.8/density;
+  let colorize = document.getElementById("colorize_2").checked;
+  let color;
+  let N = 6000;
+  let dt = 0.002;
   function g(v) {
     return [v[1], -Math.sin(v[0]) + omega**2 * Math.sin(v[0]) * Math.cos(v[0])];
   }
@@ -100,6 +105,31 @@ function new_bead() {
     };
   
 
+  new_level_set();
+
+
 }
+
+function new_level_set(){
+  let omega = parseFloat(document.getElementById("omega").value);
+  let c = parseFloat(document.getElementById("E").value);
+  let energy = function energy (x, y) {
+    return 1/2*y**2 -(Math.cos(x)) + 1/2* (omega*Math.cos(x))**2 - omega**2/4 - c;
+  };
+  levelset = implicit(board, energy, {
+    xMin: xMin,
+    xMax: xMax,
+    yMin: yMin,
+    yMax: yMax,
+    xInitialSteps: 80,
+    yInitialSteps: 80, 
+    segmentSteps: 1,
+    fill: {
+      fillColor: "none",
+      strokeColor: "none"
+    }
+  });
+}
+
 
 new_bead();
