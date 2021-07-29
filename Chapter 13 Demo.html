@@ -140,7 +140,7 @@ of the vertical line. As the pendulum swings, the angle $\theta$ changes, and we
 the vertical hanging position. The overall gravitational force is a constant $mg$ down from the pendulum,
 where $g \approx 9.8m/s^2$ is the acceleration due to gravity near the surface of the Earth. By the rigidity of the
 rod, the effect of gravity on the motion only depends on the component of gravity perpendicular to the rod;
-i.e., tangent to the circle of motion. A bit of trigonometry shows that this tangential component is $mg sin \theta$
+i.e., tangent to the circle of motion. A bit of trigonometry shows that this tangential component is $mg \operatorname{sin} \theta$
 (which is 0 when $\theta = 0$, as it should be). Such considerations enable one to derive the ODE arising out of Newton’s “$F = ma$”:
    \begin{align}\theta''(t) +
 \dfrac{g}{L}\operatorname{sin} \theta(t) = 0.   \end{align}
@@ -178,7 +178,7 @@ y(u)
 evolves is keeping
 track of the entire state of the pendulum at each time: not only its angle, but also its angular velocity.</p>
 
-<p> The stationary points are given by $(2k\pi, 0)$ and $(\pi+2k\pi, 0)$ for integers $k$. </p>
+<p> The stationary points are given by $(2k\pi, 0)$ and $((2k+1)\pi, 0)$ for integers $k$. </p>
 
 <p> Below is a phase portrait of this ODE system. To play with the visulization yourself, change the damping coefficient $\gamma$, choose your desired display options, and see how the phase portrait changes. Choose your desired initial condition by dragging the blue point on the graph. The stationary points of the form $(2k\pi,0)$ are shown as red dots while the stationary points of the form $((2k+1)\pi,0)$ are shown as green dots. Observe how the dynamics change around each stationary point as $\gamma$ varies. </p>
 
@@ -254,19 +254,19 @@ freely. </p>
 $$\phi'' = - \dfrac{g}{r}\operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{cos}\phi.$$</p>
 <p>
 Following our usual procedure to rewrite a single second-order ODE as a system
-of first-order ODE’s, we introduce the notation $w(t) = \phi'(t)$ (whose physical interpretation is the angular velocity of the bead along the ring) to get the autonomous system
+of first-order ODE’s, we introduce the notation $\rm{w}(t) = \phi'(t)$ (whose physical interpretation is the angular velocity of the bead along the ring) to get the autonomous system
 \begin{align}
-\begin{cases} \phi' &= w \\
-w' &= - \dfrac{g}{r}\operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{cos}\phi.\end{cases}\end{align}
+\begin{cases} \phi' &= \rm{w} \\
+\rm{w}' &= - \dfrac{g}{r}\operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{cos}\phi.\end{cases}\end{align}
 </p>
 
 <p> As discussed in the book, the system undergoes a dramatic bifurcation as the spinning speed $|\omega|$ of the ring crosses above the value
- $\sqrt{g/r}$. Points of the form $(2k\pi, 0)$ and $(\pi+2k\pi, 0)$ for integers $k$ are always stationary points. When $|\omega| > \sqrt{g/r}$, additional stationary points of the form $(\pm \operatorname{arccos}(g/(r\omega^2))+2k\pi,0)$ for integers $k$ appear.</p>
+ $\sqrt{g/r}$. Points of the form $(2k\pi, 0)$ and $((2k+1)\pi, 0)$ for integers $k$ are always stationary points. When $|\omega| > \sqrt{g/r}$, additional stationary points of the form $(\pm \operatorname{arccos}(g/(r\omega^2))+2k\pi,0)$ for integers $k$ appear.</p>
 
 <p> Here, without loss of generality, we choose $r$ so that $g/r = 1$ with unit 1/time<sup>2</sup>. Then the ODE system becomes 
 \begin{align}
-\begin{cases} \phi' &= w \\
-w' &= - \operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{cos}\phi.\end{cases}\end{align} and bifurcation happens as the spinning speed $|\omega|$ crosses above $1$.
+\begin{cases} \phi' &= \rm{w} \\
+\rm{w}' &= - \operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{cos}\phi.\end{cases}\end{align} and bifurcation happens as the spinning speed $|\omega|$ crosses above $1$.
 </p>
 
 <p> Below is a phase portrait of this ODE system. To play with the visulization yourself, change the angluar velocity $\omega$ of the ring, choose your desired display options, and see how the phase portrait changes. Choose your desired initial condition by dragging the blue point on the graph. The stationary points of the form $(2k\pi,0)$ are shown as red dots, the stationary points of the form $((2k+1)\pi,0)$ are shown as green dots, and the stationary points of the form $(\pm \operatorname{arccos}(g/(r\omega^2))+2k\pi,0)$ are shown as blue dots. Observe how the dynamics change around each stationary point as $\omega$ varies. </p>
@@ -316,6 +316,8 @@ w' &= - \operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{co
             
 
 <script src="js/draw_bubble.js"></script>
+
+</article>
 </body>
 
 </html>
