@@ -7,6 +7,7 @@ function new_chem_osc() {
   var density = parseFloat(document.getElementById("density_chem").value); 
   var scaling = 0.8/density;
   var colorize = document.getElementById("colorize_chem").checked;
+  var color;
   let a = k1/5;
   
   var N = 3000;
@@ -52,10 +53,10 @@ function new_chem_osc() {
       if (length != 0) {
         let w = [scaling*g(v)[0]/length, scaling*g(v)[1]/length];
         if (colorize==true) {
-		  var color = "hsl(" + (360- (3*length % 360)) + ", 100%, 75%)";
+		  color = "hsl(" + (360- (3*length % 360)) + ", 100%, 75%)";
 		}    
 		else {
-		  var color = 'gray';
+		  color = 'gray';
 		}
         board.create('arrow', [v,[v[0]+w[0], v[1]+w[1]]],{fixed:true, strokeColor:color});
       }

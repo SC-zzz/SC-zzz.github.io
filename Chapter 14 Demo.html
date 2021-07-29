@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 14 Demo</title>
+
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 13 Demo.html">previous page</a> | 
+<a href="Chapter 15 Demo.html">next page</a>
+</nav>
+
+
+
+<article>
+
+    <h1>Chapter 14 Demo</h1>  
+
+<div>
+<h3>Visualizing non-linear dynamics.</h3>
+</div>
+
+<h4>The SIR model.</h4>
+
+
+<p> Here we look at the SIR model discussed in this chapter. This is used in connection with infectious diseases such as chicken pox and COVID-19 (but not the common cold or seasonal flu) for which individuals who survive the disease obtain long-term immunity.
+
+
+<p> Consider the following subpopulations:</p>
+<div class="plainlist">
+<ul>
+<li>$s(t)$ is the fraction of susceptible individuals at time $t$ (this could be all individuals who have not yet been infected, or a subset such as unvaccinated individuals if a vaccine exists),</li>
+<li>$i(t)$ is the fraction of infected individuals who may spread the disease,</li>
+<li>$r(t)$ the fraction removed from interaction with the disease (due to immunity or death).</li>
+</ul>
+</div>
+<p>(Note that $r(t)$ increases over time, $s(t)$ decreases over time since survival from exposure confers immunity, and $s + i + r = 1$.)</p> 
+<p>The SIR model is the system of ODE’s:
+    \begin{align}
+    \dfrac{ds}{dt} &= -\tau s(t)i(t), \\
+    \dfrac{di}{dt} &= (\tau s(t) - \gamma) i(t), \\
+    \dfrac{dr}{dt} &= \gamma i(t).
+    \end{align}
+with transmission rate $\tau > 0$ (lower-case Greek tau) and recovery rate $\gamma > 0$ (lower-case Greek gamma) each having dimension 1/time (e.g., per day). This is non-linear due to $s(t)i(t)$ in two of the equations.</p>
+
+<p> Let $R_0 = \tau/\gamma$. This ratio is a dimensionless natural quantity for describing the dynamics. The interpretation of $R_0$ is the average number of new infections caused by an infected person; it is called the <it>basic reproduction number</it> (it is
+not a “rate”, since it is dimensionless). For example, the deadliest second of the four waves of the 1918 flu had $R_0 = 3.8$.</p>
+
+<p> To play with the visulization yourself, change the parameters, and choose your initial conditions by dragging the purple point. Observe that the three curves $s,i,r$ stay nonnegative.</p>
+
+     
+
+<div class="twoCol_3366">
+  
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameters</legend>
+ <div class="range-wrap column" style="width: 42%;">
+  <label for="tau">$\tau$: </label>
+  <input id = "tau" type="range" class="range" min="0.02" max="1" step = 0.02 value = "0.5" oninput="new_SIR()">
+  <output class="bubble"></output>
+ </div>
+  <div class="range-wrap column" style="width: 42%;">
+  <label for="gamma">$\gamma$: </label>
+  <input id = "gamma" type="range" class="range" min="0.02" max="1" step = 0.02 value = "0.1" oninput="new_SIR()">
+  <output class="bubble"></output>
+ </div>
+<p>$R_0 = \tau/\gamma = $ <span id = "R0"></span></p> 
+</fieldset>
+ </div>
+ <br>
+  <div>
+<fieldset>
+  <legend class="controlLegend">Initial Conditions</legend>
+<div style="width:100%; padding-top:100%; position:relative">
+<div id = "rangebox" class="jxgbox" style="position:absolute;top: 0;width:100%;height:100%">
+</div></div>
+</fieldset>
+</div>
+</div>
+
+
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Graph</legend>
+           <p style="display: none;color:red" id="warning"> ATTENTION: The initial conditions need to be in the shaded region!<br></p>
+            <div id="SIRdiv" style="margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
+            <div id="mySIR"></div>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+
+
+<script src="js/SIR_model.js"> </script> 
+
+
+
+
+<script src="js/draw_bubble.js"></script>
+</body>
+
+</html>

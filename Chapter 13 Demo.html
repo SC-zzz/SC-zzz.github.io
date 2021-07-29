@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 13 Demo</title>
+
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 12 Demo.html">previous page</a> | 
+<a href="Chapter 14 Demo.html">next page</a>
+</nav>
+
+
+
+<article>
+
+    <h1>Chapter 13 Demo</h1>  
+
+<div>
+<h3>Visualizing non-linear ODE systems and stationary points.</h3>
+</div>
+
+<h4>The non-linear pendulum.</h4>
+
+
+<p> Here we look at the non-linear pendulum discussed in this chapter: a pendulum of mass $m$ hangs by a thin rigid rod (not a string) with length $L$ and negligible mass. To describe the position of the pendulum at any time $t$, we choose the angle that the rod makes at each instant of time with a vertical line, as shown in the figure below. We denote this angle as $\theta(t)$, measured in radians rather than degree. We suppose that the pendulum motion is planar (i.e., the pendulum swings “back and forth” in a plane perpendicular to the ground, rather than rotating freely in all directions). Let “$\theta(t) > 0$” correspond to the
+pendulum being to the right of the vertical line and “$\theta(t) < 0$” correspond to the pendulum being to the left
+of the vertical line. As the pendulum swings, the angle $\theta$ changes, and we regard it as a function of time $t$.</p>
+
+<p> First we consider the undamped pendulum. That is, we suppose that only gravity acts on this system (ignore friction). This means that at any instant of time, the force points straight down. Gravity acts by trying to push the pendulum back to
+the vertical hanging position. The overall gravitational force is a constant $mg$ down from the pendulum,
+where $g \approx 9.8m/s^2$ is the acceleration due to gravity near the surface of the Earth. By the rigidity of the
+rod, the effect of gravity on the motion only depends on the component of gravity perpendicular to the rod;
+i.e., tangent to the circle of motion. A bit of trigonometry shows that this tangential component is $mg sin \theta$
+(which is 0 when $\theta = 0$, as it should be). Such considerations enable one to derive the ODE arising out of Newton’s “$F = ma$”:
+   \begin{align}\theta''(t) +
+\dfrac{g}{L}\operatorname{sin} \theta(t) = 0.   \end{align}
+where $L$ is the length of the rod. This is a much harder ODE to solve (it is very non-linear, due to the term
+$\operatorname{sin} \theta(t)$), and an exact solution is not an “elementary” function.</p>
+
+<img src="img/penforce.pdf" alt="pendulum" width = "50%" height = "auto">
+
+<p> We can also consider the damped pendulum (i.e., account for air resistance). This has a frictional force
+with magnitude $mb \theta'(t)$ proportional to the angular velocity $\theta'$ (where $b > 0$ has dimension distance per unit
+time), and it slows the pendulum. The ODE incorporating air resistance is 
+   \begin{align}\theta''(t) + \dfrac{b}{L}\theta'(t) +
+\dfrac{g}{L}\operatorname{sin} \theta(t) = 0.   \end{align} </p>
+
+<p> If we let $b=0$ then this becomes the undamped case. Thus we will allow $b \ge 0$ to include both the damped and the undamped case. <p>
+
+<p> As in the textbook, for our analysis of the pendulum it
+will simplify the calculations if we render everything dimensionless by scaling quantities appropriately as follows. Since $b/L$ and $g/L$ have respective dimensions 1/time and 1/time<sup>2</sup>, we’re led to
+scale $t$ to make it dimensionless: for $\omega_0 = \sqrt{g/L} > 0$ (which has dimension 1/time) we again define a
+new dimensionless “time” variable $u = \omega_0t$. Let $x(u) = \theta
+\left(\dfrac{\theta}{\omega_0}\right)$ and $y(u) = \dfrac{dx}{du}$.
+These are also dimensionless. Then calculation shows that 
+$$\dfrac{y}{u} = - \dfrac{b/L}{\omega_0}y(u) - \operatorname{sin}x(u).$$</p>
+<p> The coefficient of y(u) at the end is the negative of the ratio
+$\gamma = \dfrac{b/L}{\omega_0} \ge 0$, which is a dimensionless incarnation of the friction constant. Thus, the original second-order ODE for $\theta$ as a function of $t$ is equivalent to the following first-order system for $x$ and $y$ as functions of the
+dimensionless $u$: 
+\begin{align}
+\begin{cases} x'(u) &= y(u) \\
+y'(u) &= -\operatorname{sin}(x(u)) - \gamma y(u),\end{cases}\end{align}
+where $\gamma =0$ corresponds to the undamped case and $\gamma > 0$ corresponds to the damped case. We emphasize that the functions in this first-order system are encoding the angle and the angular
+velocity, so the 2-dimensional “phase plane” in which the trajectory $\mathbf{x}(u) = \begin{bmatrix}
+x(u)\\
+y(u)
+\end{bmatrix}$
+evolves is keeping
+track of the entire state of the pendulum at each time: not only its angle, but also its angular velocity.</p>
+
+<p> The stationary points are given by $(2k\pi, 0)$ and $(\pi+2k\pi, 0)$ for integers $k$. </p>
+
+<p> Below is a phase portrait of this ODE system. To play with the visulization yourself, change the damping coefficient $\gamma$, choose your desired display options, and see how the phase portrait changes. Choose your desired initial condition by dragging the blue point on the graph. The stationary points of the form $(2k\pi,0)$ are shown as red dots while the stationary points of the form $((2k+1)\pi,0)$ are shown as green dots. Observe how the dynamics change around each stationary point as $\gamma$ varies. </p>
+
+     
+
+<div class="twoCol_3366">
+  
+  <div>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Damping Coefficient</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="gamma">$\gamma$: </label>
+  <input id = "gamma" type="range" class="range" min="0" max="3" step = 0.1 value = "0" oninput="new_pendulum()">
+  <output class="bubble"></output><br>
+ </div>
+  <p>Undamped: $\gamma =0$;</p>
+<p>Underdamped: $0< \gamma < 2$;</p>
+<p>Critically damped: $ \gamma = 2$;</p>
+<p>Overdamped: $\gamma > 2$.</p>
+</fieldset>
+ </div> 
+ <br>
+ <div>
+<fieldset>
+  <legend class="controlLegend">Display Options</legend>
+      <label for="density">Density: </label><br>
+   <input id = "density" type="range" class="range" min="1" max="2.4" step = 0.2 value = "1.6" style="width: 50%;" oninput="new_pendulum()"> <br><br>
+   <input type="checkbox" id="colorize" checked oninput="new_pendulum()">
+   <label for="colorize"> Colorize according to magnitude</label><br> 
+</fieldset>
+</div> 
+</div>
+
+
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Phase Portrait</legend>
+<div id = "pendulumbox" class="jxgbox" style="width:700px;height:600px">
+        </fieldset>
+    </div>
+  </div>
+</div>  
+
+
+
+<script src="js/nonlinear_pendulum.js"> </script> 
+
+
+
+
+
+
+
+
+
+
+<br>
+<h4>The bead on a ring.</h4>
+
+<p> Here we consider the bead on a ring discussed in this chapter: a small bead of mass $m$ moving without friction on a large thin circular metal wire with radius $r$, where the ring is set up so that it is being rotated around the vertical axis through
+its center at a constant angular velocity $\omega$; see the figure below. As the ring spins, the bead may wobble around on the ring; we denote by $\phi(t)$ the signed angle at time $t$ by which the bead is displaced from the vertically down position. The relevant forces acting on the bead are gravity as well as the force exerted
+by the ring that assures that the bead stays attached to the ring. A variant on this that is analyzed with the
+same equations but which is perhaps better-suited to experiments is a metal strip of negligible thickness
+(with rims along its edges) that is bent into a circle, and on whose inner rim a small bead can roll around
+freely. </p>
+
+<img src="img/unstablehoop.pdf"  alt="bead on a ring" width = "50%" height = "auto">
+
+
+<p>Using Newton’s equation of motion, we can model the bead's motion by the following non-linear but autonomous ODE
+$$\phi'' = - \dfrac{g}{r}\operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{cos}\phi.$$</p>
+<p>
+Following our usual procedure to rewrite a single second-order ODE as a system
+of first-order ODE’s, we introduce the notation $w(t) = \phi'(t)$ (whose physical interpretation is the angular velocity of the bead along the ring) to get the autonomous system
+\begin{align}
+\begin{cases} \phi' &= w \\
+w' &= - \dfrac{g}{r}\operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{cos}\phi.\end{cases}\end{align}
+</p>
+
+<p> As discussed in the book, the system undergoes a dramatic bifurcation as the spinning speed $|\omega|$ of the ring crosses above the value
+ $\sqrt{g/r}$. Points of the form $(2k\pi, 0)$ and $(\pi+2k\pi, 0)$ for integers $k$ are always stationary points. When $|\omega| > \sqrt{g/r}$, additional stationary points of the form $(\pm \operatorname{arccos}(g/(r\omega^2))+2k\pi,0)$ for integers $k$ appear.</p>
+
+<p> Here, without loss of generality, we choose $r$ so that $g/r = 1$ with unit 1/time<sup>2</sup>. Then the ODE system becomes 
+\begin{align}
+\begin{cases} \phi' &= w \\
+w' &= - \operatorname{sin}\phi +\omega^2 \operatorname{sin}\phi \operatorname{cos}\phi.\end{cases}\end{align} and bifurcation happens as the spinning speed $|\omega|$ crosses above $1$.
+</p>
+
+<p> Below is a phase portrait of this ODE system. To play with the visulization yourself, change the angluar velocity $\omega$ of the ring, choose your desired display options, and see how the phase portrait changes. Choose your desired initial condition by dragging the blue point on the graph. The stationary points of the form $(2k\pi,0)$ are shown as red dots, the stationary points of the form $((2k+1)\pi,0)$ are shown as green dots, and the stationary points of the form $(\pm \operatorname{arccos}(g/(r\omega^2))+2k\pi,0)$ are shown as blue dots. Observe how the dynamics change around each stationary point as $\omega$ varies. </p>
+     
+
+<div class="twoCol_3366">
+  
+  <div>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Angular Velocity</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="omega">$\omega$: </label>
+  <input id = "omega" type="range" class="range" min="0" max="3" step = 0.1 value = "0" oninput="new_bead()">
+  <output class="bubble"></output><br>
+ </div>
+   <p>Bifurcation happens when $\omega$ crosses  $\sqrt{g/r}$ (which equals 1 in our case).</p>
+</fieldset>
+ </div> 
+ <br>
+ <div>
+<fieldset>
+  <legend class="controlLegend">Display Options</legend>
+      <label for="density_2">Density: </label><br>
+   <input id = "density_2" type="range" class="range" min="1" max="2.8" step = 0.2 value = "1.6" style="width: 50%;" oninput="new_bead()"> <br><br>
+   <input type="checkbox" id="colorize_2" checked oninput="new_bead()">
+   <label for="colorize_2"> Colorize according to magnitude</label><br> 
+</fieldset>
+</div>
+</div> 
+
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Phase Portrait</legend>
+        <div id = "canvasdiv2" >
+        <div id = "beadbox" class="jxgbox" style="width:700px; height:600px;">
+          </div>
+          </div>
+        </fieldset>
+    </div>
+</div>  
+
+
+
+<script src="js/bead_on_a_ring.js"> </script> 
+ 
+            
+
+<script src="js/draw_bubble.js"></script>
+</body>
+
+</html>

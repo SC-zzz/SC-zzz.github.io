@@ -8,7 +8,7 @@ function new_function() {
   var density = parseFloat(document.getElementById("density").value); 
   var scaling = 0.8/density;
   var colorize = document.getElementById("colorize").checked;
-  
+  var color;
   var t_start = 0;
   var t_fin = 6;
   var dt = 0.004;
@@ -30,10 +30,10 @@ function new_function() {
       if (length != 0) {
         let w = [scaling*g(v)[0]/length, scaling*g(v)[1]/length];
         if (colorize==true) {
-		  var color = "hsl(" + (360- (length % 360)) + ", 100%, 75%)";
+		  color = "hsl(" + (360- (length % 360)) + ", 100%, 75%)";
 		}    
 		else {
-		  var color = 'gray';
+		  color = 'gray';
 		}
         brd.create('arrow', [v,[v[0]+w[0], v[1]+w[1]]],{fixed:true, strokeColor:color});
       }
