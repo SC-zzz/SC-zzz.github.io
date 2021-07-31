@@ -57,7 +57,8 @@ function new_bead() {
 		else {
 		  color = 'hsl(0, 0%, 60%)';
 		}
-        board.create('arrow', [v,[v[0]+w[0], v[1]+w[1]]],{fixed:true, strokeWidth: 1.5, strokeColor:color});
+        let myArrow = board.create('arrow', [v,[v[0]+w[0], v[1]+w[1]]],{fixed:true, strokeWidth: 1.5, strokeColor:color});
+        myArrow.hasPoint = function() { return false;};
       }
    
     }

@@ -21,7 +21,7 @@ function new_chem_osc() {
   
   board = JXG.JSXGraph.initBoard('chemicalbox', {boundingbox: [-0.5, lim+0.5, lim+0.5, -0.5], axis: true, grid: false});
   
-  kbrd = JXG.JSXGraph.initBoard('krangebox', {boundingbox: [-1, 11, 14, -1], 
+  kbrd = JXG.JSXGraph.initBoard('krangebox', {boundingbox: [-1, 10.4, 14, -1], 
     axis: true, grid: true, keepAspectRatio: true,
     defaultAxes: {
     x : {

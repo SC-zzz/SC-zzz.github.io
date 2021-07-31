@@ -40,6 +40,8 @@ function new_bead() {
       }
     }
   }});
+  
+    // draw arrows
   for (let i = xMin; i<=xMax; i= i+1/density){
     for (let j = yMin; j<=yMax; j= j+1/density){
       var v = [i,j];

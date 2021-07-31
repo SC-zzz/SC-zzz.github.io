@@ -29,6 +29,7 @@ function new_IC() {
       }
     }
   }});
+  
   var bdrycurve = brd.create('functiongraph', [function(x){return -x+1},0,1]);
   brd.create('text',[0.1, 1, "Choose IC within the shaded region"],{fontsize: 14, fixed:true});	  
   var xaxis = brd.create('functiongraph', [function(x){return 0},0,1],{visible:false});
@@ -36,6 +37,7 @@ function new_IC() {
   //var ineq = brd.create('inequality', [k_curve]);
   // 3. step: plot a filled curve which starts at (0,0), contains all points of 'sqrt(x^2-1)'
   // and is closed by adding (0,0) at the end.
+  
   var curve = brd.create('curve', [[], []], {strokeWidth:2, fillColor:'lightblue', fillOpacity: 0.2});
   curve.updateDataArray = function() {
     // Start with (0, 0)
@@ -50,10 +52,14 @@ function new_IC() {
     this.dataX.push(0);
     this.dataY.push(0);
   };
+  
   brd.update();
+  
+  
+  
   var p = brd.create('point', [0.9,0.1], {name:'$(s(0), i(0))$', size:4, strokeColor:"purple", 
     fillColor:"purple",
-    attractors: [bdrycurve,xaxis,yaxis], attractorDistance:0.05, snatchDistance: 0.1});
+    attractors: [bdrycurve], attractorDistance:0.05, snatchDistance: 0.1});
   brd.create('text',[0.6, 0.9, function() {
      return '$s(0)= ' + p.X().toFixed(2)+'$,';}
      ],{fontsize: 12, fixed:true});
@@ -63,31 +69,26 @@ function new_IC() {
   brd.create('text',[0.6, 0.7, function() {
      return '$r(0)= ' + (1-p.X()-p.Y()).toFixed(2)+'$,';}
      ],{fontsize: 12, fixed:true});   
-  //txt.setAttribute({name: function() {
-  //  return '$(s(0), i(0))$$=$$(' + p.X().toFixed(2) + ', ' + p.Y().toFixed(2) + ')$';}
-  //});
-
-  //var s0txt = "$s(0) = $"+p.X();  
-  //brd.create('text',[0.6, 0.8, s0txt],{fontsize: 12, fixed:true});
-  //p.on("drag",function(){ 
-  //  s0txt = "$s(0) = $"+p.X();
-  //  brd.update();
-  //}); 
+  
   s0 = p.X(); 
   i0 = p.Y();
   r0 = 1-s0-i0;
   sicurve = brd.create('curve', [p.X(), p.Y()], {strokeColor:'purple', strokeWidth: 2});
   
   new_SIR();
-  
-  
    
-  p.on("drag",function(){ 
-    s0 = p.X(); 
-    i0 = p.Y();
+   
+   
+  brd.on('move', function() {
+    brd.suspendUpdate();
+    s0 = Math.max(0, p.X()); 
+    i0 = Math.max(0, p.Y());
     r0 = 1-s0-i0;
+    p.moveTo([s0,i0]);
+    brd.unsuspendUpdate();
     new_SIR();
-  }); 
+ });
+
 }
 
 
@@ -141,8 +142,7 @@ function new_SIR() {
   brd.update();
   
   // Define Data
-  var data = [	
-    //parametric_3d,
+  let data = [	
 	{
 	x:tArray,
 	y:sArray,
@@ -170,7 +170,7 @@ function new_SIR() {
     ];
 
   // Define Layout
-  var layout = {   
+  let layout = {   
 	xaxis: {range: [0, 60], title: "t"},
 	yaxis: {autorange: true},
 	title: "The SIR model"   
