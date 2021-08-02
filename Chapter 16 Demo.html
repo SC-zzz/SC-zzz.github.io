@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 16 Demo</title>
+
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+ <script src="js/JSX_auxilliary_functions.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 15 Demo.html">previous page</a> | 
+<a href="Chapter 17 Demo.html">next page</a>
+</nav>
+
+
+<p style="display: none">
+$\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\SPAN}{\text{span}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\u}{\mathbf{u}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\ww}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\Cbar}{\overline{\mathbf{C}}}
+\newcommand{\Dbar}{\overline{\mathbf{D}}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Y}{\mathbf{Y}}$
+
+\newcommand{\Xbar}{\widehat{\mathbf{X}}}
+\newcommand{\Ybar}{\widehat{\mathbf{Y}}}
+\newcommand{\zz}{\mathbf{z}}
+\renewcommand{\a}{\mathbf{a}}
+\renewcommand{\aa}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\cc}{\mathbf{c}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\hh}{\mathbf{h}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\ve}[1]{\mathbf{#1}}
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+$\begin{bmatrix}#1\end{bmatrix}$\fi}
+\newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
+\newcommand{\rref}{\operatorname{rref}}
+\newcommand{\hide}[1]{{}}
+\newcommand{\proj}{\operatorname{\mathbf{Proj}}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdt}[2]{\tfrac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\dfrac{\partial #1}{\partial #2}}
+
+\newcommand{\svdots}{\raisebox{3pt}{$\scalebox{.75}{\vdots}$}}
+\newcommand{\sddots}{\raisebox{3pt}{$\scalebox{.75}{$\ddots$}$}}
+
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Eth}{Eth}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Free}{Free}
+%\DeclareMathOperator{\frob}{frob}
+%\DeclareMathOperator{\Gal}{Gal}
+%\DeclareMathOperator{\genus}{genus}
+%\DeclareMathOperator{\Hecke}{Hecke}
+\DeclareMathOperator{\Hom}{Hom}
+%\DeclareMathOperator{\id}{id}
+%\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\modulo}{\medspace mod}
+\DeclareMathOperator{\Norm}{N}
+%\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Pic}{Pic}
+%\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Split}{Split}
+\DeclareMathOperator{\Sturm}{Sturm}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Tate}{Tate}
+\DeclareMathOperator{\tors}{tors}
+%\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\Weil}{Weil}
+
+\DeclareMathOperator{\sech}{sech}
+
+\newcommand{\adjacent}{\leftrightarrow}
+
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\SO}{SO}
+
+\newcommand{\cm}{\text{,}}
+%\newcommand{\pd}{\text{.}}
+\newcommand{\n}{\noindent}
+
+\newcommand{\Omicron}{\mathrm{O}}
+\newcommand{\Zeta}{\mathrm{Z}}
+
+\renewcommand{\div}{\mathop{\mathrm{div}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\renewcommand{\ss}{\mathop{\mathrm{ss}}}
+\newcommand{\elliptic}{\mathop{\mathrm{ell}}}
+
+\newcommand{\new}{\mathop{\mathrm{new}}}
+\newcommand{\old}{\mathop{\mathrm{old}}}
+
+\newcommand{\Bs}{\boldsymbol}
+%\newcommand{\ds}{\displaystyle}
+%\newcommand{\f}{\mathfrak}
+\newcommand{\s}{\mathcal}
+
+%\newcommand{\A}{\mathbb{A}}
+%\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fpbar}{\bar{\mathbb{\F}}_p}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\Gm}{\mathbb{G}_{\mathrm{m}}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\R}{\mathbf{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\E}{\mathbf{E}}
+\renewcommand{\H}{\mathrm{H}}
+\newcommand{\M}{\mathbf{M}}
+\renewcommand{\S}{\mathbf{S}}
+
+\newcommand{\var}{\mathbf{Var}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\erf}{\operatorname{erf}}
+
+\newcommand{\rar}{\rightarrow}
+\newcommand{\lar}{\leftarrow}
+\newcommand{\hrar}{\hookrightarrow}
+\renewcommand{\iff}{\Longleftrightarrow}
+\newcommand{\xrar}{\xrightarrow}
+\newcommand{\rrar}{\longrightarrow}
+\newcommand{\mt}{\mapsto}
+\newcommand{\mmt}{\longmapsto}
+
+\newcommand{\angles}[1]{\langle #1\rangle}
+\newcommand{\ceiling}[1]{\lceil #1\rceil}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+
+\newcommand{\set}[2]{\{\,#1\,\,|\,\,#2\,\}}
+
+\renewcommand{\emph}{\it}
+\renewcommand{\em}{\emph}
+
+$\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
+
+</p>
+<article>
+    <h1>Chapter 16 Demo</h1>  
+
+<div>
+<h3>Visualizing different numerical methods.</h3>
+</div>
+
+
+<p> In this chapter, we learned three numerical methods for solving ordinary differential equations approximately on a computer. For simplicity we will focus on the scalar-valued autonomous case. </p>
+
+<p> Consider an ODE of the form 
+\[
+\frac{dx}{dt} = f(x)
+\]
+with initial condition $x(t_0)=x_0$. The goal is to approximate $x(t)$ on the interval $t\in[t_0,t_0+T]$ for a
+chosen time duration $T > 0$. The <i>explicit</i> (or <i>forward</i>) <i>Euler method</i> for step size $h = T/N>0$ is the collection of approximations $x_i$ to $x(t_i)$
+where $x_0$ is the given initial value and recursively 
+\begin{equation} \label{eqn:nm-explicit}
+  x_{i+1} = x_i + h f(x_i) 
+\end{equation}
+for $h = T/N > 0$ and $i = 0, 1, \dots, N-1$. </p>
+
+<p> The <i>implicit</i> (or <i>backward</i>) <i>Euler method</i> for step size $h = T/N$ is the collection of
+approximations $x_i$ to $x(t_i)$ where $x_0$ is the given initial value and for $i = 0, \dots, N-1$  the value 
+$x_{i+1}$ is the solution near $x_i$ to the equation
+\begin{equation}\label{eqn:nm-implicit}
+  x = x_i + h f(x), \quad i=0,\ldots,N-1.
+\end{equation}
+</p>
+<p> The <i>trapezoidal method</i> for step size $h = T/N$ is the collection of
+approximations $x_i$ to $x(t_i)$ where $x_0$ is the given initial value and for $i = 0, \dots, N-1$  the value 
+$x_{i+1}$ is the solution near $x_i$ to the equation
+\begin{equation}\label{trapeqn}
+  x = x_i + h\,\frac{f(x_i)+f(x)}{2}\,\,\,\, \mbox{ for }\,\,\,\,\, i = 0, 1, \dots, N-1.
+\end{equation}
+</p>
+
+<p> Below we give two examples of how the solutions of the three methods (explicit Euler, implicit Euler,
+and trapezoidal) approach to the exact solution. You can adjust the time step size using the slider. </p>
+
+     
+<div class="twoCol_5050">
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 1</legend>
+  <div  class="twoCol_5050">
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">ODE</legend>
+<p>ODE: $x'(t) = x(t)$, $x(0) = 1.$</p>
+<p>Exact solution: $x(t) = e^{t}.$</p><br>
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Step size</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="h">$h$: </label>
+  <input id = "h" type="range" class="range" min="0.001" max="0.5" step = 0.001 value = "0.5" oninput="new_numerical_x()">
+  <output class="bubble"></output><br><br>
+ </div>
+</fieldset>
+ </div> 
+</div>
+<!-- <div>
+  <fieldset > 
+      <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>  
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 2</legend>
+  <div  class="twoCol_5050">
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">ODE</legend>
+<p>ODE: $x'(t) = (x(t))^2 - 4$, $x(0) = 1.$</p>
+<p>Exact solution: $x(t) = \dfrac{6 - 2 e^{4 t}}{3 + e^{4 t}}.$</p>
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Step size</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="h2">$h$: </label>
+  <input id = "h2" type="range" class="range" min="0.001" max="0.5" step = 0.001 value = "0.5" oninput="new_numerical_2()">
+  <output class="bubble"></output><br><br>
+ </div>
+</fieldset>
+ </div> 
+</div>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="numericalPlot2" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>  
+</div>  
+
+
+<script src="js/numerical_ex1.js"></script>
+<script src="js/numerical_ex2.js"></script>
+
+<script src="js/draw_bubble.js"></script>
+
+</article>
+</body>
+
+</html>
