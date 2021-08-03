@@ -59,7 +59,7 @@
 .twoCol_6633 {
 	display: -ms-grid; 
 	display:grid;
-	grid-template-columns: 65% 32%;
+	grid-template-columns: 65% 33%;
  	grid-gap:2%;
 }
 .twoCol_2080 {
@@ -71,7 +71,7 @@
 .twoCol_3366 {
 	display: -ms-grid; 
 	display:grid;
-	grid-template-columns: 32% 65%;
+	grid-template-columns: 33% 65%;
  	grid-gap:2%;
 }
 .twoCol_4060 {
@@ -199,6 +199,14 @@
 		-ms-grid-gap: 20px;
 		grid-gap:20px;
 	}
+	.twoCol_5050 {
+		display: -ms-grid; 
+		display:grid;
+		-ms-grid-columns: 100%;
+		grid-template-columns: 100%;
+		-ms-grid-gap: 20px;
+		grid-gap:20px;
+	}	
 
 
 }
