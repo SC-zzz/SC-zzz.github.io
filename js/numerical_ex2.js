@@ -44,7 +44,7 @@ function new_numerical_2() {
 	y:y1Array,
 	mode:"lines",
 	name: 'explicit',
-	line: {color: 'orange', width: 2}
+	line: {color: 'darkorange', width: 2}
 	},
 	{
 	x:tArray,

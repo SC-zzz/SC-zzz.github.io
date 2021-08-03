@@ -1,6 +1,6 @@
-function new_numerical_x() { 
-// x' = x, x(0) = 1
-  let h = parseFloat(document.getElementById("h").value);  
+function new_numerical_2() { 
+// x' = x^2-4, x(0) = 1
+  let h = parseFloat(document.getElementById("h2").value);  
   let y_0 = 1; 
   
   let t_start = 0;
@@ -13,7 +13,7 @@ function new_numerical_x() {
   let tArray_exact = Array.from(Array(N_exact), (_, k) => t_start + k * h_exact);
   let yArray_exact = [];
   for (let i = 0; i< N_exact; i ++){
-    yArray_exact[i] = Math.exp(tArray_exact[i]);
+    yArray_exact[i] = (6-2*Math.exp(4*tArray_exact[i]))/(Math.exp(4*tArray_exact[i])+3);
   }
 
   
@@ -22,25 +22,19 @@ function new_numerical_x() {
   let y3Array = Array(N).fill(y_0); 
       
   for (let i = 0; i< N; i ++){
-    y1Array[i+1] = (1+h) * y1Array[i];
-    y2Array[i+1] = y2Array[i]/(1-h);
-    y3Array[i+1] = y3Array[i]*(1+h/2)/(1-h/2);
+    y1Array[i+1] = y1Array[i] + h * ((y1Array[i])**2 - 4);
+    y2Array[i+1] = (1- Math.sqrt(1+16*h**2 - 4*h*y2Array[i]))/(2*h);
+    y3Array[i+1] = (1- Math.sqrt(1 - 2*h* (y2Array[i] +h/2*(y2Array[i]**2-8))))/(h);
   }  
   
-    
 
-  //function f(v) {
-  //  return v;
-  //}
-  //
-  //function fd(v) {
-  //  return 1;
-  //} 
-
-  //let y1Array = ode_auto_Euler(N, h, f, y_0);
-  //let y2Array = ode_auto_Euler_implicit_1d(N, h, f, y_0, limit, fd);
-  //let y3Array = ode_auto_trapezoidal_1d(N, h, f, y_0, limit, fd);
-
+  function f(v) {
+    return v**2-4;
+  }
+  
+  let y4Array = ode_auto_midpoint(N, h, f, y_0);  
+  let y5Array = ode_auto_Heun(N, h, f, y_0);  
+  let y6Array = ode_auto_RK4(N, h, f, y_0);   
 
    
   // Define Data
@@ -72,6 +66,27 @@ function new_numerical_x() {
 	mode:"lines",
 	name: 'trapezoidal',
 	line: {color: 'red', width: 2}
+	},
+	{
+	x:tArray,
+	y:y4Array,
+	mode:"lines",
+	name: 'midpoint',
+	line: {color: 'pink', width: 2}
+	},
+	{
+	x:tArray,
+	y:y5Array,
+	mode:"lines",
+	name: 'Heun',
+	line: {color: 'gold', width: 2}
+	},
+	{
+	x:tArray,
+	y:y6Array,
+	mode:"lines",
+	name: 'RK4',
+	line: {color: 'brown', width: 2}
 	}
 	];
 
@@ -92,7 +107,7 @@ function new_numerical_x() {
 	}; 
 
     // Display using Plotly
-  Plotly.newPlot("numericalPlot", data, layout);
+  Plotly.newPlot("numericalPlot2", data, layout);
 }
 
-new_numerical_x();
+new_numerical_2();

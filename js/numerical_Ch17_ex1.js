@@ -1,4 +1,4 @@
-function new_numerical_x() { 
+function new_numerical_1() { 
 // x' = x, x(0) = 1
   let h = parseFloat(document.getElementById("h").value);  
   let y_0 = 1; 
@@ -27,11 +27,16 @@ function new_numerical_x() {
     y3Array[i+1] = y3Array[i]*(1+h/2)/(1-h/2);
   }  
   
-    
 
-  //function f(v) {
-  //  return v;
-  //}
+
+  function f(v) {
+    return v;
+  }
+  
+  let y4Array = ode_auto_midpoint(N, h, f, y_0);  
+  let y5Array = ode_auto_Heun(N, h, f, y_0);  
+  let y6Array = ode_auto_RK4(N, h, f, y_0);   
+   
   //
   //function fd(v) {
   //  return 1;
@@ -72,6 +77,27 @@ function new_numerical_x() {
 	mode:"lines",
 	name: 'trapezoidal',
 	line: {color: 'red', width: 2}
+	},
+	{
+	x:tArray,
+	y:y4Array,
+	mode:"lines",
+	name: 'midpoint',
+	line: {color: 'pink', width: 2}
+	},
+	{
+	x:tArray,
+	y:y5Array,
+	mode:"lines",
+	name: 'Heun',
+	line: {color: 'gold', width: 2}
+	},
+	{
+	x:tArray,
+	y:y6Array,
+	mode:"lines",
+	name: 'RK4',
+	line: {color: 'brown', width: 2}
 	}
 	];
 
@@ -95,4 +121,4 @@ function new_numerical_x() {
   Plotly.newPlot("numericalPlot", data, layout);
 }
 
-new_numerical_x();
+new_numerical_1();

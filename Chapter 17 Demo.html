@@ -4,7 +4,7 @@
  <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width">
-  <title>Chapter 16 Demo</title>
+  <title>Chapter 17 Demo</title>
 
   <!-- Fonts -->
   <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
@@ -116,8 +116,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <nav>
 <a href="index_page.html">back to index page</a> | 
-<a href="Chapter 15 Demo.html">previous page</a> | 
-<a href="Chapter 17 Demo.html">next page</a>
+<a href="Chapter 16 Demo.html">previous page</a> | 
+<a href="Chapter 18 Demo.html">next page</a>
 </nav>
 
 
@@ -290,44 +290,43 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 </p>
 <article>
-    <h1>Chapter 16 Demo</h1>  
+    <h1>Chapter 17 Demo</h1>  
 
 <div>
 <h3>Visualizing different numerical methods.</h3>
 </div>
-<h4>Comparing explicit Euler, implicit Euler, and trapezoidal methods.</h4>
+<h4>Comparing Runge-Kutta methods.</h4>
 
-<p> In this chapter, we learned three numerical methods for solving ordinary differential equations approximately on a computer. For simplicity we will focus on the scalar-valued autonomous case. </p>
+<p> In addition to the explicit Euler, implicit Euler, and trapezoidal methods introduced in the previous chapter, in this chapter we learned an additional class of explicit numerical methods for approximating solutions to first-order IVP’s, called Runge-Kutta methods.</p>
 
-<p> Consider an ODE of the form 
+<p> Consider a (possibly non-autonomous) first-order IVP systems of the form
 \[
-\frac{dx}{dt} = f(x)
+\frac{d\x}{dt} = \mathbf{f}(t,\x),\,\,\, \x(t_0) = \x_0.
 \]
-with initial condition $x(t_0)=x_0$. The goal is to approximate $x(t)$ on the interval $t\in[t_0,t_0+T]$ for a
-chosen time duration $T > 0$. The <i>explicit</i> (or <i>forward</i>) <i>Euler method</i> for step size $h = T/N>0$ is the collection of approximations $x_i$ to $x(t_i)$
-where $x_0$ is the given initial value and recursively 
-\begin{equation} \label{eqn:nm-explicit}
-  x_{i+1} = x_i + h f(x_i) 
-\end{equation}
-for $h = T/N > 0$ and $i = 0, 1, \dots, N-1$. </p>
+The goal is to approximate $\x(t)$ on the interval $t\in[t_0,t_0+T]$ for a
+chosen time duration $T > 0$. For this IVP, the <i>modified Euler method</i> (also called
+the <i>midpoint method</i>) is
+\[
+\x_{k+1} = \x_k + h \mathbf{f} \left(t_k + \frac{1}{2}h, \x_k + \frac{1}{2}h \mathbf{f}(t_k, \x_k)\right)
+\]
+and the <i>improved Euler method</i> (also called <i>Heun's method</i>) is 
+\[
+\x_{k+1} = \x_k + \frac{1}{2}h \left( \mathbf{f}(t_k,\x_k) + \mathbf{f}(t_k+h, \x_k+h\mathbf{f}(t_k,\x_k)) \right).
+\]
 
-<p> The <i>implicit</i> (or <i>backward</i>) <i>Euler method</i> for step size $h = T/N$ is the collection of
-approximations $x_i$ to $x(t_i)$ where $x_0$ is the given initial value and for $i = 0, \dots, N-1$  the value 
-$x_{i+1}$ is the solution near $x_i$ to the equation
-\begin{equation}\label{eqn:nm-implicit}
-  x = x_i + h f(x), \quad i=0,\ldots,N-1.
-\end{equation}
 </p>
-<p> The <i>trapezoidal method</i> for step size $h = T/N$ is the collection of
-approximations $x_i$ to $x(t_i)$ where $x_0$ is the given initial value and for $i = 0, \dots, N-1$  the value 
-$x_{i+1}$ is the solution near $x_i$ to the equation
-\begin{equation}\label{trapeqn}
-  x = x_i + h\,\frac{f(x_i)+f(x)}{2}\,\,\,\, \mbox{ for }\,\,\,\,\, i = 0, 1, \dots, N-1.
+<p> For this IVP, the (fourth-order) <i>Runge-Kutta method</i> (also called "RK4") is
+\begin{equation}\label{rk4m}
+\x_{k+1} = \x_k + \frac{1}{6}h\mathbf{m}_1 + \frac{1}{3}h\mathbf{m}_2 + \frac{1}{3}h\mathbf{m}_3 +\frac{1}{3}h\mathbf{m}_4,
 \end{equation}
+where the $\mathbf{m}_j$'s are defined by the following recursive procedure:
+$$  \mathbf{m}_1 = \mathbf{f}(t_k,\x_k), \,\,\,
+  \mathbf{m}_2 = \mathbf{f}\left(t_k+\frac{h}{2},\x_k+\frac{h}{2} \mathbf{m}_1\right),$$
+  $$  \mathbf{m}_3 = \mathbf{f}\left(t_k+\frac{h}{2},\x_k+\frac{h}{2}\mathbf{m}_2\right), \,\,\,
+  \mathbf{m}_4 = \mathbf{f}(t_k+h,\x_k+h\mathbf{m}_3).$$
 </p>
 
-<p> Below we give two examples of how the solutions of the three methods (explicit Euler, implicit Euler,
-and trapezoidal) approach to the exact solution. You can adjust the time step size using the slider. You can show or hide a curve by clicking on its legend.</p>
+<p> Below we give two examples of how the solutions of the three new methods (midpoint, Heun, and RK4) as well as the three old methods (explicit Euler, implicit Euler, and trapezoidal) approach to the exact solution. You can adjust the time step size using the slider. You can show or hide a curve by clicking on its legend.</p>
 
      
 <div class="twoCol_5050">
@@ -347,7 +346,7 @@ and trapezoidal) approach to the exact solution. You can adjust the time step si
       <legend class="controlLegend">Step Size</legend>
  <div class="range-wrap" style="width: 92%;">
   <label for="h">$h$: </label>
-  <input id = "h" type="range" class="range" min="0.001" max="0.5" step = 0.001 value = "0.5" oninput="new_numerical_x()">
+  <input id = "h" type="range" class="range" min="0.001" max="0.5" step = 0.001 value = "0.5" oninput="new_numerical_1()">
   <output class="bubble"></output><br><br>
  </div>
 </fieldset>
@@ -369,7 +368,8 @@ and trapezoidal) approach to the exact solution. You can adjust the time step si
     </div> -->
 
 </fieldset>
-</div>  
+</div>
+
 <div>
   <fieldset>
       <legend class="controlLegend">Example 2</legend>
@@ -409,8 +409,126 @@ and trapezoidal) approach to the exact solution. You can adjust the time step si
 </div>  
 
 
-<script src="js/numerical_ex1.js"></script>
-<script src="js/numerical_ex2.js"></script>
+<script src="js/numerical_Ch17_ex1.js"></script>
+<script src="js/numerical_Ch17_ex2.js"></script>
+
+
+
+<br>
+<h4>Comparing numerical methods with stiff ODE’s.</h4>
+
+<p> As discussed in this chapter, an ODE whose solutions converge very rapidly to a specific solution whatever the initial conditions
+(informally:  solutions involve a rapidly decaying "transient" term, such as $C e^{-5x}$ for
+$y' = -5(y-\cos x)$ near the start of this section) and an ODE system 
+whose solutions involve multiple contributions that occur on time scales that differ by orders of magnitude 
+is called a <i>stiff</i> ODE. </p>
+<p> There is no precise mathematical definition of stiffness, but entire books have been written about numerical algorithms that handle stiffness with a reasonable balance between accuracy and efficiency. A common feature of stiff ODE's, beyond the presence of very different time scales within the same problem, is that "explicit" methods (such as the explicit Euler method) tend to perform very poorly.  The reason that stiffness
+was overlooked prior to the advent of computers is that it is a phenomenon specific to working with actual step sizes $h > 0$
+rather than a feature (such as stability) connected to behavior in the limit as $h \to 0$.
+</p>
+
+<p> Same as in the textbook, here we illustrate through a study of the IVP
+\begin{equation}\label{basicstiff}
+\frac{dx}{dt} = -\lambda x,\,\,\, x(0) = 1 \,\,\,\mbox{ with } \,\,\, \lambda > 0
+\end{equation}
+how to quantify the smallness of $h$ needed to overcome stiffness, and to show with examples that certain methods perform better than others.
+We will use a step size $h > 0$ and work on the time interval $[0, +\infty)$.
+Lest this ODE seem too special, we recall that through the method of eigenvectors
+we can generally regard most linear ODE systems as being a collection of many decoupled
+ODE's of the form $x'_j = -\lambda_j x_j$ (by the magical substitution).  So phenomena that
+arise for this can be reasonably representative of what happens for typical large linear ODE systems
+(and even for large non-linear ODE systems near stationary points, through the process of linearization).
+In particular, the lessons we learn will be adapted to systems of linear ODE's
+by using eigenvalues of a derivative matrix in the role of $\lambda$. </p>
+<p> Below we visualize this IVP. You can change the parameter $\lambda$ and adjust the step size $h$ using the sliders. You can show or hide a curve by clicking on its legend.</p>
+  
+<div class="twoCol_3366">
+  <div>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">ODE</legend>
+<p>ODE: $x'(t) = -\lambda x(t)$, $x(0) = 1,\,\,\,\mbox{ with } \,\,\, \lambda > 0$.</p>
+<p>Exact solution: $x(t) = e^{-\lambda t}.$</p><br>
+</fieldset>
+ </div>  
+ <br> 
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="lambda_stiff">$\lambda$: </label>
+  <input id = "lambda_stiff" type="range" class="range" min="0.5" max="20" step = 0.5 value = "0.5" oninput="new_stiff()">
+  <output class="bubble"></output><br><br>
+  <p>$2/\lambda =$  <span id="2/lambda"></span>.</p>
+ </div>
+</fieldset>
+ </div> 
+  <br> 
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Step Size</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="h_stiff">$h$: </label>
+  <input id = "h_stiff" type="range" class="range" min="0.001" max="0.5" step = 0.001 value = "0.5" oninput="new_stiff()">
+  <output class="bubble"></output><br><br>
+  <p>Explicit Euler's method requires $0 < h < 2/\lambda$.</p>
+ </div>
+</fieldset>
+ </div> 
+  <br>
+ <div >
+<fieldset>
+  <legend class="controlLegend">Display Options</legend>
+ Runge-Kutta methods: 
+    <input type="radio" name="showMore" id="hideMore" onclick="new_stiff()"> hide  &nbsp;
+    <input type="radio" name="showMore"  id="showMore" checked onclick="new_stiff()"> show<br><!-- <br>
+   Scale: <br>
+    <input type="radio" name="scale" id="linear" checked onclick="new_stiff()"> linear scale<br>
+    <input type="radio" name="scale"  id="log" onclick="new_stiff()"> log scale<br>   -->
+</fieldset>
+ </div>
+</div>
+<div>
+  <fieldset > 
+      <legend class="controlLegend">Comparison</legend>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="stiffPlot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+     </div>
+      </fieldset> 
+    </div>
+</div>
+
+
+
+<script src="js/numerical_Ch17_stiffness.js"></script>
+
+
+
+
+
+
+
+<br>
+<div> 
+<h4>Comparing different numberical methods for your favorite ODE.</h4>
+<p>You can go to the sites below, enter your own ODE, and see how different numberical methods behave. </p>
+<div class="plainlist">
+<ul>
+<li><a href="http://www.math-cs.gordon.edu/%7Esenning/desolver/">First Order Differential Equation Solver</a>—for explicit Euler, Heun,
+and RK4 methods.</li>
+<li><a href="https://planetcalc.com/8394/">Midpoint method</a>—for midpoint method.</li>
+<li><a href="https://homepages.bluffton.edu/~nesterd/apps/slopefields.html">Slope and direction fields</a>—for explicit Euler, Heun, midpoint, and RK4 methods (as well as <a href="https://en.wikipedia.org/wiki/List_of_Runge–Kutta_methods#3/8-rule_fourth-order_method">Runge-Kutta 3/8-rule method</a> and <a href="https://en.wikipedia.org/wiki/Runge–Kutta–Fehlberg_method">Runge-Kutta-Fehlberg method</a> that we didn't introduce), under the "Plot numerical solution curves" tab.</li>
+</ul>
+</div>
+</div>  
+
+
 
 <script src="js/draw_bubble.js"></script>
 
