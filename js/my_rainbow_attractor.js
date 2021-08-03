@@ -17,7 +17,7 @@ let button_reset, button_cont, button_pause;
 
 
 function setup() {
-  let canvas = createCanvas(700, 450);
+  let canvas = createCanvas(600, 450);
   canvas.parent("canvasdiv");
   //canvas.mousePressed(canvasMouseClicked);
   colorMode(HSB, nAttractors);
@@ -66,7 +66,7 @@ function initializeAttractors() {
 
 function drawAttractors() {
   push();
-  translate(400, 0);
+  translate(300, 0);
   strokeWeight(0.2);
   noFill();
   scale(8);

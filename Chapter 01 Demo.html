@@ -341,9 +341,15 @@ Plotly.newPlot('myDiv', [{
   mode: 'lines', name: 'initial value('+x_0+','+y_0+','+z_0+')',
   line: {color: 'orange'}
 }
-], {legend: {"orientation": "h"}, title: "Chen attractors", 
-  xaxis: {range: [-24, 24]},
-  yaxis: {range: [-28, 28]}
+], {legend: {"orientation": "h",yanchor: 'top', y:-0.2}, title: "Chen attractors",  margin: {
+    l: 40,
+    r: 40,
+    b: 100,
+    t: 100,
+    pad: 4
+  },
+  xaxis: {range: [-25, 25],title: "x"},
+  yaxis: {range: [-28, 28],title: "y"}
 });
 }
 
