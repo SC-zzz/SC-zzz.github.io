@@ -84,11 +84,11 @@ function new_graph() {
  
   let lambda1 = (-gamma + math.sqrt(gamma**2-4))/2;  //one eigenvalue
   let v1 = [1/2*(-gamma - math.sqrt(gamma**2-4)), 1];
-  board.create('line', [[0,0],v1], {strokeWidth:3, strokeColor:'gray'});
+  board.create('line', [[0,0],v1], {strokeWidth:2, strokeColor:'gray'});
     
   let lambda2 = (-gamma + math.sqrt(gamma**2-4))/2;  //one eigenvalue
   let v2 = [1/2*(-gamma + math.sqrt(gamma**2-4)), 1];
-  board.create('line', [[0,0],v2], {strokeWidth:3, strokeColor:'gray'});
+  board.create('line', [[0,0],v2], {strokeWidth:2, strokeColor:'gray'});
  
 
 
