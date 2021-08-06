@@ -21,10 +21,10 @@ function new_Jn() {
   var m = parseFloat(document.getElementById("m").value);  
   
   var left_lim = 0;
-  var right_lim = 20;
+  var right_lim = 25;
 
   
-  let h = 0.005;
+  let h = 0.01;
   let N = Math.ceil((right_lim-left_lim)/h +1);
   let tArray = Array.from(Array(N), (_, k) => left_lim + k * h);       
 
@@ -32,7 +32,7 @@ function new_Jn() {
   let approxArray = tArray.map(function (t) {return Jn_truncate(n, m, t)});
 
 
-  let tArray_2 = Array.from(Array(N-1), (_, k) => left_lim + k * h + h); 
+  let tArray_2 = Array.from(Array(N-2), (_, k) => left_lim + k * h + 2*h); 
   let testArray;         
   if (n % 4 == 0) {
     testArray = tArray_2.map(function (t) {return math.sqrt(2/(Math.PI*t))*Math.cos(t-Math.PI/4)});       
@@ -63,7 +63,7 @@ function new_Jn() {
 		y: approxArray,
 		mode:"lines",
 		name: 'J_{' + n + ','+(2*m + n) +'}',
-		line: {color: 'darkorange'}
+		line: {color: 'darkorange', width: 3}
 		}
 	   ];
   }
@@ -74,7 +74,7 @@ function new_Jn() {
 		y: approxArray,
 		mode:"lines",
 		name: 'J_{' + n + ','+(2*m + n) +'}',
-		line: {color: 'darkorange'}
+		line: {color: 'darkorange', width: 3}
 		}
 		];
   }

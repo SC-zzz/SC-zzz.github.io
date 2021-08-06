@@ -325,9 +325,9 @@ where $A$ and $B$ are constants.
 c_1 = \frac{1-a}{2},\,\,\,c_2 = \frac{\sqrt{4b -(1-a)^2}}2 \ne 0.
 \end{equation} Let's compute the real and imaginary parts of $t^{z_{+}} = t^{c_1+ic_2}$
 to get some $\R$-valued solutions. Since $t^{ic_2} = e^{(\ln t)ic_2} = e^{i c_2 (\ln t)}$, we have 
-$$t^{c_1+ ic_2} = t^{c_1} t^{ ic_2} = 
+$$t^{c_1+ ic_2}  = 
 t^{c_1} e^{ic_2 (\ln t)} = 
-  t^{c_1}(\cos (c_2 (\ln t)) + i \sin(c_2 (\ln t))) = t^{c_1} \cos(c_2 (\ln t)) + i t^{c_1} \sin(c_2 (\ln t)). $$
+  t^{c_1} \cos(c_2 (\ln t)) + i t^{c_1} \sin(c_2 (\ln t)). $$
 The real and imaginary parts 
 $t^{c_1} \cos(c_2 (\ln t))$ and $t^{c_1} \sin(c_2(\ln t))$ 
 are a pair of linearly independent functions of $t$ since $c_2 \ne 0$, so the general $\R$-valued solution  
@@ -450,8 +450,8 @@ J_0(t) \approx \sqrt{\frac{2}{\pi t}} \cos(t - \pi/4)
 and called the Bessel function of the "first kind" of order $n$. It is defined by a convergent power series
 $$J_n(t) = t^n \sum_{k=0}^{\infty} \frac{(-1)^k}{2^{2k+n}k!(k+n)!}t^{2k}$$
 and satisfies an analogue of decaying for big $t$, with precise form depending on whether $n$ is even or odd:
-$$J_{2m}(t) \approx (-1)^m \sqrt{\frac{2}{\pi t}} \cos(t  - \pi/4),\,\,\,
-J_{2m+1}(t) \approx (-1)^m \sqrt{\frac{2}{\pi t}} \sin(t - \pi/4)$$ as $t \to +\infty$ (with error bounded by a constant multiple of $1/t^{3/2}$).</p>
+$$J_{2m}(t) \approx (-1)^m \sqrt{\frac{2}{\pi t}} \cos(t  - \pi/4),$$
+$$J_{2m+1}(t) \approx (-1)^m \sqrt{\frac{2}{\pi t}} \sin(t - \pi/4),$$ as $t \to +\infty$ (with error bounded by a constant multiple of $1/t^{3/2}$).</p>
 
 <p> Let $J_{n,2r+n}(t) := t^n\sum_{k=0}^{r} \sum_{k=0}^{\infty} \frac{(-1)^k}{2^{2k+n}k!(k+n)!}t^{2k}$ be the sum up to the $(2r+n)$-th power term in the expansion of $J_n$.</p>
 <p> Below we visualize the appriximations of the Bessel function $J_n$ both by $J_{n,2r+n}(t)$ and by the big $t$ asymptotic behavior ($(-1)^m\sqrt{\frac{2}{\pi t}} \cos(t  - \pi/4)$ for even $n = 2m$ and $(-1)^m \sqrt{\frac{2}{\pi t}} \sin(t - \pi/4)$ for odd $n= 2m+1$).</p>
@@ -476,7 +476,7 @@ J_{2m+1}(t) \approx (-1)^m \sqrt{\frac{2}{\pi t}} \sin(t - \pi/4)$$ as $t \to +\
       <legend class="controlLegend">Truncation $J_{n,2r+n}(t)$</legend>
  <div class="range-wrap" style="width: 92%;">
   <label for="m">$r$: </label>
-  <input id = "m" type="range" class="range" min="0" max="30" step = 1 value = "0" oninput="new_Jn()">
+  <input id = "m" type="range" class="range" min="0" max="40" step = 1 value = "0" oninput="new_Jn()">
   <output class="bubble"></output><br>
  </div>
 </fieldset>
