@@ -55,7 +55,7 @@ function new_Jn() {
 		x: tArray_2,
 		y: testArray,
 		mode:"lines",
-		name: 'Big t asymptotic',
+		name: 'Asymptotic behavior',
 		line: {color: 'red', width: 2}
 		},
 		{
