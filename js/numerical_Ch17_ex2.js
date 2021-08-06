@@ -5,7 +5,7 @@ function new_numerical_2() {
   
   let t_start = 0;
   let t_fin = 3;
-  let N = Math.ceil(t_fin/h +1);
+  let N = Math.ceil((t_fin-t_start)/h +1);
   let tArray = Array.from(Array(N), (_, k) => t_start + k * h);
   
   let h_exact = 0.01;

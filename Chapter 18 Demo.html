@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 18 Demo</title>
+
+  <!-- Fonts -->
+  <script src="https://use.fontawesome.com/6af5d1a69f.js" async></script>
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+ <script src="js/JSX_auxilliary_functions.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 17 Demo.html">previous page</a> | 
+<a href="Chapter 19 Demo.html">next page</a>
+</nav>
+
+
+<p style="display: none">
+$\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\SPAN}{\text{span}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\u}{\mathbf{u}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\ww}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\Cbar}{\overline{\mathbf{C}}}
+\newcommand{\Dbar}{\overline{\mathbf{D}}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Y}{\mathbf{Y}}$
+
+\newcommand{\Xbar}{\widehat{\mathbf{X}}}
+\newcommand{\Ybar}{\widehat{\mathbf{Y}}}
+\newcommand{\zz}{\mathbf{z}}
+\renewcommand{\a}{\mathbf{a}}
+\renewcommand{\aa}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\cc}{\mathbf{c}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\hh}{\mathbf{h}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\ve}[1]{\mathbf{#1}}
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+$\begin{bmatrix}#1\end{bmatrix}$\fi}
+\newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
+\newcommand{\rref}{\operatorname{rref}}
+\newcommand{\hide}[1]{{}}
+\newcommand{\proj}{\operatorname{\mathbf{Proj}}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdt}[2]{\tfrac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\dfrac{\partial #1}{\partial #2}}
+
+\newcommand{\svdots}{\raisebox{3pt}{$\scalebox{.75}{\vdots}$}}
+\newcommand{\sddots}{\raisebox{3pt}{$\scalebox{.75}{$\ddots$}$}}
+
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Eth}{Eth}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Free}{Free}
+%\DeclareMathOperator{\frob}{frob}
+%\DeclareMathOperator{\Gal}{Gal}
+%\DeclareMathOperator{\genus}{genus}
+%\DeclareMathOperator{\Hecke}{Hecke}
+\DeclareMathOperator{\Hom}{Hom}
+%\DeclareMathOperator{\id}{id}
+%\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\modulo}{\medspace mod}
+\DeclareMathOperator{\Norm}{N}
+%\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Pic}{Pic}
+%\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Split}{Split}
+\DeclareMathOperator{\Sturm}{Sturm}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Tate}{Tate}
+\DeclareMathOperator{\tors}{tors}
+%\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\Weil}{Weil}
+
+\DeclareMathOperator{\sech}{sech}
+
+\newcommand{\adjacent}{\leftrightarrow}
+
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\SO}{SO}
+
+\newcommand{\cm}{\text{,}}
+%\newcommand{\pd}{\text{.}}
+\newcommand{\n}{\noindent}
+
+\newcommand{\Omicron}{\mathrm{O}}
+\newcommand{\Zeta}{\mathrm{Z}}
+
+\renewcommand{\div}{\mathop{\mathrm{div}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\renewcommand{\ss}{\mathop{\mathrm{ss}}}
+\newcommand{\elliptic}{\mathop{\mathrm{ell}}}
+
+\newcommand{\new}{\mathop{\mathrm{new}}}
+\newcommand{\old}{\mathop{\mathrm{old}}}
+
+\newcommand{\Bs}{\boldsymbol}
+%\newcommand{\ds}{\displaystyle}
+%\newcommand{\f}{\mathfrak}
+\newcommand{\s}{\mathcal}
+
+%\newcommand{\A}{\mathbb{A}}
+%\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fpbar}{\bar{\mathbb{\F}}_p}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\Gm}{\mathbb{G}_{\mathrm{m}}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\R}{\mathbf{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\E}{\mathbf{E}}
+\renewcommand{\H}{\mathrm{H}}
+\newcommand{\M}{\mathbf{M}}
+\renewcommand{\S}{\mathbf{S}}
+
+\newcommand{\var}{\mathbf{Var}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\erf}{\operatorname{erf}}
+
+\newcommand{\rar}{\rightarrow}
+\newcommand{\lar}{\leftarrow}
+\newcommand{\hrar}{\hookrightarrow}
+\renewcommand{\iff}{\Longleftrightarrow}
+\newcommand{\xrar}{\xrightarrow}
+\newcommand{\rrar}{\longrightarrow}
+\newcommand{\mt}{\mapsto}
+\newcommand{\mmt}{\longmapsto}
+
+\newcommand{\angles}[1]{\langle #1\rangle}
+\newcommand{\ceiling}[1]{\lceil #1\rceil}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+
+\newcommand{\set}[2]{\{\,#1\,\,|\,\,#2\,\}}
+
+\renewcommand{\emph}{\it}
+\renewcommand{\em}{\emph}
+
+$\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
+
+</p>
+<article>
+    <h1>Chapter 18 Demo</h1>  
+
+<div>
+<h3>Visualizing linear ODE’s with non-constant coefficients.</h3>
+</div>
+<h4>The Cauchy-Euler equation.</h4>
+
+<p> The <i>Cauchy-Euler equation</i> (also called the Euler-Cauchy equation or the Euler equation) is 
+\begin{equation}\label{eq:Cauchy.Euler}
+ t^2 y'' + a t y'+ b y = 0,\,\,\,\mbox{ or equivalently }\,\,\, y'' + \frac{a}{t} y' + \frac{b}{t^2} y = 0,
+ \end{equation}
+where $a$ and $b$ are real constants.</p>
+
+<p> We are going to work out the 2-dimensional "space" of solutions to this ODE on the interval $(0, +\infty)$.
+(The interval $(-\infty, 0)$ is handled by making the change of variables to replace $t$ with $-t$.) As discussed in this chpater, we plug in an ansatz $y(t) = t^r$ into the ODE and obtain
+$$ (r (r-1) + a r + b) t^r = 0.$$
+Hence, $t^r$ is a solution precisely when $r$ is a root of the <i>indicial polynomial</i>
+\begin{equation}\label{indicial}
+X (X-1) + a X + b = X^2 + (a-1)X + b.
+\end{equation}
+By the quadratic formula, its (possibly complex) roots are 
+$$\frac{1-a \pm \sqrt{(1-a)^2- 4b}}{2}.$$ There are three cases, depending on the sign of $(1-a)^2 - 4b$. </p>
+
+<p> <b>Case 1: $(1-a)^2 - 4b >0$</b> (equivalently: $b < (1-a)^2/4$). In this case there are two real roots
+$$r_{\pm}  = \frac{1-a \pm \sqrt{(1-a)^2- 4b}}{2},$$ 
+so $t^{r_{+}}$ and $t^{r_{-}}$ are both solutions. These are linearly independent functions, so the general solution over the interval $(0, +\infty)$ is given by 
+$$y(t) = A t^{r_+} + B t^{r_{-}},$$ 
+where $A$ and $B$ are constants.
+</p>
+
+<p> <b>Case 2: $(1-a)^2 - 4b < 0$</b> (equivalently, $b > (1-a)^2/4$).  In this case $(1-a)^2 - 4b < 0$ and there are two distinct complex roots $z_{\pm} = c_1 \pm i c_2$ where 
+\begin{equation}\label{xyformula}
+c_1 = \frac{1-a}{2},\,\,\,c_2 = \frac{\sqrt{4b -(1-a)^2}}2 \ne 0.
+\end{equation} Let's compute the real and imaginary parts of $t^{z_{+}} = t^{c_1+ic_2}$
+to get some $\R$-valued solutions. Since $t^{ic_2} = e^{(\ln t)ic_2} = e^{i c_2 (\ln t)}$, we have 
+$$t^{c_1+ ic_2} = t^{c_1} t^{ ic_2} = 
+t^{c_1} e^{ic_2 (\ln t)} = 
+  t^{c_1}(\cos (c_2 (\ln t)) + i \sin(c_2 (\ln t))) = t^{c_1} \cos(c_2 (\ln t)) + i t^{c_1} \sin(c_2 (\ln t)). $$
+The real and imaginary parts 
+$t^{c_1} \cos(c_2 (\ln t))$ and $t^{c_1} \sin(c_2(\ln t))$ 
+are a pair of linearly independent functions of $t$ since $c_2 \ne 0$, so the general $\R$-valued solution  
+of our second-order linear ODE is 
+$$y(t) = A t^{c_1} \cos(c_2 (\ln t)) + B t^{c_1}  \sin(c_2 (\ln t))$$
+where $A$ and $B$ are constants (and ${c_1}, c_2$ are given above).
+</p>
+
+<p> <b>Case 3: $(1-a)^2 - 4b =0$</b> (equivalently, $b = (1-a)^2/4$). 
+In this case $r = (1-a)/2$ is a repeated root, and this gives the nonzero solution $t^r$. 
+But the ODE is second-order linear homogeneous, so there must be another solution that is linearly independent from $t^r$. Now comes a surprising guess:  we 
+claim that $ t^r \ln t$ is also a solution to the ODE.
+(This guess is less surprising than it seems: it can be discovered as a "limit" of Case 1 by thinking about IVP solutions having continuous dependence on parameters as distinct real roots move toward the common value $(1-a)/2$.)
+We can check  by a computation that $y(t) = t^r \ln t$ satisfies the ODE, so we conclude that the general solution is given by
+$$y(t) = At^r + B t^r \ln t,$$
+where $A$ and $B$ are constants.</p>
+
+<p> Below we plot the two independent solutions to the Cauchy-Euler equation. To play with the visulization yourself, pick the parameters $a,b$, and see how the solutions change.</p>
+     
+<div class="twoCol_3366">
+  <div>
+<!--   <div> 
+  <fieldset>
+      <legend class="controlLegend">ODE</legend>
+<p>ODE: $x'(t) = -\lambda x(t)$, $x(0) = 1,\,\,\,\mbox{ with } \,\,\, \lambda > 0$.</p>
+<p>Exact solution: $x(t) = e^{-\lambda t}.$</p><br>
+</fieldset>
+ </div>  
+ <br>  -->
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameters</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="a_CE">$a$: </label>
+  <input id = "a_CE" type="range" class="range" min="-4" max="4" step = 0.1 value = "0.5" oninput="new_Cauchy_Euler()">
+  <output class="bubble"></output><br>
+   </div>
+   <div class="range-wrap" style="width: 92%;"> 
+  <label for="b_CE">$b$: </label>
+  <input id = "b_CE" type="range" class="range" min="-4" max="4" step = 0.1 value = "1" oninput="new_Cauchy_Euler()">
+  <output class="bubble"></output><br>
+ </div>
+</fieldset>
+</div> 
+   <br>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Outputs</legend>
+  <div  id = "case1" >
+  <p>Case 1: $(1-a)^2 - 4b >0.$</p>
+  <p>$r_+ = $ <span id="r+"></span>, $r_- = $ <span id="r-"></span>.</p>
+  <p>$y_1(t) = t^{r_+}$, $y_2(t) = t^{r_-}$.</p>
+</div>
+  <div  id = "case2" >
+  <p>Case 2: $(1-a)^2 - 4b <0.$</p>
+   <p>$c_1 = $ <span id="c1"></span>, $c_2 = $ <span id="c2"></span>.</p>   
+  <p>$y_1(t) = t^{c_1} \cos(c_2 (\ln t))$, $y_2(t) = t^{c_1} \sin(c_2 (\ln t))$.</p>
+</div>
+  <div  id = "case3" >
+  <p>Case 3: $(1-a)^2 - 4b  = 0.$</p>
+  <p>$r = $ <span id="r"></span>.</p> 
+  <p>$y_1(t) = t^{r}$, $y_2(t) = t^r \ln t$.</p>
+</div>
+</fieldset>
+ </div> 
+</div>
+<div>
+  <fieldset > 
+      <legend class="controlLegend">Graph</legend>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+        <div  id="CEPlot" style="position:absolute;top: 0;width:100%;height:100%">
+          </div>
+          </div>
+     </div>
+      </fieldset> 
+    </div>
+</div>
+
+
+
+<script src="js/Cauchy_Euler.js"></script>
+
+
+
+
+<br>
+<h4>Bessel equations.</h4>
+
+<p> As introduced in the textbook, the Bessel equation is given by
+ $$t^2 y'' + t y' + (t^2 - n^2) y = 0$$ (with $n = 0, 1, 2, \dots$).</p>
+<p> Let's first focus on the Bessel equation with $n=0$:
+\begin{equation}\label{bessel0}
+t^2 y'' + t y' + t^2 y = 0,\,\,\,\mbox{ or equivalently } \,\,\, y'' + \frac{1}{t}y' + y = 0.
+\end{equation}
+</p>
+<p> Using power series, we find a solution of the following form, which is called the <i>Bessel function</i> $J_0(t)$:
+
+$$J_0(t) = \sum_{k=0}^{\infty} \frac{(-1)^k}{2^{2k} (k!)^2} t^{2k} = 1 - \frac{1}{4}t^2 + \frac{1}{64}t^4  - \frac{1}{2304} t^6 + \dots  .$$
+</p>
+<p> It can be shown that the scalar multiples $c \, J_0(t)$ are
+the only solutions of $t^2 y'' + t y' + t^2 y = 0$ on $(0, +\infty)$ that remain bounded as $t \to 0^+$. We have $c\,J_0(t) \to c$
+as $t \to 0^+$.  
+</p>
+
+<p>  It is tempting to think that since $J_0(t)$ satisfies the ODE $y'' + (1/t)y' + y = 0$ (as on the right in the Bessel equation
+ and for large $t$ perhaps the middle term $(1/t)y'$ is "negligible",
+  the behavior of $J_0(t)$ for large $t$ should be approximated by some nonzero solution to $y'' + y = 0$; i.e., a nonzero linear combination of
+ $\sin t$ and $\cos t$.  But that guess is wrong!  Such linear combinations $c_1 \cos t + c_2 \sin t$ are phase-shifted cosine waves 
+ $A \cos(t - \phi)$ up to a change in amplitude,
+ and in particular they <i>do not decay</i> as $t \to +\infty$, whereas it can be shown that $J_0(t)$
+ decays like $1/\sqrt{t}$, and more precisely
+ \begin{equation}\label{J0bigt}
+J_0(t) \approx \sqrt{\frac{2}{\pi t}} \cos(t - \pi/4)
+\end{equation}
+ as $t \to +\infty$ (with error bounded by a constant multiple of $1/t^{3/2}$).</p>
+
+
+<p> There is an analogous solution to $t^2 y'' + ty' + (t^2 - n^2) y = 0$ for positive integers $n$, denoted $J_n(t)$
+and called the Bessel function of the "first kind" of order $n$. It is defined by a convergent power series
+$$J_n(t) = t^n \sum_{k=0}^{\infty} \frac{(-1)^k}{2^{2k+n}k!(k+n)!}t^{2k}$$
+and satisfies an analogue of decaying for big $t$, with precise form depending on whether $n$ is even or odd:
+$$J_{2m}(t) \approx (-1)^m \sqrt{\frac{2}{\pi t}} \cos(t  - \pi/4),\,\,\,
+J_{2m+1}(t) \approx (-1)^m \sqrt{\frac{2}{\pi t}} \sin(t - \pi/4)$$ as $t \to +\infty$ (with error bounded by a constant multiple of $1/t^{3/2}$).</p>
+
+<p> Let $J_{n,2r+n}(t) := t^n\sum_{k=0}^{r} \sum_{k=0}^{\infty} \frac{(-1)^k}{2^{2k+n}k!(k+n)!}t^{2k}$ be the sum up to the $(2r+n)$-th power term in the expansion of $J_n$.</p>
+<p> Below we visualize the appriximations of the Bessel function $J_n$ both by $J_{n,2r+n}(t)$ and by the big $t$ asymptotic ($(-1)^m\sqrt{\frac{2}{\pi t}} \cos(t  - \pi/4)$ for even $n = 2m$ and $(-1)^m \sqrt{\frac{2}{\pi t}} \sin(t - \pi/4)$ for odd $n= 2m+1$).</p>
+  
+
+  
+<div class="twoCol_3366">
+  <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Order</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="n">$n$: </label>
+  <input id = "n" type="range" class="range" min="0" max="10" step = 1 value = "0" oninput="new_Jn()">
+  <output class="bubble"></output><br>
+ </div>
+</fieldset>
+</div> 
+   <br>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Truncation $J_{n,2r+n}(t)$</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="m">$r$: </label>
+  <input id = "m" type="range" class="range" min="0" max="30" step = 1 value = "0" oninput="new_Jn()">
+  <output class="bubble"></output><br>
+ </div>
+</fieldset>
+</div> 
+   <br>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Display Options</legend>
+Asymptotic: <br>
+    <input type="radio" name="showAsymp" id="hideAs" onclick="new_Jn()"> hide<br>
+    <input type="radio" name="showAsymp"  id="showAs" checked onclick="new_Jn()"> show<br><br>
+</fieldset>
+ </div> 
+</div>
+<div>
+  <fieldset > 
+      <legend class="controlLegend">Graph</legend>
+      <div>
+ <div style="width:100%; padding-top:75%; position:relative">
+        <div  id="JnPlot" style="position:absolute;top: 0;width:100%;height:100%">
+          </div>
+          </div> 
+      </div>
+      </fieldset> 
+    </div>
+</div>
+
+
+<script src="js/Bessel_approximation.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script src="js/draw_bubble.js"></script>
+
+</article>
+</body>
+
+</html>

@@ -5,11 +5,11 @@ function new_numerical_2() {
   
   let t_start = 0;
   let t_fin = 3;
-  let N = Math.ceil(t_fin/h +1);
+  let N = Math.ceil((t_fin-t_start)/h +1);
   let tArray = Array.from(Array(N), (_, k) => t_start + k * h);
   
   let h_exact = 0.01;
-  let N_exact = Math.ceil(t_fin/h_exact +1);
+  let N_exact = Math.ceil((t_fin-t_start)/h_exact +1);
   let tArray_exact = Array.from(Array(N_exact), (_, k) => t_start + k * h_exact);
   let yArray_exact = [];
   for (let i = 0; i< N_exact; i ++){
