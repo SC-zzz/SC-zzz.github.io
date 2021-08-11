@@ -1,4 +1,4 @@
-function new_numerical_1() { 
+function setup_numerical_1() { 
 // x' = x, x(0) = 1
   let h = parseFloat(document.getElementById("h").value);  
   let y_0 = 1; 
@@ -121,4 +121,60 @@ function new_numerical_1() {
   Plotly.newPlot("numericalPlot", data, layout);
 }
 
-new_numerical_1();
+
+
+
+function new_numerical_1() { 
+// x' = x, x(0) = 1
+  let h = parseFloat(document.getElementById("h").value);  
+  let y_0 = 1; 
+  
+  let t_start = 0;
+  let t_fin = 3;
+  let N = Math.ceil((t_fin-t_start)/h +1);
+  let tArray = Array.from(Array(N), (_, k) => t_start + k * h);
+  
+
+  
+  let y1Array = Array(N).fill(y_0); 
+  let y2Array = Array(N).fill(y_0); 
+  let y3Array = Array(N).fill(y_0); 
+      
+  for (let i = 0; i< N; i ++){
+    y1Array[i+1] = (1+h) * y1Array[i];
+    y2Array[i+1] = y2Array[i]/(1-h);
+    y3Array[i+1] = y3Array[i]*(1+h/2)/(1-h/2);
+  }  
+  
+
+
+  function f(v) {
+    return v;
+  }
+  
+  let y4Array = ode_auto_midpoint(N, h, f, y_0);  
+  let y5Array = ode_auto_Heun(N, h, f, y_0);  
+  let y6Array = ode_auto_RK4(N, h, f, y_0);   
+   
+
+  // update
+  var data_1 = 	{x:[tArray], y:[y1Array]};
+  var data_2 = 	{x:[tArray], y:[y2Array]};
+  var data_3 =  {x:[tArray], y:[y3Array]};
+  var data_4 = 	{x:[tArray], y:[y4Array]};
+  var data_5 = 	{x:[tArray], y:[y5Array]};
+  var data_6 =  {x:[tArray], y:[y6Array]};  
+
+  // Display using Plotly
+  Plotly.restyle("numericalPlot", data_1, 1);
+  Plotly.restyle("numericalPlot", data_2, 2);
+  Plotly.restyle("numericalPlot", data_3, 3);
+  Plotly.restyle("numericalPlot", data_4, 4);
+  Plotly.restyle("numericalPlot", data_5, 5);
+  Plotly.restyle("numericalPlot", data_6, 6);  
+
+
+}
+
+
+setup_numerical_1();
