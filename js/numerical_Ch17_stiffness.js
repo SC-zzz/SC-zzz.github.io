@@ -1,4 +1,4 @@
-function new_stiff() { 
+function setup_stiff() { 
 // x' = x, x(0) = 1
   let h = parseFloat(document.getElementById("h_stiff").value);  
   let lambda = parseFloat(document.getElementById("lambda_stiff").value);  
@@ -163,4 +163,72 @@ function new_stiff() {
   Plotly.newPlot("stiffPlot", data, layout);
 }
 
-new_stiff();
+
+
+function new_stiff() { 
+// x' = x, x(0) = 1
+  let h = parseFloat(document.getElementById("h_stiff").value);  
+  let lambda = parseFloat(document.getElementById("lambda_stiff").value);  
+  document.getElementById("2/lambda").innerHTML = (2/lambda).toFixed(4);
+  let y_0 = 1; 
+  
+  let t_start = 0;
+  let t_fin = 5;
+  let N = Math.ceil(t_fin/h +1);
+  let tArray = Array.from(Array(N), (_, k) => t_start + k * h);
+  
+  
+  let y1Array = Array(N).fill(y_0); 
+  let y2Array = Array(N).fill(y_0); 
+  let y3Array = Array(N).fill(y_0); 
+      
+  for (let i = 0; i< N; i ++){
+    y1Array[i+1] = (1-lambda*h) * y1Array[i];
+    y2Array[i+1] = y2Array[i]/(1+lambda*h);
+    y3Array[i+1] = y3Array[i]*(1-lambda*h/2)/(1+lambda*h/2);
+  }  
+  
+
+
+  function f(v) {
+    return -lambda*v;
+  }
+  
+  let y4Array = ode_auto_midpoint(N, h, f, y_0);  
+  let y5Array = ode_auto_Heun(N, h, f, y_0);  
+  let y6Array = ode_auto_RK4(N, h, f, y_0);   
+   
+  var data_1 = 	{x:[tArray], y:[y1Array]};
+  var data_2 = 	{x:[tArray], y:[y2Array]};
+  var data_3 =  {x:[tArray], y:[y3Array]};
+
+
+
+  if (document.getElementById("showMore").checked) {
+    var data_4 = 	{x:[tArray], y:[y4Array], visible: 'true'};
+    var data_5 = 	{x:[tArray], y:[y5Array], visible: 'true'};
+    var data_6 =  {x:[tArray], y:[y6Array], visible: 'true'};    
+  }
+  else {
+    var data_4 = {x:[tArray], y:[y4Array], visible: 'legendonly'};
+    var data_5 = {x:[tArray], y:[y5Array], visible:'legendonly'};
+    var data_6 = {x:[tArray], y:[y6Array], visible: 'legendonly'};
+    }
+
+
+
+    
+  // Display using Plotly
+  Plotly.restyle("stiffPlot", data_1, 1);
+  Plotly.restyle("stiffPlot", data_2, 2);
+  Plotly.restyle("stiffPlot", data_3, 3);
+  Plotly.restyle("stiffPlot", data_4, 4);
+  Plotly.restyle("stiffPlot", data_5, 5);
+  Plotly.restyle("stiffPlot", data_6, 6);  
+}
+
+
+
+
+
+setup_stiff();
