@@ -9,15 +9,20 @@ function new_ODE_solver() {
   let t_1 = parseFloat(document.getElementById("t_1").value);  
   
   document.getElementById("interval_warning").style.display = "none";
+  document.getElementById("y0_warning").style.display = "none";
+  document.getElementById("h_warning").style.display = "none";
   
-  if (t_1 <= t_0) {
+  if (t_1 <= t_0 || isNaN(t_0) || isNaN(t_1)) {
     document.getElementById("interval_warning").style.display = "initial";
     return;
   }
   
-  document.getElementById("h_warning").style.display = "none";
+  if (isNaN(y_0)) {
+    document.getElementById("y0_warning").style.display = "initial";
+    return;
+  }
   
-  if (h <= 0) {
+  if (h <= 0 || isNaN(h)) {
     document.getElementById("h_warning").style.display = "initial";
     return;
   }

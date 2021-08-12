@@ -544,13 +544,14 @@ The following will allow you to obtain the numerical solution to first order ini
       <legend class="controlLegend">Initial Condition</legend>
   <label for="y_0">$y(t_0) = $ </label>
  <input type="number" id="y_0" name="y_0"><br> 
+<p id ="y0_warning" style="color:red; display:none"> WARNING: $y_0$ needs to be a number!</p>
 </fieldset>
  </div> 
   <br>
   <div> 
   <fieldset>
       <legend class="controlLegend">Step Size</legend>
-  <label for="h_ODE">$h$: </label>
+  <label for="h_ODE">$h =$ </label>
  <input type="number" min = 0 id="h_ODE" name="h_ODE"><br> 
  <p id ="h_warning" style="color:red; display:none"> WARNING: Need to have $h>0$!</p>
 </fieldset>
@@ -564,7 +565,7 @@ The following will allow you to obtain the numerical solution to first order ini
 </div>
 <div>
   <fieldset > 
-      <legend class="controlLegend">Comparison</legend>
+      <legend class="controlLegend">Result</legend>
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
          <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
@@ -586,7 +587,7 @@ The following will allow you to obtain the numerical solution to first order ini
 
 
 
-<p>You can go to the sites below, enter your own ODE, and see how different numberical methods behave. </p>
+<p>You can also go to the sites below, enter your own ODE, and see how different numberical methods behave. </p>
 <div class="plainlist">
 <ul>
 <li><a href="http://www.math-cs.gordon.edu/%7Esenning/desolver/">First Order Differential Equation Solver</a>—for explicit Euler, Heun,
