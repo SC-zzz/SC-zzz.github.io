@@ -515,8 +515,77 @@ by using eigenvalues of a derivative matrix in the role of $\lambda$. </p>
 
 
 <br>
-<div> 
 <h4>Comparing different numberical methods for your favorite ODE.</h4>
+The following will allow you to obtain the numerical solution to first order initial value problems of your own choice.
+
+<div class="twoCol_3366">
+  <div>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">ODE</legend>
+<label for="ODE">$\dfrac{dy}{dt} =  f(t,y) =$ </label>
+<input type="text" id="ODE" name="ODE" ><br> (Enter a function in terms of $y$ and $t$) <br>
+</fieldset>
+ </div>  
+ <br> 
+  <div> 
+  <fieldset>
+    <legend class="controlLegend">Time Interval $[t_0, t_1]$</legend>
+<label for="t_0">$t_0 =$ </label>
+<input type="number" id="t_0" name="t_0"><br> 
+<label for="t_1">$t_1 =$ </label>
+<input type="number" id="t_1" name="t_1"><br> 
+<p id ="interval_warning" style="color:red; display:none"> WARNING: Need to have $t_1 > t_0$!</p>
+</fieldset>
+ </div> 
+  <br> 
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Initial Condition</legend>
+  <label for="y_0">$y(t_0) = $ </label>
+ <input type="number" id="y_0" name="y_0"><br> 
+</fieldset>
+ </div> 
+  <br>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Step Size</legend>
+  <label for="h_ODE">$h$: </label>
+ <input type="number" min = 0 id="h_ODE" name="h_ODE"><br> 
+ <p id ="h_warning" style="color:red; display:none"> WARNING: Need to have $h>0$!</p>
+</fieldset>
+ </div> 
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Submit</legend>
+<button type="button" onclick = "new_ODE_solver()">Submit!</button>
+</fieldset>
+ </div> 
+</div>
+<div>
+  <fieldset > 
+      <legend class="controlLegend">Comparison</legend>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="ODEPlot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+     </div>
+      </fieldset> 
+    </div>
+</div>
+
+
+
+<script src="js/numerical_Ch17_ODE_solver.js"></script>
+
+
+
+
+
 <p>You can go to the sites below, enter your own ODE, and see how different numberical methods behave. </p>
 <div class="plainlist">
 <ul>
@@ -525,7 +594,6 @@ and RK4 methods.</li>
 <li><a href="https://planetcalc.com/8394/">Midpoint method</a>—for midpoint method.</li>
 <li><a href="https://homepages.bluffton.edu/~nesterd/apps/slopefields.html">Slope and direction fields</a>—for explicit Euler, Heun, midpoint, and RK4 methods (as well as <a href="https://en.wikipedia.org/wiki/List_of_Runge–Kutta_methods#3/8-rule_fourth-order_method">Runge-Kutta 3/8-rule method</a> and <a href="https://en.wikipedia.org/wiki/Runge–Kutta–Fehlberg_method">Runge-Kutta-Fehlberg method</a> that we didn't introduce), under the "Plot numerical solution curves" tab.</li>
 </ul>
-</div>
 </div>  
 
 
