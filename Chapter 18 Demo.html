@@ -317,7 +317,7 @@ $$\frac{1-a \pm \sqrt{(1-a)^2- 4b}}{2}.$$ There are three cases, depending on th
 $$r_{\pm}  = \frac{1-a \pm \sqrt{(1-a)^2- 4b}}{2},$$ 
 so $t^{r_{+}}$ and $t^{r_{-}}$ are both solutions. These are linearly independent functions, so the general solution over the interval $(0, +\infty)$ is given by 
 $$y(t) = A t^{r_+} + B t^{r_{-}},$$ 
-where $A$ and $B$ are constants.
+where $A$ and $B$ are constants. The two independent solutions we will visualize below are $y_1(t) = t^{r_+}$ and $y_2(t) = t^{r_-}$.
 </p>
 
 <p> <b>Case 2: $(1-a)^2 - 4b < 0$</b> (equivalently, $b > (1-a)^2/4$).  In this case $(1-a)^2 - 4b < 0$ and there are two distinct complex roots $z_{\pm} = c_1 \pm i c_2$ where 
@@ -333,7 +333,7 @@ $t^{c_1} \cos(c_2 (\ln t))$ and $t^{c_1} \sin(c_2(\ln t))$
 are a pair of linearly independent functions of $t$ since $c_2 \ne 0$, so the general $\R$-valued solution  
 of our second-order linear ODE is 
 $$y(t) = A t^{c_1} \cos(c_2 (\ln t)) + B t^{c_1}  \sin(c_2 (\ln t))$$
-where $A$ and $B$ are constants (and ${c_1}, c_2$ are given above).
+where $A$ and $B$ are constants (and ${c_1}, c_2$ are given above). The two independent solutions we will visualize below are $y_1(t) = t^{c_1} \cos(c_2 (\ln t))$ and $y_2(t) = t^{c_1}  \sin(c_2 (\ln t))$.
 </p>
 
 <p> <b>Case 3: $(1-a)^2 - 4b =0$</b> (equivalently, $b = (1-a)^2/4$). 
@@ -343,7 +343,7 @@ claim that $ t^r \ln t$ is also a solution to the ODE.
 (This guess is less surprising than it seems: it can be discovered as a "limit" of Case 1 by thinking about IVP solutions having continuous dependence on parameters as distinct real roots move toward the common value $(1-a)/2$.)
 We can check  by a computation that $y(t) = t^r \ln t$ satisfies the ODE, so we conclude that the general solution is given by
 $$y(t) = At^r + B t^r \ln t,$$
-where $A$ and $B$ are constants.</p>
+where $A$ and $B$ are constants. The two independent solutions we will visualize below are $y_1(t) = t^r$ and $y_2(t) = t^r \ln t$.</p>
 
 <p> Below we plot the two independent solutions to the Cauchy-Euler equation. To play with the visulization yourself, pick the parameters $a,b$, and see how the solutions change.</p>
      

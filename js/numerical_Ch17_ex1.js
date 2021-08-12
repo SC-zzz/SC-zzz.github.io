@@ -62,7 +62,7 @@ function setup_numerical_1() {
 	y:y1Array,
 	mode:"lines",
 	name: 'explicit',
-	line: {color: 'darkorange', width: 2}
+	line: {color: 'green', width: 2}
 	},
 	{
 	x:tArray,
@@ -97,7 +97,7 @@ function setup_numerical_1() {
 	y:y6Array,
 	mode:"lines",
 	name: 'RK4',
-	line: {color: 'brown', width: 2}
+	line: {color: 'MediumAquaMarine', width: 2}
 	}
 	];
 

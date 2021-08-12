@@ -75,7 +75,7 @@ function new_ODE_solver() {
 	y:y1Array,
 	mode:"lines",
 	name: 'explicit Euler',
-	line: {color: 'darkorange', width: 2}
+	line: {color: 'green', width: 2}
 	},
 // 	{
 // 	x:tArray,
@@ -110,7 +110,7 @@ function new_ODE_solver() {
 	y:y6Array,
 	mode:"lines",
 	name: 'RK4',
-	line: {color: 'brown', width: 2}
+	line: {color: 'MediumAquaMarine', width: 2}
 	}
 	];
 
