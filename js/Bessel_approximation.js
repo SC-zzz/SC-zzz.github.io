@@ -28,7 +28,7 @@ function new_Jn() {
   let N = Math.ceil((right_lim-left_lim)/h +1);
   let tArray = Array.from(Array(N), (_, k) => left_lim + k * h);       
 
-    
+  let JArray = tArray.map(function (t) {return Jn_truncate(n, 42, t)});   
   let approxArray = tArray.map(function (t) {return Jn_truncate(n, m, t)});
 
 
@@ -51,6 +51,13 @@ function new_Jn() {
   if (document.getElementById("showAs").checked) {
   // Define Data
     var data = [
+    	{
+		x: tArray,
+		y: JArray,
+		mode:"lines",
+		name: 'J_n',
+		line: {color: 'dodgerblue', width: 3}
+		},
 		{
 		x: tArray_2,
 		y: testArray,
@@ -69,6 +76,13 @@ function new_Jn() {
   }
   else {
     var data = [
+        {
+		x: tArray,
+		y: JArray,
+		mode:"lines",
+		name: 'J_n',
+		line: {color: 'dodgerblue', width: 3}
+		},
 		{
 		x: tArray,
 		y: approxArray,
@@ -81,7 +95,7 @@ function new_Jn() {
 	// Define Layout
   var layout = {
 	   xaxis: {range: [left_lim, right_lim], title: "t"},
-	   yaxis: {autorange: true, title: "y"},  
+	   yaxis: {range: [-1, 5], title: "y"},  
 	   title: "Approximation of J_" + n,
 	   showlegend: true,
 	   legend: {"orientation": "h", yanchor: 'top', y:-0.2},
