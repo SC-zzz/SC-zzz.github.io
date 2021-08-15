@@ -272,9 +272,10 @@ function ode_Euler_implicit_1d(t_0, t_1, h, f, y_0, limit, fd) {
 	  //  return  math.subtract(math.subtract(x,ys[i]), math.multiply(f(ts[i], ys[i]), h)) };
 	  function func(y) {return  y - h * f(ts[i+1], y) - ys[i];}
 	  function func_der(y) {return  1 - h * fd(ts[i+1], y);}
+	  let guess = ys[i] + h * f(ts[i], ys[i]); 
 	  //function func_der2(y) {return  - h * fdd(ts[i+1], y);}	  
 	  //ys[i + 1] =  newtonRootFind_modified_1d(func, func_der, func_der2, ys[i], limit);
-	  ys[i + 1] =  newtonRootFind_1d(func, func_der, ys[i], limit);
+	  ys[i + 1] =  newtonRootFind_1d(func, func_der, guess, limit);
 	}
 	return [ts, ys];
 }
@@ -305,7 +306,8 @@ function ode_trapezoidal_1d(t_0, t_1, h, f, y_0, limit, fd) {
 	  //  return  math.subtract(math.subtract(x,ys[i]), math.multiply(f(ts[i], ys[i]), h)) };
 	  function func(y){return  y - h*(f(ts[i+1], y) + f(ts[i], ys[i]))/2 - ys[i]};
 	  function func_der(y){return  1 - h * fd(ts[i+1],y)/2};
-	  ys[i + 1] =  newtonRootFind_1d(func, func_der, ys[i], limit);
+	  let guess = ys[i] + h * f(ts[i], ys[i]);
+	  ys[i + 1] =  newtonRootFind_1d(func, func_der, guess, limit);
 	}
 	return [ts, ys];
 }
