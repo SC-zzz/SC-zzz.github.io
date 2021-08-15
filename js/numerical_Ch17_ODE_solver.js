@@ -34,7 +34,6 @@ function new_ODE_solver() {
   let ODE_d = String(math.derivative(ODE, 'y')); 
   let ODE_dd = String(math.derivative(ODE_d, 'y')); 
  
-  document.getElementById("testtt").innerHTML = ODE_d;
   
   function f(t, y) {
     return math.evaluate(ODE, {t:t, y:y});
@@ -46,9 +45,9 @@ function new_ODE_solver() {
   } 
   
   // second derivative of f
-  function fdd(t, y) {
-    return math.evaluate(ODE_dd, {t:t, y:y});
-  } 
+//   function fdd(t, y) {
+//     return math.evaluate(ODE_dd, {t:t, y:y});
+//   } 
     
 //   
 //   let y1Array = Array(N).fill(y_0); 
@@ -70,28 +69,6 @@ function new_ODE_solver() {
   let y4Array = (ode_midpoint(t_0, t_1, h, f, y_0))[1];
   let y5Array = (ode_Heun(t_0, t_1, h, f, y_0))[1];
   let y6Array = (ode_RK4(t_0, t_1, h, f, y_0))[1]; 
-  
-//    
-//   function g(y) {
-//     return y**3 - 4 + y;
-//   } 
-//  
-//  
-//   function gd(y) {
-//     return 3*y**2 + 1;
-//   }   
-//    
-//   let guess = 1;
-//    
-//   function func(y) {return  y - h * f(1, y) - guess;}
-//   function func_der(y) {return  1 - h * fd(1, y);}
-//   let ha = func(1);
-//   document.getElementById("testtt2").innerHTML = ha;
-//   console.log(ha);
-//   let re =  newtonRootFind_1d(func, func_der, guess, limit);
-//   
-//   document.getElementById("testtt3").innerHTML = ha;
-//   
   
    
   // Define Data
