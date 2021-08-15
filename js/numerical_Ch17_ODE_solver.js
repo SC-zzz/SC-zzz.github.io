@@ -2,7 +2,7 @@ function new_ODE_solver() {
 
   let ODE = String(document.getElementById("ODE").value);
   let h = parseFloat(document.getElementById("h_ODE").value);  
-
+  let limit = 20;
   let y_0 = parseFloat(document.getElementById("y_0").value);  
   
   let t_0 = parseFloat(document.getElementById("t_0").value);  
@@ -30,10 +30,26 @@ function new_ODE_solver() {
   let N = Math.ceil((t_1-t_0)/h +1);
   let tArray = Array.from(Array(N), (_, k) => t_0 + k * h);
  
+  // derivatives
+  let ODE_d = String(math.derivative(ODE, 'y')); 
+  let ODE_dd = String(math.derivative(ODE_d, 'y')); 
+ 
+  document.getElementById("testtt").innerHTML = ODE_d;
+  
   function f(t, y) {
     return math.evaluate(ODE, {t:t, y:y});
   } 
  
+  // derivative of f
+  function fd(t, y) {
+    return math.evaluate(ODE_d, {t:t, y:y});
+  } 
+  
+  // second derivative of f
+  function fdd(t, y) {
+    return math.evaluate(ODE_dd, {t:t, y:y});
+  } 
+    
 //   
 //   let y1Array = Array(N).fill(y_0); 
 //   let y2Array = Array(N).fill(y_0); 
@@ -48,25 +64,35 @@ function new_ODE_solver() {
 
 
   let y1Array = (ode_Euler(t_0, t_1, h, f, y_0))[1];
-  //let y2Array = ode_auto_Heun(N, h, f, y_0);  
-  //let y3Array = ode_auto_RK4(N, h, f, y_0);   
+  let y2Array = (ode_Euler_implicit_1d(t_0, t_1, h, f, y_0, limit, fd))[1];
+  let y3Array = (ode_trapezoidal_1d(t_0, t_1, h, f, y_0, limit, fd))[1];
   
   let y4Array = (ode_midpoint(t_0, t_1, h, f, y_0))[1];
   let y5Array = (ode_Heun(t_0, t_1, h, f, y_0))[1];
   let y6Array = (ode_RK4(t_0, t_1, h, f, y_0))[1]; 
   
-   
-  //
-  //function fd(v) {
-  //  return 1;
-  //} 
-
-  //let y1Array = ode_auto_Euler(N, h, f, y_0);
-  //let y2Array = ode_auto_Euler_implicit_1d(N, h, f, y_0, limit, fd);
-  //let y3Array = ode_auto_trapezoidal_1d(N, h, f, y_0, limit, fd);
-
-
-
+//    
+//   function g(y) {
+//     return y**3 - 4 + y;
+//   } 
+//  
+//  
+//   function gd(y) {
+//     return 3*y**2 + 1;
+//   }   
+//    
+//   let guess = 1;
+//    
+//   function func(y) {return  y - h * f(1, y) - guess;}
+//   function func_der(y) {return  1 - h * fd(1, y);}
+//   let ha = func(1);
+//   document.getElementById("testtt2").innerHTML = ha;
+//   console.log(ha);
+//   let re =  newtonRootFind_1d(func, func_der, guess, limit);
+//   
+//   document.getElementById("testtt3").innerHTML = ha;
+//   
+  
    
   // Define Data
   var data = [
@@ -77,20 +103,20 @@ function new_ODE_solver() {
 	name: 'explicit Euler',
 	line: {color: 'green', width: 2}
 	},
-// 	{
-// 	x:tArray,
-// 	y:y2Array,
-// 	mode:"lines",
-// 	name: 'implicit',
-// 	line: {color: 'purple', width: 2}
-// 	},
-// 	{
-// 	x:tArray,
-// 	y:y3Array,
-// 	mode:"lines",
-// 	name: 'trapezoidal',
-// 	line: {color: 'red', width: 2}
-// 	},
+	{
+	x:tArray,
+	y:y2Array,
+	mode:"lines",
+	name: 'implicit Euler',
+	line: {color: 'gold', width: 2}
+	},
+	{
+	x:tArray,
+	y:y3Array,
+	mode:"lines",
+	name: 'trapezoidal',
+	line: {color: 'red', width: 2}
+	},
 	{
 	x:tArray,
 	y:y4Array,
@@ -103,14 +129,14 @@ function new_ODE_solver() {
 	y:y5Array,
 	mode:"lines",
 	name: 'Heun',
-	line: {color: 'gold', width: 2}
+	line: {color: 'peru', width: 2}
 	},
 	{
 	x:tArray,
 	y:y6Array,
 	mode:"lines",
 	name: 'RK4',
-	line: {color: 'MediumAquaMarine', width: 2}
+	line: {color: 'purple', width: 2}
 	}
 	];
 

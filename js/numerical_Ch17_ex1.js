@@ -61,15 +61,15 @@ function setup_numerical_1() {
 	x:tArray,
 	y:y1Array,
 	mode:"lines",
-	name: 'explicit',
+	name: 'explicit Euler',
 	line: {color: 'green', width: 2}
 	},
 	{
 	x:tArray,
 	y:y2Array,
 	mode:"lines",
-	name: 'implicit',
-	line: {color: 'purple', width: 2}
+	name: 'implicit Euler',
+	line: {color: 'gold', width: 2}
 	},
 	{
 	x:tArray,
@@ -90,14 +90,14 @@ function setup_numerical_1() {
 	y:y5Array,
 	mode:"lines",
 	name: 'Heun',
-	line: {color: 'gold', width: 2}
+	line: {color: 'peru', width: 2}
 	},
 	{
 	x:tArray,
 	y:y6Array,
 	mode:"lines",
 	name: 'RK4',
-	line: {color: 'MediumAquaMarine', width: 2}
+	line: {color: 'purple', width: 2}
 	}
 	];
 

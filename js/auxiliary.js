@@ -77,6 +77,67 @@ function drawGrid(ctx, startx, endx, numstepx, starty, endy, numstepy, color, wi
  */
  
  
+ 
+ 
+
+/**
+ * Find root of a function near a point numerically using Newton's method.
+ * @param {function} f: The function.  
+ * @param {function} fd: The derivative function.  
+ * @param {Float} guess: The initial guess. Float for 1d case
+ * @param {Number} limit: The max number of steps
+ * @returns {Float} x0: The root found
+ */
+function newtonRootFind_1d(f, fd, guess, limit) {
+  let delta;  //initialize the array for the results
+  let x0 = guess;
+  for (let i = 0; i < limit; i++) {
+    if (math.abs(f(x0)) < 0.0000001) {
+      break;
+    }	
+	if (fd(x0) == 0) {
+	  delta = 0.0001;
+	}
+	else {
+	  delta = -f(x0)/fd(x0);
+	}
+	x0 = x0 + delta;
+  }
+  return x0;
+}
+ 
+ 
+/**
+ * Find root of a function near a point numerically using modified Newton's method.
+ * @param {function} f: The function.  
+ * @param {function} fd: The derivative function.  
+ * @param {Float} guess: The initial guess. Float for 1d case
+ * @param {Number} limit: The max number of steps
+ * @returns {Float} x0: The root found
+ */
+function newtonRootFind_modified_1d(f, fd, fdd, guess, limit) {
+  let delta;  //initialize the array for the results
+  let x0 = guess;
+  for (let i = 0; i < limit; i++) {
+    if (math.abs(f(x0)) < 0.0000001) {
+      break;
+    }	
+	if (fd(x0) != 0) {
+	  delta = -f(x0)/fd(x0);
+	}
+	else if (fdd(x0) != 0) {
+	  delta = - 2*f(x0)/(fdd(x0))**2;
+	}
+	else {
+	  delta = 0.0001;
+	}
+	x0 = x0 + delta;
+  }
+  return x0;
+} 
+ 
+ 
+ 
 
 /**
  * Solve a system of first-order ODE y' = f(t,y) numerically using Euler's method.
@@ -152,6 +213,7 @@ function ode_Heun(t_0, t_1, h, f, y_0) {
 }
 
 
+
 /**
  * Solve a system of first-order ODE y' = f(t,y) numerically using the Runge Kutta 4th 
  * order method.
@@ -182,6 +244,80 @@ function ode_RK4(t_0, t_1, h, f, y_0) {
 	}
 	return [ts, ys];
 }
+
+
+/**
+ * Solve a first-order ODE y' = f(t, y) numerically using implicit Euler's method.
+ * y[i+1] = y[i] + h * f(t[i+1], y[i+1])
+ * @param {Float} t_0: The starting time.
+ * @param {Float} t_1: The ending time.
+ * @param {Float} h: The stepsize.
+ * @param {function} f: The function.  
+ * @param {Float} y_0: The initial value. Float for 1d case
+ * @param {Number} limit: The max number of iterations.
+ * @param {function} fd: The derivative function.  
+ * @returns {Array} [ts, ys]: ts is an Array storing the time steps
+                              ys is an Array storing the function values
+ */
+function ode_Euler_implicit_1d(t_0, t_1, h, f, y_0, limit, fd) {
+	const N = Math.floor((t_1 - t_0)/h) + 1;
+	var ts = Array.from(Array(N), (_, k) => k * h + t_0);
+	var ys = Array(N).fill(y_0);  //initialize the array for the results
+
+	//let func_der = function(y){
+	    //return  math.divide(math.subtract(func(y+epsilon), func(y)), epsilon)};
+
+	for (let i = 0; i < N-1; i++) {
+	  //let func = function(y){
+	  //  return  math.subtract(math.subtract(x,ys[i]), math.multiply(f(ts[i], ys[i]), h)) };
+	  function func(y) {return  y - h * f(ts[i+1], y) - ys[i];}
+	  function func_der(y) {return  1 - h * fd(ts[i+1], y);}
+	  //function func_der2(y) {return  - h * fdd(ts[i+1], y);}	  
+	  //ys[i + 1] =  newtonRootFind_modified_1d(func, func_der, func_der2, ys[i], limit);
+	  ys[i + 1] =  newtonRootFind_1d(func, func_der, ys[i], limit);
+	}
+	return [ts, ys];
+}
+
+
+
+/**
+ * Solve a first-order ODE y' = f(t, y) numerically using trapezoidal method.
+ * @param {Float} t_0: The starting time.
+ * @param {Float} t_1: The ending time.
+ * @param {function} f: The function.  
+ * @param {Float} y_0: The initial value. Float for 1d case
+ * @param {Number} limit: The max number of iterations.
+ * @param {function} fd: The derivative function.  
+ * @returns {Array} [ts, ys]: ts is an Array storing the time steps
+                              ys is an Array storing the function values
+ */
+function ode_trapezoidal_1d(t_0, t_1, h, f, y_0, limit, fd) {
+	const N = Math.floor((t_1 - t_0)/h) + 1;
+	var ts = Array.from(Array(N), (_, k) => k * h + t_0);
+	var ys = Array(N).fill(y_0);  //initialize the array for the results
+	
+	//let func_der = function(y){
+	    //return  math.divide(math.subtract(func(y+epsilon), func(y)), epsilon)};
+
+	for (let i = 0; i < N-1; i++) {
+	  //let func = function(y){
+	  //  return  math.subtract(math.subtract(x,ys[i]), math.multiply(f(ts[i], ys[i]), h)) };
+	  function func(y){return  y - h*(f(ts[i+1], y) + f(ts[i], ys[i]))/2 - ys[i]};
+	  function func_der(y){return  1 - h * fd(ts[i+1],y)/2};
+	  ys[i + 1] =  newtonRootFind_1d(func, func_der, ys[i], limit);
+	}
+	return [ts, ys];
+}
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -273,30 +409,6 @@ function ode_auto_RK4(N, h, f, y_0) {
 	return ys;
 }
 
-
-
-/**
- * Find root of a function near a point numerically using Newton's method.
- * @param {function} f: The function.  
- * @param {function} fd: The derivative function.  
- * @param {Float} guess: The initial guess. Float for 1d case
- * @param {Number} limit: The max number of steps
- * @returns {Float} x0: The root found
- */
-function newtonRootFind_1d(f, fd, guess, limit) {
-	let delta;  //initialize the array for the results
-    let x0 = guess;
-	for (let i = 0; i < limit; i++) {
-	  if (fd(x0) == 0) {
-	    delta = 0.001;
-	  }
-	  else {
-	    delta = -f(x0)/fd(x0);
-	  }
-	  x0 = x0 + delta;
-	}
-	return x0;
-}
 
 
 

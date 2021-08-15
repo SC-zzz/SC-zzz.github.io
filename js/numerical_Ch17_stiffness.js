@@ -62,14 +62,14 @@ function setup_stiff() {
 	  y:y5Array,
 	  mode:"lines",
 	  name: 'Heun',
-	  line: {color: 'gold', width: 2}
+	  line: {color: 'peru', width: 2}
 	  };
     var y6data = {
 	  x:tArray,
 	  y:y6Array,
 	  mode:"lines",
 	  name: 'RK4',
-	  line: {color: 'MediumAquaMarine', width: 2}
+	  line: {color: 'purple', width: 2}
 	  };	  
   }
   else {
@@ -86,21 +86,21 @@ function setup_stiff() {
 	y:yArray_exact,
 	mode:"lines",
 	name: 'exact soln',
-	line: {color: 'dodgerblue', width: 3}
+	line: {color: 'dodgerblue', width: 3.5}
 	}, 
   	{
 	x:tArray,
 	y:y1Array,
 	mode:"lines",
-	name: 'explicit',
+	name: 'explicit Euler',
 	line: {color: 'green', width: 2}
 	},
 	{
 	x:tArray,
 	y:y2Array,
 	mode:"lines",
-	name: 'implicit',
-	line: {color: 'purple', width: 2}
+	name: 'implicit Euler',
+	line: {color: 'gold', width: 2}
 	},
 	{
 	x:tArray,
@@ -121,14 +121,14 @@ function setup_stiff() {
 // 	y:y5Array,
 // 	mode:"lines",
 // 	name: 'Heun',
-// 	line: {color: 'gold', width: 2}
+// 	line: {color: 'royalblue', width: 2}
 // 	},
 // 	{
 // 	x:tArray,
 // 	y:y6Array,
 // 	mode:"lines",
 // 	name: 'RK4',
-// 	line: {color: 'brown', width: 2}
+// 	line: {color: 'purple', width: 2}
 // 	}
 	];
 
