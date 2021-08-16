@@ -243,7 +243,7 @@ function gd_ex_2(id) {
 		  color = 'hsl(0, 0%, 50%)';
 		}
         let myArrow = board.create('arrow', [v,[v[0]+w[0], v[1]+w[1]]],{fixed:true, strokeWidth: 1.5, strokeColor:color});
-        myArrow.hasPoint = function() { return false;};
+        //myArrow.hasPoint = function() { return false;};
       }
    
     }
@@ -265,7 +265,7 @@ function gd_ex_2(id) {
   }
   
   var myCurve = board.create('curve', [x1Array, x2Array], {strokeColor:'dodgerblue', strokeWidth: 3.5});
-  myCurve.hasPoint = function() { return false;};
+  //myCurve.hasPoint = function() { return false;};
   myCurve.updateDataArray = function() {
         let temp = ode_auto_RK4(N, dt, g_rev, [p.X(),p.Y()]);
         this.dataX = [];

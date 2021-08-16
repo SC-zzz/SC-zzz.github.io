@@ -100,7 +100,7 @@ function new_graph() {
   var p = board.create('point', [4,3], {size: 6, strokeColor:'dodgerblue', fillColor:'dodgerblue', name:'Drag me'});
  
 
-  var sol = ode_auto_RK4(N, dt, g, [p.X(),p.Y()]);
+  var sol = ode_auto_midpoint(N, dt, g, [p.X(),p.Y()]);
   var x1Array = [];
   var x2Array = [];  
   for (let i = 0; i< sol.length; i ++) {
@@ -108,38 +108,31 @@ function new_graph() {
     x2Array[i] = sol[i][1];
   }
  
-  var sol2 = ode_auto_RK4(N, dt, gd, [p.X(),p.Y()]);
+  var sol2 = ode_auto_midpoint(N, dt, gd, [p.X(),p.Y()]);
   var x1Array2 = [];
-  var x2Array2 = [];  
+  //var x2Array2 = [];  
   for (let i = 0; i< sol2.length; i ++) {
     x1Array2[i] = sol2[i][0];
-    x2Array2[i] = sol2[i][1];
+    //x2Array2[i] = sol2[i][1];
   } 
    
   new_plot();
  
-//   p.on("drag",function(){ 
-//     sol2 = ode_auto_RK4(N, dt, gd, [p.X(),p.Y()]);
-//     for (let i = 0; i< sol2.length; i ++) {
-//       x1Array2[i] = sol2[i][0];
-//       x2Array2[i] = sol2[i][1];
-//       new_plot();
-//     }     
-//   });
+
 
   
   var myCurve = board.create('curve', [x1Array, x2Array], {strokeColor:'dodgerblue', strokeWidth: 3.5});
   
   myCurve.updateDataArray = function() {
-        sol = ode_auto_RK4(N, dt, g, [p.X(),p.Y()]);
-        sol2 = ode_auto_RK4(N, dt, gd, [p.X(),p.Y()]);
+        sol = ode_auto_midpoint(N, dt, g, [p.X(),p.Y()]);
+        sol2 = ode_auto_midpoint(N, dt, gd, [p.X(),p.Y()]);
         this.dataX = [];
         this.dataY = [];
         for(let i=0; i< sol.length; i++) {
           x1Array[i] = sol[i][0];
-          x2Array[i] = sol[i][1];
+          //x2Array[i] = sol[i][1];
           x1Array2[i] = sol2[i][0];
-          x2Array2[i] = sol2[i][1];          
+          //x2Array2[i] = sol2[i][1];          
           this.dataX[i] = sol[i][0];
           this.dataY[i] = sol[i][1];
         }

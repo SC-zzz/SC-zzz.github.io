@@ -21,9 +21,9 @@ function setup() {
   canvas.parent("canvasdiv");
   //canvas.mousePressed(canvasMouseClicked);
   colorMode(HSB, nAttractors);
-  initializeAttractors(); 
+  //initializeAttractors(); 
   
-  button_reset = createButton('Reset');
+  button_reset = createButton('Start/Reset');
   button_reset.parent("canvasdiv");
   button_reset.position(0, 15);
   button_reset.style("font-size", "18px");

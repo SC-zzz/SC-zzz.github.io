@@ -79,7 +79,7 @@ function new_chem_osc() {
   var myCurve = board.create('curve', [x1Array, x2Array], {strokeColor:'dodgerblue', strokeWidth: 3.5});
   
   myCurve.updateDataArray = function() {
-        let temp = ode_auto_RK4(N, dt, g, [p.X(),p.Y()]);
+        let temp = ode_auto_Euler(N, dt, g, [p.X(),p.Y()]);
         this.dataX = [];
         this.dataY = [];
         for(let i=0; i< temp.length; i++) {

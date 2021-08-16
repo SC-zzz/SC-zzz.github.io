@@ -81,7 +81,7 @@ function new_bead() {
   var p = board.create('point', [4,3], {size: 6, strokeColor:'dodgerblue', fillColor:'dodgerblue', name:'Drag me'});
  
 
-  var sol = ode_auto_RK4(N, dt, g, [p.X(),p.Y()]);
+  var sol = ode_auto_midpoint(N, dt, g, [p.X(),p.Y()]);
   var x1Array = [];
   var x2Array = [];  
   for (let i = 0; i< sol.length; i ++) {
@@ -92,7 +92,7 @@ function new_bead() {
   var myCurve = board.create('curve', [x1Array, x2Array], {strokeColor:'dodgerblue', strokeWidth: 3.5});
   
   myCurve.updateDataArray = function() {
-        let temp = ode_auto_RK4(N, dt, g, [p.X(),p.Y()]);
+        let temp = ode_auto_midpoint(N, dt, g, [p.X(),p.Y()]);
         this.dataX = [];
         this.dataY = [];
         for(let i=0; i< temp.length; i++) {

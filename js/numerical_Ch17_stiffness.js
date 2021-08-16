@@ -73,11 +73,31 @@ function setup_stiff() {
 	  };	  
   }
   else {
-    var y4data = {};
-    var y5data = {};
-    var y6data = {};
-    }
-
+    var y4data = {
+	  x:tArray,
+	  y:y4Array,
+	  mode:"lines",
+	  name: 'midpoint',
+	  line: {color: 'pink', width: 2},
+	   visible: false
+	  };
+    var y5data = {
+	  x:tArray,
+	  y:y5Array,
+	  mode:"lines",
+	  name: 'Heun',
+	  line: {color: 'peru', width: 2},
+	   visible: false
+	  };
+    var y6data = {
+	  x:tArray,
+	  y:y6Array,
+	  mode:"lines",
+	  name: 'RK4',
+	  line: {color: 'purple', width: 2},
+	   visible: false
+	  };
+  }
    
   // Define Data
   var data = [
@@ -177,6 +197,13 @@ function new_stiff() {
   let N = Math.ceil(t_fin/h +1);
   let tArray = Array.from(Array(N), (_, k) => t_start + k * h);
   
+  let h_exact = 0.01;
+  let N_exact = Math.ceil(t_fin/h_exact +1);
+  let tArray_exact = Array.from(Array(N_exact), (_, k) => t_start + k * h_exact);
+  let yArray_exact = [];
+  for (let i = 0; i< N_exact; i ++){
+    yArray_exact[i] = Math.exp(-lambda * tArray_exact[i]);
+  }
   
   let y1Array = Array(N).fill(y_0); 
   let y2Array = Array(N).fill(y_0); 
@@ -198,6 +225,7 @@ function new_stiff() {
   let y5Array = ode_auto_Heun(N, h, f, y_0);  
   let y6Array = ode_auto_RK4(N, h, f, y_0);   
    
+  var data_0 = 	{x:[tArray_exact], y:[yArray_exact]}; 
   var data_1 = 	{x:[tArray], y:[y1Array]};
   var data_2 = 	{x:[tArray], y:[y2Array]};
   var data_3 =  {x:[tArray], y:[y3Array]};
@@ -205,20 +233,21 @@ function new_stiff() {
 
 
   if (document.getElementById("showMore").checked) {
-    var data_4 = 	{x:[tArray], y:[y4Array], visible: 'true'};
-    var data_5 = 	{x:[tArray], y:[y5Array], visible: 'true'};
-    var data_6 =  {x:[tArray], y:[y6Array], visible: 'true'};    
+    var data_4 = 	{x:[tArray], y:[y4Array], visible: true};
+    var data_5 = 	{x:[tArray], y:[y5Array], visible: true};
+    var data_6 =  {x:[tArray], y:[y6Array], visible: true};    
   }
   else {
-    var data_4 = {x:[tArray], y:[y4Array], visible: 'legendonly'};
-    var data_5 = {x:[tArray], y:[y5Array], visible:'legendonly'};
-    var data_6 = {x:[tArray], y:[y6Array], visible: 'legendonly'};
+    var data_4 = {x:[tArray], y:[y4Array], visible: false};
+    var data_5 = {x:[tArray], y:[y5Array], visible:false};
+    var data_6 = {x:[tArray], y:[y6Array], visible: false};
     }
 
 
 
     
   // Display using Plotly
+  Plotly.restyle("stiffPlot", data_0, 0);
   Plotly.restyle("stiffPlot", data_1, 1);
   Plotly.restyle("stiffPlot", data_2, 2);
   Plotly.restyle("stiffPlot", data_3, 3);
