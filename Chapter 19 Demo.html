@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 19 Demo</title>
+
+
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  flex: 50%;
+}
+
+.column3 {
+  float: left;
+  flex: 33%;
+}
+
+.left {
+ float: left;
+ width: 50%;
+
+}
+
+.right {
+  float: left;
+  width: 50%;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 18 Demo.html">previous page</a> | 
+<a href="Chapter 20 Demo.html">next page</a>
+</nav>
+
+
+
+<article>
+
+    <h1>Chapter 19 Demo</h1>  
+
+<h3>Visualizing PDE's, an introduction.</h3>
+
+<h4>Traveling wave solutions to the wave equation.</h4>
+<p> Consider a horizontal guitar string vibrating after being plucked. If $U(t,x)$ is the vertical displacement (in centimeters) of the string over the horizontal position at distance $x$ cm from one end of the string at $t$ seconds past the initial time then the
+(1-dimensional) <i>wave equation</i> is 
+\begin{equation}
+\frac{\partial^2 U}{\partial t^2} = k \frac{\partial^2 U}{\partial x^2}, 
+\end{equation}
+where $k>0$ (with units $\textrm{cm}^2/\textrm{s}^2$) is related to the string's
+ mass and tension and $k=c^2$ where $c$ is the <i>wave speed</i>.  
+</p>
+
+<p> Recall that for a PDE with independent variables $x$ and $t$, a solution is a <i>traveling wave</i> if it has the form $u(t,x) = w(x-c t)$ for a constant $c$ (called  the <i>speed</i> of the wave) and a function $w(x)$ depending only one one variable. As in the textbook, we can find two traveling wave solutions to the wave equation
+\[
+u_r(t,x) = \sin (x-\sqrt{k}t) \qquad \textrm{and} \qquad u_l(t,x) = \sin (x+\sqrt{k} t).
+\]
+Note that $u_r$ is moving to the right with speed $\sqrt{k}$ while $u_l$ is moving to the left with speed $\sqrt{k}$. In particular, we can identify the constant $k$ with the square root of the speed of waves. 
+</p>
+
+
+
+<p> Below is a visualization of the two traveling waves $u_r$ and $u_l$. Choose the parameter $k$ and hit the button "Run the traveling waves!" to see how the two waves travel.</p>
+
+<div class="twoCol_3366">
+  
+ <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 80%;">
+  <label for="k_TW">$k$: </label>
+  <input id = "k_TW" type="range" class="range" min="1" max="16" step = 0.5 value = "1" oninput="new_c()">
+  <output class="bubble"></output><br><br>
+  <p>Speed $c = \sqrt{k} = $ <span id= "showC">1</span></p>
+ </div>
+
+</fieldset>
+ </div>
+<br>
+    <div> 
+  <fieldset>
+      <legend class="controlLegend">Display Options</legend>
+      <div>
+   <div style="padding-top: 1em;">     
+  <button style="font-size: 18px;" onclick="newTW()">Run the traveling waves!</button>
+  <br></div>
+
+  <div style="padding-top: 1em;">
+  <button style="font-size: 18px;" onclick="stopTWAnimation()">Pause</button> 
+  <button style="font-size: 18px;" onclick="continueTWAnimation()">Continue</button><br></div>
+   </div>
+</fieldset>
+ </div>
+</div> 
+
+
+  <div>
+    <div>
+        <fieldset >
+        <legend class="controlLegend">Animation</legend>
+        <p>Time: $t = $ <span id = "time_TW"> </span> </p>
+<div id="myTW" style="width:100%;max-width:700px">
+</div>
+        </fieldset>
+    </div>
+  </div>
+ </div> 
+
+
+<script src="js/traveling_wave_eqn.js"></script>
+
+
+
+<br>
+<h4> Heat and wave equations with Dirichlet boundary conditions. </h4>
+<p> Like the initial value problem for ODE’s, when solving
+PDE’s it is necessary to prescribe the behavior of the solution at some initial time. This is known as an
+initial condition. Because a PDE may take place on a region in space with data fixed at the boundary (such
+as the edge of the batter head of a drum), it is common to also prescribe the behavior at certain points.
+This is known as the boundary values (or boundary conditions). Let’s illustrate this for the heat and wave
+equations.</p>
+
+<p> <b>The heat equation.</b> Consider the heat equation on a finite interval $0 \le x \le L$. This models the evolution of the temperature of a long skinny metal rod of length $L$. We impose the Dirichlet boundary condtions $u(t,0) = 0 = u(t,L)$ and intial condtion $u(0,x) = u_0(x)$:</p>
+<p> \begin{equation} \label{eq:heat-equation-dir-bd-cond}
+\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2};\,\,\,
+u(t,0) = 0 = u(t,L);\,\,\,
+u(0,x) = u_0(x),
+\end{equation} </p>
+
+<p> Define $\omega = \pi/L$. As checked in the textbook, 
+  $$u_{\text{heat}}(t,x) = e^{-\omega^2 t}  \sin\left(\omega x\right)$$
+  is a solution to this "initial and boundary value" problem. The corresponding initial condition is $u_0(x) = \sin(\omega x)$. </p>
+
+<p> A couple of salient features of solutions to the heat equation are present in this example. First of all, for $t$ very large
+the factor $e^{-\omega^2 t}$ becomes very small. In particular,  $u(t,x) \approx 0$ for large $t$.
+Physically, this corresponds to the (reasonable) fact that if the ends of a rod are kept at a common fixed
+temperature then the rod will eventually settle down to that uniform temperature. For larger $L$
+the coefficient $-\omega^2$ in the exponential is "less negative", so a long rod will settle down more slowly than a short rod. </p>
+
+<p> <b>The wave equation.</b> An important difference between the wave equation and the heat equation is that the wave equation
+has a second-order time derivative (as opposed to first-order for the heat equation). 
+Inspired by our experience with second-order ODE's, for which an IVP required specifying the value
+of the function and its derivative at the initial time, we are led
+to expect the need to specify the initial displacement $u(0,x) = u_0(x)$ and
+the  initial velocity $(\partial u/\partial t)(0,x) = u_1(x)$ at all points in order
+to uniquely pin down a solution.  In the case of plucking a guitar string, such combined initial conditions to describe 
+subsequent motion of the string is quite reasonable. 
+And as with the heat equation, we will need to impose boundary conditions,
+such as pinning the string down at its ends. In particular, Dirichlet boundary conditions are very natural for the wave equation. Her we consider
+</p>
+
+<p>  \[
+ \frac{\partial^2 u}{\partial t^2} = \frac{\partial^2 u}{\partial x^2};\,\,\,
+ u(t,0) = 0=  u(t,L);\,\,\, \,\,u(0,x) = \sin(\omega x),\,\,
+ \frac{\partial u}{\partial t}(0,x) = 0. 
+ \] </p>
+
+<p> Define $\omega = \pi/L$. As checked in the textbook, 
+  $$u_{\text{wave}}(t,x)  = \cos(\omega t) \sin(\omega x)$$
+  satisfies the above wave equation with the given boundary and initial conditions. </p>
+
+<p> Comparing with the heat equation, there is a significant difference:
+ the exponential damping factor $e^{-\omega^2 t}$ in the heat equation solution has
+been replaced with the oscillatory function  $\cos(\omega t)$,  so the solution oscillates forever with an unchanging amplitude of $\sin(\omega x_0)$ over each point $x_0$. </p>
+
+<p> Below is a visualization of $u_{\text{heat}}$ and $u_{\text{wave}}$. See how their long time behaviors differ. </p>
+
+
+
+<div class="twoCol_3366">
+  
+ <div>
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Length</legend>
+ <div class="range-wrap" style="width: 80%;">
+  <label for="L">$L$: </label>
+  <input id = "L" type="range" class="range" min="1" max="5" step = 0.5 value = "1" oninput="new_omega()">
+  <output class="bubble"></output><br><br>
+  <p>$\omega = \pi/L = $ <span id= "showOmega">$\pi$</span></p>
+ </div>
+
+</fieldset>
+ </div>
+<br>
+    <div> 
+  <fieldset>
+      <legend class="controlLegend">Display Options</legend>
+      <div>
+   <div style="padding-top: 1em;">     
+  <button style="font-size: 18px;" onclick="newDBC()">Run the animation!</button>
+  <br></div>
+
+  <div style="padding-top: 1em;">
+  <button style="font-size: 18px;" onclick="stopDBCAnimation()">Pause</button> 
+  <button style="font-size: 18px;" onclick="continueDBCAnimation()">Continue</button><br></div>
+   </div>
+</fieldset>
+ </div>
+</div> 
+
+
+  <div>
+    <div>
+        <fieldset>
+        <legend class="controlLegend">Animation (10 times slower)</legend>
+  <p>Time: $t = $ <span id = "time_DBC"> </span> </p>       
+<div id="myDBC" style="width:100%;max-width:700px">
+</div>
+        </fieldset>
+    </div>
+  </div>
+ </div> 
+
+
+<script src="js/heat_and_wave_Dirichlet.js"></script>
+
+
+
+
+
+
+
+
+<script src="js/draw_bubble.js"></script>
+
+</article>
+
+</body>
+
+</html>
