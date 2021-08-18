@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 22 Demo</title>
+
+
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+ <script src="js/JSX_auxilliary_functions.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 7% 2.3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 21 Demo.html">previous page</a> | 
+<a href="Chapter 23 Demo.html">next page</a>
+</nav>
+
+
+<p style="display: none">
+$\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\SPAN}{\text{span}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\u}{\mathbf{u}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\ww}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\Cbar}{\overline{\mathbf{C}}}
+\newcommand{\Dbar}{\overline{\mathbf{D}}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Y}{\mathbf{Y}}$
+
+\newcommand{\Xbar}{\widehat{\mathbf{X}}}
+\newcommand{\Ybar}{\widehat{\mathbf{Y}}}
+\newcommand{\zz}{\mathbf{z}}
+\renewcommand{\a}{\mathbf{a}}
+\renewcommand{\aa}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\cc}{\mathbf{c}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\hh}{\mathbf{h}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\ve}[1]{\mathbf{#1}}
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+$\begin{bmatrix}#1\end{bmatrix}$\fi}
+\newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
+\newcommand{\rref}{\operatorname{rref}}
+\newcommand{\hide}[1]{{}}
+\newcommand{\proj}{\operatorname{\mathbf{Proj}}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdt}[2]{\tfrac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\dfrac{\partial #1}{\partial #2}}
+
+\newcommand{\svdots}{\raisebox{3pt}{$\scalebox{.75}{\vdots}$}}
+\newcommand{\sddots}{\raisebox{3pt}{$\scalebox{.75}{$\ddots$}$}}
+
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Eth}{Eth}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Free}{Free}
+%\DeclareMathOperator{\frob}{frob}
+%\DeclareMathOperator{\Gal}{Gal}
+%\DeclareMathOperator{\genus}{genus}
+%\DeclareMathOperator{\Hecke}{Hecke}
+\DeclareMathOperator{\Hom}{Hom}
+%\DeclareMathOperator{\id}{id}
+%\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\modulo}{\medspace mod}
+\DeclareMathOperator{\Norm}{N}
+%\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Pic}{Pic}
+%\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Split}{Split}
+\DeclareMathOperator{\Sturm}{Sturm}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Tate}{Tate}
+\DeclareMathOperator{\tors}{tors}
+%\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\Weil}{Weil}
+
+\DeclareMathOperator{\sech}{sech}
+
+\newcommand{\adjacent}{\leftrightarrow}
+
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\SO}{SO}
+
+\newcommand{\cm}{\text{,}}
+%\newcommand{\pd}{\text{.}}
+\newcommand{\n}{\noindent}
+
+\newcommand{\Omicron}{\mathrm{O}}
+\newcommand{\Zeta}{\mathrm{Z}}
+
+\renewcommand{\div}{\mathop{\mathrm{div}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\renewcommand{\ss}{\mathop{\mathrm{ss}}}
+\newcommand{\elliptic}{\mathop{\mathrm{ell}}}
+
+\newcommand{\new}{\mathop{\mathrm{new}}}
+\newcommand{\old}{\mathop{\mathrm{old}}}
+
+\newcommand{\Bs}{\boldsymbol}
+%\newcommand{\ds}{\displaystyle}
+%\newcommand{\f}{\mathfrak}
+\newcommand{\s}{\mathcal}
+
+%\newcommand{\A}{\mathbb{A}}
+%\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fpbar}{\bar{\mathbb{\F}}_p}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\Gm}{\mathbb{G}_{\mathrm{m}}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\R}{\mathbf{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\E}{\mathbf{E}}
+\renewcommand{\H}{\mathrm{H}}
+\newcommand{\M}{\mathbf{M}}
+\renewcommand{\S}{\mathbf{S}}
+
+\newcommand{\var}{\mathbf{Var}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\erf}{\operatorname{erf}}
+
+\newcommand{\rar}{\rightarrow}
+\newcommand{\lar}{\leftarrow}
+\newcommand{\hrar}{\hookrightarrow}
+\renewcommand{\iff}{\Longleftrightarrow}
+\newcommand{\xrar}{\xrightarrow}
+\newcommand{\rrar}{\longrightarrow}
+\newcommand{\mt}{\mapsto}
+\newcommand{\mmt}{\longmapsto}
+
+\newcommand{\angles}[1]{\langle #1\rangle}
+\newcommand{\ceiling}[1]{\lceil #1\rceil}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+
+\newcommand{\set}[2]{\{\,#1\,\,|\,\,#2\,\}}
+
+\renewcommand{\emph}{\it}
+\renewcommand{\em}{\emph}
+
+$\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
+</p>
+
+
+<article>
+    <h1>Chapter 22 Demo</h1>  
+
+<div>
+<h3>Visualizing Fourier series for periodic functions.</h3>
+</div>
+<h4>Visualizing partial sums.</h4>
+
+<p> Let $\omega = 2\pi/L$. For an arbitrary $L$-periodic $f(x)$, we define the numbers $a_k$ and $b_k$ by </p>
+<p>$$a_0 = \frac{1}{L} \int_0^{L} f(x)\, dx, $$
+$$a_k = \frac{1}{L/2} \int_0^{L} f(x) \cos k\omega x\, dx,$$
+$$b_k = \frac{1}{L/2} \int_0^{L} f(x) \sin k \omega x\, dx.$$ </p>
+
+<p> We then use these to define the <i>Fourier series associated to $f(x)$</i> to be 
+$$f(x) = a_0 + \sum_{k=1}^\infty  (a_k \cos k \omega x + b_k \sin k \omega x).$$
+ </p>
+
+<p> Let $f(x)$ be an $L$-periodic function whose discontinuities are only jump discontinuities
+(i..e., limits exist both from the left and from the right at each discontinuity). Assume $f(x)$
+is differentiable away from those points and away from perhaps finitely many other points, with $f'$
+continuous elsewhere, and assume $f'$ has at most jump discontinuities too.
+Then the associated Fourier series as defined above converges everywhere, and it coincides with $f(x)$ except possibly at the jump discontinuities for $f$, where its value is
+the average of the limits from the left and right.
+</p>
+
+<p> To give you some feeling about this result, below we give two examples. In each example, you can see a $2\pi$-periodic function $f(x)$ with jump continuities, and you can see how the partial sums of the Fourier series for $f(x)$ approximates $f(x)$.</p>
+
+     
+<div class="twoCol_5050">
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 1</legend>
+
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Function</legend>
+<p>Let $F(x)$ be the $2\pi$-periodic step function that alternates between the values 1 and 0 over
+successive intervals of length $\pi$.</p>
+<!-- <p>Fourier series: $\frac{1}{2} + \sum_{m=0}^\infty \frac{2}{\pi (2m+1)} \, \sin \left( (2m+1)x\right)$</p> -->
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Partial Sums</legend>
+ <p>Partial sum: $F_{M}(x): = \frac{1}{2} + \sum_{m=0}^M \frac{2}{\pi (2m+1)} \, \sin \left( (2m+1)x\right)$</p>     
+ <div class="range-wrap" style="width: 93%;">
+  <label for="M_1">$M$: </label>
+  <input id = "M_1" type="range" class="range" min="0" max="50" step = 1 value = "0" oninput="new_Fourier_1()">
+  <output class="bubble"></output><br>
+ </div>
+</fieldset>
+ </div> 
+<!-- <div>
+  <fieldset > 
+      <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="FourierPlot1" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>
+
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 2</legend>
+
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Function</legend>
+<p>Let $F(x)$ be the $2\pi$-periodic "sawtooth" function as below.</p>
+<!-- <p>Fourier series: $\frac{\pi}{4} + \sum_{m=0}^\infty \frac{2}{(2m+1)^2 \, \pi}\, \cos \left(
+(2m+1)\, x \right) \> -\>
+\sum_{n=1}^\infty \frac{1}{n }\, \sin\left(
+n\, x \right)$</p> -->
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Partial Sums</legend>
+  <p>Partial sum: $F_{M,N}(x): = \frac{\pi}{4} + \sum_{m=0}^M \frac{2}{(2m+1)^2 \, \pi}\, \cos \left(
+(2m+1)\, x \right) \> -\>
+\sum_{n=1}^N \frac{1}{n }\, \sin\left(
+n\, x \right)$</p>    
+  <div class="row">        
+ <div class="range-wrap column" style="width: 43%;">
+  <label for="M_2">$M$: </label>
+  <input id = "M_2" type="range" class="range" min="0" max="50" step = 1 value = "0" oninput="new_Fourier_2()">
+  <output class="bubble"></output><br>
+ </div>
+ <div class="range-wrap column" style="width: 43%;">
+  <label for="N_2">$N$: </label>
+  <input id = "N_2" type="range" class="range" min="1" max="50" step = 1 value = "1" oninput="new_Fourier_2()">
+  <output class="bubble"></output><br>
+ </div> 
+</div>
+</fieldset>
+ </div> 
+
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="FourierPlot2" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>  
+</div>  
+
+
+<script src="js/Fourier_Ch22_ex1.js"></script>
+<script src="js/Fourier_Ch22_ex2.js"></script>
+
+
+
+
+<script src="js/draw_bubble.js"></script>
+
+</article>
+</body>
+
+</html>
