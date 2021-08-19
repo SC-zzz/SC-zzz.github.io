@@ -37,7 +37,7 @@ Plotly.newPlot('myDBC', [{
     t: 100,
     pad: 4
   },
-  xaxis: {range: [x_start_DBC, (x_fin_DBC)+0.5], title: "x"},
+  xaxis: {range: [x_start_DBC, (x_fin_DBC)*1.05], title: "x"},
   yaxis: {range: [-1.1, 1.1], title: "u"}
 });
 }

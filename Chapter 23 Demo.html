@@ -4,7 +4,7 @@
  <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width">
-  <title>Chapter 22 Demo</title>
+  <title>Chapter 23 Demo</title>
 
 
 
@@ -45,7 +45,7 @@
 
 .range-wrap {
   position: relative;
-  margin: 0 7% 2.3rem 0rem;
+  margin: 0 8% 2.3rem 0rem;
 }
 .range {
   width: 100%;
@@ -115,8 +115,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <nav>
 <a href="index_page.html">back to index page</a> | 
-<a href="Chapter 21 Demo.html">previous page</a> | 
-<a href="Chapter 23 Demo.html">next page</a>
+<a href="Chapter 22 Demo.html">previous page</a> | 
+<a href="Chapter 24 Demo.html">next page</a>
 </nav>
 
 
@@ -290,130 +290,113 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 
 <article>
-    <h1>Chapter 22 Demo</h1>  
+    <h1>Chapter 23 Demo</h1>  
 
 <div>
-<h3>Visualizing Fourier series for periodic functions.</h3>
+<h3>Visualizing heat, wave, and damped wave equations with Dirichlet boundary values.</h3>
 </div>
-<h4>Visualizing partial sums.</h4>
 
-<p> Let $\omega = 2\pi/L$. For an arbitrary $L$-periodic $f(x)$, we define the numbers $a_k$ and $b_k$ by </p>
-<p>$$a_0 = \frac{1}{L} \int_0^{L} f(x)\, dx, $$
-$$a_k = \frac{1}{L/2} \int_0^{L} f(x) \cos k\omega x\, dx,$$
-$$b_k = \frac{1}{L/2} \int_0^{L} f(x) \sin k \omega x\, dx.$$ </p>
-
-<p> We then use these to define the <i>Fourier series associated to $f(x)$</i> to be 
-$$f(x) = a_0 + \sum_{k=1}^\infty  (a_k \cos k \omega x + b_k \sin k \omega x).$$
- </p>
-
-<p> Let $f(x)$ be an $L$-periodic function whose discontinuities are only jump discontinuities
-(i..e., limits exist both from the left and from the right at each discontinuity). Assume $f(x)$
-is differentiable away from those points and away from perhaps finitely many other points, with $f'$
-continuous elsewhere, and assume $f'$ has at most jump discontinuities too.
-Then the associated Fourier series as defined above converges everywhere, and it coincides with $f(x)$ except possibly at the jump discontinuities for $f$, where its value is
-the average of the limits from the left and right.
+<p> The <b>heat equation</b> $\dfrac{\partial u}{\partial t} = \dfrac{\partial^2 u}{\partial x^2}$ on $[0,L]$ with <i>vanishing Dirichlet</i> boundary values $u(t,0)= 0 = u(t,L)$ and initial condition $u(0,x) = f(x)$  has a unique solution, given by the infinite series 
+$$u(t,x) = \sum_{n=1}^\infty B_n  e^{-(n^2\pi^2/L^2)t} \sin\left(\frac{n\pi}{L}x\right)$$ with coefficients 
+$$B_n = \frac 2L \int_0^L f(x) \sin\left(\frac{n\pi}{L}x\right) \, dx.$$
 </p>
 
-<p> To give you some feeling about this result, below we give two examples. In each example, you can see a $2\pi$-periodic function $f(x)$ with jump continuities, and you can see how the partial sums of the Fourier series for $f(x)$ approximates $f(x)$.</p>
+<p> For general Dirichlet boundary values $U(t,0)=a$ and $U(t,L)=b$ and an initial condition $U(0,x) = F(x)$ 
+(with $F(0)=a$, $F(L)=b$) the solution is 
+$$
+\left(a + \frac{(b-a)x}{L}\right) + \sum_{n=1}^\infty B_n e^{-(n^2\pi^2/L^2)t} \sin((n\pi/L)x)
+$$
+for $B_n$'s defined using $f(x) = F(x) - (a + (b-a)x/L)$  in the integrals. 
+</p>
 
-     
-<div class="twoCol_5050">
-<div>
-  <fieldset>
-      <legend class="controlLegend">Example 1</legend>
+<p> A solution of the <b>wave equation</b> $\dfrac{\partial^2 u}{\partial t^2} = \dfrac{\partial^2 u}{\partial x^2}$ on $[0,L]$ with <i>vanishing Dirichlet</i> boundary values and initial conditions
+$u(0,x) = f(x)$ and $(\partial u/\partial t)(0,x) = h(x)$ is given by
+$$u(t,x) = \sum_{n=1}^\infty (A_n \cos((n\pi/L)t) +  B_n \sin((n\pi/L)t)) \sin((n\pi/L)x)$$ with 
+$$A_n = \frac 2L \int_0^L f(x) \sin((n\pi/L)x) \, dx,\,\,\,
+B_n = \frac{2}{n\pi} \int_0^L h(x) \sin((n\pi/L)x) \, dx.$$</p>
 
-  <div> 
-  <fieldset>
-      <legend class="controlLegend">Function</legend>
-<p>Let $F(x)$ be the $2\pi$-periodic step function that alternates between the values 1 and 0 over
-successive intervals of length $\pi$.</p>
-<!-- <p>Fourier series: $\frac{1}{2} + \sum_{m=0}^\infty \frac{2}{\pi (2m+1)} \, \sin \left( (2m+1)x\right)$</p> -->
-</fieldset>
- </div>   
-  <div> 
-  <fieldset>
-      <legend class="controlLegend">Partial Sums</legend>
- <p>Partial sum: $F_{M}(x): = \frac{1}{2} + \sum_{m=0}^M \frac{2}{\pi (2m+1)} \, \sin \left( (2m+1)x\right)$</p>     
- <div class="range-wrap" style="width: 93%;">
-  <label for="M_1">$M$: </label>
-  <input id = "M_1" type="range" class="range" min="0" max="60" step = 1 value = "0" oninput="new_Fourier_1()">
-  <output class="bubble"></output><br>
- </div>
-</fieldset>
- </div> 
-<!-- <div>
-  <fieldset > 
-      <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
-      <div>
-         <div style="width:100%; padding-top:75%; position:relative">
-         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
-        <div  id="FourierPlot1" style="position:absolute;top: 0;width:100%;height:100%">
-       <!-- <div>
-        <div  id="numericalPlot" style="width:auto;height:auto">-->
-          </div>
-          </div>
-        </div>
-      <!--   </fieldset>
-    </div> -->
+<p> For general boundary values $U(t,0)=a$ and $U(t,L)=b$ and initial conditions $U(0,x) = F(x)$ and $(\partial U/\partial t)(0,x)=H(x)$
+(with $F(0)=a$, $F(L)=b$, and $H(0)=0=H(L)$) the solution is 
+$$
+\left(a + \frac{(b-a)x}{L}\right) + \sum_{n=1}^\infty (A_n \cos((n\pi/L)t) + B_n \sin((n\pi/L)t)) \sin((n\pi/L)x)
+$$
+for the same $A_n$'s and $B_n$'s (using  $h(x)=H(x)$ and $f(x) = F(x) - (a + (b-a)x/L)$  in the integrals). 
+</p>
 
-</fieldset>
+<br>
+<h4>Comparison of heat and wave equations with vanishing Dirichlet boundary conditions.</h4>
+
+<p> Below is a visualization of solutions to the heat and wave equations $u_{\text{heat}}$ and $u_{\text{wave}}$ on $[0,\pi]$ with vanishing Dirichlet boundary conditions. Pick initial conditions $u(0,x) = f(x)$ and $\dfrac{\partial u_{\text{wave}}}{\partial t}(0,x) = h(x)$, and see how their long time behaviors differ.</p>
+
+<div class="twoCol_3366">
+  
+ <div>
+    <div> 
+  <fieldset>
+      <legend class="controlLegend">Initial Condition</legend>
+<div> 
+<label for="IC">$u(0,x) = f(x) = $</label>
+<select name="IC" id="IC" style="font-size: 16px;" onchange = "HW_setup()">
+  <option value="0" selected="selected">$sin(x)$</option>
+  <option value="1">$sin(2x)$</option>
+  <option value="2">$0.3sin(x) + 0.7sin(3x)$</option> 
+  <option value="3">$0.3 \sin(x) - 0.5 \sin(2x) + 0.2 \sin(3x) + 0.4 \sin(9x)$</option>
+  <option value="4">$0.2 \sin(x) - 0.5 \sin(4x) + 0.4 \sin(10x) + 0.1 \sin(13x)$</option> 
+  <option value="5">triangle wave</option>
+</select>
+<br> <br>
+<label for="ICh">$\dfrac{\partial u_{\text{wave}}}{\partial t}(0,x) = h(x) = $</label>
+<select name="ICh" id="ICh" style="font-size: 16px;" onchange = "HW_setup()">
+  <option value="0" selected="selected">$0$</option>
+  <option value="1">$1$</option>
+  <option value="2">$2$</option>
+  <option value="3">$3$</option>
+</select>
 </div>
 
-<div>
-  <fieldset>
-      <legend class="controlLegend">Example 2</legend>
-
-  <div> 
-  <fieldset>
-      <legend class="controlLegend">Function</legend>
-<p>Let $F(x)$ be the $2\pi$-periodic "sawtooth" function as below.</p>
-<!-- <p>Fourier series: $\frac{\pi}{4} + \sum_{m=0}^\infty \frac{2}{(2m+1)^2 \, \pi}\, \cos \left(
-(2m+1)\, x \right) \> -\>
-\sum_{n=1}^\infty \frac{1}{n }\, \sin\left(
-n\, x \right)$</p> -->
 </fieldset>
- </div>   
-  <div> 
-  <fieldset>
-      <legend class="controlLegend">Partial Sums</legend>
-  <p>Partial sum: $F_{M,N}(x): = \frac{\pi}{4} + \sum_{m=0}^M \frac{2}{(2m+1)^2 \, \pi}\, \cos \left(
-(2m+1)\, x \right) \> -\>
-\sum_{n=1}^N \frac{1}{n }\, \sin\left(
-n\, x \right)$</p>    
-  <div class="row">        
- <div class="range-wrap column" style="width: 43%;">
-  <label for="M_2">$M$: </label>
-  <input id = "M_2" type="range" class="range" min="0" max="60" step = 1 value = "0" oninput="new_Fourier_2()">
-  <output class="bubble"></output><br>
  </div>
- <div class="range-wrap column" style="width: 43%;">
-  <label for="N_2">$N$: </label>
-  <input id = "N_2" type="range" class="range" min="1" max="60" step = 1 value = "1" oninput="new_Fourier_2()">
-  <output class="bubble"></output><br>
- </div> 
-</div>
-</fieldset>
- </div> 
-
+<br>
+    <div> 
+  <fieldset>
+      <legend class="controlLegend">Display Options</legend>
       <div>
-         <div style="width:100%; padding-top:75%; position:relative">
-         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
-        <div  id="FourierPlot2" style="position:absolute;top: 0;width:100%;height:100%">
-       <!-- <div>
-        <div  id="numericalPlot" style="width:auto;height:auto">-->
-          </div>
-          </div>
-        </div>
-      <!--   </fieldset>
-    </div> -->
+   <div style="padding-top: 1em;">     
+  <button style="font-size: 18px;" onclick="newHW()">Run the animation!</button>
+  <br></div>
 
+  <div style="padding-top: 1em;">
+  <button style="font-size: 18px;" onclick="stopHWAnimation()">Pause</button> 
+  <button style="font-size: 18px;" onclick="continueHWAnimation()">Continue</button><br></div>
+   </div>
+    <div style="padding-top: 1em;">  Speed: 
+    <input type="radio" name="speed" id="normal" checked onclick="changeHWSpeed()"> normal &nbsp; 
+    <input type="radio" name="speed"  id="x1/2" onclick="changeHWSpeed()"> x1/2 &nbsp; &nbsp; 
+    <input type="radio" name="speed"  id="x1/5" onclick="changeHWSpeed()"> x1/5 &nbsp; &nbsp; 
+     <input type="radio" name="speed" id="x1/10"  onclick="changeHWSpeed()"> x1/10 &nbsp; &nbsp;    
+<!--     <input type="radio" name="speed" id="x1/20"  onclick="changeHWSpeed()"> x1/20 &nbsp; &nbsp;    -->
+     <br> 
+   </div>
 </fieldset>
-</div>  
-</div>  
+ </div>
+</div> 
 
 
-<script src="js/Fourier_Ch22_ex1.js"></script>
-<script src="js/Fourier_Ch22_ex2.js"></script>
+  <div>
+    <div>
+        <fieldset>
+        <legend class="controlLegend">Animation</legend>
+  <p>Time: $t = $ <span id = "time_HW"> </span> </p>       
+<div id="myHW" style="width:100%;max-width:700px">
+</div>
+        </fieldset>
+    </div>
+  </div>
+ </div> 
+
+
+<script src="js/heat_and_wave_Ch23.js"></script>
+
 
 
 
