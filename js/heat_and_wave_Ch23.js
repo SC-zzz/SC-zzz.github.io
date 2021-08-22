@@ -244,7 +244,7 @@ function continueHWAnimation(){
 }
 
 function changeHWSpeed(){
-  stopHWAnimation();
+  //stopHWAnimation();
   if (document.getElementById("normal").checked) {
     slower_HW = 1;
   }
@@ -260,7 +260,7 @@ function changeHWSpeed(){
     
   param_HW = 1/(60 * slower_HW);
   
-  myReq_HW = window.requestAnimationFrame(update_HW);
+  //myReq_HW = window.requestAnimationFrame(update_HW);
 
 }
 
