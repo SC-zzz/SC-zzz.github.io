@@ -4,7 +4,8 @@
  <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width">
-  <title>Chapter 16 Demo</title>
+  <title>First-Order ODE Solver</title>
+
 
 
  <!-- Including Math -->
@@ -114,8 +115,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <nav>
 <a href="index_page.html">back to index page</a> | 
-<a href="Chapter 15 Demo.html">previous page</a> | 
-<a href="Chapter 17 Demo.html">next page</a>
+<a href="Chapter 16 Demo.html">Chapter 16</a> | 
+<a href="Chapter 17 Demo.html">Chapter 17</a>
 </nav>
 
 
@@ -285,134 +286,124 @@ $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \renewcommand{\em}{\emph}
 
 $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
-
 </p>
+
+
 <article>
-    <h1>Chapter 16 Demo</h1>  
+    <h1>First-Order ODE Solver</h1>  
 
 <div>
 <h3>Visualizing different numerical methods.</h3>
 </div>
-<h4>Comparing explicit Euler, implicit Euler, and trapezoidal methods.</h4>
 
-<p> In this chapter, we learned three numerical methods for solving ordinary differential equations approximately on a computer. For simplicity we will focus on the scalar-valued autonomous case. </p>
-
-<p> Consider an ODE of the form 
-\[
-\frac{dx}{dt} = f(x)
-\]
-with initial condition $x(t_0)=x_0$. The goal is to approximate $x(t)$ on the interval $t\in[t_0,t_0+T]$ for a
-chosen time duration $T > 0$. The <i>explicit</i> (or <i>forward</i>) <i>Euler method</i> for step size $h = T/N>0$ is the collection of approximations $x_i$ to $x(t_i)$
-where $x_0$ is the given initial value and recursively 
-\begin{equation} \label{eqn:nm-explicit}
-  x_{i+1} = x_i + h f(x_i) 
-\end{equation}
-for $h = T/N > 0$ and $i = 0, 1, \dots, N-1$. </p>
-
-<p> The <i>implicit</i> (or <i>backward</i>) <i>Euler method</i> for step size $h = T/N$ is the collection of
-approximations $x_i$ to $x(t_i)$ where $x_0$ is the given initial value and for $i = 0, \dots, N-1$  the value 
-$x_{i+1}$ is the solution near $x_i$ to the equation
-\begin{equation}\label{eqn:nm-implicit}
-  x = x_i + h f(x), \quad i=0,\ldots,N-1.
-\end{equation}
-</p>
-<p> The <i>trapezoidal method</i> for step size $h = T/N$ is the collection of
-approximations $x_i$ to $x(t_i)$ where $x_0$ is the given initial value and for $i = 0, \dots, N-1$  the value 
-$x_{i+1}$ is the solution near $x_i$ to the equation
-\begin{equation}\label{trapeqn}
-  x = x_i + h\,\frac{f(x_i)+f(x)}{2}\,\,\,\, \mbox{ for }\,\,\,\,\, i = 0, 1, \dots, N-1.
-\end{equation}
-</p>
-
-<p> Below we give two examples of how the solutions of the three methods (explicit Euler, implicit Euler,
-and trapezoidal) approach to the exact solution. You can adjust the time step size using the slider. You can show or hide a curve by clicking on its legend.</p>
-
-     
-<div class="twoCol_5050">
-<div>
-  <fieldset>
-      <legend class="controlLegend">Example 1</legend>
-  <div  class="twoCol_5050">
-  <div> 
-  <fieldset>
-      <legend class="controlLegend">ODE</legend>
-<p>ODE: $x'(t) = x(t)$, $x(0) = 1.$</p>
-<p>Exact solution: $x(t) = e^{t}.$</p><br>
-</fieldset>
- </div>   
-  <div> 
-  <fieldset>
-      <legend class="controlLegend">Step Size</legend>
- <div class="range-wrap" style="width: 92%;">
-  <label for="h">$h$: </label>
-  <input id = "h" type="range" class="range" min="0.001" max="0.5" step = 0.001 value = "0.5" oninput="new_numerical_x()">
-  <output class="bubble"></output><br><br>
- </div>
-</fieldset>
- </div> 
-</div>
-<!-- <div>
-  <fieldset > 
-      <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
-      <div>
-         <div style="width:100%; padding-top:75%; position:relative">
-         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
-        <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">
-       <!-- <div>
-        <div  id="numericalPlot" style="width:auto;height:auto">-->
-          </div>
-          </div>
-        </div>
-      <!--   </fieldset>
-    </div> -->
-
-</fieldset>
-</div>  
-<div>
-  <fieldset>
-      <legend class="controlLegend">Example 2</legend>
-  <div  class="twoCol_5050">
-  <div> 
-  <fieldset>
-      <legend class="controlLegend">ODE</legend>
-<p>ODE: $x'(t) = (x(t))^2 - 4$, $x(0) = 1.$</p>
-<p>Exact solution: $x(t) = \dfrac{6 - 2 e^{4 t}}{3 + e^{4 t}}.$</p>
-</fieldset>
- </div>   
-  <div> 
-  <fieldset>
-      <legend class="controlLegend">Step Size</legend>
- <div class="range-wrap" style="width: 92%;">
-  <label for="h2">$h$: </label>
-  <input id = "h2" type="range" class="range" min="0.001" max="0.5" step = 0.001 value = "0.5" oninput="new_numerical_2()">
-  <output class="bubble"></output><br><br>
- </div>
-</fieldset>
- </div> 
-</div>
-      <div>
-         <div style="width:100%; padding-top:75%; position:relative">
-         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
-        <div  id="numericalPlot2" style="position:absolute;top: 0;width:100%;height:100%">
-       <!-- <div>
-        <div  id="numericalPlot" style="width:auto;height:auto">-->
-          </div>
-          </div>
-        </div>
-      <!--   </fieldset>
-    </div> -->
-
-</fieldset>
-</div>  
-</div>  
-
-
-<script src="js/numerical_ex1.js"></script>
-<script src="js/numerical_ex2.js"></script>
-
-<br>
 <h4>Comparing different numberical methods for your favorite ODE.</h4>
-<p> This <a href="First-Order_ODE_Solver.html">widget</a> will allow you to obtain numerical solutions to first order initial value problems of your own choice. </p>
+<p> The following will allow you to obtain numerical solutions to first order initial value problems of your own choice. </p>
+
+<p> Here are the things you can enter to get your ODE:</p>
+<div>
+  <ul>
+<li>Operations: + - * / ^ ! (you can also use a space for multilication) </li>
+<li>Arithmetic functions: abs exp log log2 log10 sqrt </li>
+<li>Trigometric functions: 
+    <ul>
+      <li>Trigonometric functions: sin cos tan csc cec cot</li>
+      <li>Inverse trigonometric functions: asin acos atan acsc acec acot</li>
+      <li>Hyperbolic functions: sinh cosh tanh csch cech coth</li>
+      <li>Inverse hyperbolic functions: asinh acosh atanh acsch acech acoth</li>   
+    </ul>
+</li>
+<li>Constants: 
+    <ul>
+      <li>e or E: the base of natural logarithm $e = 2.71...$</li>
+      <li>pi or PI: the constant $\pi = 3.14...$</li>
+      <li>phi: the golden ratio $1.618...$</li>
+      <li>SQRT2: the square root of 2</li>
+   </ul>
+</ul>
+</div>
+<p> Note: Use parentheses around function arguments; for example, use sin(y) instead of sin{y}. The parser is provided by <a href="https://mathjs.org/index.html">math.js</a>. If you are interested, see <a href="https://mathjs.org/docs/expressions/syntax.html">here</a> for the syntax of the expression parser, see <a href="https://mathjs.org/docs/reference/functions.html">here</a> for a full list of available functions, and see <a href="https://mathjs.org/docs/reference/constants.html">here</a> for a full list of available constants. </p>
+
+
+<div class="twoCol_3366">
+  <div>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">ODE</legend>
+<label for="ODE">$\dfrac{dy}{dt} =  f(t,y) =$ </label>
+<input type="text" id="ODE" name="ODE" ><br> (Enter a function in terms of $y$ and $t$; see above for available operations, functions, and constants) <br>
+<br>
+</fieldset>
+ </div>  
+ <br> 
+  <div> 
+  <fieldset>
+    <legend class="controlLegend">Time Interval $[t_0, t_1]$</legend>
+<label for="t_0">$t_0 =$ </label>
+<input type="number" id="t_0" name="t_0"><br> 
+<label for="t_1">$t_1 =$ </label>
+<input type="number" id="t_1" name="t_1"><br> 
+<p id ="interval_warning" style="color:red; display:none"> WARNING: Need to have $t_1 > t_0$!</p>
+</fieldset>
+ </div> 
+  <br> 
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Initial Condition</legend>
+  <label for="y_0">$y(t_0) = $ </label>
+ <input type="number" id="y_0" name="y_0"><br> 
+<p id ="y0_warning" style="color:red; display:none"> WARNING: $y_0$ needs to be a number!</p>
+</fieldset>
+ </div> 
+  <br>
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Step Size</legend>
+  <label for="h_ODE">$h =$ </label>
+ <input type="number" min = 0 id="h_ODE" name="h_ODE"><br> 
+ <p id ="h_warning" style="color:red; display:none"> WARNING: Need to have $h>0$!</p>
+</fieldset>
+ </div> 
+   <div> 
+  <fieldset>
+      <legend class="controlLegend">Submit</legend>
+<button type="button" style="font-size: 18px;" onclick = "new_ODE_solver()">Submit!</button>
+</fieldset>
+ </div> 
+</div>
+<div>
+  <fieldset > 
+      <legend class="controlLegend">Result</legend>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="ODEPlot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+     </div>
+      </fieldset> 
+    </div>
+</div>
+
+
+
+<script src="js/numerical_ODE_solver.js"></script>
+
+
+
+
+
+<p>You can also go to the sites below, enter your own ODE, and see how different numberical methods behave. </p>
+<div class="plainlist">
+<ul>
+<li><a href="http://www.math-cs.gordon.edu/%7Esenning/desolver/">First Order Differential Equation Solver</a>—for explicit Euler, Heun,
+and RK4 methods.</li>
+<li><a href="https://planetcalc.com/8394/">Midpoint method</a>—for midpoint method.</li>
+<li><a href="https://homepages.bluffton.edu/~nesterd/apps/slopefields.html">Slope and direction fields</a>—for explicit Euler, Heun, midpoint, and RK4 methods (as well as <a href="https://en.wikipedia.org/wiki/List_of_Runge–Kutta_methods#3/8-rule_fourth-order_method">Runge-Kutta 3/8-rule method</a> and <a href="https://en.wikipedia.org/wiki/Runge–Kutta–Fehlberg_method">Runge-Kutta-Fehlberg method</a> that we didn't introduce), under the "Plot numerical solution curves" tab.</li>
+</ul>
+</div>  
+
 
 
 <script src="js/draw_bubble.js"></script>
