@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 25 Demo</title>
+
+
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+ <script src="js/JSX_auxilliary_functions.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 16 Demo.html">previous page</a> | 
+<a href="Chapter 18 Demo.html">next page</a>
+</nav>
+
+
+<p style="display: none">
+$\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\SPAN}{\text{span}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\u}{\mathbf{u}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\ww}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\Cbar}{\overline{\mathbf{C}}}
+\newcommand{\Dbar}{\overline{\mathbf{D}}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Y}{\mathbf{Y}}$
+
+\newcommand{\Xbar}{\widehat{\mathbf{X}}}
+\newcommand{\Ybar}{\widehat{\mathbf{Y}}}
+\newcommand{\zz}{\mathbf{z}}
+\renewcommand{\a}{\mathbf{a}}
+\renewcommand{\aa}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\cc}{\mathbf{c}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\hh}{\mathbf{h}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\ve}[1]{\mathbf{#1}}
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+$\begin{bmatrix}#1\end{bmatrix}$\fi}
+\newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
+\newcommand{\rref}{\operatorname{rref}}
+\newcommand{\hide}[1]{{}}
+\newcommand{\proj}{\operatorname{\mathbf{Proj}}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdt}[2]{\tfrac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\dfrac{\partial #1}{\partial #2}}
+
+\newcommand{\svdots}{\raisebox{3pt}{$\scalebox{.75}{\vdots}$}}
+\newcommand{\sddots}{\raisebox{3pt}{$\scalebox{.75}{$\ddots$}$}}
+
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Eth}{Eth}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Free}{Free}
+%\DeclareMathOperator{\frob}{frob}
+%\DeclareMathOperator{\Gal}{Gal}
+%\DeclareMathOperator{\genus}{genus}
+%\DeclareMathOperator{\Hecke}{Hecke}
+\DeclareMathOperator{\Hom}{Hom}
+%\DeclareMathOperator{\id}{id}
+%\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\modulo}{\medspace mod}
+\DeclareMathOperator{\Norm}{N}
+%\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Pic}{Pic}
+%\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Split}{Split}
+\DeclareMathOperator{\Sturm}{Sturm}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Tate}{Tate}
+\DeclareMathOperator{\tors}{tors}
+%\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\Weil}{Weil}
+
+\DeclareMathOperator{\sech}{sech}
+
+\newcommand{\adjacent}{\leftrightarrow}
+
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\SO}{SO}
+
+\newcommand{\cm}{\text{,}}
+%\newcommand{\pd}{\text{.}}
+\newcommand{\n}{\noindent}
+
+\newcommand{\Omicron}{\mathrm{O}}
+\newcommand{\Zeta}{\mathrm{Z}}
+
+\renewcommand{\div}{\mathop{\mathrm{div}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\renewcommand{\ss}{\mathop{\mathrm{ss}}}
+\newcommand{\elliptic}{\mathop{\mathrm{ell}}}
+
+\newcommand{\new}{\mathop{\mathrm{new}}}
+\newcommand{\old}{\mathop{\mathrm{old}}}
+
+\newcommand{\Bs}{\boldsymbol}
+%\newcommand{\ds}{\displaystyle}
+%\newcommand{\f}{\mathfrak}
+\newcommand{\s}{\mathcal}
+
+%\newcommand{\A}{\mathbb{A}}
+%\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fpbar}{\bar{\mathbb{\F}}_p}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\Gm}{\mathbb{G}_{\mathrm{m}}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\R}{\mathbf{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\E}{\mathbf{E}}
+\renewcommand{\H}{\mathrm{H}}
+\newcommand{\M}{\mathbf{M}}
+\renewcommand{\S}{\mathbf{S}}
+
+\newcommand{\var}{\mathbf{Var}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\erf}{\operatorname{erf}}
+
+\newcommand{\rar}{\rightarrow}
+\newcommand{\lar}{\leftarrow}
+\newcommand{\hrar}{\hookrightarrow}
+\renewcommand{\iff}{\Longleftrightarrow}
+\newcommand{\xrar}{\xrightarrow}
+\newcommand{\rrar}{\longrightarrow}
+\newcommand{\mt}{\mapsto}
+\newcommand{\mmt}{\longmapsto}
+
+\newcommand{\angles}[1]{\langle #1\rangle}
+\newcommand{\ceiling}[1]{\lceil #1\rceil}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+
+\newcommand{\set}[2]{\{\,#1\,\,|\,\,#2\,\}}
+
+\renewcommand{\emph}{\it}
+\renewcommand{\em}{\emph}
+
+$\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
+</p>
+
+
+<article>
+    <h1>Chapter 25 Demo</h1>  
+
+<div>
+<h3>Visualizing the Fourier transform of some basic functions.</h3>
+</div>
+<!-- <h4>The Fourier transform of some basic functions.</h4> -->
+
+<p> In the periodic case we saw that the Fourier transform passes between $L$-periodic functions $f(x)$ of a real variable $x$
+and functions $F(n)$ of integers $n$. In the non-periodic setting, a new version of
+the Fourier transform will pass between functions $f(x)$
+of a real variable $x$ and functions $F(\lambda)$ of a real variable $\lambda$.  Our focus on the  1-dimensional Fourier transform 
+is sufficient  for many signal processing applications and 
+for PDE's with 1 spatial and 1 time dimension (a good
+warm-up before tackling the full complexities of nature). </p>
+
+<p> Let $f:\R \to \C$ be a function for which $|f(x)|$ decays quickly enough as $|x| \to +\infty$ (so
+$\int_{\R} |f(x)|\,dx$ converges).  The <i>Fourier transform</i> $\widehat{f}:\R \to \C$ is the function defined by
+$$\widehat{f}(\lambda) = \int_{\R} f(x) e^{-i\lambda x}\,dx$$
+(The integrand involves variables $\lambda$ and $x$, but we "integrate over $x$", leaving a dependence on $\lambda$.)</p>
+
+<p> The Fourier transform can also be reversed: For $f(x)$ as above, if $|\widehat{f}(\lambda)|$ decays quickly enough
+as $|\lambda| \to +\infty$
+so that $\int_{\R} |\widehat{f}(\lambda)| \,d\lambda$ converges then the following formula 
+(with suitable interpretation at jump discontinuities of $f(x)$) recovers $f$ from $\widehat{f}$: 
+$$f(x) = \frac{1}{2\pi} \int_{\R} \widehat{f}(\lambda) e^{i\lambda x}\,d\lambda.$$
+</p>
+
+<p> We also introduce convenient notation for expressing the effect of the Fourier transform on functions when it is unwieldy to use
+the "$\widehat{(\cdot)}$" symbol. For a function $f(x)$, its Fourier transform $\widehat{f}$ is also denoted as $\cF f$:
+For a function $f(x)$, its Fourier transform $\widehat{f}$ is also denoted as $\cF f$:
+$$(\cF f)(\lambda) = \int_{\R} f(x) e^{-i\lambda x}\,dx.$$
+For a function $g(\lambda)$, we define its <i>inverse Fourier transform</i> to be
+$$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda.$$
+</p>
+
+<p> Below we visualize the Fourier transform of some basic functions. You can adjust the parameters using the sliders. </p>
+
+     
+<div class="twoCol_5050">
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 1: Indicator Function</legend>
+  <div  class="twoCol_5050">
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Function</legend>
+
+<p>$\sqcap_a(x) = \mathbf{I}_{[-a,a]}(x).$</p>
+<!-- <p>$\sqcap_a(x) = \mathbf{I}_{[-a,a]}(x)=  \begin{cases}
+  1, & |x| \le a\\
+  0, & |x| > a, 
+\end{cases}</p> -->
+<p>$\widehat{\sqcap_a}(\lambda)=\dfrac{2\sin(\lambda a)}{\lambda}$.</p>
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="a_ind">$a$: </label>
+  <input id = "a_ind" type="range" class="range" min="0.5" max="6" step = 0.5 value = "0.5" oninput="new_FT_indicator()">
+  <output class="bubble"></output><br><br>
+ </div>
+</fieldset>
+ </div> 
+</div>
+<!-- <div>
+  <fieldset > 
+      <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="indicatorPlot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>
+
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 2: Triangular Bump</legend>
+  <div  class="twoCol_5050">
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Function</legend>
+<p>$\wedge_a(x) = \begin{cases} 1-|x|/a, & |x| \le a, \\ 0, & |x| > a. \end{cases}$</p>
+<p>$\widehat{\wedge_a}(\lambda) =
+ a \left(\dfrac{\sin(\lambda a/2)}{\lambda a/2}\right)^2.$</p>
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="a_tri">$a$: </label>
+  <input id = "a_tri" type="range" class="range" min="0.5" max="6" step = 0.5 value = "0.5" oninput="new_FT_triangular()">
+  <output class="bubble"></output><br><br>
+ </div>
+</fieldset>
+ </div> 
+</div>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="triangularPlot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>  
+</div>  
+<br>
+
+<div class="twoCol_5050">
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 3: Exponential Decay</legend>
+  <div  class="twoCol_5050">
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Function</legend>
+
+<p>$f_a(x) = e^{-a|x|}.$</p>
+<p>$\widehat{f_a}(\lambda) =  \dfrac{2a}{a^2 + \lambda^2}$.</p>
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="a_exp">$a$: </label>
+  <input id = "a_exp" type="range" class="range" min="0.5" max="6" step = 0.5 value = "0.5" oninput="new_FT_exponential()">
+  <output class="bubble"></output><br><br>
+ </div>
+</fieldset>
+ </div> 
+</div>
+<!-- <div>
+  <fieldset > 
+      <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="exponentialPlot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>
+
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 4: Gaussian</legend>
+  <div  class="twoCol_5050">
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Function</legend>
+<p>$f_a(x) = e^{-ax^2/2}$.</p>
+<p>$\widehat{f_a}(\lambda) =
+ \sqrt{\dfrac{2\pi}{a}}e^{-\lambda^2/2a}.$</p>
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="a_Gau">$a$: </label>
+  <input id = "a_Gau" type="range" class="range" min="0.5" max="6" step = 0.5 value = "0.5" oninput="new_FT_Gaussian()">
+  <output class="bubble"></output><br><br>
+ </div>
+</fieldset>
+ </div> 
+</div>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="GaussianPlot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>  
+</div>  
+
+
+<script src="js/Fourier_transform_indicator_function.js"></script>
+<script src="js/Fourier_transform_triangular_bump.js"></script>
+
+<script src="js/Fourier_transform_exponential_decay.js"></script>
+<script src="js/Fourier_transform_Gaussian.js"></script>
+
+
+
+<!-- 
+<br>
+<h4>Fourier transform properties.</h4>
+
+<p> The Fourier transform and inverse transform $\cF$ and $\cF^{-1}$ satisfy:
+<ul>
+<li> (linearity) 
+ $\cF(z_1 f_1 + \dots + z_m f_m) = z_1 (\cF f_1) + \dots + z_m (\cF f_m)$ for any scalars $z_1, \dots, z_m \in \C$,
+and similarly  $\cF^{-1}(z_1 g_1 + \dots + z_m g_m) = z_1 (\cF^{-1} g_1) + \dots + z_m (\cF^{-1} g_m)$ </li>
+<li> (translation) For any $x_0$ and $\lambda_0$, if we define $F(x) = f(x+x_0)$ and $G(\lambda) = g(\lambda +\lambda_0)$ then 
+$$(\cF F)(\lambda) = e^{i\lambda x_0} (\cF f)(\lambda),$$
+$$(\cF^{-1} G)(x) = e^{-i \lambda_0 x} (\cF^{-1} g)(x).$$ </li>
+<li>  (exponential) For any $x_0$ and $\lambda_0$, 
+$$\cF(e^{-i \lambda_0 x} f) = (\cF f)(\lambda + \lambda_0),$$
+$$\cF^{-1}(e^{i\lambda x_0} g) = (\cF^{-1} g)(x + x_0).$$ </li>
+<li>  (dilation/scaling) For any nonzero $c \in \R$, if we define $f_c(x) = f(cx)$ and $g_c(\lambda) = g(c \lambda)$ then
+$$(\cF(f_c))(\lambda) = \frac{1}{|c|} (\cF f)\left(\frac{\lambda}{c}\right),$$
+$$(\cF^{-1}(g_c))(x) = \frac{1}{|c|} (\cF g)\left(\frac{x}{c}\right).$$ </li>
+</ul>
+</p> -->
+
+
+
+
+
+
+
+
+<script src="js/draw_bubble.js"></script>
+
+</article>
+</body>
+
+</html>
