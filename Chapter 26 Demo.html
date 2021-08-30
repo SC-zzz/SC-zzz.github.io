@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Chapter 26 Demo</title>
+
+
+
+ <!-- Including Math -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.3/math.js"></script>
+
+  <!-- Including MathJax -->
+  <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Including P5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+  <!-- Including Plotly -->
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'}
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Including D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+   <!-- Including JSXGraph -->
+  <script type="text/javascript" charset="UTF-8"
+ src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+
+
+ <script src="js/auxiliary.js"> </script> 
+ <script src="js/JSX_auxilliary_functions.js"> </script> 
+
+
+  <style>
+
+.range-wrap {
+  position: relative;
+  margin: 0 8% 3rem 0rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: dodgerblue;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: dodgerblue;
+  top: -1px;
+  left: 50%;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+}
+
+.left {
+ float: left;
+ width: 33%;
+
+}
+
+.right {
+  float: left;
+  width: 60%;
+  padding-left: 3%
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+@media screen and (width: 620px) {
+.left, .right {
+  width: 100%;
+}
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+
+<body id = "body">
+
+
+<nav>
+<a href="index_page.html">back to index page</a> | 
+<a href="Chapter 25 Demo.html">previous page</a> | 
+next page
+<!-- <a href="Chapter 27 Demo.html">next page</a> -->
+</nav>
+
+
+<p style="display: none">
+$\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\SPAN}{\text{span}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\calL}{\mathcal{L}}
+\renewcommand{\u}{\mathbf{u}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\ww}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\Cbar}{\overline{\mathbf{C}}}
+\newcommand{\Dbar}{\overline{\mathbf{D}}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Y}{\mathbf{Y}}$
+
+\newcommand{\Xbar}{\widehat{\mathbf{X}}}
+\newcommand{\Ybar}{\widehat{\mathbf{Y}}}
+\newcommand{\zz}{\mathbf{z}}
+\renewcommand{\a}{\mathbf{a}}
+\renewcommand{\aa}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\cc}{\mathbf{c}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\hh}{\mathbf{h}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\ve}[1]{\mathbf{#1}}
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+$\begin{bmatrix}#1\end{bmatrix}$\fi}
+\newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
+\newcommand{\rref}{\operatorname{rref}}
+\newcommand{\hide}[1]{{}}
+\newcommand{\proj}{\operatorname{\mathbf{Proj}}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdt}[2]{\tfrac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\dfrac{\partial #1}{\partial #2}}
+
+\newcommand{\svdots}{\raisebox{3pt}{$\scalebox{.75}{\vdots}$}}
+\newcommand{\sddots}{\raisebox{3pt}{$\scalebox{.75}{$\ddots$}$}}
+
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Eth}{Eth}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Free}{Free}
+%\DeclareMathOperator{\frob}{frob}
+%\DeclareMathOperator{\Gal}{Gal}
+%\DeclareMathOperator{\genus}{genus}
+%\DeclareMathOperator{\Hecke}{Hecke}
+\DeclareMathOperator{\Hom}{Hom}
+%\DeclareMathOperator{\id}{id}
+%\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\modulo}{\medspace mod}
+\DeclareMathOperator{\Norm}{N}
+%\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Pic}{Pic}
+%\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Split}{Split}
+\DeclareMathOperator{\Sturm}{Sturm}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Tate}{Tate}
+\DeclareMathOperator{\tors}{tors}
+%\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\Weil}{Weil}
+
+\DeclareMathOperator{\sech}{sech}
+
+\newcommand{\adjacent}{\leftrightarrow}
+
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\SO}{SO}
+
+\newcommand{\cm}{\text{,}}
+%\newcommand{\pd}{\text{.}}
+\newcommand{\n}{\noindent}
+
+\newcommand{\Omicron}{\mathrm{O}}
+\newcommand{\Zeta}{\mathrm{Z}}
+
+\renewcommand{\div}{\mathop{\mathrm{div}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\renewcommand{\ss}{\mathop{\mathrm{ss}}}
+\newcommand{\elliptic}{\mathop{\mathrm{ell}}}
+
+\newcommand{\new}{\mathop{\mathrm{new}}}
+\newcommand{\old}{\mathop{\mathrm{old}}}
+
+\newcommand{\Bs}{\boldsymbol}
+%\newcommand{\ds}{\displaystyle}
+%\newcommand{\f}{\mathfrak}
+\newcommand{\s}{\mathcal}
+
+%\newcommand{\A}{\mathbb{A}}
+%\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fpbar}{\bar{\mathbb{\F}}_p}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\Gm}{\mathbb{G}_{\mathrm{m}}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\R}{\mathbf{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\E}{\mathbf{E}}
+\renewcommand{\H}{\mathrm{H}}
+\newcommand{\M}{\mathbf{M}}
+\renewcommand{\S}{\mathbf{S}}
+
+\newcommand{\var}{\mathbf{Var}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\erf}{\operatorname{erf}}
+
+\newcommand{\rar}{\rightarrow}
+\newcommand{\lar}{\leftarrow}
+\newcommand{\hrar}{\hookrightarrow}
+\renewcommand{\iff}{\Longleftrightarrow}
+\newcommand{\xrar}{\xrightarrow}
+\newcommand{\rrar}{\longrightarrow}
+\newcommand{\mt}{\mapsto}
+\newcommand{\mmt}{\longmapsto}
+
+\newcommand{\angles}[1]{\langle #1\rangle}
+\newcommand{\ceiling}[1]{\lceil #1\rceil}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+
+\newcommand{\set}[2]{\{\,#1\,\,|\,\,#2\,\}}
+
+\renewcommand{\emph}{\it}
+\renewcommand{\em}{\emph}
+
+$\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
+</p>
+
+
+<article>
+    <h1>Chapter 26 Demo</h1>  
+
+<div>
+<h3>Visualizing differential equations and the Fourier transform.</h3>
+</div>
+<h4>Visualizing convolution.</h4>
+
+<p> Recall that the <i>convolution</i> of two functions $f, g:\R \to \C$ is the function
+$$(f \ast g)(x) = \int_{\R} f(x-y) g(y)\,dy.$$ </p>
+
+<p> One reason for interest in convolution is because the Fourier transform of the convolution $f*g$ of two functions $f(x)$ and $g(x)$ is the product of the Fourier transforms of $f$ and $g$:
+    $$\cF(f \ast g) = (\cF f)(\cF g).$$</p>
+
+<p> Convolution may look asymmetric in how it treats $f$ and $g$ (we put $x-y$ inside $f$ rather than $g$), 
+but it works the same way with the roles of $f$ and $g$ swapped:  in other words,
+$(g \ast f)(x) = (f \ast g)(x)$.
+</p>
+
+<p> What is the <i>meaning</i> of convolution?  An instructive example is $f \ast u_L$ where  $$u_L(x) = \begin{cases} L, & -1/(2L) \le x \le 1/(2L)\\ 0, & |x| > 1/(2L)\end{cases}$$
+is a square bump concentrated over a short interval $[-1/(2L), 1/(2L)]$ of length $1/L$ centered at the origin 
+and having height $L$ (so total area 1). Then
+$$(f \ast u_L)(x) =  \int_{\R} f(x-y) u_L(y)\,dy = L \int_{-1/(2L)}^{1/(2L)} f(x-y)\,dy = \frac{1}{1/L} \int_{x-1/(2L)}^{x+1/(2L)} f(w)\,dw$$
+(with the substitution $w = x-y$).  This value at $x$ is the average of $f$ over the interval centered
+at $x$ with length $1/L$.  The effect of such convolution is to "smoothen" $f$ by
+replacing its value at each $x$ with the average of its values <i> nearby</i> (for large $L$).  
+So for large $L$, $f \ast u_L$ is a good approximation to $f$ that is  smoother.
+</p>
+
+<p> Below we give two examples of $f \ast u_L$. Observe how $f \ast u_L$ better approximates $f$ as $L$ get larger. </p>
+
+     
+<div class="twoCol_5050">
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 1: Square Bump</legend>
+  <div  class="twoCol_5050">
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Function</legend>
+
+<p>$f(x) = \begin{cases}
+  1, & |x| \le 1,\\
+  0, & |x| > 1. 
+\end{cases}$</p>
+<!-- <p>$f(x) = \mathbf{I}_{[-1,1]}(x)=  \begin{cases}
+  1, & |x| \le 1\\
+  0, & |x| > 1, 
+\end{cases}</p> -->
+<p>$u_L$: 
+    <input type="radio" name="showUL_ex1" id="hideUL_ex1" checked onclick="new_convolution_ex1()"> hide
+    <input type="radio" name="showUL_ex1"  id="showUL_ex1"onclick="new_convolution_ex1()"> show </p>
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="L_ex1">$L$: </label>
+  <input id = "L_ex1" type="range" class="range" min="0.5" max="10" step = 0.5 value = "0.5" oninput="new_convolution_ex1()">
+  <output class="bubble"></output>
+ </div>
+</fieldset>
+ </div> 
+</div>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="convEx1Plot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+
+</fieldset>
+</div>
+
+<div>
+  <fieldset>
+      <legend class="controlLegend">Example 2: Triangular Bump</legend>
+  <div  class="twoCol_5050">
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Function</legend>
+<p>$f(x) = \begin{cases} 1-|x|, & |x| \le 1, \\ 0, & |x| > 1.\end{cases}$ </p>
+<p>$u_L$: 
+    <input type="radio" name="showUL_ex2" id="hideUL_ex2" checked onclick="new_convolution_ex2()"> hide
+    <input type="radio" name="showUL_ex2"  id="showUL_ex2" onclick="new_convolution_ex2()"> show </p>
+</fieldset>
+ </div>   
+  <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="L_ex2">$L$: </label>
+  <input id = "L_ex2" type="range" class="range" min="0.5" max="10" step = 0.5 value = "0.5" oninput="new_convolution_ex2()">
+  <output class="bubble"></output>
+ </div>
+</fieldset>
+ </div> 
+</div>
+      <div>
+         <div style="width:100%; padding-top:75%; position:relative">
+         <!-- <div  id="numericalPlot" style="position:absolute;top: 0;width:100%;height:100%">-->
+        <div  id="convEx2Plot" style="position:absolute;top: 0;width:100%;height:100%">
+       <!-- <div>
+        <div  id="numericalPlot" style="width:auto;height:auto">-->
+          </div>
+          </div>
+        </div>
+      <!--   </fieldset>
+    </div> -->
+
+</fieldset>
+</div>  
+</div>  
+
+
+
+<script src="js/convolution_with_square_bump_ex1.js"></script>
+<script src="js/convolution_with_square_bump_ex2.js"></script>
+
+
+
+
+
+<br>
+<h4>Visualizing the heat equation via Fourier transform.</h4>
+
+<p> The heat equation governing the time evolution of heat distribution along a single spatial dimension is the PDE
+$$\pd{u}{t}=\alpha \frac{\partial^2 u}{\partial x^2}$$
+for a constant $\alpha > 0$ (thermal diffusivity, with dimension (distance)$^2$/time), where $u=u(t,x)$ is defined for $t\geq 0$ and $x\in\R$. In earlier chapters we made a change of variable so that $\alpha=1$, but here we keep the equation in its general form. As usual, we also impose an initial condition:
+$$
+u(0,x)=f(x)
+$$
+where $f(x)$ is the initial heat distribution on the line. Here is the solution:
+</p>
+
+<p> For $t > 0$, the solution $u(t,x)$ of the heat equation with initial condition $u(0,x) = f(x)$ is 
+ the convolution of $f(x)$ with a scaled Gaussian that depends on $t>0$:
+    $$
+    u(t,x)=\int_{\R} f(y) \frac{1}{\sqrt{4\pi \alpha t}} e^{-(x-y)^2/(4\alpha t)} \,dy=\frac{1}{\sqrt{4\pi \alpha t}}\int_{\R}f(y) e^{-(x-y)^2/(4\alpha t)} \,dy.
+    $$
+</p>
+
+<p> In the textbook, there is a detailed discussion about how to obtain this solution. First, we apply Fourier transform and find for every
+$t \ge 0$ and every $\lambda \in \R$:
+$$\widehat u(t,\lambda) = \widehat{f}(\lambda) e^{-\alpha t \lambda^2}.$$
+</p>
+<p> We then apply the inverse Fourier transform (with respect to $\lambda$) to  $\widehat{u}(t,\lambda)$ and obtain
+$$u(t,x)=  \cF^{-1}(\widehat{u}(t,\lambda)) =
+ \frac{1}{2\pi}\int_{\R} \widehat{f}(\lambda) e^{-\alpha t  \lambda^2} e^{i\lambda x}\,d\lambda.$$
+</p>
+<p> Lastly we use convolution to rewrite it into the desired form.</p>
+
+<p> Below we visualize $\widehat{u}(t,\lambda)$ and $u(t,x)$ for the heat equation with Gaussian initial condition $f(x) = e^{-x^2}$. Asjust the parameter $alpha$, and hit the "Run the animation!" button to see the animation. </p>
+
+
+
+<div class="twoCol_3366">
+  
+ <div>
+    <div> 
+  <fieldset>
+      <legend class="controlLegend">IVP</legend>
+<p>\begin{align}
+  &\pd{u}{t} =\alpha \frac{\partial^2 u}{\partial x^2},\\ 
+& u(0,x) =f(x) = e^{-x^2}
+\end{align}</p>
+<p>Fourier transform: \begin{align}
+\widehat u(t,\lambda) &= \widehat{f}(\lambda) e^{-\alpha t \lambda^2}\\
+& = \sqrt{\pi}e^{-(1+4\alpha t)\lambda^2/4}.
+\end{align}
+</p>
+<p>Solution: \begin{align}
+u(t,x) &= \cF^{-1}(\widehat{u}(t,\lambda)) \\
+&= \frac{1}{\sqrt{1+4\alpha t}}e^{-x^2/(1+4\alpha t)}.
+\end{align}
+</p>
+</fieldset>
+ </div>
+<br>
+    <div> 
+  <fieldset>
+      <legend class="controlLegend">Parameter and Display Options</legend>
+ <div class="range-wrap" style="width: 92%;">
+  <label for="alpha_heat">$\alpha$: </label>
+  <input id = "alpha_heat" type="range" class="range" min="0.5" max="10" step = 0.5 value = "0.5" oninput="HG_setup()">
+  <output class="bubble"></output>
+ </div>
+
+      <div>
+   <div style="padding-top: 1em;">     
+  <button style="font-size: 18px;" onclick="newHG()">Run the animation!</button>
+  <br></div>
+
+  <div style="padding-top: 1em;">
+  <button style="font-size: 18px;" onclick="stopAnimation_HG()">Pause</button> 
+  <button style="font-size: 18px;" onclick="continueAnimation_HG()">Continue</button><br></div>
+   </div>
+    <div style="padding-top: 1em;">  Speed: 
+    <input type="radio" name="speed" id="normal" checked onclick="changeSpeed_HG()"> normal &nbsp; 
+  <input type="radio" name="speed"  id="x1/2" onclick="changeSpeed_HG()"> x1/2 &nbsp; &nbsp; 
+    <input type="radio" name="speed"  id="x1/5" onclick="changeSpeed_HG()"> x1/5 &nbsp; &nbsp; 
+    <input type="radio" name="speed" id="x1/10"  onclick="changeSpeed_HG()"> x1/10 &nbsp; &nbsp;     
+
+     <br> 
+   </div>
+</fieldset>
+ </div>
+</div> 
+
+
+  <div>
+    <div>
+        <fieldset>
+        <legend class="controlLegend">Animation</legend>
+  <p>Time: $t = $ <span id = "time_HG"> </span> </p>       
+<div id="GaussianFourierPlot" style="width:100%;max-width:700px">
+</div>
+<div id="GaussianHeatPlot" style="width:100%;max-width:700px">
+</div>
+        </fieldset>
+    </div>
+  </div>
+ </div> 
+
+
+
+
+
+<script src="js/heat_eqn_Gaussian_Ch26.js"></script>
+
+
+
+<script src="js/draw_bubble.js"></script>
+
+</article>
+</body>
+
+</html>
