@@ -11,6 +11,7 @@ function new_ODE_solver() {
   document.getElementById("interval_warning").style.display = "none";
   document.getElementById("y0_warning").style.display = "none";
   document.getElementById("h_warning").style.display = "none";
+  document.getElementById("instruction").style.display = "none";
   
   if (t_1 <= t_0 || isNaN(t_0) || isNaN(t_1)) {
     document.getElementById("interval_warning").style.display = "initial";
@@ -146,6 +147,8 @@ function new_ODE_solver() {
 
     // Display using Plotly
   Plotly.newPlot("ODEPlot", data, layout);
+  document.getElementById("instruction").style.display = "initial";
+  
 }
 
 
