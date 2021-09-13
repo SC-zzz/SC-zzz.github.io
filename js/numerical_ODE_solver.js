@@ -131,15 +131,19 @@ function new_ODE_solver() {
   // Define Layout
   var layout = {
 	//xaxis: {range: [t_start, t_fin], title: "t", type: plotscale},
-	xaxis: {range: [t_0, t_1], title: "t"},
-	yaxis: {autorange: true, title: "y"},  
+	//xaxis: {range: [t_0, t_1+0.05*(t_1-t_0)], title: "t"},
+	//xaxis: {range: [t_0, t_1], title: "t"},
+	//yaxis: {autorange: true, title: "y"}, 
+	xaxis: {range: [t_0, t_1]},
+	yaxis: {autorange: true},  	 
 	//title: "aaa",
 	showlegend: true,
-	legend: {"orientation": "h", yanchor: 'top', y:-0.2},
+	legend: {"orientation": "h", yanchor: 'top', y:-0.2, itemdoubleclick: false},
+	//hoverlabel: {font: {size: 12}},
 	margin: {
     l: 50,
     r: 50,
-    b: 100,
+    b: 50,
     t: 50,
     pad: 4
   },
@@ -147,8 +151,46 @@ function new_ODE_solver() {
 
     // Display using Plotly
   Plotly.newPlot("ODEPlot", data, layout);
-  document.getElementById("instruction").style.display = "initial";
   
+  var myPlot = document.getElementById("ODEPlot");
+  var hoverInfo = document.getElementById('hoverinfo');
+
+  myPlot.on('plotly_hover', function(data){
+    var infotext = data.points.map(function(d){
+        return (d.data.name+': t= ' + parseFloat(d.x.toFixed(7)) 
+          + ',  y= ' + parseFloat(d.y.toFixed(4)));
+    });
+    hoverInfo.innerHTML = infotext.join('<br/>');
+    })
+    .on('plotly_unhover', function(data){
+    hoverInfo.innerHTML = '';
+    }); 
+ 
+ 
+//   myPlot.on('plotly_legendclick', function(data){
+//     if (data.points[curveNumber].visible == true) {
+//       var update = {visible: "lengendonly"};
+//     }
+//     else if (data.points[curveNumber].visible == "lengendonly") {
+//       var update = {visible: true};
+//     } 
+//    
+//     Plotly.restyle("ODEPlot", update,[data.curveNumber]);
+//     
+//     return false;
+//   }); 
+  
+//   myPlot.on('plotly_legenddoubleclick', function(data){
+//      
+// //     var update = {visible: "legendonly"};
+// //     Plotly.restyle("ODEPlot", update);  
+// //   
+// //     var update2 = {visible: true};
+// //     Plotly.restyle("ODEPlot", update2,[data.curveNumber]);
+//     return false;
+//   });
+
+  document.getElementById("instruction").style.display = "initial";
 }
 
 

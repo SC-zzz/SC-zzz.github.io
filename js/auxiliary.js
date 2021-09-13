@@ -150,7 +150,12 @@ function newtonRootFind_modified_1d(f, fd, fdd, guess, limit) {
                               ys is an Array storing the function values
  */
 function ode_Euler(t_0, t_1, h, f, y_0) {
-	const N = Math.floor((t_1 - t_0)/h) + 1;
+    if (Math.ceil((t_1 - t_0)/h) - (t_1 - t_0)/h < 0.0000001) {
+      var N = Math.ceil((t_1 - t_0)/h) + 1;
+    } 
+    else {
+	  var N = Math.floor((t_1 - t_0)/h) + 1;
+	} 
 	var ts = Array.from(Array(N), (_, k) => k * h + t_0);
 	var ys = Array(N).fill(y_0);  //initialize the array for the results
 
@@ -167,13 +172,18 @@ function ode_Euler(t_0, t_1, h, f, y_0) {
  * @param {Float} t_1: The ending time.
  * @param {Float} h: The stepsize.
  * @param {function} f: The function.  
- * @param {Float} or {Array} y_0: The initial value. Float for 1d case, Array for higher dim
+ * @param {Float} or {Array} y_0: The initialmath.round((t_1 - t_0)/h) value. Float for 1d case, Array for higher dim
  * @returns {Array} [ts, ys]: ts is an Array storing the time steps
                               ys is an Array storing the function values
  */
  
 function ode_midpoint(t_0, t_1, h, f, y_0) {
-	const N = Math.floor((t_1 - t_0)/h) + 1;
+    if (Math.ceil((t_1 - t_0)/h) - (t_1 - t_0)/h < 0.0000001) {
+      var N = Math.ceil((t_1 - t_0)/h) + 1;
+    } 
+    else {
+	  var N = Math.floor((t_1 - t_0)/h) + 1;
+	} 
 	var ts = Array.from(Array(N), (_, k) => k * h + t_0);
 	var ys = Array(N).fill(y_0);  //initialize the array for the results
 
@@ -199,7 +209,12 @@ function ode_midpoint(t_0, t_1, h, f, y_0) {
  */
  
 function ode_Heun(t_0, t_1, h, f, y_0) {
-	const N = Math.floor((t_1 - t_0)/h) + 1;
+    if (Math.ceil((t_1 - t_0)/h) - (t_1 - t_0)/h < 0.0000001) {
+      var N = Math.ceil((t_1 - t_0)/h) + 1;
+    } 
+    else {
+	  var N = Math.floor((t_1 - t_0)/h) + 1;
+	}  
 	var ts = Array.from(Array(N), (_, k) => k * h + t_0);
 	var ys = Array(N).fill(y_0);  //initialize the array for the results
 
@@ -226,7 +241,12 @@ function ode_Heun(t_0, t_1, h, f, y_0) {
                               ys is an Array storing the function values
  */
 function ode_RK4(t_0, t_1, h, f, y_0) {
-	const N = Math.floor((t_1 - t_0)/h) + 1;
+    if (Math.ceil((t_1 - t_0)/h) - (t_1 - t_0)/h < 0.0000001) {
+      var N = Math.ceil((t_1 - t_0)/h) + 1;
+    } 
+    else {
+	  var N = Math.floor((t_1 - t_0)/h) + 1;
+	} 
 	var ts = Array.from(Array(N), (_, k) => k * h + t_0);
 	var ys = Array(N).fill(y_0);  //initialize the array for the results
 
@@ -260,7 +280,12 @@ function ode_RK4(t_0, t_1, h, f, y_0) {
                               ys is an Array storing the function values
  */
 function ode_Euler_implicit_1d(t_0, t_1, h, f, y_0, limit, fd) {
-	const N = Math.floor((t_1 - t_0)/h) + 1;
+    if (Math.ceil((t_1 - t_0)/h) - (t_1 - t_0)/h < 0.0000001) {
+      var N = Math.ceil((t_1 - t_0)/h) + 1;
+    } 
+    else {
+	  var N = Math.floor((t_1 - t_0)/h) + 1;
+	} 
 	var ts = Array.from(Array(N), (_, k) => k * h + t_0);
 	var ys = Array(N).fill(y_0);  //initialize the array for the results
 
@@ -294,7 +319,12 @@ function ode_Euler_implicit_1d(t_0, t_1, h, f, y_0, limit, fd) {
                               ys is an Array storing the function values
  */
 function ode_trapezoidal_1d(t_0, t_1, h, f, y_0, limit, fd) {
-	const N = Math.floor((t_1 - t_0)/h) + 1;
+    if (Math.ceil((t_1 - t_0)/h) - (t_1 - t_0)/h < 0.0000001) {
+      var N = Math.ceil((t_1 - t_0)/h) + 1;
+    } 
+    else {
+	  var N = Math.floor((t_1 - t_0)/h) + 1;
+	} 
 	var ts = Array.from(Array(N), (_, k) => k * h + t_0);
 	var ys = Array(N).fill(y_0);  //initialize the array for the results
 	
