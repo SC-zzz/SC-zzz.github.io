@@ -125,23 +125,23 @@ previous page |
     <h1>Chapter 1 Demo</h1>  
 
 <h3>Introducing ODE's.</h3>
-
+<h4 id = "Chen">Visualizing the Chen attractor.</h4>
 
 <p> As we will learn later in this course, some ODE systems exhibit “chaos” (i.e., extreme sensitivity to initial conditions). One example is given by the following system of equations, which describes the velocity of a point. This system is called the Chen attractor, with parameters $a,b,c$. You can read more about it <a href="https://en.wikipedia.org/wiki/Multiscroll_attractor">here</a>. </p>
 <p>
     \begin{align}
-    \dot{x} &amp; = a(y-x) \\
-    \dot{y} &amp; = (c-a)x  - xz + cy\\
-    \dot{z} &amp; = xy -bz.
+    x' & = a(y-x) \\
+    y' & = (c-a)x  - xz + cy\\
+    z' &  = xy -bz.
     \end{align}
   </p>
 
 <p> Here we will use $(a, b, c) = (40, 3, 28)$. Then the system of ODE's becomes</p>
 <p>
     \begin{align}
-    \dot{x} &amp; = 40(y-x) \\
-    \dot{y} &amp; = -12x  - xz + 28y\\
-    \dot{z} &amp; = xy -3z.
+    x' &  = 40(y-x) \\
+    y' &  = -12x  - xz + 28y\\
+    z' &  = xy -3z.
     \end{align}
   </p>
 

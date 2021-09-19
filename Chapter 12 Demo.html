@@ -132,22 +132,22 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <h3>Visualizing chaos, bifurcation, and sensitive dependence on initial conditions & parameters.</h3>
 
-<h4>Lorenz attractors.</h4>
+<h4 id="LorenzAttractors">Lorenz attractors.</h4>
 <p> The system of ODE's we care about is the following Lorenz system,  with constants $a > 1, b > 0, c > 0$:</p>
 <p>
     \begin{align}
-    \dot{x} &amp; = a(y-x) \\
-    \dot{y} &amp; = bx - y - xz \\
-    \dot{z} &amp; = xy -cz.
+    x' & = a(y-x) \\
+    y' & = bx - y - xz \\
+    z' & = xy -cz.
     \end{align}
   </p>
 
 <p> Lorenz focused on $(a, b, c) = (10, 28, 8/3)$, for reasons within the theory of dynamical systems. We also focus on this case here. Then the system of ODE's becomes</p>
 <p>
     \begin{align}
-    \dot{x} &amp; = 10(y-x) \\
-    \dot{y} &amp; = 28x - y - xz \\
-    \dot{z} &amp; = xy -\dfrac{8}{3}z.
+    x' &  = 10(y-x) \\
+    y' & = 28x - y - xz \\
+    z' & = xy -\dfrac{8}{3}z.
     \end{align}
   </p>
 
