@@ -16,18 +16,18 @@ function new_function() {
   var k = parseFloat(document.getElementById("k").value);    
 
 
-  let v1_x = [];
-  let v1_y = [];
-  let v2_x = [];
-  let v2_y = []; 
-  for (let j=0; j< 10; j++) {
-    let M = [[a/j + 1,b/j], [c/j,d/j + 1]]; 
-    let Aj = math.pow(M, j);
-    v1_x[j] = Aj[0][0];
-    v1_y[j] = Aj[1][0];    
-    v2_x[j] = Aj[0][1];
-    v2_y[j] = Aj[1][1];        
-  } 
+  // let v1_x = [];
+  // let v1_y = [];
+  // let v2_x = [];
+  // let v2_y = []; 
+  // for (let j=0; j< 10; j++) {
+  //   let M = [[a/j + 1,b/j], [c/j,d/j + 1]]; 
+  //   let Aj = math.pow(M, j);
+  //   v1_x[j] = Aj[0][0];
+  //   v1_y[j] = Aj[1][0];    
+  //   v2_x[j] = Aj[0][1];
+  //   v2_y[j] = Aj[1][1];        
+  // } 
   
   let M = [[a/k + 1,b/k], [c/k,d/k + 1]]; 
   let Ak = math.pow(M, k);
@@ -81,11 +81,7 @@ function new_function() {
 //   }
 // 	                
 // 
-// 
-// 
-// 
-// 
-// 
+
 
 
 
@@ -112,6 +108,14 @@ function new_function() {
     c2_y[i] = temp[1][1];     
   }
    
+   let x_min = math.min(math.min(c1_x),math.min(c2_x));
+   let x_max = math.max(math.max(c1_x),math.max(c2_x));
+   let x_span = x_max - x_min;
+
+   let y_min = math.min(math.min(c1_y),math.min(c2_y));
+   let y_max = math.max(math.max(c1_y),math.max(c2_y));
+   let y_span = y_max - y_min;
+
   //var brd = JXG.JSXGraph.initBoard('box',{axis: true,boundingbox: [-5, 5, 5, -5], keepaspectratio: true});
 
   //brd.create('curve', [c1_x, c1_y], {strokeColor: "black",strokeWidth:3});  
@@ -134,7 +138,15 @@ function new_function() {
     mode: "markers",
     name: "t=0",
     marker: {color: 'dodgerblue', size: 10, symbol: "x-dot"}
-   },  
+   }, 
+      {
+    x: [c1_x[N-1]],
+    y: [c1_y[N-1]],
+    type: "scatter",
+    mode: "markers",
+    name: "t=1",
+    marker: {color: 'dodgerblue', size: 10, symbol: "square"}
+   },   
     {
     x: [Ak[0][0]],
     y: [Ak[1][0]],
@@ -160,6 +172,14 @@ function new_function() {
     name: "t=0",
     marker: {color: 'orange', size: 10, symbol: "x-dot"}
    },  
+         {
+    x: [c2_x[N-1]],
+    y: [c2_y[N-1]],
+    type: "scatter",
+    mode: "markers",
+    name: "t=1",
+    marker: {color: 'orange', size: 10, symbol: "square"}
+   },  
 //   {
 //     x: v1_x,
 //     y: v1_y,
@@ -177,7 +197,11 @@ function new_function() {
   }, 
      
   ], 
-  {legend: {"orientation": "h",yanchor: 'top', y:-0.2}, title: "Matrix exponential",  
+  {
+    xaxis: {range: [x_min - 0.1*x_span, x_max + 0.1*x_span]},
+    yaxis: {autorange: false, range: [y_min - 0.1*y_span, y_max + 0.1*y_span]},  
+    legend: {"orientation": "h",yanchor: 'top', y:-0.2}, 
+    title: "Matrix exponential",  
     margin: {
       l: 40,
       r: 40,
