@@ -289,7 +289,7 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 <article>
 
-    <h1>Chapter 7 Demo</h1>  
+    <h1>Chapter 7</h1>  
 
 
 <h3>Visualizing matrix exponentials.</h3>
@@ -327,11 +327,9 @@ since $M$ and $-M$ commute for any $M$, we
 have 
 $$e^M e^{-M} = e^{0} = {\rm{I}}_n$$
 for any $M$, so $e^M$ <i>is always invertible with inverse</i> $e^{-M}$.
-Sadly, if $AB \ne BA$ then generally $e^A e^B \ne e^{A+B}$. The story of 
-<a href ="https://en.wikipedia.org/wiki/Matrix_exponential\#The_exponential_of_sums">how to deal
-with</a> this  "great matrix exponential tragedy" is beyond the level of this course.
+Sadly, if $AB \ne BA$ then generally $e^A e^B \ne e^{A+B}$. The story of how to deal with this "great matrix exponential tragedy" is beyond the level of this course.
 The power identity above can be used to show
-$e^M = \lim_{k \to \infty}({\rm{I}}_n + (1/k)M)^k$.
+$$e^M = \lim_{k \to \infty}({\rm{I}}_n + (1/k)M)^k.$$
  </p>
 
 <p> Here is why the matrix exponential $e^M$ for $M = tA$ is so useful in the study of $\x' = A\x$: For an $n$-vector $\mathbf{b}$ and an $n \times n$ matrix $A$, the function $\y(t) = e^{tA}\mathbf{b}$ satisfies
