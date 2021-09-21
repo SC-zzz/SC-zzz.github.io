@@ -335,7 +335,7 @@ $$e^M = \lim_{k \to \infty}({\rm{I}}_n + (1/k)M)^k.$$
 <p> Here is why the matrix exponential $e^M$ for $M = tA$ is so useful in the study of $\x' = A\x$: For an $n$-vector $\mathbf{b}$ and an $n \times n$ matrix $A$, the function $\y(t) = e^{tA}\mathbf{b}$ satisfies
 $$\y'(t) =  A(e^{tA}\mathbf{b}) = A \y(t),\,\,\, \y(0)=\mathbf{b}.$$</p>
 
-<p> Here we visualize the matrix exponential $e^{tA}$ from $t=0$ to $t=1$ for a $2\times 2$ matrix $A = \begin{bmatrix}a & b \\ c & d \end{bmatrix}$ by showing the two curves $e^{tA}e_1$ and $e^{tA}e_2$ for $0\le t \le 1$. (Here $e_1 = \begin{bmatrix} 1 \\0\end{bmatrix}$ and $e_2 = \begin{bmatrix} 0 \\1 \end{bmatrix}$.) We also visualize the approximation of $e^A$. To play with the visulization yourself, pick values for constants $a,b,c,d$, and choose $k$.</p>
+<p> Here we visualize the matrix exponential $e^{tA}$ from $t=0$ to $t=1$ for a $2\times 2$ matrix $A = \begin{bmatrix}a & b \\ c & d \end{bmatrix}$ by showing the two curves $e^{tA}\mathbf{e}_1$ and $e^{tA}\mathbf{e}_2$ for $0\le t \le 1$. (Here $\mathbf{e}_1 = \begin{bmatrix} 1 \\0\end{bmatrix}$ and $\mathbf{e}_2 = \begin{bmatrix} 0 \\1 \end{bmatrix}$.) We also visualize the approximation of $e^A$. To play with the visulization yourself, pick values for constants $a,b,c,d$, and choose $k$.</p>
 
 
 <div class="twoCol_4060">
@@ -375,7 +375,8 @@ $$\y'(t) =  A(e^{tA}\mathbf{b}) = A \y(t),\,\,\, \y(0)=\mathbf{b}.$$</p>
   <fieldset>
       <legend class="controlLegend">Approximation of $e^A$</legend>
   <p> Let $A_k : =   ({\rm{I}}_n + (1/k)A)^k$. Then </p>
-  <p> $e^A = \lim_{k \to \infty} A_k$.</p>
+  <p> $e^A = \lim_{k \to \infty} A_k$,</p>
+  <p> so $e^A \mathbf{e}_1 = \lim_{k \to \infty} (A_k \mathbf{e}_1)$, and $e^A \mathbf{e}_2 = \lim_{k \to \infty} (A_k \mathbf{e}_2)$.</p>
   <div class="range-wrap" style="width: 92%;">
   <label for="k">$k$: </label>
   <input id = "k" type="range" class="range" min="1" max="30" step = 1 value = "1" oninput="new_function()">
@@ -390,6 +391,7 @@ $$\y'(t) =  A(e^{tA}\mathbf{b}) = A \y(t),\,\,\, \y(0)=\mathbf{b}.$$</p>
     <div>
         <fieldset >
         <legend class="controlLegend">Graph</legend>
+        <p> For small $k$, you might need to zoom out to see $A_k \mathbf{e}_1$ and $A_k \mathbf{e}_2$.</p>
         <div id="myMatExp" style="width:100%;max-width:700px"></div>
 <!--         <div id = "canvasdiv" >
         <div id = "box" class="jxgbox" style="width:600px; height:600px;">

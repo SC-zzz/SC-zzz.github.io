@@ -128,7 +128,7 @@ function new_function() {
     y: c1_y,
     mode: 'lines', 
     //name: 'first column of e^{tA}',
-    name: 'e<sup>tA</sup>e<sub>1</sub>',
+    name: 'e<sup>tA</sup><b>e</b><sub>1</sub>',
     line: {color: 'dodgerblue', width: 3}
   }, 
       {
@@ -153,7 +153,7 @@ function new_function() {
     type: "scatter",
     mode: "markers",
     //name: "first column of A_k",
-    name: 'A<sub>k</sub>e<sub>1</sub>',    
+    name: 'A<sub>k</sub><b>e</b><sub>1</sub>',    
     marker: {color: 'green', size: 12}
   },
   {
@@ -161,7 +161,7 @@ function new_function() {
     y: c2_y,
     mode: 'lines', 
     //name: 'second column of e^{tA}',
-    name: 'e<sup>tA</sup>e<sub>2</sub>',    
+    name: 'e<sup>tA</sup><b>e</b><sub>2</sub>',    
     line: {color: 'orange', width: 3}
   },
       {
@@ -192,7 +192,7 @@ function new_function() {
     type: "scatter",
     mode: "markers",
     //name: "second column of A_k",
-    name: 'A<sub>k</sub>e<sub>2</sub>',     
+    name: 'A<sub>k</sub><b>e</b><sub>2</sub>',     
     marker: {color: 'red', size: 12}
   }, 
      
