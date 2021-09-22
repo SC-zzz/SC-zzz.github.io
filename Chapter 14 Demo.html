@@ -37,8 +37,8 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
- <script src="js/JSX_auxilliary_functions.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
+ <script src="js/JSX_auxilliary_functions.js"> </script>
 
   <style>
 
@@ -95,7 +95,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -113,15 +113,15 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 13 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 13 Demo.html">previous Chapter</a> |
 <a href="Chapter 15 Demo.html">next Chapter</a>
 </nav>
 
 
 <p style="display: none">$\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$</p>
 <article>
-    <h1>Chapter 14</h1>  
+    <h1>Chapter 14</h1>
 
 <div>
 <h3>Visualizing non-linear dynamics.</h3>
@@ -141,7 +141,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 <li>$r(t)$ the fraction removed from interaction with the disease (due to immunity or death).</li>
 </ul>
 </div>
-<p>(Note that $r(t)$ increases over time, $s(t)$ decreases over time since survival from exposure confers immunity, and $s + i + r = 1$.)</p> 
+<p>(Note that $r(t)$ increases over time, $s(t)$ decreases over time since survival from exposure confers immunity, and $s + i + r = 1$.)</p>
 <p>The SIR model is the system of ODE’s:
     \begin{align}
     \dfrac{ds}{dt} &= -\tau s(t)i(t), \\
@@ -155,12 +155,12 @@ not a “rate”, since it is dimensionless). For example, the deadliest second 
 
 <p> To play with the visulization yourself, change the parameters, and choose your initial conditions by dragging the purple point. Observe that the three curves $s,i,r$ stay nonnegative.</p>
 
-     
+
 
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Parameters</legend>
  <div class="range-wrap column" style="width: 42%;">
@@ -173,7 +173,7 @@ not a “rate”, since it is dimensionless). For example, the deadliest second 
   <input id = "gamma" type="range" class="range" min="0.02" max="1" step = 0.02 value = "0.1" oninput="new_SIR()">
   <output class="bubble"></output>
  </div>
-<p>$R_0 = \tau/\gamma = $ <span id = "R0"></span></p> 
+<p>$R_0 = \tau/\gamma = $ <span id = "R0"></span></p>
 </fieldset>
  </div>
  <br>
@@ -199,11 +199,11 @@ not a “rate”, since it is dimensionless). For example, the deadliest second 
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
 
 
-<script src="js/SIR_model.js"> </script> 
+<script src="js/SIR_model.js"> </script>
 
 
 
@@ -215,14 +215,14 @@ not a “rate”, since it is dimensionless). For example, the deadliest second 
 that we analyzed in the previous chapter. Recall that this is described by ODE system
 \begin{align}
 \frac{d}{dt} \begin{bmatrix}\phi(t) \\ \rm{w}(t)\end{bmatrix} = \mathbf{f}(\phi(t), \rm{w}(t)) \end{align}
-with $f \colon \mathbf{R}^2 \to \mathbf{R}^2$ defined by
+with $\mathbf{f} \colon \mathbf{R}^2 \to \mathbf{R}^2$ defined by
 \begin{equation}\mathbf{f}(\phi,{\rm{w}})=({\rm{w}}, -(g/r)\sin\phi+\omega^2\sin\phi\cos\phi)=({\rm{w}}, -(g/r)\sin\phi+\ (\omega^2/2)\sin(2\phi)).\end{equation}
  </p>
 
-<p> The bead on the rotating ring is a Hamiltonian system. Let 
+<p> The bead on the rotating ring is a Hamiltonian system. Let
 \begin{align}
 E &=\frac{1}{2}{\rm{w}}^2 -\frac{g}{r}\cos\phi +\frac{\omega^2}{4}\cos(2\phi) \\
-& =\frac{1}{2}{\rm{w}}^2 -\frac{g}{r}\cos\phi + \frac{1}{2}(\omega \cos \phi)^2-\frac{\omega^2}{4}, 
+& =\frac{1}{2}{\rm{w}}^2 -\frac{g}{r}\cos\phi + \frac{1}{2}(\omega \cos \phi)^2-\frac{\omega^2}{4},
 \end{align}
 then $$\pd{E}{{\rm{w}}}={\rm{w}},\,\,\,-\pd{E}{\phi}=-\frac{g}{r}\sin\phi+\frac{\omega^2}{2}\sin(2\phi).$$
 </p>
@@ -230,13 +230,21 @@ then $$\pd{E}{{\rm{w}}}={\rm{w}},\,\,\,-\pd{E}{\phi}=-\frac{g}{r}\sin\phi+\frac{
 <p> Here, same as in the previous chapter, without loss of generality, we choose $r$ so that $g/r = 1$ with unit 1/time<sup>2</sup>.
 </p>
 
-<p> In the graph below we plot level sets of $E$. To play with the visulization yourself, change the angluar velocity $\omega$ of the ring, choose which level set $E=c$ you want to see, choose your desired display options, and see how the phase portrait changes. You can also choose your desired initial condition by dragging the blue point on the graph. The stationary points of the form $(2k\pi,0)$ are shown as red dots, the stationary points of the form $((2k+1)\pi,0)$ are shown as green dots, and the stationary points of the form $(\pm \operatorname{arccos}(g/(r\omega^2))+2k\pi,0)$ are shown as blue dots. Observe how the level set varies. </p>
-     
+<p> In the graph below we plot level sets of $E$. To play with the visulization
+  yourself, change the angluar velocity $\omega$ of the ring, choose which level
+  set $E=c$ you want to see (shown in black), choose your desired display options,
+  and see how the phase portrait changes. You can also choose your desired initial
+  condition by dragging the blue point on the graph. The stationary points of the
+  form $(2k\pi,0)$ are shown as red dots, the stationary points of the form
+  $((2k+1)\pi,0)$ are shown as green dots, and the stationary points of the form
+  $(\pm \operatorname{arccos}(g/(r\omega^2))+2k\pi,0)$ are shown as blue dots.
+  Observe how the level set varies. </p>
+
 
 <div class="twoCol_3366">
-  
+
   <div>
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Angular Velocity</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -246,9 +254,9 @@ then $$\pd{E}{{\rm{w}}}={\rm{w}},\,\,\,-\pd{E}{\phi}=-\frac{g}{r}\sin\phi+\frac{
  </div>
    <p>Bifurcation happens when $\omega$ crosses  $\sqrt{g/r}$ (which equals 1 in our case).</p>
 </fieldset>
- </div> 
+ </div>
   <br>
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Energy</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -257,7 +265,7 @@ then $$\pd{E}{{\rm{w}}}={\rm{w}},\,\,\,-\pd{E}{\phi}=-\frac{g}{r}\sin\phi+\frac{
   <output class="bubble"></output><br>
  </div>
 </fieldset>
- </div> 
+ </div>
  <br>
  <div>
 <fieldset>
@@ -265,10 +273,10 @@ then $$\pd{E}{{\rm{w}}}={\rm{w}},\,\,\,-\pd{E}{\phi}=-\frac{g}{r}\sin\phi+\frac{
       <label for="density_2">Density: </label><br>
    <input id = "density_2" type="range" class="range" min="1" max="2.6" step = 0.2 value = "1.6" style="width: 50%;" oninput="new_bead()"> <br><br>
    <input type="checkbox" id="colorize_2" checked oninput="new_bead()">
-   <label for="colorize_2"> Colorize according to magnitude</label><br> 
+   <label for="colorize_2"> Colorize according to magnitude</label><br>
 </fieldset>
 </div>
-</div> 
+</div>
 
     <div>
         <fieldset >
@@ -279,11 +287,11 @@ then $$\pd{E}{{\rm{w}}}={\rm{w}},\,\,\,-\pd{E}{\phi}=-\frac{g}{r}\sin\phi+\frac{
           </div>
         </fieldset>
     </div>
-</div>  
+</div>
 
 
 
-<script src="js/bead_on_a_ring_Hamiltonian.js"> </script> 
+<script src="js/bead_on_a_ring_Hamiltonian.js"> </script>
 
 
 <script src="js/draw_bubble.js"></script>

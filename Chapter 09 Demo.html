@@ -21,7 +21,7 @@
 
   <!-- Including P5 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-  
+
   <!-- Including Plotly -->
   <script>
   window.PlotlyConfig = {MathJaxConfig: 'local'}
@@ -37,7 +37,7 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
 
 
   <style>
@@ -96,7 +96,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -114,8 +114,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 08 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 08 Demo.html">previous Chapter</a> |
 <a href="Chapter 10 Demo.html">next Chapter</a>
 </nav>
 
@@ -123,7 +123,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <article>
 
-    <h1>Chapter 9</h1>  
+    <h1>Chapter 9</h1>
 
 <div>
 <h3>Visualizing inhomogeneous linear ODE’s.</h3>
@@ -157,12 +157,12 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 <li>How does the phase shift of $y(t)$ change with the change of $\omega$?</li>
 </ul>
 </div>
-     
+
 
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Initial Condition</legend>
  <div class="range-wrap" style="width: 90%;">
@@ -173,7 +173,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 </fieldset>
  </div>
  <br>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Frequency of Forcing</legend>
  <div class="range-wrap" style="width: 90%;">
@@ -202,9 +202,9 @@ $T = \dfrac{2\pi}{\omega} = $ <span id = 'period'> </span>.</p>
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
-<script src="js/first_order_inhomo_Ch9.js"> </script> 
+<script src="js/first_order_inhomo_Ch9.js"> </script>
 
 <br>
 <h4 id ="secondOrderEq">Second-order equations.</h4>
@@ -221,22 +221,24 @@ $T = \dfrac{2\pi}{\omega} = $ <span id = 'period'> </span>.</p>
 <ol>
   <li>The associated Wronskian is $W(t) = u_1(t)u_2'(t) - u_1'(t)u_2(t) = - \operatorname{sin}^2({\omega_0} t) - \operatorname{cos}^2({\omega_0} t) = -1$.</li>
   <li>The inhomogeneous ODE $y'' + \omega_0^2 y = \operatorname{sin}(\omega t)$ with initial conditions $y(0) = 0$ and
-$y'(0) = 0$ (which are our initial conditions) has exactly one solution, given by 
+$y'(0) = 0$ (which are our initial conditions) has exactly one solution, given by
     \begin{align}
     y(t) &= -u_1(t) \int_0^t \dfrac{u_2(t)\operatorname{sin}(\omega t)}{W(t)}ds + u_2(t) \int_0^t \dfrac{u_1(t)\operatorname{sin}(\omega t)}{W(t)} ds \\
     & = \operatorname{sin}({\omega_0} t) \int_0^t {\operatorname{cos}({\omega_0} t)\operatorname{sin}(\omega t)}ds - \operatorname{cos}({\omega_0} t) \int_0^t {\operatorname{sin}({\omega_0} t)\operatorname{sin}(\omega t)} ds \\
-    &= \begin{cases} \dfrac{\operatorname{sin}(\omega t) - (\omega \operatorname{sin}({\omega_0} t))/{\omega_0}}{\omega_0^2 - \omega^2} & \omega_0 \neq \pm \omega, \\
-       \dfrac{\operatorname{sin}(\omega t) - t\omega \operatorname{cos}(\omega t)}{2\omega^2}  & \omega_0 = \pm\omega. \end{cases}
+    &= \begin{cases} \dfrac{\operatorname{sin}(\omega t) - (\omega \operatorname{sin}({\omega_0} t))/{\omega_0}}{\omega_0^2 - \omega^2} & \omega \neq \pm \omega_0, \\
+       \dfrac{\operatorname{sin}(\omega t) - t\omega \operatorname{cos}(\omega t)}{2\omega^2}  & \omega = \pm\omega_0. \end{cases}
     \end{align}
 </li>
 </ol>
-
+<p> Notice that in the case $\omega = \pm\omega_0$ the solution formula has the
+  term involving $t$ that grows unboundedly as time evolves. We say resonace occurs
+  in this case, and resonance is explored more in Chapter 10.</p>
 <p> Now it is time to have some fun and play a “guessing $\omega_0$ game”. Press the button to generate a random $\omega_0$, then vary $\omega$ to see how the graph changes and enter your guess for $\omega_0$.</p>
 
 
 <script type="text/javascript">
 var omega0 = 0.2;
-document.getElementById("successimg").style.display = 'none'; 
+document.getElementById("successimg").style.display = 'none';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -251,7 +253,7 @@ function generate_freq(){
 }
 
 function evaluate_guess(){
-  document.getElementById("successimg").style.display = 'none'; 
+  document.getElementById("successimg").style.display = 'none';
   var guess = parseFloat(document.getElementById("guess").value);
   document.getElementById("guess_omega0").innerHTML = guess;
   new_guessing_graph();
@@ -260,35 +262,35 @@ function evaluate_guess(){
   }
   else if (math.abs(guess - omega0) > 0.2 && guess > 0) {
     document.getElementById("message").innerHTML = "Close! Try again.";
-  }  
+  }
   else if (math.abs(guess - omega0) > 0 && guess > 0) {
     document.getElementById("message").innerHTML = "Very close! Keep trying.";
-  }  
+  }
   else if (guess - omega0 == 0) {
     document.getElementById("message").innerHTML = "Yay! You get the correct value!";
-    document.getElementById("successimg").style.display = 'initial'; 
+    document.getElementById("successimg").style.display = 'initial';
   }
   else {
     document.getElementById("message").innerHTML = "Please enter a positive number.";
   }
 }
-</script> 
+</script>
 
 
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Resonant Frequency</legend>
 Press the button to randomly generate a resonant frequency $w_0 \in [0.2,5]$ (up to 1 decimal place):
-  <div style="padding-top: 1em;">     
+  <div style="padding-top: 1em;">
   <button style="font-size: 18px;" onclick="generate_freq()">Generate!</button>
   <br></div>
 </fieldset>
  </div>
  <br>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Frequency of Forcing</legend>
  <div class="range-wrap" style="width: 90%;">
@@ -301,7 +303,7 @@ $T = \dfrac{2\pi}{\omega} = $ <span id = 'period_2'> </span>
 </fieldset>
  </div>
 <br>
-   <div style="position: relative"> 
+   <div style="position: relative">
   <fieldset>
       <legend class="controlLegend">Your Guess: </legend>
 <label for="guess">Your guess for $\omega_0$:</label>
@@ -309,7 +311,7 @@ $T = \dfrac{2\pi}{\omega} = $ <span id = 'period_2'> </span>
   <p style="display: none;">You guessed $\omega_0 = $ <span id = "guess_omega0"> </span>.</p>
    <p style="display: none;"> Actual $\omega_0$: <span id = "show_omega0"> </span>  <br></p>
  <label for="showGuess">Show your guess on the graph:</label>
-    <input type="radio" name="showGuess" id="hide" checked onclick="new_guessing_graph()"> hide 
+    <input type="radio" name="showGuess" id="hide" checked onclick="new_guessing_graph()"> hide
     <input type="radio" name="showGuess"  id="show" onclick="new_guessing_graph()"> show<br>
   <p id = "message" style = "color:red"></p>
   <div id="successimg" style ="display: none;"><img src="img/swing.gif" alt="success" width = "100%" height = "auto">
@@ -332,15 +334,15 @@ $T = \dfrac{2\pi}{\omega} = $ <span id = 'period_2'> </span>
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
 
 
 <script src="js/guessing_game_Ch9.js"></script>
 
 
- 
-            
+
+
 
 <script src="js/draw_bubble.js"></script>
 

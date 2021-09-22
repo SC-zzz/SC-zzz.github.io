@@ -37,8 +37,8 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
- <script src="js/JSX_auxilliary_functions.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
+ <script src="js/JSX_auxilliary_functions.js"> </script>
 
 
   <style>
@@ -96,7 +96,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -114,8 +114,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 23 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 23 Demo.html">previous Chapter</a> |
 <a href="Chapter 25 Demo.html">next Chapter</a>
 </nav>
 
@@ -155,7 +155,7 @@ $\newcommand{\R}{\mathbf{R}}
 \newcommand{\m}{\mathbf{m}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else
 $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
 \newcommand{\rref}{\operatorname{rref}}
@@ -290,7 +290,7 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 
 <article>
-    <h1>Chapter 24</h1>  
+    <h1>Chapter 24</h1>
 
 <div>
 <h3>Visualizing the heat and wave equations on some 2-dimensional regions.</h3>
@@ -313,11 +313,11 @@ information at just two points, namely the endpoints $x = 0, L$).
 </p>
 
 <p> Here we treat the case of a rectanglar shape. Consider a rectangle with sides having lengths $L_1$ and $L_2$.  Set up coordinates
-so it is the region $$R = [0, L_1]\times [0, L_2] = \{(x,y) \in \R^2: 0 \le x \le L_1, 0 \le y \le L_2\}.$$ 
+so it is the region $$R = [0, L_1]\times [0, L_2] = \{(x,y) \in \R^2: 0 \le x \le L_1, 0 \le y \le L_2\}.$$
 We will consider the heat equation on $R$ with specified boundary conditions on all four sides.
 In contrast with a rod, whose ``boundary'' consisted of two distinct points (so that boundary falls into two parts, each a point), the boundary of $R$ is a
 <i>connected</i> curve (consisting of 4 line segments touching at endpoints).
-Our focus is on cases with <i>constant</i> temperature along the boundary. 
+Our focus is on cases with <i>constant</i> temperature along the boundary.
 We call this a <i>Dirichlet boundary condition</i>.  (The concept has a more general definition, but constancy is sufficient for our needs.) </p>
 
 <p> Since constant functions satisfy the 2-dimensional heat equation, to find
@@ -327,22 +327,27 @@ it is the same as solving the heat equation satisfying the vanishing Dirichlet b
 $u \pm \tau$, and that allows us to pass between solutions with value 0
 on the entire boundary and solutions with value $\tau$ on the entire boundary.
 So we will focus on those solutions which vanish on the boundary (and then any desired constant can be added to this to get
-the solutions with a specific constant value on the boundary). 
+the solutions with a specific constant value on the boundary).
 </p>
 
-<p> Now, as we learned in this chapter, using separation of variables, we find that the general solution to the  <b>heat equation</b> on a rectangle 
-$[0,L_1] \times [0, L_2]$ with <i>vanishing Dirichlet</i> boundary values is 
+<p> Now, as we learned in this chapter, using separation of variables, we find that the general solution to the  <b>heat equation</b> on a rectangle
+$[0,L_1] \times [0, L_2]$ with <i>vanishing Dirichlet</i> boundary values is
 \begin{equation}
 u(t,x,y) = \sum_{n_1=1}^\infty \sum_{n_2 = 1}^\infty A_{n_1,n_2}  e^{-((n_1^2/L_1^2) + (n_2^2/L_2^2))\pi^2 t}  \sin((n_1 \pi/L_1) x) \sin((n_2 \pi/L_2) y).
 \end{equation}
 </p>
 
-<p> Below we visualize heat map plots of $e^{-((n_1^2/L_1^2) + (n_2^2/L_2^2))\pi^2 t}  \sin((n_1 \pi/L_1) x) \sin((n_2 \pi/L_2) y)$. Pick $L_1, L_2, n_1, n_2$ and see this function evolves with time.</p>
+<p> Below we visualize heat map plots of
+  $e^{-((n_1^2/L_1^2) + (n_2^2/L_2^2))\pi^2 t}  \sin((n_1 \pi/L_1) x) \sin((n_2 \pi/L_2) y)$.
+  Pick $L_1, L_2, n_1, n_2$ and see this function evolves with time. Note that as you change the $L_j$'s, the scale along
+the axes changes (to keep the box looking the same on the computer screen).  Trying running with a slower speed (such as 1/20 or 1/50 times as slow) to better
+see what is happening with the heat flow.  Beware that if you want to change the speed of the animation, you need to begin from the start rather than pressing
+Pause and trying to change the speed and then pressing Continue.</p>
 
 <div class="twoCol_3366">
-  
+
  <div>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Side Lengths</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -358,7 +363,7 @@ u(t,x,y) = \sum_{n_1=1}^\infty \sum_{n_2 = 1}^\infty A_{n_1,n_2}  e^{-((n_1^2/L_
 </fieldset>
  </div>
 <br>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Modes</legend>
   <div class="row">
@@ -376,37 +381,37 @@ u(t,x,y) = \sum_{n_1=1}^\infty \sum_{n_2 = 1}^\infty A_{n_1,n_2}  e^{-((n_1^2/L_
 </fieldset>
  </div>
 <br>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Display Options</legend>
       <div>
-   <div style="padding-top: 1em;">     
+   <div style="padding-top: 1em;">
   <button style="font-size: 18px;" onclick="newHDRec()">Run the animation!</button>
   <br></div>
 
   <div style="padding-top: 1em;">
-  <button style="font-size: 18px;" onclick="stopAnimation_HDRec()">Pause</button> 
+  <button style="font-size: 18px;" onclick="stopAnimation_HDRec()">Pause</button>
   <button style="font-size: 18px;" onclick="continueAnimation_HDRec()">Continue</button><br></div>
    </div>
-    <div style="padding-top: 1em;">  Speed: 
-    <input type="radio" name="speed" id="normal" checked onclick="changeSpeed_HDRec()"> normal &nbsp; 
+    <div style="padding-top: 1em;">  Speed:
+    <input type="radio" name="speed" id="normal" checked onclick="changeSpeed_HDRec()"> normal &nbsp;
 <!--     <input type="radio" name="speed"  id="x1/2" onclick="changeSpeed_HDRec()"> x1/2 &nbsp; &nbsp;  -->
-    <input type="radio" name="speed"  id="x1/5" onclick="changeSpeed_HDRec()"> x1/5 &nbsp; &nbsp; 
+    <input type="radio" name="speed"  id="x1/5" onclick="changeSpeed_HDRec()"> x1/5 &nbsp; &nbsp;
 <!--     <input type="radio" name="speed" id="x1/10"  onclick="changeSpeed_HDRec()"> x1/10 &nbsp; &nbsp;     -->
-    <input type="radio" name="speed" id="x1/20"  onclick="changeSpeed_HDRec()"> x1/20 &nbsp; &nbsp;   
-    <input type="radio" name="speed" id="x1/50"  onclick="changeSpeed_HDRec()"> x1/50 &nbsp; &nbsp;   
-     <br> 
+    <input type="radio" name="speed" id="x1/20"  onclick="changeSpeed_HDRec()"> x1/20 &nbsp; &nbsp;
+    <input type="radio" name="speed" id="x1/50"  onclick="changeSpeed_HDRec()"> x1/50 &nbsp; &nbsp;
+     <br>
    </div>
 </fieldset>
  </div>
-</div> 
+</div>
 
 
   <div>
     <div>
         <fieldset>
         <legend class="controlLegend">Animation</legend>
-  <p>Time: $t = $ <span id = "time_HDRec"> </span> </p>       
+  <p>Time: $t = $ <span id = "time_HDRec"> </span> </p>
 <div id="myHDRec" style="width:100%;max-width:700px">
 </div>
 <div id="myHDRec2" style="width:100%;max-width:700px">
@@ -414,7 +419,7 @@ u(t,x,y) = \sum_{n_1=1}^\infty \sum_{n_2 = 1}^\infty A_{n_1,n_2}  e^{-((n_1^2/L_
         </fieldset>
     </div>
   </div>
- </div> 
+ </div>
 
 
 <script src="js/heat_rectangle_Ch24.js"></script>

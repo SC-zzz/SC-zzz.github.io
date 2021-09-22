@@ -37,7 +37,7 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
 
 
   <style>
@@ -96,7 +96,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -114,8 +114,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 04 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 04 Demo.html">previous Chapter</a> |
 <a href="Chapter 06 Demo.html">next Chapter</a>
 </nav>
 
@@ -123,7 +123,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <article>
 
-    <h1>Chapter 5</h1>  
+    <h1>Chapter 5</h1>
 
 <div>
 <h3>Visualizing second-order linear ODE’s and complex numbers.</h3>
@@ -144,9 +144,9 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Constants</legend>
  <div class="range-wrap" style="width: 75%;">
@@ -162,7 +162,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 </fieldset>
  </div>
  <br>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Initial Condtions</legend>
  <div class="range-wrap" style="width: 75%;">
@@ -184,10 +184,11 @@ Responsive layout - makes the two columns stack on top of each other instead of 
   <legend class="controlLegend">Display Options</legend>
  Independent solutions: <br>
     <input type="radio" name="showIndSol" id="hideIS" onclick="new_function()"> hide<br>
-    <input type="radio" name="showIndSol"  id="showIS" checked onclick="new_function()"> show<br><br>
+    <input type="radio" name="showIndSol"  id="showIS" checked onclick="new_function()"> show<br>
+   <!-- <br>
    Scale: <br>
     <input type="radio" name="scale" id="linear" checked onclick="new_function()"> linear scale<br>
-    <input type="radio" name="scale"  id="log" onclick="new_function()"> log scale (WARNING: This works only for positive parts)<br>  
+    <input type="radio" name="scale"  id="log" onclick="new_function()"> log scale (WARNING: This works only for positive parts)<br>   -->
 </fieldset>
  </div>
 </div>
@@ -197,8 +198,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     <div>
         <fieldset >
         <legend class="controlLegend">Outputs</legend>
-        <p> As we have learned, the associated characteristic polynomial is $\lambda^2 + p \lambda + q = \lambda^2$<span id ="p_term">+</span>$\lambda$<span id ="q_term">-1.5</span>. <span id ="type_of_roots"> </span> The roots are $\lambda_1 =$  <span id ="lambda1"></span>, $\lambda_2 =$  <span id ="lambda2"></span>. </p>  
-        <p id="case1">Two independent solutions are $y_1(t) = e^{\lambda_1 t}$  and $y_2(t) = e^{\lambda_2 t}$. </p>   
+        <p> As we have learned, the associated characteristic polynomial is $\lambda^2 + p \lambda + q = \lambda^2$<span id ="p_term">+</span>$\lambda$<span id ="q_term">-1.5</span>. <span id ="type_of_roots"> </span> The roots are $\lambda_1 =$  <span id ="lambda1"></span>, $\lambda_2 =$  <span id ="lambda2"></span>. </p>
+        <p id="case1">Two independent solutions are $y_1(t) = e^{\lambda_1 t}$  and $y_2(t) = e^{\lambda_2 t}$. </p>
         <p id="case2">Two independent solutions are $y_1(t) = e^{\lambda_1 t}$  and $y_2(t) = te^{\lambda_1 t}$. </p>
         <p id="case3">Let $\lambda_1, \lambda_2 = r_0 \pm i s_0$. Then two independent solutions are $y_1(t) = e^{r_0t}\cos(s_0t)$  and $y_2(t) = e^{r_0t}\sin(s_0t)$. </p>
         <p>$y(t) = c_1y_1(t) + c_2y_2(t) = $ <span id ="c1"></span>$y_1(t)$<span id ="plusc2">$+$ </span><span id ="minusc2">$-$ </span><span id ="c2"></span>$y_2(t)$.</p>
@@ -215,28 +216,28 @@ Responsive layout - makes the two columns stack on top of each other instead of 
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
-<script src="js/draw_second_order_ode.js"> </script> 
+<script src="js/draw_second_order_ode.js"> </script>
 
 
 
 <br>
 
 <h4 id="complex">Visualizing complex numbers.</h4>
-<p> To visualize Euler's formula, drag the point $P$ on the graph: </p>
+<p id="EulersFormula"> To visualize Euler's formula, move the point $P$ on the circle: </p>
 
 <div class="twoCol_3366">
   <div>
  <div >
 <fieldset>
   <legend class="controlLegend">Outputs</legend>
-  <div id="output">  
+  <div id="output">
     <p id="rtop"> $x = \operatorname{cos} \theta = $ <span id = "x_coord"></span>, &nbsp $y= \operatorname{sin} \theta = $ <span id = "y_coord"></span>.</p>
-    <p>$\theta = $ <span id = "theta_dec"></span> radians &nbsp $ = $ <span id = "theta_pi"></span>$\pi$ radians.</p>
+    <p>$\theta = $ <span id = "theta_dec"></span> radians &nbsp;$ = $ <span id = "theta_pi"></span>$\pi$ radians = <span id = "theta_deg"></span> degrees.</p>
         <b>Euler's Formula</b>
     <p id="euler"> $e^{i\theta} = \operatorname{cos} \theta + i \operatorname{sin} \theta = $ <span id = "x_coord2"></span> <span id = "plus">$+$</span><span id = "minus">$-$</span> <span id = "y_coord2"></span> $i$.</p>
-  </div> 
+  </div>
 </fieldset>
  </div>
 </div>
@@ -253,27 +254,30 @@ Responsive layout - makes the two columns stack on top of each other instead of 
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
 <br>
-<p> To visualize complex multiplication, drag the points $z_1,z_2$ on the graph: </p>
+<p id="mult"> To visualize complex multiplication, move the points $z_1,z_2$ on the respective circles: </p>
 
 <div class="twoCol_3366">
   <div>
  <div>
 <fieldset>
   <legend class="controlLegend">Outputs</legend>
-  <div>  
+  <div>
     <p id="z1_mult"> $z_1  = 1.5e^{i \theta_1} $$=1.5\operatorname{cos} \theta_1 + (1.5\operatorname{sin} \theta_1)i  = $ <span id = "x1_mult"></span>$ + ($<span id = "y1_mult"></span>$)i$.</p>
 
     <p id="z2_mult"> $z_2 = 2e^{i \theta_2} $$=2\operatorname{cos} \theta_2 + (2\operatorname{sin} \theta_2)i  = $ <span id = "x2_mult"></span>$ + ($<span id = "y2_mult"></span>$)i$.</p>
 
     <p id="z3_mult"> $z_3 = z_1z_2$$=3e^{i (\theta_1+\theta_2)}$$=3e^{i \theta_3}$$=3\operatorname{cos} \theta_3 + (3\operatorname{sin} \theta_3)i$$=$ <span id = "x3_mult"></span>$ + ($<span id = "y3_mult"></span>$)i$.</p>
 
-    <p id="theta1_mult"> $\theta_1 = $ <span id = "t1pi_mult"></span>$\pi$ radians.</p>
-    <p id="theta2_mult"> $\theta_2 = $ <span id = "t2pi_mult"></span>$\pi$ radians.</p>
-    <p id="theta3_mult"> $\theta_3$$=(\theta_1+\theta_2) \text{ mod } 2\pi = $ <span id = "t3pi_mult"></span>$\pi$ radians.</p>
-  </div> 
+    <p id="theta1_mult"> $\theta_1 = $ <span id = "t1_mult"></span> radians $=$
+      <span id = "t1pi_mult"></span>$\pi$ radians $=$ <span id = "t1deg_mult"></span> degrees.</p>
+    <p id="theta2_mult"> $\theta_2 = $ <span id = "t2_mult"></span> radians $=$
+      <span id = "t2pi_mult"></span>$\pi$ radians $=$ <span id = "t2deg_mult"></span> degrees.</p>
+    <p id="theta3_mult"> $\theta_3$$=(\theta_1+\theta_2) \text{ mod } 2\pi = $
+      <span id = "t3_mult"></span> radians $=$ <span id = "t3pi_mult"></span>$\pi$ radians $=$ <span id = "t3deg_mult"></span> degrees.</p>
+  </div>
 </fieldset>
  </div>
 </div>
@@ -290,25 +294,25 @@ Responsive layout - makes the two columns stack on top of each other instead of 
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
 <br>
-<p> To visualize complex conjugation and inversion, drag the point $z$ on the graph: </p>
+<p id= "ConjAndInv"> To visualize complex conjugation and inversion, move the point $z$ on its circle: </p>
 
 <div class="twoCol_3366">
   <div>
  <div>
 <fieldset>
   <legend class="controlLegend">Outputs</legend>
-  <div>  
+  <div>
     <p id="z1_conj"> $z  = 2e^{i \theta} $$=2\operatorname{cos} \theta + (2\operatorname{sin} \theta)i  = $ <span id = "x1_conj"></span>$ + ($<span id = "y1_conj"></span>$)i$.</p>
 
     <p id="z2_conj"> $\overline{z} = 2e^{-i \theta} $$=2\operatorname{cos} \theta - (2\operatorname{sin} \theta)i  = $ <span id = "x2_conj"></span>$ + ($<span id = "y2_conj"></span>$)i$.</p>
 
     <p id="z3_conj"> $1/z = \overline{z}/|z|^2$$=0.5e^{-i \theta}$$=0.5e^{-i \theta}$$=0.5\operatorname{cos} \theta - (0.5\operatorname{sin} \theta)i$$=$ <span id = "x3_conj"></span>$ + ($<span id = "y3_conj"></span>$)i$.</p>
 
-    <p> $\theta = $ <span id = "t1pi_conj"></span>$\pi$ radians.</p>
-  </div> 
+    <p> $\theta = $ <span id = "t1_conj"></span> radians $=$ <span id = "t1pi_conj"></span>$\pi$ radians $=$ <span id = "t1deg_conj"></span> degrees.</p>
+  </div>
 </fieldset>
  </div>
 </div>
@@ -325,9 +329,9 @@ Responsive layout - makes the two columns stack on top of each other instead of 
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
-<script src="js/complex_numbers.js"></script>           
+<script src="js/complex_numbers.js"></script>
 
 
 

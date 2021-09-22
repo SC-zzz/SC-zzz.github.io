@@ -38,7 +38,7 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
 
 
   <style>
@@ -101,7 +101,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -119,8 +119,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 11 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 11 Demo.html">previous Chapter</a> |
 <a href="Chapter 13 Demo.html">next Chapter</a>
 </nav>
 
@@ -128,9 +128,9 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <article>
 
-    <h1>Chapter 12</h1>  
+    <h1>Chapter 12</h1>
 
-<h3>Visualizing chaos, bifurcation, and sensitive dependence on initial conditions & parameters.</h3>
+<h3>Visualizing chaos, and sensitive dependence on initial conditions & parameters.</h3>
 
 <h4 id="LorenzAttractors">Lorenz attractors.</h4>
 <p> The system of ODE's we care about is the following Lorenz system,  with constants $a > 1, b > 0, c > 0$:</p>
@@ -151,7 +151,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     \end{align}
   </p>
 
-<p> The figure below shows the trajectory of a Lorenz attractor with initial value $(x_0,y_0,z_0)=(1,1,1)$ from time $t =0$ to time $t=20$. You can also play with the figure yourself; move your mouse to the figure and you will see various viewing options on the top right corner of the figure. </p>
+<p id ="rotate"> The figure below shows the trajectory of a Lorenz attractor with initial value $(x_0,y_0,z_0)=(1,1,1)$ from time $t =0$ to time $t=20$. You can also play with the figure yourself; move your mouse to the figure and you will see various viewing options on the top right corner of the figure. </p>
 
 
 <div id="3dLorenz" style="max-width: 900px"> </div>
@@ -166,7 +166,7 @@ function g(v) {
 
 function attractor_3d(){
 
-let xArray = [], yArray = [], zArray = [];  
+let xArray = [], yArray = [], zArray = [];
 
 let nTotal = 20/h + 1;
 let sol = ode_auto_RK4(nTotal, h, g, [1,1,1]);
@@ -182,7 +182,7 @@ Plotly.newPlot('3dLorenz', [{
   y: yArray,
   z: zArray,
   type: 'scatter3d',
-  mode: 'lines', 
+  mode: 'lines',
   line: {color: 'dodgerblue', width: 3},
   name: 'initial value (1,1,1)'
 },{
@@ -190,7 +190,7 @@ Plotly.newPlot('3dLorenz', [{
   y: [yArray[0]],
   z: [zArray[0]],
   type: 'scatter3d',
-  mode: 'markers', 
+  mode: 'markers',
   marker: {color: 'red', size:5},
   name: 't=0'
 },
@@ -199,7 +199,7 @@ Plotly.newPlot('3dLorenz', [{
   y: [yArray[nTotal-1]],
   z: [zArray[nTotal-1]],
   type: 'scatter3d',
-  mode: 'markers', 
+  mode: 'markers',
   marker: {color: 'darkviolet', size:5},
   name: 't=20'
 }
@@ -212,7 +212,7 @@ Plotly.newPlot('3dLorenz', [{
         r: 0,
         b: 0,
         t: 10
-        }, 
+        },
 });
 }
 attractor_3d();
@@ -220,28 +220,35 @@ attractor_3d();
 
 
 
-<p> Here is a colorful demonstration of 50 Lorenz attractors with nearby yet distinct initial positions. This animation is essentially taken from <a href="https://iacopogarizio.com/projects/visualizing-chaos/">here</a>. You can see that their trajectories are eventually totally unrelated. </p>
+<p id ="50colorfulLorenz"> Here is a colorful demonstration of 50 Lorenz attractors with nearby yet distinct initial positions. This animation is essentially taken from <a href="https://iacopogarizio.com/projects/visualizing-chaos/">here</a>. You can see that their trajectories are eventually totally unrelated. </p>
 
 
 <div id="canvasdiv" style="position: relative;margin-left: auto; margin-right:auto; margin-top:10px; margin-bottom:10px" >
   <!-- <canvas id="canvas" style=" background: white; width:600px; height: 450px"></canvas> -->
   </div>
 
-<script src="js/attractor.js"></script> 
+<script src="js/attractor.js"></script>
 
 
-<script src="js/my_rainbow_attractor.js"></script> 
+<script src="js/my_rainbow_attractor.js"></script>
 
 
 
 
 
-<p> Now let's try it yourself. Choose an initial value near (1,1,1) and hit the “Run the attractors!” button. Then you will see (the $xy$-projection of) the trajactories of two Lorenz attractors, one with intial value $(x_0,y_0,z_0)=(1,1,1)$ and the other with the intial value of your choice. For clarity, only the trajectories in the previous five seconds are kept showing. You will see that initially the two trajectories are very close to each other (so you probably will only be able to see one), but after a while they become unrelated.</p>
+<p id="animate"> Now let's try it yourself. Choose an initial value near $(1,1,1)$
+  and hit the “Run the attractors!” button. Then you will see (the $xy$-projection of)
+  the trajactories of two Lorenz attractors, one with intial value $(x_0,y_0,z_0)=(1,1,1)$
+  and the other with the intial value of your choice. For clarity, only the trajectories
+  in the previous five seconds are kept showing. You will see that initially the
+  two trajectories are very close to each other (so you probably will only be able
+  to see one), but after a while they become unrelated. You may need to be patient
+  (or speed up the speed) to see the divergent behavior from the two nearby initial points.</p>
 
 <div class="twoCol_3366">
-  
+
  <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Initial Conditions</legend>
  <div class="range-wrap" style="width: 55%;">
@@ -263,25 +270,25 @@ attractor_3d();
 </fieldset>
  </div>
 
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Display Options</legend>
       <div>
-   <div style="padding-top: 1em;">     
+   <div style="padding-top: 1em;">
   <button style="font-size: 18px;" onclick="myFunction()">Run the attractors!</button>
   <br></div>
 
   <div style="padding-top: 1em;">
-  <button style="font-size: 18px;" onclick="stopAnimation()">Pause</button> 
+  <button style="font-size: 18px;" onclick="stopAnimation()">Pause</button>
   <button style="font-size: 18px;" onclick="continueAnimation()">Continue</button><br></div>
-   <div style="padding-top: 1em;">  Speed: 
-    <input type="radio" name="speed" id="normal" checked onclick="continueAnimation()"> normal &nbsp; 
-    <input type="radio" name="speed"  id="x2" onclick="continueAnimation()"> x2 &nbsp; &nbsp; 
+   <div style="padding-top: 1em;">  Speed:
+    <input type="radio" name="speed" id="normal" checked onclick="continueAnimation()"> normal &nbsp;
+    <input type="radio" name="speed"  id="x2" onclick="continueAnimation()"> x2 &nbsp; &nbsp;
      <input type="radio" name="speed" id="x4"  onclick="continueAnimation()"> x4 &nbsp; <br> </div>
    </div>
 </fieldset>
  </div>
-</div> 
+</div>
 
 
 
@@ -295,7 +302,7 @@ attractor_3d();
         </fieldset>
     </div>
   </div>
- </div> 
+ </div>
 
 
 <script type="text/javascript">
@@ -303,9 +310,9 @@ var myReq;
 var param = 1; // speeding
 var N = 1000;
 var n = 2;
-var x = [], y = [], z = [];  
+var x = [], y = [], z = [];
 function attractors_2d_setup(x_0, y_0, z_0){
-n = 2;  
+n = 2;
 x[0] = [];
 y[0] = [];
 z[0] = [];
@@ -320,7 +327,7 @@ z[1] = [];
   x[1][0] = x_0;
   y[1][0] = y_0;
   z[1][0] = z_0;
-  
+
 for (var j = 0; j < 2; j++) {
   let sol = ode_auto_RK4(n, h, g, [x[j][0],y[j][0],z[j][0]]);
   for (let i =0; i< n; i++){
@@ -440,10 +447,10 @@ function continueAnimation (){
   }
   else if (document.getElementById('x2').checked) {
       myReq = window.requestAnimationFrame(update_x2);
-  }  
+  }
   else if (document.getElementById('x4').checked) {
       myReq = window.requestAnimationFrame(update_x4);
-  } 
+  }
 }
 
 //attractors_2d();
@@ -455,17 +462,17 @@ function myFunction() {
   var x_0 = parseFloat(document.getElementById("x_0").value);
   var y_0 = parseFloat(document.getElementById("y_0").value);
   var z_0 = parseFloat(document.getElementById("z_0").value);
-  stopAnimation();  
+  stopAnimation();
   attractors_2d_setup(x_0, y_0, z_0);
   if (document.getElementById('normal').checked) {
       myReq = window.requestAnimationFrame(update);
   }
   else if (document.getElementById('x2').checked) {
       myReq = window.requestAnimationFrame(update_x2);
-  }  
+  }
   else if (document.getElementById('x4').checked) {
       myReq = window.requestAnimationFrame(update_x4);
-  } 
+  }
 }
 
 </script>

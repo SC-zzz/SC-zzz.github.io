@@ -1,15 +1,15 @@
 JXG.Options.text.useMathJax = true;
-function new_orthogonal_1() { 
+function new_orthogonal_1() {
   let t_start = 0;
   let t_fin = 2*Math.PI;
   let h = 0.01;
   let N = Math.ceil((t_fin-t_start)/h +1);
   let tArray = Array.from(Array(N), (_, k) => t_start + k * h);
-  
-  brd = JXG.JSXGraph.initBoard('thetabox_1', {boundingbox: [-1.2, 1.2, 1.2, -1.2], keepAspectRatio: true, 
+
+  brd = JXG.JSXGraph.initBoard('thetabox_1', {boundingbox: [-1.2, 1.2, 1.2, -1.2], keepAspectRatio: true,
     axis: true, grid: false});
-  
-  brd.create('text',[-1,1, 'Drag $P$:'],{fontsize: 14});  
+
+  brd.create('text',[-1,1, 'Drag $P$:'],{fontsize: 14});
   var p0 = brd.create('point',[0,0],{fixed:true,visible:false});
   var p1 = brd.create('point',[1,0],{name:'',visible:false,fixed:true});
   var c = brd.create('circle',[p0,p1],{strokeWidth:2,strokeColor:'rgb(150, 150, 150)'});
@@ -32,7 +32,7 @@ function new_orthogonal_1() {
   brd.create('text',[
         function(){return (p2.X()+p3.X())*0.5;},
         function(){return (p2.Y()+p3.Y())*0.5;},
-        'sin'],{fontsize: 14});  
+        'sin'],{fontsize: 14});
 
 
   var upd = function() {
@@ -43,38 +43,39 @@ function new_orthogonal_1() {
     var theta_pi = theta_dec / Math.PI;
     //document.getElementById("theta_dec").innerHTML = math.format(theta_dec,{precision: 2});
     document.getElementById("theta_pi").innerHTML = math.format(theta_pi,{precision: 2});
-    var F1Array = tArray.map(function(t) 
-      {return p2.X() * Math.sin(t)/math.SQRT2 + p2.Y() * Math.cos(t)/math.SQRT2; 
+    document.getElementById("theta_deg").innerHTML = math.format(theta_pi * 180,{precision: 3});
+    var F1Array = tArray.map(function(t)
+      {return p2.X() * Math.sin(t)/math.SQRT2 + p2.Y() * Math.cos(t)/math.SQRT2;
       });
-    var F2Array = tArray.map(function(t) 
-      {return -p2.Y() * Math.sin(t)/math.SQRT2 + p2.X() * Math.cos(t)/math.SQRT2; 
-      });            
+    var F2Array = tArray.map(function(t)
+      {return -p2.Y() * Math.sin(t)/math.SQRT2 + p2.X() * Math.cos(t)/math.SQRT2;
+      });
     let data = [
       {
         x: tArray,
         y: F1Array,
-        mode: 'lines', name: 'F_{&#952;}',
+        mode: 'lines', name: 'F<sub>&#952;</sub>',
         line: {color: 'dodgerblue', width: 3}
       },
       {
         x: tArray,
         y: F2Array,
-        mode: 'lines', name: 'F_{&#952; + &#960;/2}',
+        mode: 'lines', name: 'F<sub>&#952; + &#960;/2</sub>',
         line: {color: 'orange', width: 3}
-      },      
+      },
       ];
-      
-    let layout = {   
+
+    let layout = {
 	  xaxis: {range: [t_start, t_fin], title: "x"},
 	  yaxis: {range: [-0.8, 0.8],},
-	  title: "Orthogonality: Example I"   
-	  };  
+	  title: "Orthogonality: Example 1"
+	  };
     Plotly.newPlot("orthogPlot1", data, layout);
   }
 
   upd();
 
-  p2.on("drag",function(){ 
+  p2.on("drag",function(){
     upd();
   });
 

@@ -1,14 +1,14 @@
 JXG.Options.text.useMathJax = true;
-function new_orthogonal_2() { 
+function new_orthogonal_2() {
   let t_start = 0;
   let t_fin = 2;
   let h = 0.01;
   let N = Math.ceil((t_fin-t_start)/h +1);
   let tArray = Array.from(Array(N), (_, k) => t_start + k * h);
-  
-  brd = JXG.JSXGraph.initBoard('thetabox_2', {boundingbox: [-1.2, 1.2, 1.2, -1.2], keepAspectRatio: true, 
+
+  brd = JXG.JSXGraph.initBoard('thetabox_2', {boundingbox: [-1.2, 1.2, 1.2, -1.2], keepAspectRatio: true,
     axis: true, grid: false});
-  brd.create('text',[-1,1, 'Drag $P$:'],{fontsize: 14});  
+  brd.create('text',[-1,1, 'Drag $P$:'],{fontsize: 14});
   var p0 = brd.create('point',[0,0],{fixed:true,visible:false});
   var p1 = brd.create('point',[1,0],{name:'',visible:false,fixed:true});
   var c = brd.create('circle',[p0,p1],{strokeWidth:2,strokeColor:'rgb(150, 150, 150)'});
@@ -31,7 +31,7 @@ function new_orthogonal_2() {
   brd.create('text',[
         function(){return (p2.X()+p3.X())*0.5;},
         function(){return (p2.Y()+p3.Y())*0.5;},
-        'sin'],{fontsize: 14});  
+        'sin'],{fontsize: 14});
 
 
   var upd = function() {
@@ -42,38 +42,39 @@ function new_orthogonal_2() {
     var theta_pi = theta_dec / Math.PI;
     //document.getElementById("theta_dec").innerHTML = math.format(theta_dec,{precision: 2});
     document.getElementById("theta2_pi").innerHTML = math.format(theta_pi,{precision: 2});
-    var F1Array = tArray.map(function(t) 
-      {return p2.X() * (Math.sqrt(3/52) * (5*t-8)) + p2.Y() * (Math.sqrt(7)/8 * (t**3)); 
+    document.getElementById("theta2_deg").innerHTML = math.format(theta_pi * 180,{precision: 3});
+    var F1Array = tArray.map(function(t)
+      {return p2.X() * (Math.sqrt(3/52) * (5*t-8)) + p2.Y() * (Math.sqrt(7)/8 * (t**3));
       });
-    var F2Array = tArray.map(function(t) 
-      {return -p2.Y() * (Math.sqrt(3/52) * (5*t-8)) + p2.X() * (Math.sqrt(7)/8 * (t**3)); 
-      });            
+    var F2Array = tArray.map(function(t)
+      {return -p2.Y() * (Math.sqrt(3/52) * (5*t-8)) + p2.X() * (Math.sqrt(7)/8 * (t**3));
+      });
     let data = [
       {
         x: tArray,
         y: F1Array,
-        mode: 'lines', name: 'G_{&#952;}',
+        mode: 'lines', name: 'G<sub>&#952;</sub>',
         line: {color: 'dodgerblue', width: 3}
       },
       {
         x: tArray,
         y: F2Array,
-        mode: 'lines', name: 'G_{&#952; + &#960;/2}',
+        mode: 'lines', name: 'G<sub>&#952; + &#960;/2</sub>',
         line: {color: 'orange', width: 3}
-      },      
+      },
       ];
-      
-    let layout = {   
+
+    let layout = {
 	  xaxis: {range: [t_start, t_fin], title: "x"},
 	  yaxis: {range: [-3, 3],},
-	  title: "Orthogonality: Example II"   
-	  };  
+	  title: "Orthogonality: Example 2"
+	  };
     Plotly.newPlot("orthogPlot2", data, layout);
   }
 
   upd();
 
-  p2.on("drag",function(){ 
+  p2.on("drag",function(){
     upd();
   });
 

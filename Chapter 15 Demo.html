@@ -18,7 +18,7 @@
   </script>
   <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
- 
+
 
   <!-- Including Plotly -->
   <script>
@@ -35,8 +35,8 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
- <script src="js/JSX_auxilliary_functions.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
+ <script src="js/JSX_auxilliary_functions.js"> </script>
 
 
   <style>
@@ -94,7 +94,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -112,8 +112,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 14 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 14 Demo.html">previous Chapter</a> |
 <a href="Chapter 16 Demo.html">next Chapter</a>
 </nav>
 
@@ -153,7 +153,7 @@ $\newcommand{\R}{\mathbf{R}}
 \newcommand{\m}{\mathbf{m}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else
 $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
 \newcommand{\rref}{\operatorname{rref}}
@@ -287,7 +287,7 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 </p>
 <article>
-    <h1>Chapter 15</h1>  
+    <h1>Chapter 15</h1>
 
 <div>
 <h3>Visualizing Hamiltonian dynamics and gradient descent dynamics.</h3>
@@ -300,12 +300,17 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 $$\mathbf{x}'(t) = -(\nabla E)(\mathbf{x}(t)).$$</p>
 
 
-<p> Below we give two examples of gradient descent dynamics with differrent $E$. Gradient vector fields, level sets of $E$, and stationary points are shown. Drag the blue dot to your desried position to generate a trajectory starting from that position. Observe that the trajectories are always orthogonal to the level sets. Notice that the gradient vectors fields and the trajectories are going in opposite directions. </p>
+<p> Below we give two examples of gradient descent dynamics with differrent $E$.
+  Gradient vector fields, level sets of $E$, and stationary points are shown.
+  Drag the blue dot to your desried position to generate a trajectory starting
+  from that position. Observe that the trajectories are always orthogonal to the
+  level sets. The gradient vectors and the trajectories point in opposite directions
+  due to the sign in front of $\nabla E$ in the ODE system. </p>
 
-     
+
 
 <div class="twoCol_5050">
-  
+
   <div>
     <div>
         <fieldset >
@@ -316,8 +321,8 @@ $$\mathbf{x}'(t) = -(\nabla E)(\mathbf{x}(t)).$$</p>
           </div>
           </div>
         </fieldset>
-    </div> 
-</div> 
+    </div>
+</div>
 
     <div>
         <fieldset >
@@ -329,7 +334,7 @@ $$\mathbf{x}'(t) = -(\nabla E)(\mathbf{x}(t)).$$</p>
           </div>
         </fieldset>
     </div>
-</div>  
+</div>
 
 
 
@@ -337,15 +342,15 @@ $$\mathbf{x}'(t) = -(\nabla E)(\mathbf{x}(t)).$$</p>
 <br>
 <h4 id="fromHamiltonian">Gradient descent from Hamiltonian dynamics.</h4>
 
-<p> As discussed in this chapter, gradient descent dynamics can be viewed as a limiting form  of Hamiltonian dynamics when 
-a strong damping is inserted.  For a function $E:\mathbf{R}^{2n} \to \mathbf{R}$ defined by $E(\mathbf{x}, \mathbf{y}) = \frac{1}{2}|\!|\mathbf{y}|\!|^2 + V(\mathbf{x})$ 
+<p> As discussed in this chapter, gradient descent dynamics can be viewed as a limiting form  of Hamiltonian dynamics when
+a strong damping is inserted.  For a function $E:\mathbf{R}^{2n} \to \mathbf{R}$ defined by $E(\mathbf{x}, \mathbf{y}) = \frac{1}{2}|\!|\mathbf{y}|\!|^2 + V(\mathbf{x})$
 for $\mathbf{x}, \mathbf{y} \in \mathbf{R}^n$ with $V(\mathbf{x})$ some
 function, the associated Hamiltonian system is
 \[
 \left\{
 \begin{array}{l}
   \x'(t) = \y(t),\\
-  \y'(t) = -\nabla V(\x(t)).
+  \y'(t) = -(\nabla V)(\x(t)).
 \end{array}
 \right.
 \]
@@ -364,7 +369,7 @@ pendulum ODE system, a "damping" can be introduced by adding
 \right.
 \end{equation}
 If $\gamma$ is large then eventually $\y(t)$ becomes fairly constant and the remaining dynamics in $\x(t)$
-is approximately gradient descent dynamics for $V$ as the energy function after scaling the time variable by $\gamma$. That is, 
+is approximately gradient descent dynamics for $V$ as the energy function after scaling the time variable by $\gamma$. That is,
 \begin{equation}
 \x'(t) \approx -\frac{1}{\gamma} (\nabla V)(\x(t)),
 \end{equation}
@@ -374,7 +379,7 @@ So $\mathbf{X}$ approximately satisfies gradient descent dynamics with energy $V
 This is the sense in which gradient descent dynamics is related to Hamiltonian dynamics.
 </p>
 
-<p> As an example, consider $E(x,y) = (1/2) y^2 +  V(x)$ where $V(x) = (1/2) x^2$ (so $V'(x) = x$); this is the dimensionless form of 
+<p> As an example, consider $E(x,y) = (1/2) y^2 +  V(x)$ where $V(x) = (1/2) x^2$ (so $V'(x) = x$); this is the dimensionless form of
  energy for an undamped spring-mass system. In this case, the associated Hamiltonian system is
 \[
 \left\{
@@ -384,11 +389,11 @@ This is the sense in which gradient descent dynamics is related to Hamiltonian d
 \end{array}
 \right.
 \]
-which is the first-order system associated to the second-order ODE $x''(t) + x(t) = 0$. 
+which is the first-order system associated to the second-order ODE $x''(t) + x(t) = 0$.
 (The solutions are given explicitly by
-$x(t) = x(0) \cos t + y(0) \sin t$ and $y(t) = -x(0) \sin t + y(0) \cos t,$ but this will not be relevant below.) 
+$x(t) = x(0) \cos t + y(0) \sin t$ and $y(t) = -x(0) \sin t + y(0) \cos t,$ but this will not be relevant below.)
 
-We now introduce damping by adding an extra $-\gamma\, y(t)$ term with $\gamma > 0$: 
+We now introduce damping by adding an extra $-\gamma\, y(t)$ term with $\gamma > 0$:
 \[
 \left\{
 \begin{array}{l}
@@ -397,50 +402,54 @@ We now introduce damping by adding an extra $-\gamma\, y(t)$ term with $\gamma >
 \end{array}
 \right.
 \]
-(This is the first-order system associated to the second-order ODE $x''(t) + \gamma x'(t) + x(t) = 0$, which is 
-the ODE for a spring-mass system with damping coefficient $\gamma > 0$.) 
+(This is the first-order system associated to the second-order ODE $x''(t) + \gamma x'(t) + x(t) = 0$, which is
+the ODE for a spring-mass system with damping coefficient $\gamma > 0$.)
 In matrix form, this is $$\x'(t) = A \x(t),\,\,\, \mbox{ for }\,\,\,
 A = \begin{bmatrix} 0 & 1 \\ -1 & -\gamma\end{bmatrix}.$$</p>
 
-<p> The "largeness" condition on $\gamma$ will require at least that $\gamma > 2$, 
+<p> The "largeness" condition on $\gamma$ will require at least that $\gamma > 2$,
 so the characteristic polynomial $\lambda^2 + \gamma \lambda +1$ of the ODE system has
 two distinct real roots:
 \begin{equation}\label{rootformula}
 \lambda_{\pm} = \frac{-\gamma \pm \sqrt{\gamma^2 -4}}{2}.
 \end{equation} </p>
-<p> The solutions to the ODE system are linear combinations 
+<p> The solutions to the ODE system are linear combinations
 \begin{equation}\label{xce}
 x(t) = c_+ e^{\lambda_+ t} + c_{-} e^{\lambda_{-} t}.
 \end{equation} </p>
 <p> Expressing this solution in terms of the initial values $x(0)$ and $y(0)$ yields
 $$c_{+} = \frac{\lambda_{-}x(0) - y(0)}{\lambda_{-} - \lambda_{+}},\,\,\,\,
 c_{-} = \frac{-\lambda_{+} x(0) + y(0)}{\lambda_{-} - \lambda_{+}},$$
-which gives 
+which gives
 \begin{equation}\label{eq:15.Hamiltonian.to.gradient.exact}
 x(t) = \frac{\lambda_- x(0) - y(0)}{\lambda_- - \lambda_+} e^{\lambda_+ t} + \frac{-\lambda_+ x(0) + y(0)}{\lambda_- -\lambda_+} e^{\lambda_- t}.
 \end{equation}</p>
 
 
-<p> For large $\gamma$, we have 
+<p> For large $\gamma$, we have
 \begin{equation}
 \x'(t) \approx -\frac{1}{\gamma} (\nabla V)(\x(t)) = -\frac{1}{\gamma}\begin{bmatrix} x \\ 0\end{bmatrix},
 \end{equation}
 $$\lambda_- \approx -\gamma,\,\,\,  \lambda_{+} \approx -\frac{1}{\gamma},$$
-and 
-$$x(t) \approx \frac{\lambda_- x(0) - y(0)}{\lambda_{-} - \lambda_+} e^{\lambda_+ t} \approx \frac{-\gamma x(0)- y(0)}{-\gamma + 1/\gamma} 
+and
+$$x(t) \approx \frac{\lambda_- x(0) - y(0)}{\lambda_{-} - \lambda_+} e^{\lambda_+ t} \approx \frac{-\gamma x(0)- y(0)}{-\gamma + 1/\gamma}
 e^{-(1/\gamma) t} \approx x(0) e^{-(1/\gamma) t}.$$
 </p>
 
-<p> In the graph below we visualize this first-order system. To play with the visulization yourself, change the adamping coefficient, choose your desired display options, choose your desired initial condition by dragging the blue point on the graph, and see how the trajectory and the graph of $x(t)$ and its approximation change. The stationary point is shown as red dot. The two eigenlines are also shown. </p>
+<p> In the graph below we visualize this first-order system. To play with the
+  visulization yourself, change the adamping coefficient, choose your desired
+  display options, choose your desired initial condition by dragging the blue
+  point on the graph, and see how the trajectory and the graph of $x(t)$ and its
+  approximation change. The stationary point is shown as red dot. The two eigenlines are also shown. </p>
 
 
 
-   
+
 
 <div class="twoCol_5050">
   <div>
   <div class="twoCol_5050">
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Damping Coefficient</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -449,14 +458,14 @@ e^{-(1/\gamma) t} \approx x(0) e^{-(1/\gamma) t}.$$
   <output class="bubble"></output><br>
  </div>
 </fieldset>
- </div> 
+ </div>
  <div>
 <fieldset>
   <legend class="controlLegend">Display Options</legend>
       <label for="density_2">Density: </label><br>
    <input id = "density_2" type="range" class="range" min="1" max="2.8" step = 0.2 value = "1.6" style="width: 92%;" oninput="new_graph()"> <br><br>
    <input type="checkbox" id="colorize_2" checked oninput="new_graph()">
-   <label for="colorize_2"> Colorize according to magnitude</label><br> 
+   <label for="colorize_2"> Colorize according to magnitude</label><br>
 </fieldset>
 </div>
 </div>
@@ -482,7 +491,7 @@ e^{-(1/\gamma) t} \approx x(0) e^{-(1/\gamma) t}.$$
         </div>
         </fieldset>
     </div>
-</div>  
+</div>
 
 
 
@@ -490,7 +499,7 @@ e^{-(1/\gamma) t} \approx x(0) e^{-(1/\gamma) t}.$$
 
 
 
-<script src="js/gradient_descent_ex.js"> </script> 
+<script src="js/gradient_descent_ex.js"> </script>
 
 
 
@@ -498,7 +507,7 @@ e^{-(1/\gamma) t} \approx x(0) e^{-(1/\gamma) t}.$$
 
 
 
-<script src="js/gradient_descent_from_Hamiltonian.js"> </script> 
+<script src="js/gradient_descent_from_Hamiltonian.js"> </script>
 
 
 <script src="js/draw_bubble.js"></script>

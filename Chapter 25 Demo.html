@@ -37,8 +37,8 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
- <script src="js/JSX_auxilliary_functions.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
+ <script src="js/JSX_auxilliary_functions.js"> </script>
 
 
   <style>
@@ -96,7 +96,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -114,8 +114,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 24 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 24 Demo.html">previous Chapter</a> |
 <a href="Chapter 26 Demo.html">next Chapter</a>
 </nav>
 
@@ -155,7 +155,7 @@ $\newcommand{\R}{\mathbf{R}}
 \newcommand{\m}{\mathbf{m}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else
 $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
 \newcommand{\rref}{\operatorname{rref}}
@@ -290,7 +290,7 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 
 <article>
-    <h1>Chapter 25</h1>  
+    <h1>Chapter 25</h1>
 
 <div>
 <h3>Visualizing the Fourier transform of some basic functions.</h3>
@@ -300,8 +300,8 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 <p> In the periodic case we saw that the Fourier transform passes between $L$-periodic functions $f(x)$ of a real variable $x$
 and functions $F(n)$ of integers $n$. In the non-periodic setting, a new version of
 the Fourier transform will pass between functions $f(x)$
-of a real variable $x$ and functions $F(\lambda)$ of a real variable $\lambda$.  Our focus on the  1-dimensional Fourier transform 
-is sufficient  for many signal processing applications and 
+of a real variable $x$ and functions $F(\lambda)$ of a real variable $\lambda$.  Our focus on the  1-dimensional Fourier transform
+is sufficient  for many signal processing applications and
 for PDE's with 1 spatial and 1 time dimension (a good
 warm-up before tackling the full complexities of nature). </p>
 
@@ -312,8 +312,8 @@ $$\widehat{f}(\lambda) = \int_{\R} f(x) e^{-i\lambda x}\,dx$$
 
 <p> The Fourier transform can also be reversed: For $f(x)$ as above, if $|\widehat{f}(\lambda)|$ decays quickly enough
 as $|\lambda| \to +\infty$
-so that $\int_{\R} |\widehat{f}(\lambda)| \,d\lambda$ converges then the following formula 
-(with suitable interpretation at jump discontinuities of $f(x)$) recovers $f$ from $\widehat{f}$: 
+so that $\int_{\R} |\widehat{f}(\lambda)| \,d\lambda$ converges then the following formula
+(with suitable interpretation at jump discontinuities of $f(x)$) recovers $f$ from $\widehat{f}$:
 $$f(x) = \frac{1}{2\pi} \int_{\R} \widehat{f}(\lambda) e^{i\lambda x}\,d\lambda.$$
 </p>
 
@@ -327,25 +327,25 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
 
 <p> Below we visualize the Fourier transform of some basic functions. You can adjust the parameters using the sliders. </p>
 
-     
-<div class="twoCol_5050">
+
+<div class="twoCol_5050" id ="ex1&2">
 <div>
   <fieldset>
       <legend class="controlLegend">Example 1: Indicator Function</legend>
   <div  class="twoCol_5050">
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Function</legend>
 
 <p>$\sqcap_a(x) = \mathbf{I}_{[-a,a]}(x).$</p>
 <!-- <p>$\sqcap_a(x) = \mathbf{I}_{[-a,a]}(x)=  \begin{cases}
   1, & |x| \le a\\
-  0, & |x| > a, 
+  0, & |x| > a,
 \end{cases}</p> -->
 <p>$\widehat{\sqcap_a}(\lambda)=\dfrac{2\sin(\lambda a)}{\lambda}$.</p>
 </fieldset>
- </div>   
-  <div> 
+ </div>
+  <div>
   <fieldset>
       <legend class="controlLegend">Parameter</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -354,10 +354,10 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
   <output class="bubble"></output><br><br>
  </div>
 </fieldset>
- </div> 
+ </div>
 </div>
 <!-- <div>
-  <fieldset > 
+  <fieldset >
       <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -378,15 +378,15 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
   <fieldset>
       <legend class="controlLegend">Example 2: Triangular Bump</legend>
   <div  class="twoCol_5050">
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Function</legend>
 <p>$\wedge_a(x) = \begin{cases} 1-|x|/a, & |x| \le a, \\ 0, & |x| > a. \end{cases}$</p>
 <p>$\widehat{\wedge_a}(\lambda) =
  a \left(\dfrac{\sin(\lambda a/2)}{\lambda a/2}\right)^2.$</p>
 </fieldset>
- </div>   
-  <div> 
+ </div>
+  <div>
   <fieldset>
       <legend class="controlLegend">Parameter</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -395,7 +395,7 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
   <output class="bubble"></output><br><br>
  </div>
 </fieldset>
- </div> 
+ </div>
 </div>
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -410,24 +410,24 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
     </div> -->
 
 </fieldset>
-</div>  
-</div>  
+</div>
+</div>
 <br>
 
-<div class="twoCol_5050">
+<div class="twoCol_5050"  id ="ex3&4">
 <div>
   <fieldset>
       <legend class="controlLegend">Example 3: Exponential Decay</legend>
   <div  class="twoCol_5050">
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Function</legend>
 
 <p>$f_a(x) = e^{-a|x|}.$</p>
 <p>$\widehat{f_a}(\lambda) =  \dfrac{2a}{a^2 + \lambda^2}$.</p>
 </fieldset>
- </div>   
-  <div> 
+ </div>
+  <div>
   <fieldset>
       <legend class="controlLegend">Parameter</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -436,10 +436,10 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
   <output class="bubble"></output><br><br>
  </div>
 </fieldset>
- </div> 
+ </div>
 </div>
 <!-- <div>
-  <fieldset > 
+  <fieldset >
       <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -460,15 +460,15 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
   <fieldset>
       <legend class="controlLegend">Example 4: Gaussian</legend>
   <div  class="twoCol_5050">
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Function</legend>
 <p>$f_a(x) = e^{-ax^2/2}$.</p>
 <p>$\widehat{f_a}(\lambda) =
  \sqrt{\dfrac{2\pi}{a}}e^{-\lambda^2/2a}.$</p>
 </fieldset>
- </div>   
-  <div> 
+ </div>
+  <div>
   <fieldset>
       <legend class="controlLegend">Parameter</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -477,7 +477,7 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
   <output class="bubble"></output><br><br>
  </div>
 </fieldset>
- </div> 
+ </div>
 </div>
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -492,8 +492,8 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
     </div> -->
 
 </fieldset>
-</div>  
-</div>  
+</div>
+</div>
 
 
 <script src="js/Fourier_transform_indicator_function.js"></script>
@@ -504,19 +504,19 @@ $$(\cF^{-1} g)(x) = \frac{1}{2\pi} \int_{\R} g(\lambda) e^{i\lambda x}\,d\lambda
 
 
 
-<!-- 
+<!--
 <br>
 <h4>Fourier transform properties.</h4>
 
 <p> The Fourier transform and inverse transform $\cF$ and $\cF^{-1}$ satisfy:
 <ul>
-<li> (linearity) 
+<li> (linearity)
  $\cF(z_1 f_1 + \dots + z_m f_m) = z_1 (\cF f_1) + \dots + z_m (\cF f_m)$ for any scalars $z_1, \dots, z_m \in \C$,
 and similarly  $\cF^{-1}(z_1 g_1 + \dots + z_m g_m) = z_1 (\cF^{-1} g_1) + \dots + z_m (\cF^{-1} g_m)$ </li>
-<li> (translation) For any $x_0$ and $\lambda_0$, if we define $F(x) = f(x+x_0)$ and $G(\lambda) = g(\lambda +\lambda_0)$ then 
+<li> (translation) For any $x_0$ and $\lambda_0$, if we define $F(x) = f(x+x_0)$ and $G(\lambda) = g(\lambda +\lambda_0)$ then
 $$(\cF F)(\lambda) = e^{i\lambda x_0} (\cF f)(\lambda),$$
 $$(\cF^{-1} G)(x) = e^{-i \lambda_0 x} (\cF^{-1} g)(x).$$ </li>
-<li>  (exponential) For any $x_0$ and $\lambda_0$, 
+<li>  (exponential) For any $x_0$ and $\lambda_0$,
 $$\cF(e^{-i \lambda_0 x} f) = (\cF f)(\lambda + \lambda_0),$$
 $$\cF^{-1}(e^{i\lambda x_0} g) = (\cF^{-1} g)(x + x_0).$$ </li>
 <li>  (dilation/scaling) For any nonzero $c \in \R$, if we define $f_c(x) = f(cx)$ and $g_c(\lambda) = g(c \lambda)$ then

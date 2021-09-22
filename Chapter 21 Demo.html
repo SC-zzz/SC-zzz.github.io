@@ -38,7 +38,7 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
 
 
   <style>
@@ -101,7 +101,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -119,8 +119,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 20 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 20 Demo.html">previous Chapter</a> |
 <a href="Chapter 22 Demo.html">next Chapter</a>
 </nav>
 
@@ -159,7 +159,7 @@ $\newcommand{\R}{\mathbf{R}}
 \newcommand{\m}{\mathbf{m}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else
 $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
 \newcommand{\rref}{\operatorname{rref}}
@@ -294,18 +294,18 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 <article>
 
-    <h1>Chapter 21</h1>  
+    <h1>Chapter 21</h1>
 
 <h3>Visualizing orthogonal functions.</h3>
 
 <p> Recall for continuous (e.g., smooth) functions $f, g:[0,L] \to \R$, their <i>dot product</i> is
 defined to be
 \begin{equation}
-\langle f, g \rangle :=  \frac{1}{L} \int_0^L  f(x) g(x) \, dx, 
+\langle f, g \rangle :=  \frac{1}{L} \int_0^L  f(x) g(x) \, dx,
 \label{innerproduct}
 \end{equation}
-(This is not denoted as  $f \cdot g$, to avoid confusion 
-with usual multiplication of functions.) 
+(This is not denoted as  $f \cdot g$, to avoid confusion
+with usual multiplication of functions.)
 When $\langle f, g \rangle = 0$ we say $f$ and $g$ are <i>orthogonal</i>.  We write $\langle f, g \rangle_{[0,L]}$ rather than $\langle f, g \rangle$ if we want to emphasize $L$. (One can similarly define $\langle f, g \rangle_{[a,b]} = \frac{1}{b-a}\int_a^b f(x) g(x)\,dx$ for any $a < b$ and $f, g: [a,b] \to \R$.)</p>
 
 <p> One thing to keep in mind is that the dot product of two functions is not easily visualized in terms of their graphs, even for the orthogonality condition. </p>
@@ -330,14 +330,14 @@ orthogonal (i.e., $\langle f_i, f_j \rangle = 0$ when $i \ne j$) then they are l
 <ul>
   <li>$\langle f_1, f_1 \rangle = 1$, </li>
   <li>$\langle f_2, f_2 \rangle = 1$, </li>
-  <li>$\langle f_1, f_2 \rangle = 0$. </li>    
+  <li>$\langle f_1, f_2 \rangle = 0$. </li>
 </ul>
 <p> So $f_1$ and $f_2$ are orthogonal. What's more, if we define $F_\theta (x): = \cos(\theta)f_1(x) + \sin(\theta)f_2(x)$ and $F_{\theta + \pi/2}(x): = -\sin(\theta)f_1(x) + \cos(\theta)f_2(x)$, then using the linearity of the dot product we find</p>
 <p>\begin{align}
-  \langle F_{\theta}, F_{\theta + \pi/2} \rangle 
+  \langle F_{\theta}, F_{\theta + \pi/2} \rangle
   &= \langle \cos(\theta)f_1(x) + \sin(\theta)f_2(x), -\sin(\theta)f_1(x) + \cos(\theta)f_2(x) \rangle \\
-  &= -\cos(\theta)\sin(\theta)\langle f_1(x), f_1(x)\rangle +\cos^2(\theta)\langle f_1(x), f_2(x)\rangle  
-  -\sin^2(\theta)\langle f_2(x), f_1(x)\rangle 
+  &= -\cos(\theta)\sin(\theta)\langle f_1(x), f_1(x)\rangle +\cos^2(\theta)\langle f_1(x), f_2(x)\rangle
+  -\sin^2(\theta)\langle f_2(x), f_1(x)\rangle
   +\cos(\theta)\sin(\theta)\langle f_2(x), f_2(x)\rangle \\
   & = - \cos(\theta)\sin(\theta)+ 0 - 0 + \cos(\theta)\sin(\theta)\\
   & = 0.
@@ -358,13 +358,13 @@ orthogonal (i.e., $\langle f_i, f_j \rangle = 0$ when $i \ne j$) then they are l
 <div style="width:100%; padding-top:100%; position:relative">
 <div id = "thetabox_1" class="jxgbox" style="position:absolute;top: 0;width:100%;height:100%">
 </div></div>
-<p>$\theta = $ <span id = "theta_pi"> </span>$\pi$</p>
+<p>$\theta = $ <span id = "theta_pi"> </span>$\pi$ radians $=$ <span id = "theta_deg"> </span> degrees</p>
 <p>$\sin(\theta) = $ <span id = "sin"> </span></p>
 <p>$\cos(\theta) = $ <span id = "cos"> </span></p>
 </fieldset>
 </div>
 
-</div> 
+</div>
 
   <div>
     <div>
@@ -375,7 +375,7 @@ orthogonal (i.e., $\langle f_i, f_j \rangle = 0$ when $i \ne j$) then they are l
         </fieldset>
     </div>
   </div>
- </div> 
+ </div>
 </fieldset>
  </div>
 
@@ -385,11 +385,13 @@ orthogonal (i.e., $\langle f_i, f_j \rangle = 0$ when $i \ne j$) then they are l
 <br>
 <h4 id="example2">Example 2.</h4>
 
-<p> Here is another exmaple. Consider the functions $g_1(x) = \sqrt{3/52}(5x-8)$ and $g_2(x) = \dfrac{\sqrt{7}}{8}x^3$ on the interval $[0,2]$. We find</p>
+<p> Here is another exmaple. Consider the functions $g_1(x) = \sqrt{3/52}(5x-8)$
+  and $g_2(x) = \dfrac{\sqrt{7}}{8}x^3$ on the interval $[0,2]$. The ugly coefficients
+  make the $g_j$'s have length 1: we find</p>
 <ul>
   <li>$\langle g_1, g_1 \rangle = 1$, </li>
   <li>$\langle g_2, g_2 \rangle = 1$, </li>
-  <li>$\langle g_1, g_2 \rangle = 0$. </li>    
+  <li>$\langle g_1, g_2 \rangle = 0$. </li>
 </ul>
 <p> So $g_1$ and $g_2$ are orthogonal. What's more, if we define $G_\theta (x): = \cos(\theta)g_1(x) + \sin(\theta)g_2(x)$ and $G_{\theta + \pi/2}(x): = -\sin(\theta)g_1(x) + \cos(\theta)g_2(x)$, then using the linearity of the dot product, again we find</p>
 <p>$$\langle G_{\theta}, G_{\theta + \pi/2} \rangle  = 0,$$</p>
@@ -409,13 +411,13 @@ orthogonal (i.e., $\langle f_i, f_j \rangle = 0$ when $i \ne j$) then they are l
 <div style="width:100%; padding-top:100%; position:relative">
 <div id = "thetabox_2" class="jxgbox" style="position:absolute;top: 0;width:100%;height:100%">
 </div></div>
-<p>$\theta = $ <span id = "theta2_pi"> </span>$\pi$</p>
+<p>$\theta = $ <span id = "theta2_pi"> </span>$\pi$ radians $=$ <span id = "theta2_deg"> </span> degrees</p>
 <p>$\sin(\theta) = $ <span id = "sin2"> </span></p>
 <p>$\cos(\theta) = $ <span id = "cos2"> </span></p>
 </fieldset>
 </div>
 
-</div> 
+</div>
 
   <div>
     <div>
@@ -426,7 +428,7 @@ orthogonal (i.e., $\langle f_i, f_j \rangle = 0$ when $i \ne j$) then they are l
         </fieldset>
     </div>
   </div>
- </div> 
+ </div>
 </fieldset>
  </div>
 

@@ -10,14 +10,14 @@ function squareWavePartialSum(M, x) {
   return sum;
 }
 
-function new_Fourier_1() { 
-  let M = parseFloat(document.getElementById("M_1").value);  
+function new_Fourier_1() {
+  let M = parseFloat(document.getElementById("M_1").value);
   let h = 0.01;
   let t_start = -2*Math.PI;
   let t_fin = 2*Math.PI;
   let K = Math.ceil((t_fin-t_start)/h +1);
   let tArray = Array.from(Array(K), (_, k) => t_start + k * h);
-  
+
 
   let yArray_exact = [];
   for (let i = 0; i< Math.ceil(K/4); i ++){
@@ -31,15 +31,15 @@ function new_Fourier_1() {
   }
   for (let i = Math.ceil(3*K/4); i< K; i ++){
     yArray_exact[i] = 0;
-  }  
-    
+  }
+
   let yArray = [];
-  
+
   for (let i = 0; i< K; i ++){
     yArray[i+1] = squareWavePartialSum(M, tArray[i]);
-  }  
-  
-   
+  }
+
+
   // Define Data
   var data = [
     {
@@ -48,12 +48,12 @@ function new_Fourier_1() {
 	mode:"lines",
 	name: 'step function',
 	line: {color: 'dodgerblue', width: 3}
-	}, 
+	},
   	{
 	x:tArray,
 	y:yArray,
 	mode:"lines",
-	name: 'F_' + M,
+	name: 'F<sub>' + M +'</sub>',
 	line: {color: 'green', width: 2}
 	}
 	];
@@ -61,7 +61,7 @@ function new_Fourier_1() {
   // Define Layout
   var layout = {
 	xaxis: {range: [t_start, t_fin], title: "t"},
-	yaxis: {autorange: true, title: "x"},  
+	yaxis: {autorange: true, title: "x"},
 	//title: "aaa",
 	showlegend: true,
 	legend: {"orientation": "h", yanchor: 'top', y:-0.2},
@@ -72,7 +72,7 @@ function new_Fourier_1() {
     t: 30,
     pad: 4
   },
-	}; 
+	};
 
     // Display using Plotly
   Plotly.newPlot("FourierPlot1", data, layout);

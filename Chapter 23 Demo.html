@@ -37,8 +37,8 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
- <script src="js/JSX_auxilliary_functions.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
+ <script src="js/JSX_auxilliary_functions.js"> </script>
 
 
   <style>
@@ -96,7 +96,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -114,8 +114,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 22 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 22 Demo.html">previous Chapter</a> |
 <a href="Chapter 24 Demo.html">next Chapter</a>
 </nav>
 
@@ -155,7 +155,7 @@ $\newcommand{\R}{\mathbf{R}}
 \newcommand{\m}{\mathbf{m}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else
 $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
 \newcommand{\rref}{\operatorname{rref}}
@@ -290,7 +290,7 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 
 <article>
-    <h1>Chapter 23</h1>  
+    <h1>Chapter 23</h1>
 
 <div>
 <h3>Visualizing heat, wave, and damped wave equations on a bounded interval with Dirichlet boundary values.</h3>
@@ -298,53 +298,58 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 <h4 id="comparisonHeatAndWave">Comparison of heat and wave equations with vanishing Dirichlet boundary conditions.</h4>
 
-<p> The <b>heat equation</b> $\dfrac{\partial u}{\partial t} = \dfrac{\partial^2 u}{\partial x^2}$ on $[0,L]$ with <i>vanishing Dirichlet</i> boundary values $u(t,0)= 0 = u(t,L)$ and initial condition $u(0,x) = f(x)$  has a unique solution, given by the infinite series 
-$$u(t,x) = \sum_{n=1}^\infty B_n  e^{-(n^2\pi^2/L^2)t} \sin\left(\frac{n\pi}{L}x\right)$$ with coefficients 
+<p> The <b>heat equation</b> $\dfrac{\partial u}{\partial t} = \dfrac{\partial^2 u}{\partial x^2}$ on $[0,L]$ with <i>vanishing Dirichlet</i> boundary values $u(t,0)= 0 = u(t,L)$ and initial condition $u(0,x) = f(x)$  has a unique solution, given by the infinite series
+$$u(t,x) = \sum_{n=1}^\infty B_n  e^{-(n^2\pi^2/L^2)t} \sin\left(\frac{n\pi}{L}x\right)$$ with coefficients
 $$B_n = \frac 2L \int_0^L f(x) \sin\left(\frac{n\pi}{L}x\right) \, dx.$$
 </p>
 
-<p> For general Dirichlet boundary values $U(t,0)=a$ and $U(t,L)=b$ and an initial condition $U(0,x) = F(x)$ 
-(with $F(0)=a$, $F(L)=b$) the solution is 
+<p> For general Dirichlet boundary values $U(t,0)=a$ and $U(t,L)=b$ and an initial condition $U(0,x) = F(x)$
+(with $F(0)=a$, $F(L)=b$) the solution is
 $$
 \left(a + \frac{(b-a)x}{L}\right) + \sum_{n=1}^\infty B_n e^{-(n^2\pi^2/L^2)t} \sin((n\pi/L)x)
 $$
-for $B_n$'s defined using $f(x) = F(x) - (a + (b-a)x/L)$  in the integrals. 
+for $B_n$'s defined using $f(x) = F(x) - (a + (b-a)x/L)$  in the integrals.
 </p>
 
 <p> A solution of the <b>wave equation</b> $\dfrac{\partial^2 u}{\partial t^2} = \dfrac{\partial^2 u}{\partial x^2}$ on $[0,L]$ with <i>vanishing Dirichlet</i> boundary values and initial conditions $u(0,x) = f(x)$ and $(\partial u/\partial t)(0,x) = h(x)$ is given by
-$$u(t,x) = \sum_{n=1}^\infty (A_n \cos((n\pi/L)t) +  B_n \sin((n\pi/L)t)) \sin((n\pi/L)x)$$ with 
+$$u(t,x) = \sum_{n=1}^\infty (A_n \cos((n\pi/L)t) +  B_n \sin((n\pi/L)t)) \sin((n\pi/L)x)$$ with
 $$A_n = \frac 2L \int_0^L f(x) \sin((n\pi/L)x) \, dx,$$
 $$B_n = \frac{2}{n\pi} \int_0^L h(x) \sin((n\pi/L)x) \, dx.$$</p>
 
 <p> For general boundary values $U(t,0)=a$ and $U(t,L)=b$ and initial conditions $U(0,x) = F(x)$ and $(\partial U/\partial t)(0,x)=H(x)$
-(with $F(0)=a$, $F(L)=b$, and $H(0)=0=H(L)$) the solution is 
+(with $F(0)=a$, $F(L)=b$, and $H(0)=0=H(L)$) the solution is
 $$
 \left(a + \frac{(b-a)x}{L}\right) + \sum_{n=1}^\infty (A_n \cos((n\pi/L)t) + B_n \sin((n\pi/L)t)) \sin((n\pi/L)x)
 $$
-for the same $A_n$'s and $B_n$'s (using  $h(x)=H(x)$ and $f(x) = F(x) - (a + (b-a)x/L)$  in the integrals). 
+for the same $A_n$'s and $B_n$'s (using  $h(x)=H(x)$ and $f(x) = F(x) - (a + (b-a)x/L)$  in the integrals).
 </p>
 
 
-<p> Below is a visualization of solutions to the heat and wave equations $u_{\text{heat}}$ and $u_{\text{wave}}$ on $[0,\pi]$ with vanishing Dirichlet boundary conditions (so $L = \pi$). Pick initial conditions $u(0,x) = f(x)$ and $\dfrac{\partial u_{\text{wave}}}{\partial t}(0,x) = h(x)$, and see how their long time behaviors differ. Also notice that the more oscillatory parts of the solution to the heat equation in space decay faster in time.</p>
+<p> Below is a visualization of solutions to the heat and wave equations $u_{\text{heat}}$
+  and $u_{\text{wave}}$ on $[0,\pi]$ with vanishing Dirichlet boundary conditions (so $L = \pi$).
+  Pick initial conditions $u(0,x) = f(x)$ and $\dfrac{\partial u}{\partial t}(0,x) = h(x)$,
+  and see how their long time behaviors differ. To see the decay of the heat equation
+  solution more clearly, try running the animation with slower speeds (such as $1/10$-times as slow).</p>
 
 <div class="twoCol_3366">
-  
+
  <div>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Initial Condition</legend>
-<div> 
+<div>
 <label for="ICf">$u(0,x) = f(x) = $</label>
 <select name="ICf" id="ICf" style="font-size: 16px;" onchange = "HW_setup()">
   <option value="0" selected="selected">$sin(x)$</option>
   <option value="1">$sin(2x)$</option>
-  <option value="2">$0.3sin(x) + 0.7sin(3x)$</option> 
+  <option value="2">$0.3sin(x) + 0.7sin(3x)$</option>
   <option value="3">$0.3 \sin(x) - 0.5 \sin(2x) + 0.2 \sin(3x) + 0.4 \sin(9x)$</option>
-  <option value="4">$0.2 \sin(x) - 0.5 \sin(4x) + 0.4 \sin(10x) + 0.1 \sin(13x)$</option> 
+  <option value="4">$0.2 \sin(x) - 0.5 \sin(4x) + 0.4 \sin(10x) + 0.1 \sin(13x)$</option>
   <option value="5">triangle wave</option>
 </select>
 <br> <br>
-<label for="ICh">$\dfrac{\partial u_{\text{wave}}}{\partial t}(0,x) = h(x) = $</label>
+For wave equation only: <br>
+<label for="ICh">$\dfrac{\partial u}{\partial t}(0,x) = h(x) = $</label>
 <select name="ICh" id="ICh" style="font-size: 16px;" onchange = "HW_setup()">
   <option value="0" selected="selected">$0$</option>
   <option value="1">$\sin(x)$</option>
@@ -354,42 +359,42 @@ for the same $A_n$'s and $B_n$'s (using  $h(x)=H(x)$ and $f(x) = F(x) - (a + (b-
 </fieldset>
  </div>
 <br>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Display Options</legend>
       <div>
-   <div style="padding-top: 1em;">     
+   <div style="padding-top: 1em;">
   <button style="font-size: 18px;" onclick="newHW()">Run the animation!</button>
   <br></div>
 
   <div style="padding-top: 1em;">
-  <button style="font-size: 18px;" onclick="stopHWAnimation()">Pause</button> 
+  <button style="font-size: 18px;" onclick="stopHWAnimation()">Pause</button>
   <button style="font-size: 18px;" onclick="continueHWAnimation()">Continue</button><br></div>
    </div>
-    <div style="padding-top: 1em;">  Speed: 
-    <input type="radio" name="speed" id="normal" checked onclick="changeHWSpeed()"> normal &nbsp; 
-    <input type="radio" name="speed"  id="x1/2" onclick="changeHWSpeed()"> x1/2 &nbsp; &nbsp; 
-    <input type="radio" name="speed"  id="x1/5" onclick="changeHWSpeed()"> x1/5 &nbsp; &nbsp; 
-     <input type="radio" name="speed" id="x1/10"  onclick="changeHWSpeed()"> x1/10 &nbsp; &nbsp;    
+    <div style="padding-top: 1em;">  Speed:
+    <input type="radio" name="speed" id="normal" checked onclick="changeHWSpeed()"> normal &nbsp;
+    <input type="radio" name="speed"  id="x1/2" onclick="changeHWSpeed()"> x1/2 &nbsp; &nbsp;
+    <input type="radio" name="speed"  id="x1/5" onclick="changeHWSpeed()"> x1/5 &nbsp; &nbsp;
+     <input type="radio" name="speed" id="x1/10"  onclick="changeHWSpeed()"> x1/10 &nbsp; &nbsp;
 <!--     <input type="radio" name="speed" id="x1/20"  onclick="changeHWSpeed()"> x1/20 &nbsp; &nbsp;    -->
-     <br> 
+     <br>
    </div>
 </fieldset>
  </div>
-</div> 
+</div>
 
 
   <div>
     <div>
         <fieldset>
         <legend class="controlLegend">Animation</legend>
-  <p>Time: $t = $ <span id = "time_HW"> </span> </p>       
+  <p>Time: $t = $ <span id = "time_HW"> </span> </p>
 <div id="myHW" style="width:100%;max-width:700px">
 </div>
         </fieldset>
     </div>
   </div>
- </div> 
+ </div>
 
 
 <script src="js/heat_and_wave_Ch23.js"></script>
@@ -403,49 +408,55 @@ for the same $A_n$'s and $B_n$'s (using  $h(x)=H(x)$ and $f(x) = F(x) - (a + (b-
 
 <p> The solutions of the wave equation as above are $2L$-periodic in time, so they oscillate forever without decay. But an actual vibrating string (for instance, in a guitar) does not go on periodically forever, in contrast with solutions to the wave equation. The point is that the wave equation is an idealized model that does not take friction into account. One way to incorporate friction is to add in a damping term inspired by our experience with damping for harmonic oscillators in our study of second-order linear ODE’s: the <i>damped wave equation</i> is
   $$\frac{\partial^2 u}{\partial t^2}(t,x) + k \frac{\partial u}{\partial t}(t,x) = \frac{\partial^2 u}{\partial x^2}(t,x),$$
-  where $k> 0$ is a constant quantifying the strength of the friction.  
+  where $k> 0$ is a constant quantifying the strength of the friction.
 </p>
-<p> Provided that $k$ is small enough ($< 2\pi/L$, to be precise), 
+<p> Provided that $k$ is small enough ($< 2\pi/L$, to be precise),
 separation of variables yields a general solution for the damped wave equation that has approximately the same form as when $k=0$. To be precise, the damped wave equation on $[0, L]$ with vanishing Dirichlet boundary values has general solution</p>
-<p> $$u(t,x) = e^{-(k/2)t}  \sum_{n=1}^\infty 
+<p> $$u(t,x) = e^{-(k/2)t}  \sum_{n=1}^\infty
 (A_n \cos(\omega_n t)  + B_n \sin(\omega_n t)) \sin\left(\frac{n\pi}{L}x\right)$$
 with $\omega_n = \sqrt{(n\pi/L)^2 - (k/2)^2}$.  The exponential factor $e^{-(k/2)t}$ provides the desired decay over time
 when $k > 0$, and as $k \to 0$ the factor $\omega_n$ approaches $\sqrt{(n\pi/L)^2} = n\pi/L$ which appears
 in the general solution of the wave equation for the case $k=0$.  </p>
-<p> If we are given intial conditions 
-$u(0,x) = f(x)$ and $(\partial u/\partial t)(0,x) = h(x)$, then 
+<p> If we are given intial conditions
+$u(0,x) = f(x)$ and $(\partial u/\partial t)(0,x) = h(x)$, then
 $$A_n = \frac 2L \int_0^L f(x) \sin((n\pi/L)x) \, dx,$$
 $$B_n = \frac{2}{L\omega_n} \int_0^L h(x) \sin((n\pi/L)x) \, dx + \frac{k}{2\omega_n} A_n.$$</p>
 </p>
 
-<p> Below is a visualization of solutions to the damped and umdamped wave equations $u_{\text{damped}}$ and $u_{\text{undamped}}$ on $[0,\pi]$ with vanishing Dirichlet boundary conditions (so $L = \pi$). Choose your desired damping $k$, pick initial conditions $u(0,x) = f(x)$ and $\dfrac{\partial u}{\partial t}(0,x) = h(x)$, and see how their long time behaviors differ. </p>
+<p> Below is a visualization of solutions to the damped and umdamped wave equations
+  $u_{\text{damped}}$ and $u_{\text{undamped}}$ on $[0,\pi]$ with vanishing Dirichlet
+  boundary conditions (so $L = \pi$). Choose your desired damping $k$, pick initial
+  conditions $u(0,x) = f(x)$ and $\dfrac{\partial u}{\partial t}(0,x) = h(x)$, and
+  see how their long time behaviors differ. To see the decay of the damped wave
+  equation solution more clearly, try running the animation with slower speeds
+  (such as $1/10$-times as slow).</p>
 
 
 
 <div class="twoCol_3366">
  <div>
-       <div> 
+       <div>
   <fieldset>
-      <legend class="controlLegend">Damping</legend> 
+      <legend class="controlLegend">Damping</legend>
    <div class="range-wrap" style="width: 90%;">
   <label for="k">$k$: </label>
   <input id = "k" type="range" class="range" min="0" max="1.9" step = 0.1 value = "1.9" oninput="wave_setup()">
   <output class="bubble"></output><br>
- </div>     
+ </div>
   </fieldset>
 </div>
 <br>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Initial Condition</legend>
-<div> 
+<div>
 <label for="IC2">$u(0,x) = f(x) = $</label>
 <select name="ICf2" id="ICf2" style="font-size: 16px;" onchange = "wave_setup()">
   <option value="0" selected="selected">$sin(x)$</option>
   <option value="1">$sin(2x)$</option>
-  <option value="2">$0.3sin(x) + 0.7sin(3x)$</option> 
+  <option value="2">$0.3sin(x) + 0.7sin(3x)$</option>
   <option value="3">$0.3 \sin(x) - 0.5 \sin(2x) + 0.2 \sin(3x) + 0.4 \sin(9x)$</option>
-  <option value="4">$0.2 \sin(x) - 0.5 \sin(4x) + 0.4 \sin(10x) + 0.1 \sin(13x)$</option> 
+  <option value="4">$0.2 \sin(x) - 0.5 \sin(4x) + 0.4 \sin(10x) + 0.1 \sin(13x)$</option>
   <option value="5">triangle wave</option>
 </select>
 <br> <br>
@@ -459,42 +470,42 @@ $$B_n = \frac{2}{L\omega_n} \int_0^L h(x) \sin((n\pi/L)x) \, dx + \frac{k}{2\ome
 </fieldset>
  </div>
 <br>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Display Options</legend>
       <div>
-   <div style="padding-top: 1em;">     
+   <div style="padding-top: 1em;">
   <button style="font-size: 18px;" onclick="newWave()">Run the animation!</button>
   <br></div>
 
   <div style="padding-top: 1em;">
-  <button style="font-size: 18px;" onclick="stopWaveAnimation()">Pause</button> 
+  <button style="font-size: 18px;" onclick="stopWaveAnimation()">Pause</button>
   <button style="font-size: 18px;" onclick="continueWaveAnimation()">Continue</button><br></div>
    </div>
-    <div style="padding-top: 1em;">  Speed: 
-    <input type="radio" name="speed2" id="normal_wave" checked onclick="changeWaveSpeed()"> normal &nbsp; 
-    <input type="radio" name="speed2"  id="x1/2_wave" onclick="changeWaveSpeed()"> x1/2 &nbsp; &nbsp; 
-    <input type="radio" name="speed2"  id="x1/5_wave" onclick="changeWaveSpeed()"> x1/5 &nbsp; &nbsp; 
-     <input type="radio" name="speed2" id="x1/10_wave"  onclick="changeWaveSpeed()"> x1/10 &nbsp; &nbsp;    
+    <div style="padding-top: 1em;">  Speed:
+    <input type="radio" name="speed2" id="normal_wave" checked onclick="changeWaveSpeed()"> normal &nbsp;
+    <input type="radio" name="speed2"  id="x1/2_wave" onclick="changeWaveSpeed()"> x1/2 &nbsp; &nbsp;
+    <input type="radio" name="speed2"  id="x1/5_wave" onclick="changeWaveSpeed()"> x1/5 &nbsp; &nbsp;
+     <input type="radio" name="speed2" id="x1/10_wave"  onclick="changeWaveSpeed()"> x1/10 &nbsp; &nbsp;
 <!--     <input type="radio" name="speed" id="x1/20_wave"  onclick="changeWaveSpeed()"> x1/20 &nbsp; &nbsp;    -->
-     <br> 
+     <br>
    </div>
 </fieldset>
  </div>
-</div> 
+</div>
 
 
   <div>
     <div>
         <fieldset>
         <legend class="controlLegend">Animation</legend>
-  <p>Time: $t = $ <span id = "time_wave"> </span> </p>       
+  <p>Time: $t = $ <span id = "time_wave"> </span> </p>
 <div id="myWave" style="width:100%;max-width:700px">
 </div>
         </fieldset>
     </div>
   </div>
- </div> 
+ </div>
 
 
 <script src="js/wave_eqn_Ch23.js"></script>

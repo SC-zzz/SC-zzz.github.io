@@ -36,7 +36,7 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
 
 
   <style>
@@ -94,7 +94,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -112,8 +112,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 10 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 10 Demo.html">previous Chapter</a> |
 <a href="Chapter 12 Demo.html">next Chapter</a>
 </nav>
 
@@ -121,10 +121,10 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <article>
 
-    <h1>Chapter 11</h1>  
+    <h1>Chapter 11</h1>
 
 <div>
-<h3>Visualizing phase portraits for 2-dimensional ODE's.</h3>
+<h3>Visualizing phase portraits for 2-dimensional ODE systems.</h3>
 </div>
 
 <h4 id="competitiveLotka-Volterra">The competitive Lotka-Volterra model.</h4>
@@ -146,12 +146,12 @@ finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on 
 
 <p> To play with the visulization yourself, change the parameters, and see how the graph changes. Choose your desired initial condition by dragging the blue point on the graph. The stationary points are shown as red dots. Observe that solution curves starting in the first quadrant stay in the first quadrant.</p>
 
-     
+
 
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Parameters</legend>
  <div class="range-wrap column" style="width: 42%;">
@@ -193,7 +193,8 @@ finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on 
       <label for="density">Density: </label><br>
    <input id = "density" type="range" class="range" min="1.2" max="3.8" step = 0.2 value = "1.8" style="width: 50%;" oninput="new_function()"> <br><br>
    <input type="checkbox" id="colorize"  checked oninput="new_function()">
-   <label for="colorize"> Colorize according to magnitude</label><br> 
+   <label for="colorize"> Colorize according to magnitude</label><br>
+   <p>The red dots are stationary points.</p>
 </fieldset>
 </div>
 </div>
@@ -210,11 +211,11 @@ finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on 
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
 
 
-<script src="js/competitive_Lotka_Volterra_new.js"> </script> 
+<script src="js/competitive_Lotka_Volterra_new.js"> </script>
 
 
 
@@ -238,12 +239,12 @@ finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on 
   </p>
 <p> To play with the visulization yourself, change the parameters, and see how the graph changes. Choose your desired initial condition by dragging the blue point on the graph. Observe that for any choice of parameters, the vector fields point inwards when $|x_1(t)|$ and $|x_2(t)|$ are large. From this you can deduce that no trajectories are going off to infinity. </p>
 
-     
+
 
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Parameters</legend>
  <div class="range-wrap column" style="width: 42%;">
@@ -275,10 +276,10 @@ finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on 
       <label for="density_2">Density: </label><br>
    <input id = "density_2" type="range" class="range" min="1" max="2.8" step = 0.2 value = "1.6" style="width: 50%;" oninput="new_bounded_trajectory()"> <br><br>
    <input type="checkbox" id="colorize_2" checked oninput="new_bounded_trajectory()">
-   <label for="colorize_2"> Colorize according to magnitude</label><br> 
+   <label for="colorize_2"> Colorize according to magnitude</label><br>
 </fieldset>
 </div>
-</div> 
+</div>
 
     <div>
         <fieldset >
@@ -289,13 +290,13 @@ finite resources, and $k_{ij} > 0$ is a measure of the impact of species $j$ on 
           </div>
         </fieldset>
     </div>
-</div>  
+</div>
 
 
 
-<script src="js/bounded_trajectory.js"> </script> 
- 
-            
+<script src="js/bounded_trajectory.js"> </script>
+
+
 
 <script src="js/draw_bubble.js"></script>
 

@@ -37,8 +37,8 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
- <script src="js/JSX_auxilliary_functions.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
+ <script src="js/JSX_auxilliary_functions.js"> </script>
 
 
   <style>
@@ -96,7 +96,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -114,8 +114,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 25 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 25 Demo.html">previous Chapter</a> |
 next Chapter
 <!-- <a href="Chapter 27 Demo.html">next Chapter</a> -->
 </nav>
@@ -156,7 +156,7 @@ $\newcommand{\R}{\mathbf{R}}
 \newcommand{\m}{\mathbf{m}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else
 $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
 \newcommand{\rref}{\operatorname{rref}}
@@ -291,12 +291,12 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 
 <article>
-    <h1>Chapter 26</h1>  
+    <h1>Chapter 26</h1>
 
 <div>
 <h3>Visualizing differential equations and the Fourier transform.</h3>
 </div>
-<h4 id="convolutionVisualization">Visualizing convolution.</h4>
+<h4 id="convolutionVisualization">Convolution.</h4>
 
 <p> Recall that the <i>convolution</i> of two functions $f, g:\R \to \C$ is the function
 $$(f \ast g)(x) = \int_{\R} f(x-y) g(y)\,dy.$$ </p>
@@ -304,47 +304,47 @@ $$(f \ast g)(x) = \int_{\R} f(x-y) g(y)\,dy.$$ </p>
 <p> One reason for interest in convolution is because the Fourier transform of the convolution $f*g$ of two functions $f(x)$ and $g(x)$ is the product of the Fourier transforms of $f$ and $g$:
     $$\cF(f \ast g) = (\cF f)(\cF g).$$</p>
 
-<p> Convolution may look asymmetric in how it treats $f$ and $g$ (we put $x-y$ inside $f$ rather than $g$), 
+<p> Convolution may look asymmetric in how it treats $f$ and $g$ (we put $x-y$ inside $f$ rather than $g$),
 but it works the same way with the roles of $f$ and $g$ swapped:  in other words,
 $(g \ast f)(x) = (f \ast g)(x)$.
 </p>
 
 <p> What is the <i>meaning</i> of convolution?  An instructive example is $f \ast u_L$ where  $$u_L(x) = \begin{cases} L, & -1/(2L) \le x \le 1/(2L)\\ 0, & |x| > 1/(2L)\end{cases}$$
-is a square bump concentrated over a short interval $[-1/(2L), 1/(2L)]$ of length $1/L$ centered at the origin 
+is a square bump concentrated over a short interval $[-1/(2L), 1/(2L)]$ of length $1/L$ centered at the origin
 and having height $L$ (so total area 1). Then
 $$(f \ast u_L)(x) =  \int_{\R} f(x-y) u_L(y)\,dy = L \int_{-1/(2L)}^{1/(2L)} f(x-y)\,dy = \frac{1}{1/L} \int_{x-1/(2L)}^{x+1/(2L)} f(w)\,dw$$
 (with the substitution $w = x-y$).  This value at $x$ is the average of $f$ over the interval centered
-at $x$ with length $1/L$.  The effect of such convolution is to "smoothen" $f$ by
-replacing its value at each $x$ with the average of its values <i> nearby</i> (for large $L$).  
+at $x$ with length $1/L$.  The effect of such convolution is to &ldquo;smoothen&rdquo; $f$ by
+replacing its value at each $x$ with the average of its values <i> nearby</i> (for large $L$).
 So for large $L$, $f \ast u_L$ is a good approximation to $f$ that is  smoother.
 </p>
 
 <p> Below we give two examples of $f \ast u_L$. Observe how $f \ast u_L$ better approximates $f$ as $L$ get larger. </p>
 
-     
+
 <div class="twoCol_5050">
 <div>
   <fieldset>
       <legend class="controlLegend">Example 1: Square Bump</legend>
   <div  class="twoCol_5050">
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Function</legend>
 
 <p>$f(x) = \begin{cases}
   1, & |x| \le 1,\\
-  0, & |x| > 1. 
+  0, & |x| > 1.
 \end{cases}$</p>
 <!-- <p>$f(x) = \mathbf{I}_{[-1,1]}(x)=  \begin{cases}
   1, & |x| \le 1\\
-  0, & |x| > 1, 
+  0, & |x| > 1,
 \end{cases}</p> -->
-<p>$u_L$: 
+<p>$u_L$:
     <input type="radio" name="showUL_ex1" id="hideUL_ex1" checked onclick="new_convolution_ex1()"> hide
     <input type="radio" name="showUL_ex1"  id="showUL_ex1"onclick="new_convolution_ex1()"> show </p>
 </fieldset>
- </div>   
-  <div> 
+ </div>
+  <div>
   <fieldset>
       <legend class="controlLegend">Parameter</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -353,7 +353,7 @@ So for large $L$, $f \ast u_L$ is a good approximation to $f$ that is  smoother.
   <output class="bubble"></output>
  </div>
 </fieldset>
- </div> 
+ </div>
 </div>
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -372,16 +372,16 @@ So for large $L$, $f \ast u_L$ is a good approximation to $f$ that is  smoother.
   <fieldset>
       <legend class="controlLegend">Example 2: Triangular Bump</legend>
   <div  class="twoCol_5050">
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Function</legend>
 <p>$f(x) = \begin{cases} 1-|x|, & |x| \le 1, \\ 0, & |x| > 1.\end{cases}$ </p>
-<p>$u_L$: 
+<p>$u_L$:
     <input type="radio" name="showUL_ex2" id="hideUL_ex2" checked onclick="new_convolution_ex2()"> hide
     <input type="radio" name="showUL_ex2"  id="showUL_ex2" onclick="new_convolution_ex2()"> show </p>
 </fieldset>
- </div>   
-  <div> 
+ </div>
+  <div>
   <fieldset>
       <legend class="controlLegend">Parameter</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -390,7 +390,7 @@ So for large $L$, $f \ast u_L$ is a good approximation to $f$ that is  smoother.
   <output class="bubble"></output>
  </div>
 </fieldset>
- </div> 
+ </div>
 </div>
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -405,8 +405,8 @@ So for large $L$, $f \ast u_L$ is a good approximation to $f$ that is  smoother.
     </div> -->
 
 </fieldset>
-</div>  
-</div>  
+</div>
+</div>
 
 
 
@@ -418,7 +418,7 @@ So for large $L$, $f \ast u_L$ is a good approximation to $f$ that is  smoother.
 
 
 <br>
-<h4 id="heatViaFourier">Visualizing the heat equation via Fourier transform.</h4>
+<h4 id="heatViaFourier">The heat equation via Fourier transform.</h4>
 
 <p> The heat equation governing the time evolution of heat distribution along a single spatial dimension is the PDE
 $$\pd{u}{t}=\alpha \frac{\partial^2 u}{\partial x^2}$$
@@ -429,7 +429,7 @@ $$
 where $f(x)$ is the initial heat distribution on the line. Here is the solution:
 </p>
 
-<p> For $t > 0$, the solution $u(t,x)$ of the heat equation with initial condition $u(0,x) = f(x)$ is 
+<p> For $t > 0$, the solution $u(t,x)$ of the heat equation with initial condition $u(0,x) = f(x)$ is
  the convolution of $f(x)$ with a scaled Gaussian that depends on $t>0$:
     $$
     u(t,x)=\int_{\R} f(y) \frac{1}{\sqrt{4\pi \alpha t}} e^{-(x-y)^2/(4\alpha t)} \,dy=\frac{1}{\sqrt{4\pi \alpha t}}\int_{\R}f(y) e^{-(x-y)^2/(4\alpha t)} \,dy.
@@ -446,18 +446,25 @@ $$u(t,x)=  \cF^{-1}(\widehat{u}(t,\lambda)) =
 </p>
 <p> Lastly we use convolution to rewrite it into the desired form.</p>
 
-<p> Below we visualize $\widehat{u}(t,\lambda)$ and $u(t,x)$ for the heat equation with Gaussian initial condition $f(x) = e^{-x^2}$. Asjust the parameter $alpha$, and hit the "Run the animation!" button to see the animation. </p>
+<p> Below we visualize $\widehat{u}(t,\lambda)$ and $u(t,x)$ for the heat equation
+  with Gaussian initial condition $f(x) = e^{-x^2}$. Adjust the parameter $\alpha$,
+  and hit the &ldquo;Run the animation!&rdquo; button to see the animation. Observe
+  that the animation begins at time $t = 0$ with the graphs of $u(0, x) = f(x)$ in
+  blue and $\widehat u(t,\lambda) =\sqrt{\pi}e^{-\lambda^2/4}$ in red that are both
+  <i>independent of $\alpha$</i> (but as $t$ grows, the new red and blue curves for
+  $t > 0$ very much depend on $\alpha$: this is because the PDE depends on $\alpha$,
+ and can also be seen explicitly in the formulas for each).</p>
 
 
 
 <div class="twoCol_3366">
-  
+
  <div>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">IVP</legend>
 <p>\begin{align}
-  &\pd{u}{t} =\alpha \frac{\partial^2 u}{\partial x^2},\\ 
+  &\pd{u}{t} =\alpha \frac{\partial^2 u}{\partial x^2},\\
 & u(0,x) =f(x) = e^{-x^2}
 \end{align}</p>
 <p>Fourier transform: \begin{align}
@@ -473,7 +480,7 @@ u(t,x) &= \cF^{-1}(\widehat{u}(t,\lambda)) \\
 </fieldset>
  </div>
 <br>
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Parameter and Display Options</legend>
  <div class="range-wrap" style="width: 92%;">
@@ -483,32 +490,32 @@ u(t,x) &= \cF^{-1}(\widehat{u}(t,\lambda)) \\
  </div>
 
       <div>
-   <div style="padding-top: 1em;">     
+   <div style="padding-top: 1em;">
   <button style="font-size: 18px;" onclick="newHG()">Run the animation!</button>
   <br></div>
 
   <div style="padding-top: 1em;">
-  <button style="font-size: 18px;" onclick="stopAnimation_HG()">Pause</button> 
+  <button style="font-size: 18px;" onclick="stopAnimation_HG()">Pause</button>
   <button style="font-size: 18px;" onclick="continueAnimation_HG()">Continue</button><br></div>
    </div>
-    <div style="padding-top: 1em;">  Speed: 
-    <input type="radio" name="speed" id="normal" checked onclick="changeSpeed_HG()"> normal &nbsp; 
-  <input type="radio" name="speed"  id="x1/2" onclick="changeSpeed_HG()"> x1/2 &nbsp; &nbsp; 
-    <input type="radio" name="speed"  id="x1/5" onclick="changeSpeed_HG()"> x1/5 &nbsp; &nbsp; 
-    <input type="radio" name="speed" id="x1/10"  onclick="changeSpeed_HG()"> x1/10 &nbsp; &nbsp;     
+    <div style="padding-top: 1em;">  Speed:
+    <input type="radio" name="speed" id="normal" checked onclick="changeSpeed_HG()"> normal &nbsp;
+  <input type="radio" name="speed"  id="x1/2" onclick="changeSpeed_HG()"> x1/2 &nbsp; &nbsp;
+    <input type="radio" name="speed"  id="x1/5" onclick="changeSpeed_HG()"> x1/5 &nbsp; &nbsp;
+    <input type="radio" name="speed" id="x1/10"  onclick="changeSpeed_HG()"> x1/10 &nbsp; &nbsp;
 
-     <br> 
+     <br>
    </div>
 </fieldset>
  </div>
-</div> 
+</div>
 
 
   <div>
     <div>
         <fieldset>
         <legend class="controlLegend">Animation</legend>
-  <p>Time: $t = $ <span id = "time_HG"> </span> </p>       
+  <p>Time: $t = $ <span id = "time_HG"> </span> </p>
 <div id="GaussianFourierPlot" style="width:100%;max-width:700px">
 </div>
 <div id="GaussianHeatPlot" style="width:100%;max-width:700px">
@@ -516,7 +523,7 @@ u(t,x) &= \cF^{-1}(\widehat{u}(t,\lambda)) \\
         </fieldset>
     </div>
   </div>
- </div> 
+ </div>
 
 
 

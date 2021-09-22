@@ -13,19 +13,19 @@ function sawtoothPartialSum(M, N, x) {
   }
   for (let n=1; n<= N; n++) {
     sum = sum + sawtoothSin(n, x);
-  }  
+  }
   return sum;
 }
 
-function new_Fourier_2() { 
-  let M = parseFloat(document.getElementById("M_2").value);  
-  let N = parseFloat(document.getElementById("N_2").value);   
+function new_Fourier_2() {
+  let M = parseFloat(document.getElementById("M_2").value);
+  let N = parseFloat(document.getElementById("N_2").value);
   let h = 0.01;
   let t_start = -2*Math.PI;
   let t_fin = 2*Math.PI;
   let K = Math.ceil((t_fin-t_start)/h +1);
   let tArray = Array.from(Array(K), (_, k) => t_start + k * h);
-  
+
 
   let yArray_exact = [];
   for (let i = 0; i< Math.ceil(K/4); i ++){
@@ -39,15 +39,15 @@ function new_Fourier_2() {
   }
   for (let i = Math.ceil(3*K/4); i< K; i ++){
     yArray_exact[i] = tArray[i] - Math.PI;
-  }  
-    
+  }
+
   let yArray = [];
-  
+
   for (let i = 0; i< K; i ++){
     yArray[i+1] = sawtoothPartialSum(M, N, tArray[i]);
-  }  
-  
-   
+  }
+
+
   // Define Data
   var data = [
     {
@@ -56,12 +56,12 @@ function new_Fourier_2() {
 	mode:"lines",
 	name: 'sawtooth function',
 	line: {color: 'dodgerblue', width: 3}
-	}, 
+	},
   	{
 	x:tArray,
 	y:yArray,
 	mode:"lines",
-	name: 'F_{' + M + ', ' + M + '}',
+	name: 'F<sub>' + M + ', ' + N + '</sub>',
 	line: {color: 'green', width: 2}
 	}
 	];
@@ -69,7 +69,7 @@ function new_Fourier_2() {
   // Define Layout
   var layout = {
 	xaxis: {range: [t_start, t_fin], title: "t"},
-	yaxis: {autorange: true, title: "x"},  
+	yaxis: {autorange: true, title: "x"},
 	//title: "aaa",
 	showlegend: true,
 	legend: {"orientation": "h", yanchor: 'top', y:-0.2},
@@ -80,7 +80,7 @@ function new_Fourier_2() {
     t: 30,
     pad: 4
   },
-	}; 
+	};
 
     // Display using Plotly
   Plotly.newPlot("FourierPlot2", data, layout);

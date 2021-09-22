@@ -37,8 +37,8 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
- <script src="js/JSX_auxilliary_functions.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
+ <script src="js/JSX_auxilliary_functions.js"> </script>
 
 
   <style>
@@ -96,7 +96,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -114,8 +114,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 21 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 21 Demo.html">previous Chapter</a> |
 <a href="Chapter 23 Demo.html">next Chapter</a>
 </nav>
 
@@ -155,7 +155,7 @@ $\newcommand{\R}{\mathbf{R}}
 \newcommand{\m}{\mathbf{m}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else
 $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
 \newcommand{\rref}{\operatorname{rref}}
@@ -290,19 +290,19 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 
 <article>
-    <h1>Chapter 22</h1>  
+    <h1>Chapter 22</h1>
 
 <div>
 <h3>Visualizing Fourier series for periodic functions.</h3>
 </div>
-<h4 id="partialSums">Visualizing partial sums.</h4>
+<h4 id="partialSums">Truncated Fourier series approximations.</h4>
 
 <p> Let $\omega = 2\pi/L$. For an arbitrary $L$-periodic $f(x)$, we define the numbers $a_k$ and $b_k$ by </p>
 <p>$$a_0 = \frac{1}{L} \int_0^{L} f(x)\, dx, $$
 $$a_k = \frac{1}{L/2} \int_0^{L} f(x) \cos k\omega x\, dx,$$
 $$b_k = \frac{1}{L/2} \int_0^{L} f(x) \sin k \omega x\, dx.$$ </p>
 
-<p> We then use these to define the <i>Fourier series associated to $f(x)$</i> to be 
+<p> We then use these to define the <i>Fourier series associated to $f(x)$</i> to be
 $$f(x) = a_0 + \sum_{k=1}^\infty  (a_k \cos k \omega x + b_k \sin k \omega x).$$
  </p>
 
@@ -314,35 +314,38 @@ Then the associated Fourier series as defined above converges everywhere, and it
 the average of the limits from the left and right.
 </p>
 
-<p> To give you some feeling about this result, below we give two examples. In each example, you can see a $2\pi$-periodic function $f(x)$ with jump continuities, and you can see how the partial sums of the Fourier series for $f(x)$ approximates $f(x)$.</p>
+<p> To give you some feeling about this result, below we give two examples.
+  In each example, you can see a $2\pi$-periodic function $f(x)$ with jump continuities,
+  and you can see how the partial sums of the Fourier series for $f(x)$ approximates $f(x)$.
+  As you increase the truncation parameter(s), observe how the Gibbs phenomenon appears!</p>
 
-     
+
 <div class="twoCol_5050">
 <div>
   <fieldset>
       <legend class="controlLegend">Example 1</legend>
 
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Function</legend>
 <p>Let $F(x)$ be the $2\pi$-periodic step function that alternates between the values 1 and 0 over
-successive intervals of length $\pi$.</p>
+successive intervals of length $\pi$. The graph of $F(x)$ is shown in blue.</p>
 <!-- <p>Fourier series: $\frac{1}{2} + \sum_{m=0}^\infty \frac{2}{\pi (2m+1)} \, \sin \left( (2m+1)x\right)$</p> -->
 </fieldset>
- </div>   
-  <div> 
+ </div>
+  <div>
   <fieldset>
       <legend class="controlLegend">Partial Sums</legend>
- <p>$F_{M}(x): = \frac{1}{2} + \sum_{m=0}^M \frac{2}{\pi (2m+1)} \, \sin \left( (2m+1)x\right)$</p>     
+ <p>$F_{M}(x): = \frac{1}{2} + \sum_{m=0}^M \frac{2}{\pi (2m+1)} \, \sin \left( (2m+1)x\right)$</p>
  <div class="range-wrap" style="width: 93%;">
   <label for="M_1">$M$: </label>
   <input id = "M_1" type="range" class="range" min="0" max="60" step = 1 value = "0" oninput="new_Fourier_1()">
   <output class="bubble"></output><br>
  </div>
 </fieldset>
- </div> 
+ </div>
 <!-- <div>
-  <fieldset > 
+  <fieldset >
       <legend class="controlLegend">Graph of $x(t)$ and its Approximation</legend>-->
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -363,24 +366,24 @@ successive intervals of length $\pi$.</p>
   <fieldset>
       <legend class="controlLegend">Example 2</legend>
 
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Function</legend>
-<p>Let $F(x)$ be the $2\pi$-periodic "sawtooth" function as below.</p>
+<p>Let $F(x)$ be the $2\pi$-periodic &ldquo;sawtooth&rdquo; function as below. The graph of $F(x)$ is shown in blue.</p>
 <!-- <p>Fourier series: $\frac{\pi}{4} + \sum_{m=0}^\infty \frac{2}{(2m+1)^2 \, \pi}\, \cos \left(
 (2m+1)\, x \right) \> -\>
 \sum_{n=1}^\infty \frac{1}{n }\, \sin\left(
 n\, x \right)$</p> -->
 </fieldset>
- </div>   
-  <div> 
+ </div>
+  <div>
   <fieldset>
       <legend class="controlLegend">Partial Sums</legend>
   <p>$F_{M,N}(x): = \frac{\pi}{4} + \sum_{m=0}^M \frac{2}{(2m+1)^2 \, \pi}\, \cos \left(
 (2m+1)\, x \right) \> -\>
 \sum_{n=1}^N \frac{1}{n }\, \sin\left(
-n\, x \right)$</p>    
-  <div class="row">        
+n\, x \right)$</p>
+  <div class="row">
  <div class="range-wrap column" style="width: 43%;">
   <label for="M_2">$M$: </label>
   <input id = "M_2" type="range" class="range" min="0" max="60" step = 1 value = "0" oninput="new_Fourier_2()">
@@ -390,10 +393,10 @@ n\, x \right)$</p>
   <label for="N_2">$N$: </label>
   <input id = "N_2" type="range" class="range" min="1" max="60" step = 1 value = "1" oninput="new_Fourier_2()">
   <output class="bubble"></output><br>
- </div> 
+ </div>
 </div>
 </fieldset>
- </div> 
+ </div>
 
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -408,8 +411,8 @@ n\, x \right)$</p>
     </div> -->
 
 </fieldset>
-</div>  
-</div>  
+</div>
+</div>
 
 
 <script src="js/Fourier_Ch22_ex1.js"></script>

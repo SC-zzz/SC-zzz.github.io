@@ -36,7 +36,7 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
 
 
   <style>
@@ -99,7 +99,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -113,8 +113,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-previous Chapter | 
+<a href="index_page.html">back to menu</a> |
+previous Chapter |
 <a href="Chapter 02 Demo.html">next Chapter</a>
 </nav>
 
@@ -122,12 +122,13 @@ previous Chapter |
 
 <article>
 
-    <h1>Chapter 1</h1>  
+    <h1>Chapter 1</h1>
 
-<h3>Introducing ODE's.</h3>
-<h4 id = "Chen">Visualizing the Chen attractor.</h4>
+<h3>Visualizing the Chen attractor.</h3>
+<h4 id = "ChenTrajectory">Manipulating one Chen attractor trajectory.</h4>
 
-<p> As we will learn later in this course, some ODE systems exhibit “chaos” (i.e., extreme sensitivity to initial conditions). One example is given by the following system of equations, which describes the velocity of a point. This system is called the Chen attractor, with parameters $a,b,c$. You can read more about it <a href="https://en.wikipedia.org/wiki/Multiscroll_attractor">here</a>. </p>
+<p> As we will learn later in this course, some ODE systems exhibit &ldquo;chaos&rdquo;
+  (i.e., extreme sensitivity to initial conditions). One example is given by the following system of equations, which describes the velocity of a point. This system is called the Chen attractor, with parameters $a,b,c$. You can read more about it <a href="https://en.wikipedia.org/wiki/Multiscroll_attractor">here</a>. </p>
 <p>
     \begin{align}
     x' & = a(y-x) \\
@@ -164,12 +165,12 @@ var dt = 0.004;
 function attractor_3d(){
 
 
-let x = [], y = [], z = [];  
+let x = [], y = [], z = [];
 
   //x[0] = -0.1;
   //y[0] = 0.5;
   //z[0] = -0.6;
-  
+
 
 let sol = ode_RK4(0, 20, dt, f, [-0.1,0.5,-0.6]);
 let n = sol[0].length;
@@ -185,7 +186,7 @@ Plotly.newPlot('3dChen', [{
   y: y,
   z: z,
   type: 'scatter3d',
-  mode: 'lines', 
+  mode: 'lines',
   line: {color: 'dodgerblue', width: 3},
   name: 'initial value (-0.1,0.5,-0.6)'
 },{
@@ -193,7 +194,7 @@ Plotly.newPlot('3dChen', [{
   y: [y[0]],
   z: [z[0]],
   type: 'scatter3d',
-  mode: 'markers', 
+  mode: 'markers',
   marker: {color: 'red', size:5},
   name: 't=0'
 },
@@ -202,7 +203,7 @@ Plotly.newPlot('3dChen', [{
   y: [y[n-1]],
   z: [z[n-1]],
   type: 'scatter3d',
-  mode: 'markers', 
+  mode: 'markers',
   marker: {color: 'darkviolet', size:5},
   name: 't=20'
 }
@@ -215,25 +216,28 @@ Plotly.newPlot('3dChen', [{
         r: 0,
         b: 0
         //t: 10
-        }, 
+        },
 });
 }
 attractor_3d();
 </script>
 
-<p> Now let's try it yourself. Choose an initial value near $(-0.1,0.5,-0.6)$ and hit the “Run the attractors!” button. Then you will see (the $xy$-projection of) the trajactories of two Chen attractors, one with intial value $(x_0,y_0,z_0)=(-0.1,0.5,-0.6)$ and the other with the intial value of your choice. For clarity, only the trajectories in the previous two seconds are kept showing. You will see that initially the two trajectories are very close to each other  (so you probably will only be able to see one), but after a while they become unrelated.</p>
+
+<br>
+<h4 id = "ChenAnimation">Sensitivity to the starting point.</h4>
+<p> Now let's try it yourself. Choose an initial value near $(-0.1,0.5,-0.6)$ and hit the &ldquo;Run the attractors!&rdquo; button. Then you will see (the $xy$-projection of) the trajactories of two Chen attractors, one with intial value $(x_0,y_0,z_0)=(-0.1,0.5,-0.6)$ and the other with the intial value of your choice. For clarity, only the trajectories in the previous two seconds are kept showing. You will see that initially the two trajectories are very close to each other (so you probably will only be able to see one), but after a while they become unrelated.</p>
 
 
 
 
 
 <div class="twoCol_3366">
-  
+
  <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Initial Conditions</legend>
- <div class="row" style="padding-left:1em">   
+ <div class="row" style="padding-left:1em">
  <div class="range-wrap" style="width: 55%;">
   <label for="x_0">$x_0$: </label>
   <input id = "x_0" type="range" class="range" min="-0.15" max="-0.05" step = 0.01 value = "-0.1">
@@ -253,25 +257,25 @@ attractor_3d();
 </fieldset>
  </div>
 
-    <div> 
+    <div>
   <fieldset>
       <legend class="controlLegend">Display Options</legend>
       <div>
-   <div style="padding-top: 1em;">     
+   <div style="padding-top: 1em;">
   <button style="font-size: 18px;" onclick="myFunction()">Run the attractors!</button>
   <br></div>
 
   <div style="padding-top: 1em;">
-  <button style="font-size: 18px;" onclick="stopAnimation()">Pause</button> 
+  <button style="font-size: 18px;" onclick="stopAnimation()">Pause</button>
   <button style="font-size: 18px;" onclick="continueAnimation()">Continue</button><br></div>
-   <div style="padding-top: 1em;">  Speed: 
-    <input type="radio" name="speed" id="normal" checked onclick="continueAnimation()"> normal &nbsp; 
-    <input type="radio" name="speed"  id="x2" onclick="continueAnimation()"> x2 &nbsp; &nbsp; 
+   <div style="padding-top: 1em;">  Speed:
+    <input type="radio" name="speed" id="normal" checked onclick="continueAnimation()"> normal &nbsp;
+    <input type="radio" name="speed"  id="x2" onclick="continueAnimation()"> x2 &nbsp; &nbsp;
      <input type="radio" name="speed" id="x4"  onclick="continueAnimation()"> x4 &nbsp; <br> </div>
    </div>
 </fieldset>
  </div>
-</div> 
+</div>
 
 
 
@@ -285,7 +289,7 @@ attractor_3d();
         </fieldset>
     </div>
   </div>
- </div> 
+ </div>
 
 
 
@@ -297,10 +301,10 @@ var param = 1; // speeding
 //var dt = 0.004;
 var N = 500;
 var n = 2;
-var x = [], y = [], z = [];  
+var x = [], y = [], z = [];
 
 function attractors_2d_setup(x_0, y_0, z_0){
-n = 2;  
+n = 2;
 x[0] = [];
 y[0] = [];
 z[0] = [];
@@ -315,7 +319,7 @@ z[1] = [];
   x[1][0] = x_0;
   y[1][0] = y_0;
   z[1][0] = z_0;
-  
+
 for (var j = 0; j < 2; j++) {
   let sol = ode_auto_RK4(n, dt, f2, [x[j][0],y[j][0],z[j][0]]);
   for (let i =0; i< n; i++){
@@ -435,10 +439,10 @@ function continueAnimation (){
   }
   else if (document.getElementById('x2').checked) {
       myReq = window.requestAnimationFrame(update_x2);
-  }  
+  }
   else if (document.getElementById('x4').checked) {
       myReq = window.requestAnimationFrame(update_x4);
-  } 
+  }
 }
 
 //attractors_2d();
@@ -450,17 +454,17 @@ function myFunction() {
   var x_0 = parseFloat(document.getElementById("x_0").value);
   var y_0 = parseFloat(document.getElementById("y_0").value);
   var z_0 = parseFloat(document.getElementById("z_0").value);
-  stopAnimation();  
+  stopAnimation();
   attractors_2d_setup(x_0, y_0, z_0);
   if (document.getElementById('normal').checked) {
       myReq = window.requestAnimationFrame(update);
   }
   else if (document.getElementById('x2').checked) {
       myReq = window.requestAnimationFrame(update_x2);
-  }  
+  }
   else if (document.getElementById('x4').checked) {
       myReq = window.requestAnimationFrame(update_x4);
-  } 
+  }
 }
 
 </script>
