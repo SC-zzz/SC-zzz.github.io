@@ -1,5 +1,5 @@
 // heat eqn, Gaussian
-var myReq_HG; 
+var myReq_HG;
 var slower_HG = 1;
 var param_HG = 1/(60 * slower_HG); // speeding
 var alpha = 0.5;
@@ -20,23 +20,23 @@ var uHeat = [];
 var uFourier = [];
 
 function HG_setup(){
-  stopAnimation_HG(); 
+  stopAnimation_HG();
 
-  alpha = parseFloat(document.getElementById("alpha_heat").value);    
-  
+  alpha = parseFloat(document.getElementById("alpha_heat").value);
+
   uHeat = [];
   uFourier = [];
 
   T_HG = 0;
-  document.getElementById("time_HG").innerHTML = 
+  document.getElementById("time_HG").innerHTML =
     Math.floor(T_HG * slower_HG)/(slower_HG);
 
-   
+
   // solution
   uHeat = xArray_HG.map(function(x) {
       return 1/Math.sqrt(1+ 4 * alpha * T_HG) * Math.exp(- (x**2)/(1+4*alpha * T_HG));
     });
-  
+
   // Fourier transform
   uFourier = laArray_HG.map(function(la) {
     return Math.sqrt(Math.PI) * Math.exp(- (1+4*alpha * T_HG) * (la**2) /4);
@@ -55,7 +55,7 @@ Plotly.newPlot('GaussianHeatPlot', [
 {
   x: xArray_HG,
   y: uHeat,
-  mode: 'lines', name: "Solution",
+  mode: 'lines', name: "solution",
   line: {color: 'dodgerblue', width: 3}
 },
 ], {legend: {"orientation": "h",yanchor: 'top', y:-0.2}, title: "Solution and its Fourier Transform", margin: {
@@ -79,21 +79,21 @@ Plotly.newPlot('GaussianHeatPlot', [
 
 function update_HG() {
   T_HG = T_HG + param_HG;
-  
-  document.getElementById("time_HG").innerHTML = 
+
+  document.getElementById("time_HG").innerHTML =
     Math.floor(T_HG * slower_HG)/(slower_HG);
-  
- 
+
+
   // solution
   uHeat = xArray_HG.map(function(x) {
       return 1/Math.sqrt(1+ 4 * alpha * T_HG) * Math.exp(- (x**2)/(1+4*alpha * T_HG));
     });
-  
+
   // Fourier transform
   uFourier = laArray_HG.map(function(la) {
     return Math.sqrt(Math.PI) * Math.exp(- (1+4*alpha * T_HG) * (la**2) /4);
     });
-  
+
 
   Plotly.animate('GaussianHeatPlot', {
     data: [{x: laArray_HG, y: uFourier}, {x: xArray_HG, y: uHeat}]
@@ -107,7 +107,7 @@ function update_HG() {
     }
   });
 
-  
+
   myReq_HG =requestAnimationFrame(update_HG);
 }
 
@@ -139,9 +139,9 @@ function changeSpeed_HG(){
   else if (document.getElementById("x1/4").checked) {
     slower_HG = 4;
   }
-      
+
   param_HG = 1/(60 * slower_HG);
-  
+
   //myReq_HG = window.requestAnimationFrame(update_HG);
 
 }
@@ -163,14 +163,12 @@ function newHG() {
   else if (document.getElementById("x1/10").checked) {
     slower_HG = 10;
   }
- 
+
   param_HG = 1/(60 * slower_HG);
-    
-  
-  
+
+
+
   myReq_HG = window.requestAnimationFrame(update_HG);
 }
 
 HG_setup();
-
-

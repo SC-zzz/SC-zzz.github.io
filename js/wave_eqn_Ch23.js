@@ -47,7 +47,7 @@ function triangleUndamped(sel_h, N, t, x) {
 
 
 function myUndampedCoeffBn(sel_h, n, t) {
-//B_n = \frac{2}{n \pi} \int_0^L h(x) \sin((n\pi/L)x) \, dx 
+//B_n = \frac{2}{n \pi} \int_0^L h(x) \sin((n\pi/L)x) \, dx
   if (sel_h == 0) { // h = 0
     return 0;
   }
@@ -63,9 +63,9 @@ function myUndampedCoeffBn(sel_h, n, t) {
 }
 
 
-function myDampedCoeffBnPrime(sel_h, n, t) { 
-//B_n' = \frac{2}{L\omega_n} \int_0^L h(x) \sin((n\pi/L)x) \, dx 
-//     = \frac{2}{\pi \omega_n} \int_0^{\pi} h(x) \sin(n x) \, dx 
+function myDampedCoeffBnPrime(sel_h, n, t) {
+//B_n' = \frac{2}{L\omega_n} \int_0^L h(x) \sin((n\pi/L)x) \, dx
+//     = \frac{2}{\pi \omega_n} \int_0^{\pi} h(x) \sin(n x) \, dx
   if (sel_h == 0) { // h = 0
     return 0;
   }
@@ -80,7 +80,7 @@ function myDampedCoeffBnPrime(sel_h, n, t) {
 
 }
 
-function myDampedCoeffAnPart(n, t) { 
+function myDampedCoeffAnPart(n, t) {
  //  cos(w_n t) + k/(2w_n) * sin(w_n t)
   return Math.cos(myOmega(n) * t) + k/(2 * myOmega(n)) * Math.sin(myOmega(n) * t);
 }
@@ -90,75 +90,75 @@ function myDampedCoeffAnPart(n, t) {
 
 
 function wave_setup(){
-  stopWaveAnimation(); 
+  stopWaveAnimation();
   k = parseFloat(document.getElementById("k").value);
   sel_f_wave= parseFloat(document.getElementById("ICf2").value);
   sel_h_wave= parseFloat(document.getElementById("ICh2").value);
-  
+
   uDampedArray = [];
   uUndampedArray = [];
   T_wave = 0;
   document.getElementById("time_wave").innerHTML = Math.floor(T_wave * slower_wave)/slower_wave;
-   
+
 
  if (sel_f_wave == 0) { // f(x) = sin(x)
 	for (let i = 0; i< N_wave; i ++){
 	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * (myDampedCoeffAnPart(1, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i]);
-	  
+
 	  uUndampedArray[i] = (Math.cos(T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i]);
 	}
-  } 
+  }
   else if (sel_f_wave == 1) { // f(x) = sin(2 x)
 	for (let i = 0; i< N_wave; i ++){
 	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * (myDampedCoeffAnPart(2, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 2, T_wave)) * Math.sin(2 * xArray_wave[i]);
-	  
+
 	  uUndampedArray[i] = (Math.cos(2*T_wave) + myUndampedCoeffBn(sel_h_wave, 2, T_wave)) * Math.sin(2 * xArray_wave[i]);
 	}
-  }   
+  }
   else if (sel_f_wave == 2) { // f(x) = 0.3 sin(x) + 0.7 sin(3x)
 	for (let i = 0; i< N_wave; i ++){
 	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * ((0.3 * myDampedCoeffAnPart(1, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (0.7 * myDampedCoeffAnPart(3, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i]));
-		
+
 	  uUndampedArray[i] = (0.3 * Math.cos(T_wave) + myUndampedCoeffBn(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (0.7 * Math.cos(3*T_wave) + myUndampedCoeffBn(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i]);
 	}
-  }  
+  }
   else if (sel_f_wave == 3) { // f(x) = 0.3 sin(x) - 0.5 sin(2x) + 0.2 sin(3x) + 0.4 sin(9x)
 	for (let i = 0; i< N_wave; i ++){
-	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * 
+	  uDampedArray[i] = Math.exp(-k/2 * T_wave) *
 	   ((0.3 * myDampedCoeffAnPart(1, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (-0.5 * myDampedCoeffAnPart(2, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 2, T_wave)) * Math.sin(2 * xArray_wave[i])
-		+ (0.2 * myDampedCoeffAnPart(3, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i]) 
+		+ (0.2 * myDampedCoeffAnPart(3, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i])
 		+ (0.4 * myDampedCoeffAnPart(9, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 9, T_wave)) * Math.sin(9 * xArray_wave[i]));
-	
+
 	  uUndampedArray[i] = (0.3 * Math.cos(T_wave) + myUndampedCoeffBn(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (-0.5 * Math.cos(2*T_wave) + myUndampedCoeffBn(sel_h_wave, 2, T_wave)) * Math.sin(2 * xArray_wave[i])
-		+ (0.2 * Math.cos(3*T_wave) + myUndampedCoeffBn(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i]) 
+		+ (0.2 * Math.cos(3*T_wave) + myUndampedCoeffBn(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i])
 		+ (0.4 * Math.cos(9*T_wave) + myUndampedCoeffBn(sel_h_wave, 9, T_wave)) * Math.sin(9 * xArray_wave[i]);
 	}
-  } 
+  }
   else if (sel_f_wave == 4) { // f(x) = 0.2 sin(x) - 0.5 sin(4x) + 0.4 sin(10x) + 0.1 sin(13x)
 	for (let i = 0; i< N_wave; i ++){
-	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * 
+	  uDampedArray[i] = Math.exp(-k/2 * T_wave) *
 	   ((0.2 * myDampedCoeffAnPart(1, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (-0.5 * myDampedCoeffAnPart(4, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 4, T_wave)) * Math.sin(4 * xArray_wave[i])
-		+ (0.4 * myDampedCoeffAnPart(10, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 10, T_wave)) * Math.sin(10 * xArray_wave[i]) 
+		+ (0.4 * myDampedCoeffAnPart(10, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 10, T_wave)) * Math.sin(10 * xArray_wave[i])
 		+ (0.1 * myDampedCoeffAnPart(13, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 13, T_wave)) * Math.sin(13 * xArray_wave[i]));
-	
+
 	  uUndampedArray[i] = (0.2 * Math.cos(T_wave) + myUndampedCoeffBn(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (-0.5 * Math.cos(4*T_wave) + myUndampedCoeffBn(sel_h_wave, 4, T_wave)) * Math.sin(4 * xArray_wave[i])
-		+ (0.4 * Math.cos(10*T_wave) + myUndampedCoeffBn(sel_h_wave, 10, T_wave)) * Math.sin(10 * xArray_wave[i]) 
+		+ (0.4 * Math.cos(10*T_wave) + myUndampedCoeffBn(sel_h_wave, 10, T_wave)) * Math.sin(10 * xArray_wave[i])
 		+ (0.1 * Math.cos(13*T_wave) + myUndampedCoeffBn(sel_h_wave, 13, T_wave)) * Math.sin(13 * xArray_wave[i]);
 	}
   }
   else if (sel_f_wave == 5) { // triangle wave
 	for (let i = 0; i< N_wave; i ++){
 	  uDampedArray[i] = triangleDamped(sel_h_wave, 60, T_wave, xArray_wave[i]);
-	
+
 	  uUndampedArray[i] = triangleUndamped(sel_h_wave, 60, T_wave, xArray_wave[i]);
 	}
-  }        
+  }
 
 
 
@@ -168,13 +168,13 @@ function wave_setup(){
 Plotly.newPlot('myWave', [{
   x: xArray_wave,
   y: uDampedArray,
-  mode: 'lines', name: 'u_damped',
+  mode: 'lines', name: 'u<sub>damped</sub>',
   line: {color: 'dodgerblue'}
 },
 {
   x: xArray_wave,
   y: uUndampedArray,
-  mode: 'lines', name: 'u_undamped',
+  mode: 'lines', name: 'u<sub>undamped</sub>',
   line: {color: 'orange'}
 }
 ], {legend: {"orientation": "h",yanchor: 'top', y:-0.2}, title: "Damped and undamped wave equations",  margin: {
@@ -193,67 +193,67 @@ Plotly.newPlot('myWave', [{
 
 function update_wave() {
   T_wave = T_wave + param_wave;
-  
-  document.getElementById("time_wave").innerHTML = Math.floor(T_wave * slower_wave)/slower_wave;  
-  
+
+  document.getElementById("time_wave").innerHTML = Math.floor(T_wave * slower_wave)/slower_wave;
+
  if (sel_f_wave == 0) { // f(x) = sin(x)
 	for (let i = 0; i< N_wave; i ++){
 	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * (myDampedCoeffAnPart(1, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i]);
-	  
+
 	  uUndampedArray[i] = (Math.cos(T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i]);
 	}
-  } 
+  }
   else if (sel_f_wave == 1) { // f(x) = sin(2 x)
 	for (let i = 0; i< N_wave; i ++){
 	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * (myDampedCoeffAnPart(2, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 2, T_wave)) * Math.sin(2 * xArray_wave[i]);
-	  
+
 	  uUndampedArray[i] = (Math.cos(2*T_wave) + myUndampedCoeffBn(sel_h_wave, 2, T_wave)) * Math.sin(2 * xArray_wave[i]);
 	}
-  }   
+  }
   else if (sel_f_wave == 2) { // f(x) = 0.3 sin(x) + 0.7 sin(3x)
 	for (let i = 0; i< N_wave; i ++){
 	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * ((0.3 * myDampedCoeffAnPart(1, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (0.7 * myDampedCoeffAnPart(3, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i]));
-		
+
 	  uUndampedArray[i] = (0.3 * Math.cos(T_wave) + myUndampedCoeffBn(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (0.7 * Math.cos(3*T_wave) + myUndampedCoeffBn(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i]);
 	}
-  }  
+  }
   else if (sel_f_wave == 3) { // f(x) = 0.3 sin(x) - 0.5 sin(2x) + 0.2 sin(3x) + 0.4 sin(9x)
 	for (let i = 0; i< N_wave; i ++){
-	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * 
+	  uDampedArray[i] = Math.exp(-k/2 * T_wave) *
 	   ((0.3 * myDampedCoeffAnPart(1, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (-0.5 * myDampedCoeffAnPart(2, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 2, T_wave)) * Math.sin(2 * xArray_wave[i])
-		+ (0.2 * myDampedCoeffAnPart(3, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i]) 
+		+ (0.2 * myDampedCoeffAnPart(3, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i])
 		+ (0.4 * myDampedCoeffAnPart(9, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 9, T_wave)) * Math.sin(9 * xArray_wave[i]));
-	
+
 	  uUndampedArray[i] = (0.3 * Math.cos(T_wave) + myUndampedCoeffBn(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (-0.5 * Math.cos(2*T_wave) + myUndampedCoeffBn(sel_h_wave, 2, T_wave)) * Math.sin(2 * xArray_wave[i])
-		+ (0.2 * Math.cos(3*T_wave) + myUndampedCoeffBn(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i]) 
+		+ (0.2 * Math.cos(3*T_wave) + myUndampedCoeffBn(sel_h_wave, 3, T_wave)) * Math.sin(3 * xArray_wave[i])
 		+ (0.4 * Math.cos(9*T_wave) + myUndampedCoeffBn(sel_h_wave, 9, T_wave)) * Math.sin(9 * xArray_wave[i]);
 	}
-  } 
+  }
   else if (sel_f_wave == 4) { // f(x) = 0.2 sin(x) - 0.5 sin(4x) + 0.4 sin(10x) + 0.1 sin(13x)
 	for (let i = 0; i< N_wave; i ++){
-	  uDampedArray[i] = Math.exp(-k/2 * T_wave) * 
+	  uDampedArray[i] = Math.exp(-k/2 * T_wave) *
 	   ((0.2 * myDampedCoeffAnPart(1, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (-0.5 * myDampedCoeffAnPart(4, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 4, T_wave)) * Math.sin(4 * xArray_wave[i])
-		+ (0.4 * myDampedCoeffAnPart(10, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 10, T_wave)) * Math.sin(10 * xArray_wave[i]) 
+		+ (0.4 * myDampedCoeffAnPart(10, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 10, T_wave)) * Math.sin(10 * xArray_wave[i])
 		+ (0.1 * myDampedCoeffAnPart(13, T_wave) + myDampedCoeffBnPrime(sel_h_wave, 13, T_wave)) * Math.sin(13 * xArray_wave[i]));
-	
+
 	  uUndampedArray[i] = (0.2 * Math.cos(T_wave) + myUndampedCoeffBn(sel_h_wave, 1, T_wave)) * Math.sin(xArray_wave[i])
 		+ (-0.5 * Math.cos(4*T_wave) + myUndampedCoeffBn(sel_h_wave, 4, T_wave)) * Math.sin(4 * xArray_wave[i])
-		+ (0.4 * Math.cos(10*T_wave) + myUndampedCoeffBn(sel_h_wave, 10, T_wave)) * Math.sin(10 * xArray_wave[i]) 
+		+ (0.4 * Math.cos(10*T_wave) + myUndampedCoeffBn(sel_h_wave, 10, T_wave)) * Math.sin(10 * xArray_wave[i])
 		+ (0.1 * Math.cos(13*T_wave) + myUndampedCoeffBn(sel_h_wave, 13, T_wave)) * Math.sin(13 * xArray_wave[i]);
 	}
   }
   else if (sel_f_wave == 5) { // triangle wave
 	for (let i = 0; i< N_wave; i ++){
 	  uDampedArray[i] = triangleDamped(sel_h_wave, 60, T_wave, xArray_wave[i]);
-	
+
 	  uUndampedArray[i] = triangleUndamped(sel_h_wave, 60, T_wave, xArray_wave[i]);
 	}
-  }       
+  }
 
 
 
@@ -299,17 +299,17 @@ function changeWaveSpeed(){
   else if (document.getElementById("x1/2_wave").checked) {
     slower_wave = 2;
   }
-    
+
   param_wave = 1/(60 * slower_wave);
-  
+
   //myReq_wave = window.requestAnimationFrame(update_wave);
 
 }
 
 
 function newWave() {
-  //stopWaveAnimation(); 
-  //sel_f_wave= parseFloat(document.getElementById("IC").value);  
+  //stopWaveAnimation();
+  //sel_f_wave= parseFloat(document.getElementById("IC").value);
 
   if (document.getElementById("normal_wave").checked) {
     slower_wave = 1;
@@ -323,10 +323,10 @@ function newWave() {
   else if (document.getElementById("x1/2_wave").checked) {
     slower_wave = 2;
   }
-     
+
   param_wave = 1/(60 * slower_wave);
-    
-  
+
+
   wave_setup();
   myReq_wave = window.requestAnimationFrame(update_wave);
 }

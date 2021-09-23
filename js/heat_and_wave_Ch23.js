@@ -59,69 +59,69 @@ function myWaveCoeffBn(sel_h, n, t) { // Bn
 
 
 function HW_setup(){
-  stopHWAnimation(); 
+  stopHWAnimation();
   sel_f_HW= parseFloat(document.getElementById("ICf").value);
   sel_h_HW= parseFloat(document.getElementById("ICh").value);
-  
+
   uHeatArray = [];
   uWaveArray = [];
   T_HW = 0;
   document.getElementById("time_HW").innerHTML = Math.floor(T_HW * slower_HW)/slower_HW;
-   
+
 
   if (sel_f_HW == 0) { // f(x) = sin(x)
 	for (let i = 0; i< N_HW; i ++){
 	  uHeatArray[i] = Math.exp(- T_HW) * Math.sin(xArray_HW[i]);
 	  uWaveArray[i] = (Math.cos(T_HW) + myWaveCoeffBn(sel_h_HW, 1, T_HW)) * Math.sin(xArray_HW[i]);
 	}
-  } 
+  }
   else if (sel_f_HW == 1) { // f(x) = sin(2 x)
 	for (let i = 0; i< N_HW; i ++){
 	  uHeatArray[i] = Math.exp(- 4 * T_HW) * Math.sin(2 * xArray_HW[i]);
 	  uWaveArray[i] = (Math.cos(2*T_HW) + myWaveCoeffBn(sel_h_HW, 2, T_HW)) * Math.sin(2 * xArray_HW[i]);
 	}
-  }   
+  }
   else if (sel_f_HW == 2) { // f(x) = 0.3 sin(x) + 0.7 sin(3x)
 	for (let i = 0; i< N_HW; i ++){
-	  uHeatArray[i] = 0.3 * Math.exp(- T_HW) * Math.sin(xArray_HW[i]) 
+	  uHeatArray[i] = 0.3 * Math.exp(- T_HW) * Math.sin(xArray_HW[i])
 		+ 0.7 * Math.exp(- 9 * T_HW) * Math.sin(3 * xArray_HW[i]);
 	  uWaveArray[i] = (0.3 * Math.cos(T_HW) + myWaveCoeffBn(sel_h_HW, 1, T_HW)) * Math.sin(xArray_HW[i])
 		+ (0.7 * Math.cos(3*T_HW) + myWaveCoeffBn(sel_h_HW, 3, T_HW)) * Math.sin(3 * xArray_HW[i]);
 	}
-  }  
+  }
   else if (sel_f_HW == 3) { // f(x) = 0.3 sin(x) - 0.5 sin(2x) + 0.2 sin(3x) + 0.4 sin(9x)
 	for (let i = 0; i< N_HW; i ++){
-	  uHeatArray[i] = 0.3 * Math.exp(- T_HW) * Math.sin(xArray_HW[i]) 
-		- 0.5 * Math.exp(- 4 * T_HW) * Math.sin(2 * xArray_HW[i]) 
+	  uHeatArray[i] = 0.3 * Math.exp(- T_HW) * Math.sin(xArray_HW[i])
+		- 0.5 * Math.exp(- 4 * T_HW) * Math.sin(2 * xArray_HW[i])
 		+ 0.2 * Math.exp(- 9 * T_HW) * Math.sin(3 * xArray_HW[i])
 		+ 0.4 * Math.exp(- 81 * T_HW) * Math.sin(9 * xArray_HW[i]);
-	
+
 	  uWaveArray[i] = (0.3 * Math.cos(T_HW) + myWaveCoeffBn(sel_h_HW, 1, T_HW)) * Math.sin(xArray_HW[i])
 		+ (-0.5 * Math.cos(2*T_HW) + myWaveCoeffBn(sel_h_HW, 2, T_HW)) * Math.sin(2 * xArray_HW[i])
-		+ (0.2 * Math.cos(3*T_HW) + myWaveCoeffBn(sel_h_HW, 3, T_HW)) * Math.sin(3 * xArray_HW[i]) 
+		+ (0.2 * Math.cos(3*T_HW) + myWaveCoeffBn(sel_h_HW, 3, T_HW)) * Math.sin(3 * xArray_HW[i])
 		+ (0.4 * Math.cos(9*T_HW) + myWaveCoeffBn(sel_h_HW, 9, T_HW)) * Math.sin(9 * xArray_HW[i]);
 	}
-  } 
+  }
   else if (sel_f_HW == 4) { // f(x) = 0.2 sin(x) - 0.5 sin(4x) + 0.4 sin(10x) + 0.1 sin(13x)
 	for (let i = 0; i< N_HW; i ++){
-	  uHeatArray[i] = 0.2 * Math.exp(- T_HW) * Math.sin(xArray_HW[i]) 
-		- 0.5 * Math.exp(- 16 * T_HW) * Math.sin(4 * xArray_HW[i]) 
+	  uHeatArray[i] = 0.2 * Math.exp(- T_HW) * Math.sin(xArray_HW[i])
+		- 0.5 * Math.exp(- 16 * T_HW) * Math.sin(4 * xArray_HW[i])
 		+ 0.4 * Math.exp(- 100 * T_HW) * Math.sin(10 * xArray_HW[i])
 		+ 0.1 * Math.exp(- 169 * T_HW) * Math.sin(13 * xArray_HW[i]);
-	
+
 	  uWaveArray[i] = (0.2 * Math.cos(T_HW) + myWaveCoeffBn(sel_h_HW, 1, T_HW)) * Math.sin(xArray_HW[i])
 		+ (-0.5 * Math.cos(4*T_HW) + myWaveCoeffBn(sel_h_HW, 4, T_HW)) * Math.sin(4 * xArray_HW[i])
-		+ (0.4 * Math.cos(10*T_HW) + myWaveCoeffBn(sel_h_HW, 10, T_HW)) * Math.sin(10 * xArray_HW[i]) 
+		+ (0.4 * Math.cos(10*T_HW) + myWaveCoeffBn(sel_h_HW, 10, T_HW)) * Math.sin(10 * xArray_HW[i])
 		+ (0.1 * Math.cos(13*T_HW) + myWaveCoeffBn(sel_h_HW, 13, T_HW)) * Math.sin(13 * xArray_HW[i]);
 	}
   }
   else if (sel_f_HW == 5) { // triangle wave
 	for (let i = 0; i< N_HW; i ++){
 	  uHeatArray[i] = triangleHeat(60, T_HW, xArray_HW[i]);
-	
+
 	  uWaveArray[i] = triangleWave(sel_h_HW, 60, T_HW, xArray_HW[i]);
 	}
-  }        
+  }
 
 
 
@@ -132,13 +132,13 @@ function HW_setup(){
 Plotly.newPlot('myHW', [{
   x: xArray_HW,
   y: uHeatArray,
-  mode: 'lines', name: 'u_heat',
+  mode: 'lines', name: 'u<sub>heat</sub>',
   line: {color: 'dodgerblue'}
 },
 {
   x: xArray_HW,
   y: uWaveArray,
-  mode: 'lines', name: 'u_wave',
+  mode: 'lines', name: 'u<sub>wave</sub>',
   line: {color: 'orange'}
 }
 ], {legend: {"orientation": "h",yanchor: 'top', y:-0.2}, title: "Heat and wave equations",  margin: {
@@ -157,62 +157,62 @@ Plotly.newPlot('myHW', [{
 
 function update_HW() {
   T_HW = T_HW + param_HW;
-  
-  document.getElementById("time_HW").innerHTML = Math.floor(T_HW * slower_HW)/slower_HW;  
-  
+
+  document.getElementById("time_HW").innerHTML = Math.floor(T_HW * slower_HW)/slower_HW;
+
   if (sel_f_HW == 0) { // f(x) = sin(x)
 	for (let i = 0; i< N_HW; i ++){
 	  uHeatArray[i] = Math.exp(- T_HW) * Math.sin(xArray_HW[i]);
 	  uWaveArray[i] = (Math.cos(T_HW) + myWaveCoeffBn(sel_h_HW, 1, T_HW)) * Math.sin(xArray_HW[i]);
 	}
-  } 
+  }
   else if (sel_f_HW == 1) { // f(x) = sin(2 x)
 	for (let i = 0; i< N_HW; i ++){
 	  uHeatArray[i] = Math.exp(- 4 * T_HW) * Math.sin(2 * xArray_HW[i]);
 	  uWaveArray[i] = (Math.cos(2*T_HW) + myWaveCoeffBn(sel_h_HW, 2, T_HW)) * Math.sin(2 * xArray_HW[i]);
 	}
-  }   
+  }
   else if (sel_f_HW == 2) { // f(x) = 0.3 sin(x) + 0.7 sin(3x)
 	for (let i = 0; i< N_HW; i ++){
-	  uHeatArray[i] = 0.3 * Math.exp(- T_HW) * Math.sin(xArray_HW[i]) 
+	  uHeatArray[i] = 0.3 * Math.exp(- T_HW) * Math.sin(xArray_HW[i])
 		+ 0.7 * Math.exp(- 9 * T_HW) * Math.sin(3 * xArray_HW[i]);
 	  uWaveArray[i] = (0.3 * Math.cos(T_HW) + myWaveCoeffBn(sel_h_HW, 1, T_HW)) * Math.sin(xArray_HW[i])
 		+ (0.7 * Math.cos(3*T_HW) + myWaveCoeffBn(sel_h_HW, 3, T_HW)) * Math.sin(3 * xArray_HW[i]);
 	}
-  }  
+  }
   else if (sel_f_HW == 3) { // f(x) = 0.3 sin(x) - 0.5 sin(2x) + 0.2 sin(3x) + 0.4 sin(9x)
 	for (let i = 0; i< N_HW; i ++){
-	  uHeatArray[i] = 0.3 * Math.exp(- T_HW) * Math.sin(xArray_HW[i]) 
-		- 0.5 * Math.exp(- 4 * T_HW) * Math.sin(2 * xArray_HW[i]) 
+	  uHeatArray[i] = 0.3 * Math.exp(- T_HW) * Math.sin(xArray_HW[i])
+		- 0.5 * Math.exp(- 4 * T_HW) * Math.sin(2 * xArray_HW[i])
 		+ 0.2 * Math.exp(- 9 * T_HW) * Math.sin(3 * xArray_HW[i])
 		+ 0.4 * Math.exp(- 81 * T_HW) * Math.sin(9 * xArray_HW[i]);
-	
+
 	  uWaveArray[i] = (0.3 * Math.cos(T_HW) + myWaveCoeffBn(sel_h_HW, 1, T_HW)) * Math.sin(xArray_HW[i])
 		+ (-0.5 * Math.cos(2*T_HW) + myWaveCoeffBn(sel_h_HW, 2, T_HW)) * Math.sin(2 * xArray_HW[i])
-		+ (0.2 * Math.cos(3*T_HW) + myWaveCoeffBn(sel_h_HW, 3, T_HW)) * Math.sin(3 * xArray_HW[i]) 
+		+ (0.2 * Math.cos(3*T_HW) + myWaveCoeffBn(sel_h_HW, 3, T_HW)) * Math.sin(3 * xArray_HW[i])
 		+ (0.4 * Math.cos(9*T_HW) + myWaveCoeffBn(sel_h_HW, 9, T_HW)) * Math.sin(9 * xArray_HW[i]);
 	}
-  } 
+  }
   else if (sel_f_HW == 4) { // f(x) = 0.2 sin(x) - 0.5 sin(4x) + 0.4 sin(10x) + 0.1 sin(13x)
 	for (let i = 0; i< N_HW; i ++){
-	  uHeatArray[i] = 0.2 * Math.exp(- T_HW) * Math.sin(xArray_HW[i]) 
-		- 0.5 * Math.exp(- 16 * T_HW) * Math.sin(4 * xArray_HW[i]) 
+	  uHeatArray[i] = 0.2 * Math.exp(- T_HW) * Math.sin(xArray_HW[i])
+		- 0.5 * Math.exp(- 16 * T_HW) * Math.sin(4 * xArray_HW[i])
 		+ 0.4 * Math.exp(- 100 * T_HW) * Math.sin(10 * xArray_HW[i])
 		+ 0.1 * Math.exp(- 169 * T_HW) * Math.sin(13 * xArray_HW[i]);
-	
+
 	  uWaveArray[i] = (0.2 * Math.cos(T_HW) + myWaveCoeffBn(sel_h_HW, 1, T_HW)) * Math.sin(xArray_HW[i])
 		+ (-0.5 * Math.cos(4*T_HW) + myWaveCoeffBn(sel_h_HW, 4, T_HW)) * Math.sin(4 * xArray_HW[i])
-		+ (0.4 * Math.cos(10*T_HW) + myWaveCoeffBn(sel_h_HW, 10, T_HW)) * Math.sin(10 * xArray_HW[i]) 
+		+ (0.4 * Math.cos(10*T_HW) + myWaveCoeffBn(sel_h_HW, 10, T_HW)) * Math.sin(10 * xArray_HW[i])
 		+ (0.1 * Math.cos(13*T_HW) + myWaveCoeffBn(sel_h_HW, 13, T_HW)) * Math.sin(13 * xArray_HW[i]);
 	}
   }
   else if (sel_f_HW == 5) { // triangle wave
 	for (let i = 0; i< N_HW; i ++){
 	  uHeatArray[i] = triangleHeat(60, T_HW, xArray_HW[i]);
-	
+
 	  uWaveArray[i] = triangleWave(sel_h_HW, 60, T_HW, xArray_HW[i]);
 	}
-  }        
+  }
 
 
   Plotly.animate('myHW', {
@@ -257,17 +257,17 @@ function changeHWSpeed(){
   else if (document.getElementById("x1/2").checked) {
     slower_HW = 2;
   }
-    
+
   param_HW = 1/(60 * slower_HW);
-  
+
   //myReq_HW = window.requestAnimationFrame(update_HW);
 
 }
 
 
 function newHW() {
-  //stopHWAnimation(); 
-  //sel_f_HW= parseFloat(document.getElementById("IC").value);  
+  //stopHWAnimation();
+  //sel_f_HW= parseFloat(document.getElementById("IC").value);
 
   if (document.getElementById("normal").checked) {
     slower_HW = 1;
@@ -281,10 +281,10 @@ function newHW() {
   else if (document.getElementById("x1/2").checked) {
     slower_HW = 2;
   }
-     
+
   param_HW = 1/(60 * slower_HW);
-    
-  
+
+
   HW_setup();
   myReq_HW = window.requestAnimationFrame(update_HW);
 }
