@@ -4,11 +4,13 @@ var i0 = 0.1;
 var r0 = 1-s0-i0;
 var brd;
 var sicurve; // the trajectory of (s,i)
+var r0curve; // dashed line s0 = 1/R0
+var p_R0Inv;
 
 function new_IC() {
   var tau = parseFloat(document.getElementById("tau").value);
   var gamma = parseFloat(document.getElementById("gamma").value);
-  document.getElementById("R0").innerHTML = (tau/gamma).toFixed(2);
+
 
   brd = JXG.JSXGraph.initBoard('rangebox', {boundingbox: [-0.1, 1.1, 1.1, -0.1],
     axis: true, grid: true, keepAspectRatio: true,
@@ -32,6 +34,7 @@ function new_IC() {
   }});
 
   var bdrycurve = brd.create('functiongraph', [function(x){return -x+1},0,1]);
+  brd.create('text',[0.1, 1, "Choose IC within the shaded region"],{fontsize: 14, fixed:true});
   brd.create('text',[0.1, 1, "Choose IC within the shaded region"],{fontsize: 14, fixed:true});
   var xaxis = brd.create('functiongraph', [function(x){return 0},0,1],{visible:false});
   var yaxis = brd.create('line', [[0,0],[0,1]],{visible:false});
@@ -77,9 +80,10 @@ function new_IC() {
   sicurve = brd.create('curve', [p.X(), p.Y()], {strokeColor:'purple', strokeWidth: 2});
 
  // dashed line s0 = 1/R0
-  brd.create('curve', [[gamma/tau, gamma/tau], [0,1-gamma/tau]], {dash: 2, strokeWidth: 2});
-  brd.create('text',[gamma/tau +0.02, 0.1, '$s_0 = 1/R_0$'], {fontsize: 12, fixed:true});
-
+  r0curve = brd.create('curve', [[gamma/tau, gamma/tau], [-0.1,1.1]], {name: 'B', id: 'B', dash: 2, strokeWidth: 2});
+  //r0text = brd.create('text',[gamma/tau +0.02, 0.1, '$s_0 = 1/R_0$'], {fontsize: 12, fixed:true});
+  p_R0Inv = brd.create('point', [gamma/tau,0], {name:'$1/R_0$', size:3, strokeColor:"blue",
+    fillColor:"blue", fixed:true});
 
   new_SIR();
 
@@ -104,6 +108,7 @@ function new_IC() {
 function new_SIR() {
   var tau = parseFloat(document.getElementById("tau").value);
   var gamma = parseFloat(document.getElementById("gamma").value);
+  document.getElementById("R0").innerHTML = (tau/gamma).toFixed(2);
   //var s0 = parseFloat(document.getElementById("s0").value);
 
 
@@ -144,7 +149,18 @@ function new_SIR() {
     this.dataX = sArray;
     this.dataY = iArray;
     };
+
+  r0curve.updateDataArray = function() {
+      this.dataX = [gamma/tau, gamma/tau];
+      //this.dataY = [0,1-gamma/tau];
+      };
+
+  //r0text.setCoords = (gamma/tau+0.02, 0.1);
+
+  p_R0Inv.moveTo([gamma/tau,0]);
+
   brd.update();
+
 
   // Define Data
   let data = [

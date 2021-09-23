@@ -37,14 +37,14 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
 
 
   <style>
 
 .range-wrap {
   position: relative;
-  margin: 0 8% 2.3rem 0rem;
+  margin: 0 5% 2.3rem 3%;
 }
 .range {
   width: 100%;
@@ -95,7 +95,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -113,8 +113,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 07 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 07 Demo.html">previous Chapter</a> |
 <a href="Chapter 09 Demo.html">next Chapter</a>
 </nav>
 
@@ -122,7 +122,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <article>
 
-    <h1>Chapter 8</h1>  
+    <h1>Chapter 8</h1>
 
 <h3>Visualizing phase portraits and eigenvalues.</h3>
 
@@ -143,12 +143,12 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 <p> In order to understand if the ODE model predicts (for certain $(k_1, k_2)$) the observed periodic behavior, we plot the phase portrait of the system. To play with the visulization yourself, change the parameters, and see how the graph changes. Choose your desired initial condition by dragging the blue point on the graph. The red point is the unique stationary point. The range of $(k_1, k_2)$ where the system has an “attracting oscillator” trajectory is shown on the left.</p>
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Parameters</legend>
- <div class="row">   
+ <div class="row">
  <div class="range-wrap column" style="width: 42%;">
   <label for="k1">$k_1$: </label>
   <input id = "k1" type="range" class="range" min="5" max="13" step = 0.5 value = "10" oninput="new_chem_osc()">
@@ -169,7 +169,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
       <label for="density_chem">Density: </label><br>
    <input id = "density_chem" type="range" class="range" min="1" max="2.6" step = 0.2 value = "1.8" style="width: 50%;" oninput="new_chem_osc()"> <br><br>
    <input type="checkbox" checked id="colorize_chem"  oninput="new_chem_osc()">
-   <label for="colorize_chem"> Colorize according to magnitude</label><br> 
+   <label for="colorize_chem"> Colorize according to magnitude</label><br>
 </fieldset>
 </div>
  <br>
@@ -197,11 +197,11 @@ Responsive layout - makes the two columns stack on top of each other instead of 
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
 
-              
-<script src="js/chemical_oscillator.js"> </script> 
+
+<script src="js/chemical_oscillator.js"> </script>
 
 
 
@@ -216,11 +216,11 @@ Responsive layout - makes the two columns stack on top of each other instead of 
   </p>
 <p>for a $2\times 2$ matrix $A$, where $A$ has distinct real nonzero eigenvalues $\lambda_1$ and $\lambda_2$, with corresponding eigenvectors $\mathbf{v}_1$ and $\mathbf{v}_2$. </p>
 
-<p>We can calculate $A$ using its eigenvalues and eigenvectors. Putting the system of equations 
+<p>We can calculate $A$ using its eigenvalues and eigenvectors. Putting the system of equations
     \begin{align}
     \begin{cases}
     A\mathbf{v}_1 = \lambda_1 \mathbf{v}_1 \\
-    A\mathbf{v}_2 = \lambda_2 \mathbf{v}_2 
+    A\mathbf{v}_2 = \lambda_2 \mathbf{v}_2
     \end{cases}
     \end{align}
 into matrix form yields
@@ -239,20 +239,20 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
 
 
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Eigenvalues</legend>
- <div>   
- <div class="range-wrap" style="width: 42%;">
+ <div>
+ <div class="range-wrap" style="width: 80%;">
   <label for="ev1">$\lambda_1$: </label>
-  <input id = "ev1" type="range" class="range" min="-5" max="5" step = 0.5 value = "1" oninput="new_phase_portrait()">
+  <input id = "ev1" type="range" class="range" min="-5" max="5" step = 0.25 value = "1" oninput="new_phase_portrait()">
   <output class="bubble"></output>
  </div>
-  <div class="range-wrap" style="width: 42%;">
+  <div class="range-wrap" style="width: 80%;">
   <label for="ev2">$\lambda_2$: </label>
-  <input id = "ev2" type="range" class="range" min="-5" max="5" step = 0.5 value = "2" oninput="new_phase_portrait()">
+  <input id = "ev2" type="range" class="range" min="-5" max="5" step = 0.25 value = "2" oninput="new_phase_portrait()">
   <output class="bubble"></output>
  </div>
  </div>
@@ -260,7 +260,7 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
  </div>
  <br>
 
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Eigenvectors</legend>
  <div><p>$\mathbf{v}_1 = [1,0]^{\top}$, corresponding to $\lambda_1$</p></div>
@@ -285,11 +285,11 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
         </fieldset>
     </div>
   </div>
-</div>  
+</div>
 
 
-              
-<script src="js/draw_first_order_system_real_eigenvalues.js"> </script> 
+
+<script src="js/draw_first_order_system_real_eigenvalues.js"> </script>
 
 
 <br>
@@ -309,12 +309,12 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
 
 
 <div class="twoCol_3366">
-  
+
   <div>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Constants</legend>
- <div class="row">   
+ <div class="row">
  <div class="range-wrap column" style="width: 42%;">
   <label for="a">$a$: </label>
   <input id = "a" type="range" class="range" min="-5" max="5" step = 0.5 value = "-1" oninput="new_function()">
@@ -326,7 +326,7 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
   <output class="bubble"></output>
  </div>
  </div>
- <div class="row">   
+ <div class="row">
  <div class="range-wrap column" style="width: 42%;">
   <label for="c">$c$: </label>
   <input id = "c" type="range" class="range" min="-5" max="5" step = 0.5 value = "0" oninput="new_function()">
@@ -341,17 +341,17 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
 </fieldset>
  </div>
  <br>
-   <div> 
+   <div>
   <fieldset>
       <legend class="controlLegend">Outputs</legend>
-        <p> The determinant of $A$ is $\operatorname{det}(A) = ad-bc = $ <span id ="det_term"> </span>. </p> 
+        <p> The determinant of $A$ is $\operatorname{det}(A) = ad-bc = $ <span id ="det_term"> </span>. </p>
          <div id = "detIs0"> <p>ATTENTION: The determinant is zero. Please change $A$ to make it nonzero.</p></div>
          <div id = "detNot0">
          <p>  The associated characteristic polynomial is $\lambda^2 - \operatorname{tr}(A) \lambda + \operatorname{det}(A) = \lambda^2$<span id ="p_term">+</span>$\lambda$<span id ="q_term">-1.5</span>. <span id ="type_of_roots"> </span></p>
          <div id = "repeatedRoots"> <p>ATTENTION: Please change $A$ to make them distinct.</p></div>
          <div id = "distinctRoots">
-        <p>The eigenvalues of $A$ are $\lambda_1 =$  <span id ="lambda1"></span>, $\lambda_2 =$  <span id ="lambda2"></span>. </p> 
-        <p style="line-height: 1.3">Corresponding eigenvectors are $\mathbf{v}_1 = [$<span id ="v1"></span>$]^{\top}$ and $\mathbf{v}_2 = [$<span id ="v2"></span>$]^{\top}$. </p> 
+        <p>The eigenvalues of $A$ are $\lambda_1 =$  <span id ="lambda1"></span>, $\lambda_2 =$  <span id ="lambda2"></span>. </p>
+        <p style="line-height: 1.3">Corresponding eigenvectors are $\mathbf{v}_1 = [$<span id ="v1"></span>$]^{\top}$ and $\mathbf{v}_2 = [$<span id ="v2"></span>$]^{\top}$. </p>
         <p>The phase portrait is shown on the right.</p>
       </div>
         </div>
@@ -373,12 +373,12 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
         </fieldset>
     </div>
   </div>
-</div>  
-            
-<script src="js/draw_first_order_system_using_eigenvector_bases.js"> </script> 
+</div>
+
+<script src="js/draw_first_order_system_using_eigenvector_bases.js"> </script>
 
 <br>
-<div> 
+<div>
 <h4 id="generate">Generating phase portraits for your own ODE system.</h4>
 <p>You can go to the site below and click on the "System" tab to generate your own phase portraits. Have fun! </p>
 <div class="plainlist">
@@ -389,7 +389,7 @@ for some uniquely determined $k_1, k_2 \in \mathbf{R}$.</p>
 
 </ul>
 </div>
-  </div>  
+  </div>
 
 
 

@@ -26,10 +26,11 @@
   </script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+<script src="js/auxiliary.js"></script>
   <style>
 .range-wrap {
   position: relative;
-  margin: 0 auto 2.5rem 4rem;
+  margin: 0 auto 2.3rem 3%;
 }
 .range {
   width: 100%;
@@ -54,6 +55,7 @@
   left: 50%;
 }
 </style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 
@@ -62,8 +64,8 @@
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 01 Demo.html">previous Chapter</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 01 Demo.html">previous Chapter</a> |
 <a href="Chapter 03 Demo.html">next Chapter</a>
 </nav>
 
@@ -71,7 +73,7 @@
 
 <article>
 
-    <h1>Chapter 2</h1>  
+    <h1>Chapter 2</h1>
 
 <div>
 <h3>Visualizing a certain first-order autonomous ODE.</h3>
@@ -84,38 +86,85 @@
     Y' +AY = B,
     \end{align}
   </p>
-<p>  with constants $A ,B$ ($A \ne 0$). </p>
+<p> with constants $A ,B$ ($A \ne 0$) and imposed initial condition $Y(0) = Y_0$. </p>
 
-<p> To see the visualization, choose values for the constants  $A$, $B$ and choose the intial condition  $Y(0)=Y_0$ at time  $t=0$:</p>
+<p> As solved in the textbook, the solution to this IVP is given by the formula
+$$Y(t) = (Y_0 - \frac{B}{A}) e^{-At} + \frac{B}{A}.$$
+</p>
+<p> To see the visualization, choose values for the constants $A$, $B$ and choose
+  the intial condition  $Y(0)=Y_0$ at time  $t=0$. When you keep $A$ fixed, observe the curve changes monotonicity when
+$Y_0 - \dfrac{B}{A}$ changes sign. When you keep $B,Y_0$ fixed and change $A$, observe
+that the curve changes monotonicity only when exactly one of $A$ and $Y_0 - \dfrac{B}{A}$
+changes sign. </p>
 
-
-<div class="range-wrap" style="width: 40%;">
+<div class="twoCol_3366">
+<div>
+  <fieldset>
+      <legend class="controlLegend">Constants and Initial Condtions</legend>
+<div class="range-wrap" style="width: 90%;">
   <label for="A">$A$: </label>
-  <input id = "A" type="range" class="range" min="-2" max="2" step = 0.12>
+  <input id = "A" type="range" class="range" min="-0.3" max="0.3" step = 0.12>
   <output class="bubble"></output>
 </div>
-<div class="range-wrap" style="width: 40%;">
+<div class="range-wrap" style="width: 90%;">
   <label for="B">$B$: </label>
-  <input id = "B" type="range" class="range" min="-5" max="5" step = 0.5 value = "-5">
+  <input id = "B" type="range" class="range" min="-0.8" max="0.8" step = 0.1 value = "0">
   <output class="bubble"></output>
 </div>
-<div class="range-wrap" style="width: 40%;">
+<div class="range-wrap" style="width: 90%;">
   <label for="Y0">$Y_0$: </label>
-  <input id = "Y0" type="range" class="range" min="-5" max="5" step = 0.5>
+  <input id = "Y0" type="range" class="range" min="-1" max="1" step = 0.1 value = "1">
   <output class="bubble"></output>
+</div>
+<p><span id = "Apositive"> $A > 0,$ </span><span id = "Anegative">$A < 0,$ </span></p>
+<p>$Y_0 - \dfrac{B}{A} = $ <span id = "coeff"></span>
+  <span id = "coeff>0">$> 0$.</span><span id = "coeff=0">$= 0$.</span><span id = "coeff<0">$< 0$.</span></p>
+
+</fieldset>
 </div>
 
-  
-<script src="js/auxiliary.js"></script>
+<div>
+  <fieldset>
+    <legend class="controlLegend">Graph</legend>
 <div id="myPlot" style="width:100%;max-width:700px">
 </div>
-  
+</fieldset>
+</div>
+</div>
+
+
 <script>
 function plot_my_function()  {
-var A = parseFloat(document.getElementById("A").value);  
+var A = parseFloat(document.getElementById("A").value);
 var B = parseFloat(document.getElementById("B").value);
-var Y0 = parseFloat(document.getElementById("Y0").value); 
-const xArray = math.range(-2, 4, 0.02).toArray();
+var Y0 = parseFloat(document.getElementById("Y0").value);
+if (A<0) {
+  document.getElementById("Apositive").style.display = "none";
+  document.getElementById("Anegative").style.display = "initial";
+}
+else {
+  document.getElementById("Apositive").style.display = "initial";
+  document.getElementById("Anegative").style.display = "none";
+}
+document.getElementById("coeff").innerHTML = (Y0 - B/A).toFixed(2);
+
+if (Y0 - B/A < 0) {
+  document.getElementById("coeff>0").style.display = "none";
+  document.getElementById("coeff=0").style.display = "none";
+  document.getElementById("coeff<0").style.display = "initial";
+}
+else if (Y0 - B/A > 0){
+  document.getElementById("coeff>0").style.display = "initial";
+  document.getElementById("coeff=0").style.display = "none";
+  document.getElementById("coeff<0").style.display = "none";
+}
+else {
+  document.getElementById("coeff>0").style.display = "none";
+  document.getElementById("coeff=0").style.display = "initial";
+  document.getElementById("coeff<0").style.display = "none";
+}
+
+const xArray = math.range(-3, 3, 0.02).toArray();
 const yArray = xArray.map(function (x) {
         return math.evaluate('(Y0 - B/A)*exp(-A*x)+B/A', {x: x, A:A, B:B, Y0:Y0})
            });
@@ -124,14 +173,15 @@ const yArray = xArray.map(function (x) {
 const data = [{
   x:xArray,
   y:yArray,
-  mode:"lines"
+  mode:"lines",
+  line: {color: 'dodgerblue'}
 }];
 
 // Define Layout
 const layout = {
-  xaxis: {range: [-2, 4], title: "time t"},
-  yaxis: {autorange: true, title: "Y"},  
-  title: "The solution curve Y(t) (with A="+ A + ", B=" + B + ", Y0=" + Y0 + ")"
+  xaxis: {range: [-3, 3], title: "time t"},
+  yaxis: {range: [-7.3, 7.3], title: "Y"},
+  title: "The solution curve Y(t) (with A="+ A + ", B=" + B + ", Y<sub>0</sub>=" + Y0 + ")"
 };
 
 // Display using Plotly
@@ -150,7 +200,7 @@ document.getElementById('B').oninput = function (event) {
 document.getElementById('Y0').oninput = function (event) {
   event.preventDefault();
     plot_my_function();
-  } 
+  }
 
 
   </script>

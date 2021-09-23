@@ -37,15 +37,15 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
 
 
- <script src="js/auxiliary.js"> </script> 
- <script src="js/JSX_auxilliary_functions.js"> </script> 
+ <script src="js/auxiliary.js"> </script>
+ <script src="js/JSX_auxilliary_functions.js"> </script>
 
 
   <style>
 
 .range-wrap {
   position: relative;
-  margin: 0 8% 3rem 0rem;
+  margin: 0 5% 3rem 3%;
 }
 .range {
   width: 100%;
@@ -96,7 +96,7 @@
   clear: both;
 }
 
-Responsive layout - makes the two columns stack on top of each other instead of next to each other 
+Responsive layout - makes the two columns stack on top of each other instead of next to each other
 @media screen and (width: 620px) {
 .left, .right {
   width: 100%;
@@ -114,8 +114,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 
 
 <nav>
-<a href="index_page.html">back to menu</a> | 
-<a href="Chapter 16 Demo.html">Chapter 16</a> | 
+<a href="index_page.html">back to menu</a> |
+<a href="Chapter 16 Demo.html">Chapter 16</a> |
 <a href="Chapter 17 Demo.html">Chapter 17</a>
 </nav>
 
@@ -155,7 +155,7 @@ $\newcommand{\R}{\mathbf{R}}
 \newcommand{\m}{\mathbf{m}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else 
+\newcommand{\col}[1]{\ifmmode\begin{bmatrix}#1\end{bmatrix}\else
 $\begin{bmatrix}#1\end{bmatrix}$\fi}
 \newcommand{\scol}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
 \newcommand{\rref}{\operatorname{rref}}
@@ -290,7 +290,7 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 
 <article>
-    <h1>First-Order ODE Solver</h1>  
+    <h1>First-Order ODE Solver</h1>
 
 <div>
 <h3>Visualizing different numerical methods.</h3>
@@ -302,23 +302,22 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 <p> Here are the things you can enter to get your ODE:</p>
 <div>
   <ul>
-<li>Operations: <code>+ - * / ^ !</code> (you can also use a space for multilication; for example, you can wirte <code>"t y"</code> for <code>"t*y"</code>) </li>
-<li>Arithmetic functions: <code>abs</code> &nbsp;<code>exp</code> &nbsp;<code>log</code> (for natural logarithm; don't use <code>ln</code>) &nbsp;<code>log2</code> &nbsp;<code>log10</code> &nbsp;<code>sqrt</code> 
+<li>Operations: <code>+ - * / ^ !</code> (Please use <code>*</code> for multilication; using a space rather than an asterisk for multiplication doesn’t work if some factors of the product involve parentheses) </li>
+<li>Arithmetic functions: <code>abs</code> &nbsp;<code>exp</code> &nbsp;<code>log</code> (for natural logarithm; don't use <code>ln</code>) &nbsp;<code>sqrt</code>
 </li>
-<li>Trigometric functions: 
+<li>Trigometric functions:
     <ul>
-      <li>Trigonometric functions: <code>sin</code> &nbsp;<code>cos</code> &nbsp;<code>tan</code> &nbsp;<code>csc</code> &nbsp;<code>cec</code> &nbsp;<code>cot</code></li>
-      <li>Inverse trigonometric functions: <code>asin</code> &nbsp;<code>acos</code> &nbsp;<code>atan</code> &nbsp;<code>csc</code> &nbsp;<code>acec</code> &nbsp;<code>acot</code></li>
-      <li>Hyperbolic functions: <code>sinh</code> &nbsp;<code>cosh</code> &nbsp;<code>tanh</code> &nbsp;<code>csch</code> &nbsp;<code>cech</code> &nbsp;<code>coth</code></li>
-      <li>Inverse hyperbolic functions: <code>asinh</code> &nbsp;<code>acosh</code> &nbsp;<code>atanh</code> &nbsp;<code>acsch</code> &nbsp;<code>acech</code> &nbsp;<code>acoth</code></li>   
+      <li>Trigonometric functions: <code>sin</code> &nbsp;<code>cos</code> &nbsp;<code>tan</code> &nbsp;<code>csc</code> &nbsp;<code>sec</code> &nbsp;<code>cot</code></li>
+      <li>Inverse trigonometric functions: <code>asin</code> &nbsp;<code>acos</code> &nbsp;<code>atan</code> &nbsp;<code>acsc</code> &nbsp;<code>asec</code> &nbsp;<code>acot</code></li>
+      <li>Hyperbolic functions: <code>sinh</code> &nbsp;<code>cosh</code> &nbsp;<code>tanh</code> &nbsp;<code>csch</code> &nbsp;<code>sech</code> &nbsp;<code>coth</code></li>
+      <li>Inverse hyperbolic functions: <code>asinh</code> &nbsp;<code>acosh</code> &nbsp;<code>atanh</code> &nbsp;<code>acsch</code> &nbsp;<code>asech</code> &nbsp;<code>acoth</code></li>
     </ul>
 </li>
-<li>Constants: 
+<li>Constants:
     <ul>
       <li><code>e</code> or <code>E</code>: the base of natural logarithm $e = 2.71...$</li>
       <li><code>pi</code> or <code>PI</code>: the constant $\pi = 3.14...$</li>
       <li><code>phi</code>: the golden ratio $1.618...$</li>
-      <li><code>SQRT2</code>: the square root of 2</li>
    </ul>
 </ul>
 </div>
@@ -327,52 +326,52 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 
 <div class="twoCol_3366">
   <div>
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">ODE</legend>
 <label for="ODE">$\dfrac{dy}{dt} =  f(t,y) =$ </label>
 <input type="text" id="ODE" name="ODE" ><br> (Enter a function in terms of $y$ and $t$; see above for available operations, functions, and constants) <br>
 <br>
 </fieldset>
- </div>  
- <br> 
-  <div> 
+ </div>
+ <br>
+  <div>
   <fieldset>
     <legend class="controlLegend">Time Interval $[t_0, t_1]$</legend>
 <label for="t_0">$t_0 =$ </label>
-<input type="number" id="t_0" name="t_0"><br> 
+<input type="number" id="t_0" name="t_0"><br>
 <label for="t_1">$t_1 =$ </label>
-<input type="number" id="t_1" name="t_1"><br> 
+<input type="number" id="t_1" name="t_1"><br>
 <p id ="interval_warning" style="color:red; display:none"> WARNING: Need to have $t_1 > t_0$!</p>
 </fieldset>
- </div> 
-  <br> 
-  <div> 
+ </div>
+  <br>
+  <div>
   <fieldset>
       <legend class="controlLegend">Initial Condition</legend>
   <label for="y_0">$y(t_0) = $ </label>
- <input type="number" id="y_0" name="y_0"><br> 
+ <input type="number" id="y_0" name="y_0"><br>
 <p id ="y0_warning" style="color:red; display:none"> WARNING: $y_0$ needs to be a number!</p>
 </fieldset>
- </div> 
+ </div>
   <br>
-  <div> 
+  <div>
   <fieldset>
       <legend class="controlLegend">Step Size</legend>
   <label for="h_ODE">$h =$ </label>
- <input type="number" min = 0 id="h_ODE" name="h_ODE"><br> 
+ <input type="number" min = 0 id="h_ODE" name="h_ODE"><br>
  <p id ="h_warning" style="color:red; display:none"> WARNING: Need to have $h>0$!</p>
 </fieldset>
- </div> 
-   <div> 
+ </div>
+   <div>
   <fieldset>
       <legend class="controlLegend">Submit</legend>
 <button type="button" style="font-size: 18px;" onclick = "new_ODE_solver()">Submit!</button>
 </fieldset>
- </div> 
+ </div>
 </div>
 <div>
-  <fieldset> 
+  <fieldset>
       <legend class="controlLegend">Result</legend>
       <div>
          <div style="width:100%; padding-top:75%; position:relative">
@@ -383,10 +382,10 @@ $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
           </div>
           </div>
 <!--         <p id="instruction" style="display:none"> Click on the colored bar or the name for a method to show or hide it; double-chick to make it be the only one that appears. </p>  -->
-        <p id="instruction" style="display:none"> Click on the colored bar or the name for a method to show or hide that method. </p> 
-      <p id="hoverinfo"></p>   
+        <p id="instruction" style="display:none"> Click on the colored bar or the name for a method to show or hide that method. </p>
+      <p id="hoverinfo"></p>
      </div>
-      </fieldset> 
+      </fieldset>
     </div>
 </div>
 
@@ -406,7 +405,7 @@ and RK4 methods.</li>
 <li><a href="https://planetcalc.com/8394/">Midpoint method</a>—for midpoint method.</li>
 <li><a href="https://homepages.bluffton.edu/~nesterd/apps/slopefields.html">Slope and direction fields</a>—for explicit Euler, Heun, midpoint, and RK4 methods (as well as <a href="https://en.wikipedia.org/wiki/List_of_Runge–Kutta_methods#3/8-rule_fourth-order_method">Runge-Kutta 3/8-rule method</a> and <a href="https://en.wikipedia.org/wiki/Runge–Kutta–Fehlberg_method">Runge-Kutta-Fehlberg method</a> that we didn't introduce), under the "Plot numerical solution curves" tab.</li>
 </ul>
-</div>  
+</div>
 
 
 
