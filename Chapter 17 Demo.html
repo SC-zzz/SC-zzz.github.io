@@ -332,7 +332,11 @@ $$  \mathbf{m}_1 = \mathbf{f}(t_k,\x_k), \,\,\,
   size using the slider. You can show or hide a curve by clicking on its legend.
   As you vary $h$, you will sometimes see blue exact solution curve move too:
   <i>that curve really is not changing</i>; what is happening is that the vertical
-  axis scale sometimes changes to accommodate a smaller range of needed values for the output of the numerical methods.</p>
+  axis scale sometimes changes to accommodate a smaller range of needed values for the output of the numerical methods.
+  When you hover over the box, typically all that shows are black and blue number
+  rectangles corresponding to coordinates of a point on the blue exact solution curve.
+  When the black number is an integer multiple of $h$, then the output of the numerical methods
+  also appears.</p>
 
 
 <div class="twoCol_5050">
@@ -456,7 +460,11 @@ by using eigenvalues of a derivative matrix in the role of $\lambda$. </p>
   As you vary $h$, you will sometimes see blue exact solution curve move too:
   <i>that curve really is not changing</i>; what is happening is that the vertical
   axis scale sometimes changes to accommodate a smaller range of needed values for the output of the numerical methods.
-  As you vary $h$, observe that implicit methods are more resistant to stiffness issues (which appear when $h$ isn’t too small).</p>
+  As you vary $h$, observe that implicit methods are more resistant to stiffness
+  issues (which appear when $h$ isn’t too small). When you hover over the box, typically all that shows are black and blue number
+  rectangles corresponding to coordinates of a point on the blue exact solution curve.
+  When the black number is an integer multiple of $h$, then the output of the numerical methods
+  also appears.</p>
 
 <div class="twoCol_3366">
   <div>
@@ -474,7 +482,7 @@ by using eigenvalues of a derivative matrix in the role of $\lambda$. </p>
  <div class="range-wrap" style="width: 92%;">
   <label for="lambda_stiff">$\lambda$: </label>
   <input id = "lambda_stiff" type="range" class="range" min="0.5" max="20" step = 0.5 value = "0.5" oninput="new_stiff()">
-  <output class="bubble"></output><br><br>
+  <output class="bubble"></output><br>
  </div>
    <p>$2/\lambda =$  <span id="2/lambda"></span>.</p>
 </fieldset>
@@ -486,9 +494,9 @@ by using eigenvalues of a derivative matrix in the role of $\lambda$. </p>
  <div class="range-wrap" style="width: 92%;">
   <label for="h_stiff">$h$: </label>
   <input id = "h_stiff" type="range" class="range" min="0.001" max="0.5" step = 0.001 value = "0.5" oninput="new_stiff()">
-  <output class="bubble"></output><br><br>
+  <output class="bubble"></output><br>
  </div>
-   <p>Explicit Euler's method requires $0 < h < 2/\lambda$.</p>
+   <p>Explicit Euler's method requires $0 < h < 2/\lambda$ for decay to $0$ as $t \to \infty$.</p>
 </fieldset>
  </div>
   <br>
