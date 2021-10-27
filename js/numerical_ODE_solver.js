@@ -44,7 +44,7 @@ function new_ODE_solver() {
 
   // derivative of f
   function fd(t, y) {
-    return math.evaluate(ODE_d, {y:y});
+    return math.evaluate(ODE_d, {t:t, y:y});
   }
 
   // second derivative of f
