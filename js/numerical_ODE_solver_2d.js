@@ -104,7 +104,8 @@ function new_ODE_solver() {
     type: "scatter",
     mode: "markers",
     name: "initial condition",
-    marker: {color: 'dodgerblue', size: 10, symbol: "x-dot"}
+    marker: {color: 'dodgerblue', size: 10, symbol: "x-dot"},
+    hovertemplate:"(%{x:.2f}, %{y:.2f})"
     },
   	{
 	x:x1Array,
