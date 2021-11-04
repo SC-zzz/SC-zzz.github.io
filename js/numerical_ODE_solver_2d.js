@@ -31,7 +31,7 @@ function new_ODE_solver() {
   }
 
   let N = Math.ceil((t_1-t_0)/h +1);
-  //let tArray = Array.from(Array(N), (_, k) => t_0 + k * h);
+  let tArray = Array.from(Array(N), (_, k) => t_0 + k * h);
 
   // derivatives
   //let temp = math.parse(ODE);
@@ -98,12 +98,22 @@ function new_ODE_solver() {
 
   // Define Data
   var data = [
+    {
+    x: [x_0],
+    y: [y_0],
+    type: "scatter",
+    mode: "markers",
+    name: "initial condition",
+    marker: {color: 'dodgerblue', size: 10, symbol: "x-dot"}
+    },
   	{
 	x:x1Array,
 	y:y1Array,
 	mode:"lines",
 	name: 'explicit Euler',
-	line: {color: 'green', width: 2}
+	line: {color: 'green', width: 2},
+  hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
+  text: tArray
 	},
 	// {
 	// x:tArray,
@@ -124,22 +134,28 @@ function new_ODE_solver() {
 	y:y4Array,
 	mode:"lines",
 	name: 'midpoint',
-	line: {color: 'pink', width: 2}
+	line: {color: 'pink', width: 2},
+  hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
+  text: tArray
 	},
 	{
 	x:x5Array,
 	y:y5Array,
 	mode:"lines",
 	name: 'Heun',
-	line: {color: 'peru', width: 2}
+	line: {color: 'peru', width: 2},
+  hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
+  text: tArray
 	},
 	{
 	x:x6Array,
 	y:y6Array,
 	mode:"lines",
 	name: 'RK4',
-	line: {color: 'purple', width: 2}
-	}
+	line: {color: 'purple', width: 2},
+  hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
+  text: tArray
+  }
 	];
 
 
@@ -161,6 +177,7 @@ function new_ODE_solver() {
 	xaxis: {autorange: true, title: "x"},
 	yaxis: {autorange: true, title: "y"},
 	//title: "aaa",
+  //hovermode: "closet",
 	showlegend: true,
 	legend: {"orientation": "h", yanchor: 'top', y:-0.2, itemdoubleclick: false},
 	//hoverlabel: {font: {size: 12}},
@@ -181,8 +198,9 @@ function new_ODE_solver() {
 
   myPlot.on('plotly_hover', function(data){
     var infotext = data.points.map(function(d){
-        return (d.data.name+': t= ' + parseFloat(d.x.toFixed(7))
-          + ',  y= ' + parseFloat(d.y.toFixed(4)));
+        return (d.data.name+': t= ' + parseFloat(d.text.toFixed(7))
+          + ',  x= ' + parseFloat(d.x.toFixed(3))
+          + ',  y= ' + parseFloat(d.y.toFixed(3)));
     });
     hoverInfo.innerHTML = infotext.join('<br/>');
     })
