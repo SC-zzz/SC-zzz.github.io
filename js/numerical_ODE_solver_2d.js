@@ -31,7 +31,12 @@ function new_ODE_solver() {
   }
 
   let N = Math.ceil((t_1-t_0)/h +1);
-  let tArray = Array.from(Array(N), (_, k) => t_0 + k * h);
+  //let tArray = Array.from(Array(N), (_, k) => t_0 + k * h);
+
+  let tArrayRound = Array(N).fill(0);
+  for (let i = 0; i< N; i++){
+    tArrayRound[i] = (t_0 + i * h).toPrecision(5);
+  }
 
   // derivatives
   //let temp = math.parse(ODE);
@@ -114,7 +119,7 @@ function new_ODE_solver() {
 	name: 'explicit Euler',
 	line: {color: 'green', width: 2},
   hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
-  text: tArray
+  text: tArrayRound
 	},
 	// {
 	// x:tArray,
@@ -137,7 +142,7 @@ function new_ODE_solver() {
 	name: 'midpoint',
 	line: {color: 'pink', width: 2},
   hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
-  text: tArray
+  text: tArrayRound
 	},
 	{
 	x:x5Array,
@@ -146,7 +151,7 @@ function new_ODE_solver() {
 	name: 'Heun',
 	line: {color: 'peru', width: 2},
   hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
-  text: tArray
+  text: tArrayRound
 	},
 	{
 	x:x6Array,
@@ -155,7 +160,7 @@ function new_ODE_solver() {
 	name: 'RK4',
 	line: {color: 'purple', width: 2},
   hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
-  text: tArray
+  text: tArrayRound
   }
 	];
 
@@ -200,7 +205,7 @@ function new_ODE_solver() {
 
   myPlot.on('plotly_hover', function(data){
     var infotext = data.points.map(function(d){
-        return (d.data.name+': t= ' + parseFloat(d.text.toFixed(7))
+        return (d.data.name+': t= ' + parseFloat(d.text)
           + ',  x= ' + parseFloat(d.x.toFixed(3))
           + ',  y= ' + parseFloat(d.y.toFixed(3)));
     });
