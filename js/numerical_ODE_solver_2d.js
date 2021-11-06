@@ -118,7 +118,7 @@ function new_ODE_solver() {
 	mode:"lines",
 	name: 'explicit Euler',
 	line: {color: 'green', width: 2},
-  hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
+  hovertemplate:"t = %{text}, x = %{x:.3f}, y = %{y:.3f}",
   text: tArrayRound
 	},
 	// {
@@ -141,7 +141,7 @@ function new_ODE_solver() {
 	mode:"lines",
 	name: 'midpoint',
 	line: {color: 'pink', width: 2},
-  hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
+  hovertemplate:"t = %{text}, x = %{x:.3f}, y = %{y:.3f}",
   text: tArrayRound
 	},
 	{
@@ -150,7 +150,7 @@ function new_ODE_solver() {
 	mode:"lines",
 	name: 'Heun',
 	line: {color: 'peru', width: 2},
-  hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
+  hovertemplate:"t = %{text}, x = %{x:.3f}, y = %{y:.3f}",
   text: tArrayRound
 	},
 	{
@@ -159,7 +159,7 @@ function new_ODE_solver() {
 	mode:"lines",
 	name: 'RK4',
 	line: {color: 'purple', width: 2},
-  hovertemplate:"t = %{text}, x = %{x:.2f}, y = %{y:.2f}",
+  hovertemplate:"t = %{text}, x = %{x:.3f}, y = %{y:.3f}",
   text: tArrayRound
   }
 	];
