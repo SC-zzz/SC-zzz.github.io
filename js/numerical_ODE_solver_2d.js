@@ -110,7 +110,7 @@ function new_ODE_solver() {
     mode: "markers",
     name: "initial condition",
     marker: {color: 'dodgerblue', size: 10, symbol: "x-dot"},
-    hovertemplate:"(%{x:.2f}, %{y:.2f})"
+    hovertemplate:"(%{x:.5f}, %{y:.5f})"
     },
   	{
 	x:x1Array,
@@ -118,7 +118,7 @@ function new_ODE_solver() {
 	mode:"lines",
 	name: 'explicit Euler',
 	line: {color: 'green', width: 2},
-  hovertemplate:"t = %{text}, x = %{x:.3f}, y = %{y:.3f}",
+  hovertemplate:"t = %{text}, x = %{x:.5f}, y = %{y:.5f}",
   text: tArrayRound
 	},
 	// {
@@ -141,7 +141,7 @@ function new_ODE_solver() {
 	mode:"lines",
 	name: 'midpoint',
 	line: {color: 'pink', width: 2},
-  hovertemplate:"t = %{text}, x = %{x:.3f}, y = %{y:.3f}",
+  hovertemplate:"t = %{text}, x = %{x:.5f}, y = %{y:.5f}",
   text: tArrayRound
 	},
 	{
@@ -150,7 +150,7 @@ function new_ODE_solver() {
 	mode:"lines",
 	name: 'Heun',
 	line: {color: 'peru', width: 2},
-  hovertemplate:"t = %{text}, x = %{x:.3f}, y = %{y:.3f}",
+  hovertemplate:"t = %{text}, x = %{x:.5f}, y = %{y:.5f}",
   text: tArrayRound
 	},
 	{
@@ -159,7 +159,7 @@ function new_ODE_solver() {
 	mode:"lines",
 	name: 'RK4',
 	line: {color: 'purple', width: 2},
-  hovertemplate:"t = %{text}, x = %{x:.3f}, y = %{y:.3f}",
+  hovertemplate:"t = %{text}, x = %{x:.5f}, y = %{y:.5f}",
   text: tArrayRound
   }
 	];
@@ -206,8 +206,8 @@ function new_ODE_solver() {
   myPlot.on('plotly_hover', function(data){
     var infotext = data.points.map(function(d){
         return (d.data.name+': t= ' + parseFloat(d.text)
-          + ',  x= ' + parseFloat(d.x.toFixed(3))
-          + ',  y= ' + parseFloat(d.y.toFixed(3)));
+          + ',  x= ' + parseFloat(d.x.toFixed(5))
+          + ',  y= ' + parseFloat(d.y.toFixed(5)));
     });
     hoverInfo.innerHTML = infotext.join('<br/>');
     })
