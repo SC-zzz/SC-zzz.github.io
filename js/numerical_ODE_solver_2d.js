@@ -30,7 +30,13 @@ function new_ODE_solver() {
     return;
   }
 
-  let N = Math.ceil((t_1-t_0)/h +1);
+  if (Math.ceil((t_1 - t_0)/h) - (t_1 - t_0)/h < 0.0000001) {
+    var N = Math.ceil((t_1 - t_0)/h) + 1;
+  } 
+    else {
+      var N = Math.floor((t_1 - t_0)/h) + 1;
+  }
+
   //let tArray = Array.from(Array(N), (_, k) => t_0 + k * h);
 
   let tArrayRound = Array(N).fill(0);
