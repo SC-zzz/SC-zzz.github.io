@@ -256,10 +256,10 @@ function ode_RK4(t_0, t_1, h, f, y_0) {
 	  const k2 = f(ts[i] + h/2, s1);
 	  const s2 = math.add(ys[i], math.multiply(k2, h/2));
 	  const k3 = f(ts[i] + h/2, s2);
-	  const s3 = math.add(ys[i], math.multiply(k2, h));	
-      const k4 = f(ts[i] + h, s3); // f(t + h, y_n + k3*h)	
-      const k_new =  math.multiply(math.add(math.add(math.add(math.multiply(k1, 1/2), k2), 
-          k3), math.multiply(k4, 1/2)), 1/3); // k1/6 + k2/3 + k3/3 + k4/6
+	  const s3 = math.add(ys[i], math.multiply(k3, h));	
+          const k4 = f(ts[i] + h, s3); // f(t + h, y_n + k3*h)	
+          const k_new =  math.multiply(math.add(math.add(math.add(math.multiply(k1, 1/2), k2), 
+          k3), math.multiply(k4, 1/2)), 1/3); // k_1/6 + k_2/3 + k_3/3 + k_4/6
 	  ys[i + 1] =  math.add(ys[i], math.multiply(k_new, h));
 	}
 	return [ts, ys];
@@ -432,10 +432,10 @@ function ode_auto_RK4(N, h, f, y_0) {
 	  const k2 = f(s1);
 	  const s2 = math.add(ys[i], math.multiply(k2, h/2));
 	  const k3 = f(s2);
-	  const s3 = math.add(ys[i], math.multiply(k2, h));	
-      const k4 = f(s3); // f(y_n + k3*h)	
-      const k_new =  math.multiply(math.add(math.add(math.add(math.multiply(k1, 1/2), k2), 
-          k3), math.multiply(k4, 1/2)), 1/3); // k1/6 + k2/3 + k3/3 + k4/6
+	  const s3 = math.add(ys[i], math.multiply(k3, h));	
+          const k4 = f(s3); // f(y_n + k3*h)	
+          const k_new =  math.multiply(math.add(math.add(math.add(math.multiply(k1, 1/2), k2), 
+          k3), math.multiply(k4, 1/2)), 1/3); // k_1/6 + k_2/3 + k_3/3 + k_4/6
 	  ys[i + 1] =  math.add(ys[i], math.multiply(k_new, h));
 	}
 	return ys;
