@@ -13,6 +13,13 @@
     max-width: 33%;
     }
 
+    .title-logo {
+  height: 1.5em;
+  width: auto;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
 
     @media (max-width: 480px) {
        .image-profile {
